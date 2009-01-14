@@ -17,3 +17,4 @@ lib/ronin/web/web.rb
 lib/ronin/web/version.rb
 tasks/spec.rb
 spec/spec_helper.rb
+spec/web/extensions/hpricot_spec.rb
