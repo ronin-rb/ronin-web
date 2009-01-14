@@ -3,6 +3,16 @@ Manifest.txt
 README.txt
 Rakefile
 lib/ronin/web.rb
+lib/ronin/web/extensions.rb
+lib/ronin/web/extensions/hpricot.rb
+lib/ronin/web/extensions/hpricot/comment.rb
+lib/ronin/web/extensions/hpricot/container.rb
+lib/ronin/web/extensions/hpricot/doc.rb
+lib/ronin/web/extensions/hpricot/elem.rb
+lib/ronin/web/extensions/hpricot/tag.rb
+lib/ronin/web/extensions/hpricot/text.rb
+lib/ronin/web/server.rb
+lib/ronin/web/web.rb
 lib/ronin/web/version.rb
 tasks/spec.rb
 spec/spec_helper.rb
