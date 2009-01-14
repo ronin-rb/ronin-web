@@ -39,14 +39,17 @@ of Ronin.
 
 == FEATURES/PROBLEMS:
 
-* Integrates Spidr into Ronin::Web.
+* Web access (utilizing Mechanize and Hpricot).
+* Integrates Spidr into Ronin::Web::Spider.
 * Provides a custom Rack web-server based on Rack::Builder.
 
 == REQUIREMENTS:
 
 * Ronin >= 0.1.4
-* WWW::Mechanize
-* Hpricot
+* hpricot
+* mechanize
+* spidr >= 0.1.3
+* rack >= 0.9.1
 
 == INSTALL:
 
