@@ -13,6 +13,7 @@ lib/ronin/web/extensions/hpricot/elem.rb
 lib/ronin/web/extensions/hpricot/tag.rb
 lib/ronin/web/extensions/hpricot/text.rb
 lib/ronin/web/server.rb
+lib/ronin/web/spider.rb
 lib/ronin/web/web.rb
 lib/ronin/web/version.rb
 tasks/spec.rb
