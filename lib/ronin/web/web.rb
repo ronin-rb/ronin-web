@@ -24,12 +24,28 @@
 require 'ronin/network/http'
 
 require 'uri/http'
+require 'nokogiri'
 require 'mechanize'
 require 'open-uri'
-require 'spidr'
 
 module Ronin
   module Web
+    #
+    # Returns a Nokogiri::HTML::Document object for the specified _body_
+    # of html.
+    #
+    def Web.html(body)
+      Nokogiri::HTML(body)
+    end
+
+    #
+    # Returns a Nokogiri::XML::Document object for the specified _body_
+    # of xml.
+    #
+    def Web.xml(body)
+      Nokogiri::XML(body)
+    end
+
     #
     # Returns the default Ronin Web proxy port.
     #
