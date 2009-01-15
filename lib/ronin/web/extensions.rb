@@ -21,4 +21,4 @@
 #++
 #
 
-require 'ronin/web/extensions/hpricot'
+require 'ronin/web/extensions/nokogiri'
