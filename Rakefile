@@ -10,11 +10,11 @@ Hoe.new('ronin-web', Ronin::Web::VERSION) do |p|
   p.developer('Postmodern', 'postmodern.mod3@gmail.com')
   p.remote_rdoc_dir = 'docs/ronin-web'
   p.extra_deps = [
-    ['ronin', '>=0.1.4'],
     'hpricot',
-    'mechanize',
+    ['mechanize', '<=0.8.5'],
     ['spidr', '>=0.1.3'],
-    ['rack', '>=0.9.1']
+    ['rack', '>=0.9.1'],
+    ['ronin', '>=0.1.4']
   ]
 end
 
