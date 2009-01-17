@@ -66,7 +66,7 @@ module Ronin
       # Creates a new Web Server using the given configuration _block_.
       #
       def initialize(&block)
-        @router = method(:not_found)
+        @default_route = method(:not_found)
 
         @url_patterns = {}
         @host_patterns = {}
@@ -118,21 +118,21 @@ module Ronin
       #
       def self.start(options={},&block)
         server = self.new { setup }
-        end
 
         server.instance_eval(&block) if block
         return server.start(options)
       end
 
       #
-      # Use the specified _block_ as the router for all requests.
+      # Use the specified _block_ as the default route for all other
+      # requests.
       #
-      #   srv.router do |env|
+      #   srv.default_route do |env|
       #     [200, {'Content-Type' => 'text/html'}, 'lol train']
       #   end
       #
-      def router(&block)
-        @router = block
+      def default_route(&block)
+        @default_route = block
         return self
       end
 
@@ -272,7 +272,7 @@ module Ronin
           end
         end
 
-        return @router.call(env)
+        return @default_route.call(env)
       end
 
     end
