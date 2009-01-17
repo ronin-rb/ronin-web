@@ -1,9 +1,9 @@
 module Nokogiri
   module XML
-    class Attr < Node
+    class Text < Node
 
       def similar?(other)
-        super(other) && (self.value == other.value)
+        super(other) && (self.content == other.content)
       end
 
     end

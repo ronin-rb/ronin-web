@@ -1,61 +1,43 @@
-require 'nokogiri/xml/node'
-
 module Nokogiri
   module XML
     class Node
-      
-      include Comparable
 
       #
-      # Iterates over every sub-child, passing each to the specified
-      # _block_.
+      # Returns the total count of all sub-children of the node.
       #
-      def every_child(&block)
-        children.each do |child|
-          block.call(child)
+      def total_children
+        count = 0
+        first = self.child
 
-          if child.kind_of?(Node)
-            child.every_child(&block)
-          end
+        return count unless first
+
+        while first
+          count += (1 + first.total_children)
+
+          first = first.next
         end
 
-        return self
+        count
       end
 
-      #
-      # Iterates over every text node, passing each to the specified
-      # _block_.
-      #
-      def all_text(&block)
-        every_child do |child|
-          block.call(child) if child.text?
+      def traverse_text(&block)
+        block.call(self) if text?
+
+        first = self.child
+
+        while first
+          first.traverse_text(&block)
+
+          first = first.next
         end
+
+        self
       end
 
-      #
-      # Returns the number of all sub-children.
-      #
-      def count_children
-        sum = 0
+      def similar?(other)
+        return false unless other
 
-        every_child { |child| sum += 1 }
-        return sum
-      end
-
-      def eql?(other)
-        (self.class == other.class) && \
-          (self.name == other.name) && \
-          (self.attributes == other.attributes)
-      end
-
-      alias == eql?
-
-      #
-      # Compares the number of sub-children with that of the _other_
-      # element.
-      #
-      def <=>(other)
-        count_children <=> other.count_children
+        (self.type == other.type) && (self.name == other.name)
       end
 
     end
