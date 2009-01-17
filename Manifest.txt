@@ -8,7 +8,10 @@ lib/ronin/web/extensions.rb
 lib/ronin/web/extensions/nokogiri.rb
 lib/ronin/web/extensions/nokogiri/xml.rb
 lib/ronin/web/extensions/nokogiri/xml/node.rb
+lib/ronin/web/extensions/nokogiri/xml/text.rb
 lib/ronin/web/extensions/nokogiri/xml/attr.rb
+lib/ronin/web/extensions/nokogiri/xml/element.rb
+lib/ronin/web/extensions/nokogiri/xml/document.rb
 lib/ronin/web/server.rb
 lib/ronin/web/spider.rb
 lib/ronin/web/web.rb
