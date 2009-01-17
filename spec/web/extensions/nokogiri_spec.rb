@@ -10,14 +10,14 @@ describe Nokogiri::HTML do
     @edited_doc = Nokogiri::HTML(%{<html><head><title>test</title></head><body><p><b>This is a test</b> html page.</p></div></body></html>})
   end
 
-  it "should be able to test if two elements are equal" do
+  it "should be able to test if two elements are similar" do
     elem1 = @doc.at('b')
     elem2 = @edited_doc.at('b')
 
     elem1.similar?(elem2).should == true
   end
 
-  it "should be able to test if two elements are not equal" do
+  it "should be able to test if two elements are not similar" do
     elem1 = @doc.at('p').children.last
     elem2 = @edited_doc.at('b')
 
