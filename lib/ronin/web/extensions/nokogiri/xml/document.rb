@@ -1,3 +1,5 @@
+require 'nokogiri/xml/document'
+
 module Nokogiri
   module XML
     class Document < Node

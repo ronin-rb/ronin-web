@@ -1,3 +1,5 @@
+require 'nokogiri/xml/text'
+
 module Nokogiri
   module XML
     class Text < Node

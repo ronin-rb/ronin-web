@@ -1,3 +1,5 @@
+require 'nokogiri/xml/element'
+
 module Nokogiri
   module XML
     class Element < Node

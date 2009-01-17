@@ -1,3 +1,5 @@
+require 'nokogiri/xml/attr'
+
 module Nokogiri
   module XML
     class Attr < Node
