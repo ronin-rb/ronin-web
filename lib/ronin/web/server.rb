@@ -72,13 +72,14 @@ module Ronin
         @host_patterns = {}
         @path_patterns = {}
 
-        super do
-          map '/' do
-            run(method(:route))
-          end
-        end
+        super(&block)
+      end
 
-        instance_eval(&block) if block
+      #
+      # Default method which configures a newly created Web Server object.
+      #
+      def setup
+        map('/') { run(method(:route)) }
       end
 
       #
@@ -116,7 +117,11 @@ module Ronin
       # using the given _options_.
       #
       def self.start(options={},&block)
-        self.new(&block).start(options)
+        server = self.new { setup }
+        end
+
+        server.instance_eval(&block) if block
+        return server.start(options)
       end
 
       #
