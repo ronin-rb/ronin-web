@@ -27,6 +27,12 @@ module Ronin
   module Web
     class Server < Rack::Builder
 
+      # Default interface to run the Web Server on
+      HOST = '0.0.0.0'
+
+      # Default port to run the Web Server on
+      PORT = 8080
+
       # Built-in HTTP Content-Types
       CONTENT_TYPES = {
         'text/html' => ['html', 'htm', 'xhtml'],
@@ -55,12 +61,6 @@ module Ronin
           'cpp'
         ]
       }
-
-      # Default interface to run the Web Server on
-      HOST = '0.0.0.0'
-
-      # Default port to run the Web Server on
-      PORT = 8080
 
       #
       # Creates a new Web Server using the given configuration _block_.
