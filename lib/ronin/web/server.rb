@@ -152,17 +152,28 @@ module Ronin
       end
 
       #
+      # Binds the specified URL _path_ to the given _block_.
+      #
+      #   srv.bind '/secrets.xml' do |env|
+      #     [200, {'Content-Type' => 'text/xml'}, "<secrets>Made you look.</secrets>"]
+      #   end
+      #
+      def bind(path,&block)
+        map(path) do
+          run Proc.new(&block)
+        end
+      end
+
+      #
       # Binds the contents of the specified _file_ to the specified URL
       # _path_, using the given _options_.
       #
       #   srv.bind '/robots.txt', '/path/to/my_robots.txt'
       #
-      def bind(path,file,options={})
+      def bind_file(path,file,options={})
         content_type = (options[:content_type] || content_type_for(file))
 
-        map(path) do
-          run Proc.new { |env| return_file(file) }
-        end
+        bind(path) { |env| return_file(file) }
       end
 
       #
