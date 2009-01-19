@@ -25,7 +25,7 @@ require 'rack'
 
 module Ronin
   module Web
-    class Server < Rack::Builder
+    class Server
 
       # Default interface to run the Web Server on
       HOST = '0.0.0.0'
@@ -33,53 +33,20 @@ module Ronin
       # Default port to run the Web Server on
       PORT = 8080
 
-      # Built-in HTTP Content-Types
-      CONTENT_TYPES = {
-        'text/html' => ['html', 'htm', 'xhtml'],
-        'text/css' => ['css'],
-        'image/gif' => ['gif'],
-        'image/jpeg' => ['jpeg', 'jpg'],
-        'image/png' => ['png'],
-        'image/x-icon' => ['ico'],
-        'text/javascript' => ['js'],
-        'text/xml' => ['xml'],
-        'application/rss+xml' => ['rss'],
-        'application/rdf+xml' => ['rdf'],
-        'application/pdf' => ['pdf'],
-        'application/doc' => ['doc'],
-        'application/zip' => ['zip'],
-        'text/plain' => [
-          'txt',
-          'conf',
-          'rb',
-          'py',
-          'h',
-          'c',
-          'hh',
-          'cc',
-          'hpp',
-          'cpp'
-        ]
-      }
-
       #
       # Creates a new Web Server using the given configuration _block_.
       #
       def initialize(&block)
-        @default_route = method(:not_found)
+        @default = method(:not_found)
 
-        @url_patterns = {}
         @host_patterns = {}
         @path_patterns = {}
 
-        super(&block)
-      end
+        @hosts = {}
+        @paths = {}
+        @directories = {}
 
-      #
-      # Default method which configures a newly created Web Server object.
-      #
-      def setup
-        map('/') { run(method(:route)) }
+        instance_eval(&block) if block
       end
 
       #
@@ -113,36 +80,47 @@ module Ronin
       end
 
       #
+      # The Hash of the servers supported file extensions and their HTTP
+      # Content-Types.
+      #
+      def Server.content_types
+        @@content_types ||= {}
+      end
+
+      #
+      # Registers a new content _type_ for the specified file _extensions_.
+      #
+      #   Server.content_type 'text/xml', ['xml', 'xsl']
+      #
+      def self.content_type(type,extensions)
+        extensions.each { |ext| Server.content_types[ext] = type }
+
+        return self
+      end
+
+      #
       # Creates a new Web Server object with the given _block_ and starts it
       # using the given _options_.
       #
       def self.start(options={},&block)
-        server = self.new { setup }
-
-        server.instance_eval(&block) if block
-        return server.start(options)
+        self.new(&block).start(options)
       end
 
       #
       # Use the specified _block_ as the default route for all other
       # requests.
       #
-      #   srv.default_route do |env|
+      #   default do |env|
       #     [200, {'Content-Type' => 'text/html'}, 'lol train']
       #   end
       #
-      def default_route(&block)
-        @default_route = block
-        return self
-      end
-
-      def urls_like(pattern,&block)
-        @url_patterns[pattern] = block
+      def default(&block)
+        @default = block
         return self
       end
 
       def hosts_like(pattern,&block)
-        @host_patterns[pattern] = block
+        @host_patterns[pattern] = self.class.new(&block)
         return self
       end
 
@@ -151,47 +129,71 @@ module Ronin
         return self
       end
 
+      def host(name,&block)
+        @hosts[name] = self.class.new(&block)
+        return self
+      end
+
       #
       # Binds the specified URL _path_ to the given _block_.
       #
-      #   srv.bind '/secrets.xml' do |env|
+      #   bind '/secrets.xml' do |env|
       #     [200, {'Content-Type' => 'text/xml'}, "<secrets>Made you look.</secrets>"]
       #   end
       #
       def bind(path,&block)
-        map(path) do
-          run Proc.new(&block)
-        end
+        @paths[path] = block
+        return self
+      end
+
+      #
+      # Binds the specified URL directory _path_ to the given _block_.
+      #
+      #   dir '/downloads' do |env|
+      #     [200, {'Content-Type' => 'text/xml'}, "Your somewhere inside the downloads directory"]
+      #   end
+      #
+      def dir(path,&block)
+        path += '/' unless path[-1..-1] == '/'
+
+        @directories[path] = block
+        return self
       end
 
       #
       # Binds the contents of the specified _file_ to the specified URL
       # _path_, using the given _options_.
       #
-      #   srv.bind '/robots.txt', '/path/to/my_robots.txt'
+      #   file '/robots.txt', '/path/to/my_robots.txt'
       #
-      def bind_file(path,file,options={})
+      def file(path,file,options={})
+        file = File.expand_path(file)
         content_type = (options[:content_type] || content_type_for(file))
 
-        bind(path) { |env| return_file(file) }
+        bind(path) do |env|
+          if File.file?(file)
+            [200, {'Content-Type' => content_type_for(file)}, File.new(file)]
+          else
+            not_found(env)
+          end
+        end
       end
 
       #
       # Mounts the contents of the specified _directory_ to the given
       # prefix _path_.
       #
-      #   srv.mount '/download/', '/tmp/files/'
+      #   mount '/download/', '/tmp/files/'
       #
       def mount(path,dir)
         dir = File.expand_path(dir)
 
-        map(path) do
-          run Proc.new { |env|
-            sub_path = File.expand_path(env['PATH_INFO']).sub(path,'')
-            absolute_path = File.join(dir,sub_path)
+        dir(path) do |env|
+          http_path = File.expand_path(env['PATH_INFO'])
+          sub_path = http_path.sub(path,'')
+          absolute_path = File.join(dir,sub_path)
 
-            return_file(absolute_path,env)
-          }
+          return_file(absolute_path,env)
         end
       end
 
@@ -206,7 +208,55 @@ module Ronin
         return self
       end
 
-      protected
+      #
+      # The method which receives all requests.
+      #
+      def call(env)
+        http_host = env['HTTP_HOST']
+        http_path = env['PATH_INFO']
+
+        if http_host
+          @host_patterns.each do |pattern,server|
+            if http_host.match(pattern)
+              return server.call(env)
+            end
+          end
+
+          if (server = @hosts[http_host])
+            return server.call(env)
+          end
+        end
+
+        if http_path
+          @path_patterns.each do |pattern,block|
+            if http_path.match(pattern)
+              return block.call(env)
+            end
+          end
+
+          @directories.each do |path,block|
+            if http_path[0...path.length] == path
+              return block.call(env)
+            end
+          end
+
+          if (block = @paths[http_path])
+            return block.call(env)
+          end
+        end
+
+        return @default.call(env)
+      end
+
+      #
+      # Returns the HTTP Content-Type for the specified file _extension_.
+      #
+      #   content_type('html')
+      #   # => "text/html"
+      #
+      def content_type(extension)
+        Server.content_types[extension] || 'application/x-unknown-content-type'
+      end
 
       #
       # Returns the HTTP Content-Type for the specified _file_.
@@ -215,26 +265,27 @@ module Ronin
       #   # => "text/html"
       #
       def content_type_for(file)
-        ext = File.extname(file)
+        ext = File.extname(file).downcase
 
-        CONTENT_TYPES.each do |content_type,exts|
-          return content_type if exts.include?(ext)
-        end
-
-        return 'application/x-unknown-content-type'
+        return content_type(ext[1..-1])
       end
 
-      #
-      # Returns a HTTP 200 response with the contents of the specified
-      # _file_.
-      #
-      def return_file(file,env)
-        if File.file?(file)
-          return [200, {'Content-Type' => content_type_for(file)}, File.new(file)]
-        else
-          return not_found(env)
-        end
-      end
+      protected
+
+      content_type 'text/html', ['html', 'htm', 'xhtml']
+      content_type 'text/css', ['css']
+      content_type 'text/gif', ['gif']
+      content_type 'text/jpeg', ['jpeg', 'jpg']
+      content_type 'text/png', ['png']
+      content_type 'image/x-icon', ['ico']
+      content_type 'text/javascript', ['js']
+      content_type 'text/xml', ['xml', 'xsl']
+      content_type 'application/rss+xml', ['rss']
+      content_type 'application/rdf+xml', ['rdf']
+      content_type 'application/pdf', ['pdf']
+      content_type 'application/doc', ['doc']
+      content_type 'application/zip', ['zip']
+      content_type 'text/plain', ['txt', 'conf', 'rb', 'py', 'h', 'c', 'hh', 'cc', 'hpp', 'cpp']
 
       #
       # Returns the HTTP 404 Not Found message for the requested path.
@@ -249,41 +300,10 @@ module Ronin
     <title>404 Not Found</title>
   <body>
     <h1>Not Found</h1>
-    <p>The requested URL #{path} was not found on this server.</p>
+    <p>The requested URL #{path.html_encode} was not found on this server.</p>
     <hr>
   </body>
 </html>}]
-      end
-
-      #
-      # The method which receives all requests.
-      #
-      def route(env)
-        test_pattern = lambda { |key,pattern,block|
-          if key.match(pattern)
-            return block.call(env)
-          end
-        }
-
-        if (url = env['REQUEST_URI'])
-          @url_patterns.each do |pattern,block|
-            test_pattern.call(url,pattern,block)
-          end
-        end
-
-        if (host = env['HTTP_HOST'])
-          @host_patterns.each do |pattern,block|
-            test_pattern.call(host,pattern,block)
-          end
-        end
-
-        if (path = env['PATH_INFO'])
-          @path_patterns.each do |pattern,block|
-            test_pattern.call(path,pattern,block)
-          end
-        end
-
-        return @default_route.call(env)
       end
 
     end
