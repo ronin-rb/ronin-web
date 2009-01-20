@@ -245,7 +245,11 @@ module Ronin
       end
 
       #
-      # Starts the server.
+      # Starts the server with the given _options_.
+      #
+      # _options_ may include the following keys:
+      # <tt>:host</tt>:: The host to bind to, defaults to Server.default_host.
+      # <tt>:port</tt>:: The port to listen on, defaults to Server.default_port.
       #
       def start(options={})
         host = (options[:host] || Server.default_host)
