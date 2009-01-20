@@ -278,26 +278,26 @@ module Ronin
         http_path = File.expand_path(env['PATH_INFO'])
 
         if http_host
+          if (server = @virtual_hosts[http_host])
+            return server.call(env)
+          end
+
           @virtual_host_patterns.each do |pattern,server|
             if http_host.match(pattern)
               return server.call(env)
             end
           end
-
-          if (server = @virtual_hosts[http_host])
-            return server.call(env)
-          end
         end
 
         if http_path
+          if (block = @paths[http_path])
+            return block.call(env)
+          end
+
           @path_patterns.each do |pattern,block|
             if http_path.match(pattern)
               return block.call(env)
             end
-          end
-
-          if (block = @paths[http_path])
-            return block.call(env)
           end
 
           sub_dir = @directories.keys.select { |path|
