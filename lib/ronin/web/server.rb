@@ -363,7 +363,7 @@ module Ronin
       def route(url)
         url = URI(url.to_s)
 
-        call(
+        return call(
           'HTTP_HOST' => url.host,
           'HTTP_PORT' => url.port,
           'SERVER_PORT' => url.port,
@@ -375,7 +375,7 @@ module Ronin
       def route_path(path)
         path, query = URI.decode(path.to_s).split('?',2)
 
-        route(URI::HTTP.build(
+        return route(URI::HTTP.build(
           :host => @host,
           :port => @port,
           :path => path,
