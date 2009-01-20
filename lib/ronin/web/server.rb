@@ -136,7 +136,6 @@ module Ronin
 
       def hosts_like(pattern,&block)
         @host_patterns[pattern] = self.class.new(&block)
-        return self
       end
 
       def paths_like(pattern,&block)
@@ -146,7 +145,6 @@ module Ronin
 
       def host(name,&block)
         @hosts[name] = self.class.new(&block)
-        return self
       end
 
       #
