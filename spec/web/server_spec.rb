@@ -7,15 +7,19 @@ describe Web::Server do
   before(:all) do
     @server = Web::Server.new do
       default do |env|
-        [200, {'Content-Type' => 'text/html'}, 'lol']
+        response('lol')
       end
 
-      bind('/secrets.xml') do |env|
-        [200, {'Content-Type' => 'text/xml'}, '<secret/>']
+      bind('/stuff/secret.xml') do |env|
+        response('<secret/>', :headers => {'Content-Type' => 'text/xml'})
       end
 
-      dir('/stuff') do |env|
-        [200, {'Content-Type' => 'text/html'}, 'stuff']
+      paths_like(/stuff\/secret\./) do |env|
+        response('No secrets here.')
+      end
+
+      map('/stuff') do |env|
+        response('stuff')
       end
     end
   end
@@ -41,10 +45,18 @@ describe Web::Server do
   end
 
   it "should have a default response for un-matched paths" do
-    web_server_get(@server,'/imposible').should == 'lol'
+    web_server_get(@server,'/imposible').body.should == ['lol']
   end
 
   it "should bind a path to a certain response" do
-    web_server_get(@server,'/secrets.xml').should == '<secret/>'
+    web_server_get(@server,'/stuff/secret.xml').body.should == ['<secret/>']
+  end
+
+  it "should match paths with patterns" do
+    web_server_get(@server,'/stuff/secret.pdf').body.should == ['No secrets here.']
+  end
+
+  it "should match paths to sub-directories" do
+    web_server_get(@server,'/stuff/impossible.html').body.should == ['stuff']
   end
 end
