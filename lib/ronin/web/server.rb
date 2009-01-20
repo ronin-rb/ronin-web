@@ -197,7 +197,7 @@ module Ronin
           end
         end
 
-        return response(File.read(path),:content_type => content_type_for(path))
+        return response(File.new(path), :content_type => content_type_for(path))
       end
 
       #
@@ -322,9 +322,9 @@ module Ronin
 
         bind(path) do |env|
           if File.file?(file)
-            [200, {'Content-Type' => content_type_for(file)}, File.new(file)]
+            return_file(file,env)
           else
-            not_found(env['PATH_INFO'])
+            not_found(env)
           end
         end
       end
