@@ -36,6 +36,9 @@ module Ronin
       # Default port to run the Web Server on
       PORT = 8080
 
+      # Directory index files
+      INDICES = ['index.htm', 'index.html']
+
       # The host to bind to
       attr_accessor :host
 
@@ -145,6 +148,22 @@ module Ronin
       end
 
       #
+      # Returns the index file contained within the _path_ of the specified directory.
+      # If no index file can be found, +nil+ will be returned.
+      #
+      def index_of(path)
+        path = File.expand_path(path)
+
+        INDICES.each do |name|
+          index = File.join(path,name)
+
+          return index if File.file?(index)
+        end
+
+        return nil
+      end
+
+      #
       # Returns the HTTP 404 Not Found message for the requested path.
       #
       def not_found(env)
@@ -161,6 +180,24 @@ module Ronin
     <hr>
   </body>
 </html>}]
+      end
+
+      #
+      # Returns the contents of the file at the specified _path_. If the _path_
+      # points to a directory, the directory will be searched for an index file.
+      # If no index file can be found or _path_ points to a non-existant
+      # file, a "404 Not Found" response will be returned.
+      #
+      def return_file(path,env)
+        if !(File.exists?(path))
+          return not_found(env)
+        elsif File.directory?(path)
+          unless (path = index_of(path))
+            return not_found(env)
+          end
+        end
+
+        return response(File.read(path),:content_type => content_type_for(path))
       end
 
       #
@@ -287,7 +324,7 @@ module Ronin
           if File.file?(file)
             [200, {'Content-Type' => content_type_for(file)}, File.new(file)]
           else
-            not_found(env)
+            not_found(env['PATH_INFO'])
           end
         end
       end
@@ -298,13 +335,12 @@ module Ronin
       #
       #   mount '/download/', '/tmp/files/'
       #
-      def mount(path,dir)
-        dir = File.expand_path(dir)
+      def mount(path,directory)
+        dir = File.expand_path(directory)
 
         map(path) do |env|
-          http_path = File.expand_path(env['PATH_INFO'])
-          sub_path = http_path.sub(path,'')
-          absolute_path = File.join(dir,sub_path)
+          sub_path = File.expand_path(env['PATH_INFO']).sub(path,'')
+          absolute_path = File.join(directory,sub_path)
 
           return_file(absolute_path,env)
         end
