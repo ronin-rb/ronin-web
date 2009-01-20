@@ -49,7 +49,7 @@ module Ronin
       # <tt>:host</tt>:: The host to bind to, defaults to Server.default_host.
       # <tt>:port</tt>:: The port to listen on, defaults to Server.default_port.
       #
-      def initialize(&block)
+      def initialize(options={},&block)
         @host = (options[:host] || Server.default_host)
         @port = (options[:port] || Server.default_port)
 
@@ -360,27 +360,26 @@ module Ronin
         return @default.call(env)
       end
 
-      def route_path(path)
-        path, query = URI.decode(path.to_s).split('?',2)
-
-        call(Rack::Request.new(
-          'HTTP_HOST' => @host,
-          'HTTP_PORT' => @port,
-          'SERVER_PORT' => @port,
-          'PATH_INFO' => path,
-          'QUERY_STRING' => query
-        ))
-      end
-
       def route(url)
         url = URI(url.to_s)
 
-        call(Rack::Request.new(
+        call(
           'HTTP_HOST' => url.host,
           'HTTP_PORT' => url.port,
           'SERVER_PORT' => url.port,
           'PATH_INFO' => url.path,
           'QUERY_STRING' => url.query
+        )
+      end
+
+      def route_path(path)
+        path, query = URI.decode(path.to_s).split('?',2)
+
+        route(URI::HTTP.build(
+          :host => @host,
+          :port => @port,
+          :path => path,
+          :query => query
         ))
       end
 
