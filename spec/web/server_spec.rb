@@ -11,7 +11,7 @@ describe Web::Server do
       end
 
       bind('/stuff/secret.xml') do |env|
-        response('<secret/>', :headers => {'Content-Type' => 'text/xml'})
+        response('<secret/>', :content_type => 'text/xml')
       end
 
       paths_like(/stuff\/secret\./) do |env|
