@@ -107,6 +107,21 @@ module Ronin
       end
 
       #
+      # Returns a Rack Response object with the specified _body_, the given
+      # _options_ and the given _block_.
+      #
+      # _options_ may include the following keys:
+      # <tt>:status</tt>:: The HTTP Response status code, defaults to 200.
+      # <tt>:headers</tt>:: The HTTP Headers to return.
+      #
+      def response(body=[],options={},&block)
+        status = (options[:status] || 200)
+        headers = (options[:headers] || {})
+
+        return Rack::Response.new(body,status,headers,&block)
+      end
+
+      #
       # Use the specified _block_ as the default route for all other
       # requests.
       #
@@ -149,11 +164,11 @@ module Ronin
       #
       # Binds the specified URL directory _path_ to the given _block_.
       #
-      #   dir '/downloads' do |env|
+      #   map '/downloads' do |env|
       #     [200, {'Content-Type' => 'text/xml'}, "Your somewhere inside the downloads directory"]
       #   end
       #
-      def dir(path,&block)
+      def map(path,&block)
         path += '/' unless path[-1..-1] == '/'
 
         @directories[path] = block
@@ -234,10 +249,12 @@ module Ronin
             end
           end
 
-          @directories.each do |path,block|
-            if http_path[0...path.length] == path
-              return block.call(env)
-            end
+          sub_dir = @directories.keys.select { |path|
+            http_path[0...path.length] == path
+          }.sort.last
+
+          if (sub_dir && (block = @directories[sub_dir]))
+            return block.call(env)
           end
 
           if (block = @paths[http_path])
