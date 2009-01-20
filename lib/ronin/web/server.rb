@@ -334,23 +334,6 @@ module Ronin
         return content_type(ext[1..-1])
       end
 
-      protected
-
-      content_type 'text/html', ['html', 'htm', 'xhtml']
-      content_type 'text/css', ['css']
-      content_type 'text/gif', ['gif']
-      content_type 'text/jpeg', ['jpeg', 'jpg']
-      content_type 'text/png', ['png']
-      content_type 'image/x-icon', ['ico']
-      content_type 'text/javascript', ['js']
-      content_type 'text/xml', ['xml', 'xsl']
-      content_type 'application/rss+xml', ['rss']
-      content_type 'application/rdf+xml', ['rdf']
-      content_type 'application/pdf', ['pdf']
-      content_type 'application/doc', ['doc']
-      content_type 'application/zip', ['zip']
-      content_type 'text/plain', ['txt', 'conf', 'rb', 'py', 'h', 'c', 'hh', 'cc', 'hpp', 'cpp']
-
       #
       # Returns the HTTP 404 Not Found message for the requested path.
       #
@@ -369,6 +352,23 @@ module Ronin
   </body>
 </html>}]
       end
+
+      protected
+
+      content_type 'text/html', ['html', 'htm', 'xhtml']
+      content_type 'text/css', ['css']
+      content_type 'text/gif', ['gif']
+      content_type 'text/jpeg', ['jpeg', 'jpg']
+      content_type 'text/png', ['png']
+      content_type 'image/x-icon', ['ico']
+      content_type 'text/javascript', ['js']
+      content_type 'text/xml', ['xml', 'xsl']
+      content_type 'application/rss+xml', ['rss']
+      content_type 'application/rdf+xml', ['rdf']
+      content_type 'application/pdf', ['pdf']
+      content_type 'application/doc', ['doc']
+      content_type 'application/zip', ['zip']
+      content_type 'text/plain', ['txt', 'conf', 'rb', 'py', 'h', 'c', 'hh', 'cc', 'hpp', 'cpp']
 
     end
   end
