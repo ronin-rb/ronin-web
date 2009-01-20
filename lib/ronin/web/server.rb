@@ -134,17 +134,51 @@ module Ronin
         return self
       end
 
+      #
+      # Connects the specified _server_ as a virtual host representing the
+      # specified host _name_.
+      #
+      def connect(name,server)
+        @hosts[name.to_s] = server
+      end
+
+      #
+      # Registers the specified _block_ to be called when receiving requests to host
+      # names which match the specified _pattern_.
+      #
+      #   hosts_like(/^a[0-9]\./) do
+      #     map('/download/') do |env|
+      #       ...
+      #     end
+      #   end
+      #
       def hosts_like(pattern,&block)
         @host_patterns[pattern] = self.class.new(&block)
       end
 
+      #
+      # Registers the specified _block_ to be called when receiving requests for paths
+      # which match the specified _pattern_.
+      #
+      #   paths_like(/\.xml$/) do |env|
+      #     ...
+      #   end
+      #
       def paths_like(pattern,&block)
         @path_patterns[pattern] = block
         return self
       end
 
+      #
+      # Creates a new Server object using the specified _block_ and connects it as
+      # a virtual host representing the specified host _name_.
+      #
+      #   host('cdn.evil.com') do
+      #     ...
+      #   end
+      #
       def host(name,&block)
-        @hosts[name] = self.class.new(&block)
+        connect(self.class.new(&block))
       end
 
       #
