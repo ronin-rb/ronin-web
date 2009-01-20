@@ -296,15 +296,15 @@ module Ronin
             end
           end
 
+          if (block = @paths[http_path])
+            return block.call(env)
+          end
+
           sub_dir = @directories.keys.select { |path|
             http_path[0...path.length] == path
           }.sort.last
 
           if (sub_dir && (block = @directories[sub_dir]))
-            return block.call(env)
-          end
-
-          if (block = @paths[http_path])
             return block.call(env)
           end
         end
