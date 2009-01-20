@@ -21,6 +21,8 @@
 #++
 #
 
+require 'ronin/formatting/html'
+
 require 'rack'
 
 module Ronin
@@ -112,11 +114,20 @@ module Ronin
       #
       # _options_ may include the following keys:
       # <tt>:status</tt>:: The HTTP Response status code, defaults to 200.
-      # <tt>:headers</tt>:: The HTTP Headers to return.
+      #
+      #   response("<data>lol</data>", :content_type => 'text/xml')
       #
       def response(body=[],options={},&block)
-        status = (options[:status] || 200)
-        headers = (options[:headers] || {})
+        status = (options.delete(:status) || 200)
+        headers = {}
+
+        options.each do |name,value|
+          header_name = name.to_s.split('_').map { |word|
+            word.capitalize
+          }.join('-')
+
+          headers[header_name] = value.to_s
+        end
 
         return Rack::Response.new(body,status,headers,&block)
       end
