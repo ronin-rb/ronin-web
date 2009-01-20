@@ -21,7 +21,8 @@
 #++
 #
 
-require 'ronin/formatting/html'
+require 'uri'
+require 'cgi'
 
 require 'rack'
 
@@ -35,10 +36,23 @@ module Ronin
       # Default port to run the Web Server on
       PORT = 8080
 
+      # The host to bind to
+      attr_accessor :host
+
+      # The port to listen on
+      attr_accessor :port
+
       #
       # Creates a new Web Server using the given configuration _block_.
       #
+      # _options_ may contain the following keys:
+      # <tt>:host</tt>:: The host to bind to, defaults to Server.default_host.
+      # <tt>:port</tt>:: The port to listen on, defaults to Server.default_port.
+      #
       def initialize(&block)
+        @host = (options[:host] || Server.default_host)
+        @port = (options[:port] || Server.default_port)
+
         @default = method(:not_found)
 
         @virtual_host_patterns = {}
@@ -105,7 +119,48 @@ module Ronin
       # using the given _options_.
       #
       def self.start(options={},&block)
-        self.new(&block).start(options)
+        self.new(options,&block).start
+      end
+
+      #
+      # Returns the HTTP Content-Type for the specified file _extension_.
+      #
+      #   content_type('html')
+      #   # => "text/html"
+      #
+      def content_type(extension)
+        Server.content_types[extension] || 'application/x-unknown-content-type'
+      end
+
+      #
+      # Returns the HTTP Content-Type for the specified _file_.
+      #
+      #   srv.content_type_for('file.html')
+      #   # => "text/html"
+      #
+      def content_type_for(file)
+        ext = File.extname(file).downcase
+
+        return content_type(ext[1..-1])
+      end
+
+      #
+      # Returns the HTTP 404 Not Found message for the requested path.
+      #
+      def not_found(env)
+        path = env['PATH_INFO']
+
+        return [404, {'Content-Type' => 'text/html'}, %{
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+  <head>
+    <title>404 Not Found</title>
+  <body>
+    <h1>Not Found</h1>
+    <p>The requested URL #{CGI.escapeHTML(path)} was not found on this server.</p>
+    <hr>
+  </body>
+</html>}]
       end
 
       #
@@ -256,17 +311,10 @@ module Ronin
       end
 
       #
-      # Starts the server with the given _options_.
+      # Starts the server.
       #
-      # _options_ may include the following keys:
-      # <tt>:host</tt>:: The host to bind to, defaults to Server.default_host.
-      # <tt>:port</tt>:: The port to listen on, defaults to Server.default_port.
-      #
-      def start(options={})
-        host = (options[:host] || Server.default_host)
-        port = (options[:port] || Server.default_port)
-
-        Rack::Handler::WEBrick.run(self, :Host => host, :Port => port)
+      def start
+        Rack::Handler::WEBrick.run(self, :Host => @host, :Port => @port)
         return self
       end
 
@@ -312,45 +360,28 @@ module Ronin
         return @default.call(env)
       end
 
-      #
-      # Returns the HTTP Content-Type for the specified file _extension_.
-      #
-      #   content_type('html')
-      #   # => "text/html"
-      #
-      def content_type(extension)
-        Server.content_types[extension] || 'application/x-unknown-content-type'
+      def route_path(path)
+        path, query = URI.decode(path.to_s).split('?',2)
+
+        call(Rack::Request.new(
+          'HTTP_HOST' => @host,
+          'HTTP_PORT' => @port,
+          'SERVER_PORT' => @port,
+          'PATH_INFO' => path,
+          'QUERY_STRING' => query
+        ))
       end
 
-      #
-      # Returns the HTTP Content-Type for the specified _file_.
-      #
-      #   srv.content_type_for('file.html')
-      #   # => "text/html"
-      #
-      def content_type_for(file)
-        ext = File.extname(file).downcase
+      def route(url)
+        url = URI(url.to_s)
 
-        return content_type(ext[1..-1])
-      end
-
-      #
-      # Returns the HTTP 404 Not Found message for the requested path.
-      #
-      def not_found(env)
-        path = env['PATH_INFO']
-
-        return [404, {'Content-Type' => 'text/html'}, %{
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html>
-  <head>
-    <title>404 Not Found</title>
-  <body>
-    <h1>Not Found</h1>
-    <p>The requested URL #{path.html_encode} was not found on this server.</p>
-    <hr>
-  </body>
-</html>}]
+        call(Rack::Request.new(
+          'HTTP_HOST' => url.host,
+          'HTTP_PORT' => url.port,
+          'SERVER_PORT' => url.port,
+          'PATH_INFO' => url.path,
+          'QUERY_STRING' => url.query
+        ))
       end
 
       protected
