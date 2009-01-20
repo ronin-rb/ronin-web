@@ -275,7 +275,7 @@ module Ronin
       #
       def call(env)
         http_host = env['HTTP_HOST']
-        http_path = env['PATH_INFO']
+        http_path = File.expand_path(env['PATH_INFO'])
 
         if http_host
           @virtual_host_patterns.each do |pattern,server|
