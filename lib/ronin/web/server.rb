@@ -39,10 +39,10 @@ module Ronin
       def initialize(&block)
         @default = method(:not_found)
 
-        @host_patterns = {}
-        @path_patterns = {}
+        @virtual_host_patterns = {}
+        @virtual_hosts = {}
 
-        @hosts = {}
+        @path_patterns = {}
         @paths = {}
         @directories = {}
 
@@ -139,7 +139,7 @@ module Ronin
       # specified host _name_.
       #
       def connect(name,server)
-        @hosts[name.to_s] = server
+        @virtual_hosts[name.to_s] = server
       end
 
       #
@@ -153,7 +153,7 @@ module Ronin
       #   end
       #
       def hosts_like(pattern,&block)
-        @host_patterns[pattern] = self.class.new(&block)
+        @virtual_host_patterns[pattern] = self.class.new(&block)
       end
 
       #
@@ -263,13 +263,13 @@ module Ronin
         http_path = env['PATH_INFO']
 
         if http_host
-          @host_patterns.each do |pattern,server|
+          @virtual_host_patterns.each do |pattern,server|
             if http_host.match(pattern)
               return server.call(env)
             end
           end
 
-          if (server = @hosts[http_host])
+          if (server = @virtual_hosts[http_host])
             return server.call(env)
           end
         end
