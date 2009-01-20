@@ -201,7 +201,7 @@ module Ronin
       def mount(path,dir)
         dir = File.expand_path(dir)
 
-        dir(path) do |env|
+        map(path) do |env|
           http_path = File.expand_path(env['PATH_INFO'])
           sub_path = http_path.sub(path,'')
           absolute_path = File.join(dir,sub_path)
