@@ -1,7 +1,6 @@
 require 'ronin/web/server'
 
 require 'spec_helper'
-require 'helpers/web/server'
 
 describe Web::Server do
   before(:all) do
