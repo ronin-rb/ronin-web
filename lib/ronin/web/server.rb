@@ -168,9 +168,7 @@ module Ronin
       #
       def not_found(env)
         path = env['PATH_INFO']
-
-        return [404, {'Content-Type' => 'text/html'}, %{
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+        body = %{<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html>
   <head>
     <title>404 Not Found</title>
@@ -179,7 +177,9 @@ module Ronin
     <p>The requested URL #{CGI.escapeHTML(path)} was not found on this server.</p>
     <hr>
   </body>
-</html>}]
+</html>}
+
+        return response(body, :status => 404, :content_type => 'text/html')
       end
 
       #
