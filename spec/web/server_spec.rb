@@ -45,18 +45,18 @@ describe Web::Server do
   end
 
   it "should have a default response for un-matched paths" do
-    web_server_get(@server,'/imposible').body.should == ['lol']
+    @server.route_path('/imposible').body.should == ['lol']
   end
 
   it "should bind a path to a certain response" do
-    web_server_get(@server,'/stuff/secret.xml').body.should == ['<secret/>']
+    @server.route_path('/stuff/secret.xml').body.should == ['<secret/>']
   end
 
   it "should match paths with patterns" do
-    web_server_get(@server,'/stuff/secret.pdf').body.should == ['No secrets here.']
+    @server.route_path('/stuff/secret.pdf').body.should == ['No secrets here.']
   end
 
   it "should match paths to sub-directories" do
-    web_server_get(@server,'/stuff/impossible.html').body.should == ['stuff']
+    @server.route_path('/stuff/impossible.html').body.should == ['stuff']
   end
 end
