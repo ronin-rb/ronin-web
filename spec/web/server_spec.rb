@@ -26,6 +26,24 @@ describe Web::Server do
 
       mount('/test/mount/',WEB_SERVER_ROOT)
     end
+
+    @virtual_host = Web::Server.new do
+      bind('/test/virtual_host.xml') do |env|
+        response('<virtual/>', :content_type => 'text/xml')
+      end
+    end
+
+    @server.host('virtual.host.com') do
+      bind('/test/virtual_host.xml') do |env|
+        response('<virtual/>', :content_type => 'text/xml')
+      end
+    end
+
+    @server.hosts_like(/^virtual[0-9]\./) do
+      bind('/test/virtual_host_patterns.xml') do |env|
+        response('<virtual-patterns/>', :content_type => 'text/xml')
+      end
+    end
   end
 
   it "should have a default host to listen on" do
@@ -80,5 +98,17 @@ describe Web::Server do
 
   it "should return the index file for a mounted directory" do
     @server.route_path('/test/mount/').body.should == ["Index of files.\n"]
+  end
+
+  it "should match virtual hosts" do
+    url = 'http://virtual.host.com/test/virtual_host.xml'
+
+    @server.route(url).body.should == ['<virtual/>']
+  end
+
+  it "should match virtual hosts with patterns" do
+    url = 'http://virtual0.host.com/test/virtual_host_patterns.xml'
+
+    @server.route(url).body.should == ['<virtual-patterns/>']
   end
 end
