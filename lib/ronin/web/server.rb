@@ -191,7 +191,9 @@ module Ronin
       def return_file(path,env)
         if !(File.exists?(path))
           return not_found(env)
-        elsif File.directory?(path)
+        end
+
+        if File.directory?(path)
           unless (path = index_of(path))
             return not_found(env)
           end
@@ -304,8 +306,6 @@ module Ronin
       #   end
       #
       def map(path,&block)
-        path += '/' unless path[-1..-1] == '/'
-
         @directories[path] = block
         return self
       end
@@ -336,10 +336,14 @@ module Ronin
       #   mount '/download/', '/tmp/files/'
       #
       def mount(path,directory)
-        dir = File.expand_path(directory)
+        sub_dirs = path.split('/')
+        directory = File.expand_path(directory)
 
         map(path) do |env|
-          sub_path = File.expand_path(env['PATH_INFO']).sub(path,'')
+          http_path = File.expand_path(env['PATH_INFO'])
+          http_dirs = http_path.split('/')
+
+          sub_path = http_dirs[sub_dirs.length..-1].join('/')
           absolute_path = File.join(directory,sub_path)
 
           return_file(absolute_path,env)
@@ -384,8 +388,12 @@ module Ronin
             end
           end
 
+          http_dirs = http_path.split('/')
+
           sub_dir = @directories.keys.select { |path|
-            http_path[0...path.length] == path
+            dirs = path.split('/')
+
+            http_dirs[0...dirs.length] == dirs
           }.sort.last
 
           if (sub_dir && (block = @directories[sub_dir]))
