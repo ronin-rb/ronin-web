@@ -1,25 +1,30 @@
 require 'ronin/web/server'
 
 require 'spec_helper'
+require 'web/helpers/server'
 
 describe Web::Server do
   before(:all) do
     @server = Web::Server.new do
       default do |env|
-        response('lol')
+        response('This is default.')
       end
 
-      bind('/stuff/secret.xml') do |env|
+      bind('/test/bind.xml') do |env|
         response('<secret/>', :content_type => 'text/xml')
       end
 
-      paths_like(/stuff\/secret\./) do |env|
+      paths_like(/path_patterns\/secret\./) do |env|
         response('No secrets here.')
       end
 
-      map('/stuff') do |env|
-        response('stuff')
+      map('/test/map') do |env|
+        response('mapped')
       end
+
+      file('/test/file.txt',File.join(WEB_SERVER_ROOT,'test.txt'))
+
+      mount('/test/mount/',WEB_SERVER_ROOT)
     end
   end
 
@@ -43,19 +48,37 @@ describe Web::Server do
     @server.content_type('lol').should == 'application/x-unknown-content-type'
   end
 
+  it "should find the index file for a directory" do
+    dir = WEB_SERVER_ROOT
+
+    @server.index_of(dir).should == File.join(dir,'index.html')
+  end
+
   it "should have a default response for un-matched paths" do
-    @server.route_path('/imposible').body.should == ['lol']
+    @server.route_path('/test/default').body.should == ['This is default.']
   end
 
   it "should bind a path to a certain response" do
-    @server.route_path('/stuff/secret.xml').body.should == ['<secret/>']
+    @server.route_path('/test/bind.xml').body.should == ['<secret/>']
   end
 
   it "should match paths with patterns" do
-    @server.route_path('/stuff/secret.pdf').body.should == ['No secrets here.']
+    @server.route_path('/test/path_patterns/secret.pdf').body.should == ['No secrets here.']
   end
 
   it "should match paths to sub-directories" do
-    @server.route_path('/stuff/impossible.html').body.should == ['stuff']
+    @server.route_path('/test/map/impossible.html').body.should == ['mapped']
+  end
+
+  it "should return a response for a file" do
+    @server.route_path('/test/file.txt').body.should == ["This is a test.\n"]
+  end
+
+  it "should return files from mounted directories" do
+    @server.route_path('/test/mount/test.txt').body.should == ["This is a test.\n"]
+  end
+
+  it "should return the index file for a mounted directory" do
+    @server.route_path('/test/mount/').body.should == ["Index of files.\n"]
   end
 end
