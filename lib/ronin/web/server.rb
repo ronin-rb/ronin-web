@@ -49,8 +49,10 @@ module Ronin
       # Creates a new Web Server using the given configuration _block_.
       #
       # _options_ may contain the following keys:
-      # <tt>:host</tt>:: The host to bind to, defaults to Server.default_host.
-      # <tt>:port</tt>:: The port to listen on, defaults to Server.default_port.
+      # <tt>:host</tt>:: The host to bind to, defaults to
+      #                  Server.default_host.
+      # <tt>:port</tt>:: The port to listen on, defaults to
+      #                  Server.default_port.
       #
       def initialize(options={},&block)
         @host = (options[:host] || Server.default_host)
@@ -118,8 +120,8 @@ module Ronin
       end
 
       #
-      # Creates a new Web Server object with the given _block_ and starts it
-      # using the given _options_.
+      # Creates a new Web Server object with the given _block_ and starts
+      # it using the given _options_.
       #
       def self.start(options={},&block)
         self.new(options,&block).start
@@ -148,8 +150,8 @@ module Ronin
       end
 
       #
-      # Returns the index file contained within the _path_ of the specified directory.
-      # If no index file can be found, +nil+ will be returned.
+      # Returns the index file contained within the _path_ of the specified
+      # directory. If no index file can be found, +nil+ will be returned.
       #
       def index_of(path)
         path = File.expand_path(path)
@@ -183,10 +185,10 @@ module Ronin
       end
 
       #
-      # Returns the contents of the file at the specified _path_. If the _path_
-      # points to a directory, the directory will be searched for an index file.
-      # If no index file can be found or _path_ points to a non-existant
-      # file, a "404 Not Found" response will be returned.
+      # Returns the contents of the file at the specified _path_. If the
+      # _path_ points to a directory, the directory will be searched for
+      # an index file. If no index file can be found or _path_ points to a
+      # non-existant file, a "404 Not Found" response will be returned.
       #
       def return_file(path,env)
         if !(File.exists?(path))
@@ -248,8 +250,8 @@ module Ronin
       end
 
       #
-      # Registers the specified _block_ to be called when receiving requests to host
-      # names which match the specified _pattern_.
+      # Registers the specified _block_ to be called when receiving
+      # requests to host names which match the specified _pattern_.
       #
       #   hosts_like(/^a[0-9]\./) do
       #     map('/download/') do |env|
@@ -262,8 +264,8 @@ module Ronin
       end
 
       #
-      # Registers the specified _block_ to be called when receiving requests for paths
-      # which match the specified _pattern_.
+      # Registers the specified _block_ to be called when receiving
+      # requests for paths which match the specified _pattern_.
       #
       #   paths_like(/\.xml$/) do |env|
       #     ...
@@ -275,8 +277,9 @@ module Ronin
       end
 
       #
-      # Creates a new Server object using the specified _block_ and connects it as
-      # a virtual host representing the specified host _name_.
+      # Creates a new Server object using the specified _block_ and
+      # connects it as a virtual host representing the specified host
+      # _name_.
       #
       #   host('cdn.evil.com') do
       #     ...
@@ -290,7 +293,7 @@ module Ronin
       # Binds the specified URL _path_ to the given _block_.
       #
       #   bind '/secrets.xml' do |env|
-      #     [200, {'Content-Type' => 'text/xml'}, "<secrets>Made you look.</secrets>"]
+      #     [200, {'Content-Type' => 'text/xml'}, "Made you look."]
       #   end
       #
       def bind(path,&block)
@@ -302,7 +305,10 @@ module Ronin
       # Binds the specified URL directory _path_ to the given _block_.
       #
       #   map '/downloads' do |env|
-      #     [200, {'Content-Type' => 'text/xml'}, "Your somewhere inside the downloads directory"]
+      #     response(
+      #       "Your somewhere inside the downloads directory",
+      #       :content_type' => 'text/xml'
+      #     )
       #   end
       #
       def map(path,&block)
