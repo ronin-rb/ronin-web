@@ -132,6 +132,13 @@ module Ronin
     # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
     # <tt>:user_agent</tt>:: The User-Agent string to use.
     # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
+    # <tt>:user</tt>:: The HTTP Basic Authentication user name.
+    # <tt>:password</tt>:: The HTTP Basic Authentication password.
+    # <tt>:content_length_proc</tt>:: A callback which will be passed the
+    #                                 content-length of the HTTP response.
+    # <tt>:progress_proc</tt>:: A callback which will be passed the size
+    #                           of each fragment, once received from the
+    #                           server.
     #
     #   Web.open('http://www.hackety.org/')
     #
@@ -141,19 +148,33 @@ module Ronin
     #   Web.open('http://www.wired.com/', :user_agent => 'the future')
     #
     def Web.open(url,options={})
-      headers = {}
+      user_agent_alias = options.delete(:user_agent_alias)
+      proxy = (options.delete(:proxy) || Web.proxy)
+      user = options.delete(:user)
+      password = options.delete(:password)
+      content_length_proc = options.delete(:content_length_proc)
+      progress_proc = options.delete(:progress_proc)
 
-      if options[:user_agent_alias]
-        headers['User-Agent'] = Web.user_agent_aliases[options[:user_agent_alias]]
-      elsif options[:user_agent]
-        headers['User-Agent'] = options[:user_agent]
-      elsif Web.user_agent
-        headers['User-Agent'] = Web.user_agent
+      headers = Network::HTTP.headers(options)
+
+      if user_agent_alias
+        headers['User-Agent'] = Web.user_agent_aliases[user_agent_alias]
       end
 
-      proxy = (options[:proxy] || Web.proxy)
       if proxy[:host]
         headers[:proxy] = Web.proxy_url(proxy)
+      end
+
+      if user
+        headers[:http_basic_authentication] = [user, password]
+      end
+
+      if content_length_proc
+        headers[:content_length_proc] = content_length_proc
+      end
+
+      if progress_proc
+        headers[:progress_proc] = progress_proc
       end
 
       return Kernel.open(url,headers)
