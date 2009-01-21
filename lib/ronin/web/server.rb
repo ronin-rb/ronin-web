@@ -283,7 +283,7 @@ module Ronin
       #   end
       #
       def host(name,&block)
-        connect(self.class.new(&block))
+        connect(name,self.class.new(&block))
       end
 
       #
