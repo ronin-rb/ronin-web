@@ -73,31 +73,45 @@ describe Web::Server do
   end
 
   it "should have a default response for un-matched paths" do
-    @server.route_path('/test/default').body.should == ['This is default.']
+    path = '/test/default'
+
+    @server.route_path(path).body.should == ['This is default.']
   end
 
   it "should bind a path to a certain response" do
-    @server.route_path('/test/bind.xml').body.should == ['<secret/>']
+    path = '/test/bind.xml'
+
+    @server.route_path(path).body.should == ['<secret/>']
   end
 
   it "should match paths with patterns" do
-    @server.route_path('/test/path_patterns/secret.pdf').body.should == ['No secrets here.']
+    path = '/test/path_patterns/secret.pdf'
+
+    @server.route_path(path).body.should == ['No secrets here.']
   end
 
   it "should match paths to sub-directories" do
-    @server.route_path('/test/map/impossible.html').body.should == ['mapped']
+    path = '/test/map/impossible.html'
+
+    @server.route_path(path).body.should == ['mapped']
   end
 
   it "should return a response for a file" do
-    @server.route_path('/test/file.txt').body.should == ["This is a test.\n"]
+    path = '/test/file.txt'
+
+    @server.route_path(path).body.should == ["This is a test.\n"]
   end
 
   it "should return files from mounted directories" do
-    @server.route_path('/test/mount/test.txt').body.should == ["This is a test.\n"]
+    path = '/test/mount/test.txt'
+
+    @server.route_path(path).body.should == ["This is a test.\n"]
   end
 
   it "should return the index file for a mounted directory" do
-    @server.route_path('/test/mount/').body.should == ["Index of files.\n"]
+    path = '/test/mount/'
+
+    @server.route_path(path).body.should == ["Index of files.\n"]
   end
 
   it "should match virtual hosts" do
