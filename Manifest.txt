@@ -18,6 +18,8 @@ lib/ronin/web/web.rb
 lib/ronin/web/version.rb
 tasks/spec.rb
 spec/spec_helper.rb
-spec/helpers/web/server.rb
+spec/web/helpers/server.rb
+spec/web/helpers/root/index.html
+spec/web/helpers/root/test.txt
 spec/web/extensions/nokogiri_spec.rb
 spec/web/server_spec.rb
