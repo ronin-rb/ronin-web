@@ -45,8 +45,8 @@ of Ronin.
 
 == REQUIREMENTS:
 
-* Ronin >= 0.1.4
-* hpricot
+* ronin >= 0.1.4
+* nokogiri
 * mechanize
 * spidr >= 0.1.3
 * rack >= 0.9.1
