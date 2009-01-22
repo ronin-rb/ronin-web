@@ -24,6 +24,12 @@
 require 'uri'
 require 'cgi'
 
+begin
+  require 'mongrel'
+rescue
+  require 'webrick'
+end
+
 require 'rack'
 
 module Ronin
@@ -388,7 +394,14 @@ module Ronin
       # Starts the server.
       #
       def start
-        Rack::Handler::WEBrick.run(self, :Host => @host, :Port => @port)
+        options = {:Host => @host, :Port => @port}
+
+        if Object.const_defined?('Mongrel')
+          Rack::Handler::Mongrel.run(self,options)
+        else
+          Rack::Handler::WEBrick.run(self,options)
+        end
+
         return self
       end
 
