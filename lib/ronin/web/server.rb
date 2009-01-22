@@ -58,16 +58,14 @@ module Ronin
       # Creates a new Web Server using the given configuration _block_.
       #
       # _options_ may contain the following keys:
-      # <tt>:host</tt>:: The host to bind to, defaults to
-      #                  Server.default_host.
-      # <tt>:port</tt>:: The port to listen on, defaults to
-      #                  Server.default_port.
+      # <tt>:host</tt>:: The host to bind to.
+      # <tt>:port</tt>:: The port to listen on.
       # <tt>:config</tt>:: A +Hash+ of configurable variables to be used
       #                    in responses.
       #
       def initialize(options={},&block)
-        @host = (options[:host] || Server.default_host)
-        @port = (options[:port] || Server.default_port)
+        @host = options[:host]
+        @port = options[:port]
         @config = {}
 
         if options.has_key?(:config)
@@ -133,6 +131,19 @@ module Ronin
         extensions.each { |ext| Server.content_types[ext] = type }
 
         return self
+      end
+
+      def Server.run(server,options={})
+        rack_options = {}
+
+        rack_options[:Host] = (options[:host] || Server.default_host)
+        rack_options[:Port] = (options[:port] || Server.default_port)
+
+        if Object.const_defined?('Mongrel')
+          Rack::Handler::Mongrel.run(server,rack_options)
+        else
+          Rack::Handler::WEBrick.run(server,rack_options)
+        end
       end
 
       #
@@ -394,14 +405,7 @@ module Ronin
       # Starts the server.
       #
       def start
-        options = {:Host => @host, :Port => @port}
-
-        if Object.const_defined?('Mongrel')
-          Rack::Handler::Mongrel.run(self,options)
-        else
-          Rack::Handler::WEBrick.run(self,options)
-        end
-
+        Server.run(self, :host => @host, :port => @port)
         return self
       end
 
