@@ -260,6 +260,24 @@ module Ronin
       end
 
       #
+      # Returns the server that handles requests for the specified host
+      # _name_.
+      #
+      def virtual_host(name)
+        name = name.to_s
+
+        if @virtual_hosts.has_key?(name)
+          return @virtual_hosts[name]
+        end
+
+        @virtual_host_patterns.each do |pattern,server|
+          return @server if name.match(pattern)
+        end
+
+        return nil
+      end
+
+      #
       # Registers the specified _block_ to be called when receiving
       # requests to host names which match the specified _pattern_.
       #
