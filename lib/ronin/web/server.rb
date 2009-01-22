@@ -461,6 +461,9 @@ module Ronin
         return @default.call(env)
       end
 
+      #
+      # Routes the specified _url_ to the call method.
+      #
       def route(url)
         url = URI(url.to_s)
 
@@ -473,6 +476,9 @@ module Ronin
         )
       end
 
+      #
+      # Routes the specified _path_ to the call method.
+      #
       def route_path(path)
         path, query = URI.decode(path.to_s).split('?',2)
 
