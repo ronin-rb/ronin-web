@@ -125,4 +125,18 @@ describe Web::Server do
 
     @server.route(url).body.should == ['<virtual-patterns/>']
   end
+
+  it "should provide access to servers via their host-names" do
+    virtual_host = @server.virtual_host('virtual.host.com')
+    url = 'http://virtual.host.com/test/virtual_host.xml'
+
+    virtual_host.route(url).body.should == ['<virtual/>']
+  end
+
+  it "should provide access to servers via their host-names that match virtual host patterns" do
+    virtual_host = @server.virtual_host('virtual1.host.com')
+    url = 'http://virtual0.host.com/test/virtual_host_patterns.xml'
+
+    virtual_host.route(url).body.should == ['<virtual-patterns/>']
+  end
 end
