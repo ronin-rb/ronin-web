@@ -271,7 +271,7 @@ module Ronin
         end
 
         @virtual_host_patterns.each do |pattern,server|
-          return @server if name.match(pattern)
+          return server if name.match(pattern)
         end
 
         return nil
