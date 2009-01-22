@@ -400,14 +400,8 @@ module Ronin
         http_path = File.expand_path(env['PATH_INFO'])
 
         if http_host
-          if (server = @virtual_hosts[http_host])
+          if (server = virtual_host(http_host))
             return server.call(env)
-          end
-
-          @virtual_host_patterns.each do |pattern,server|
-            if http_host.match(pattern)
-              return server.call(env)
-            end
           end
         end
 
