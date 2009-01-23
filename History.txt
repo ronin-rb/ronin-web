@@ -10,4 +10,6 @@
   * Integrates Spidr::Agent into Web::Spider.
   * Provides Web::Server, a customizable Rack web server that supports path
     and host-name routing.
+    * Web::Server will use Mongrel, only if Mongrel is installed, otherwise
+      WEBrick will be used.
 
