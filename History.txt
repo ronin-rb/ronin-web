@@ -1,4 +1,13 @@
-=== 0.1.0 / 2009-01-14
+=== 0.1.0 / 2009-01-22
 
 * Initial release.
+  * Provides Web.html and Web.xml methods, which use Nokogiri::HTML and
+    Nokogiri::XML respectively, to parse HTML and XML content.
+  * Supports custom Proxy and User-Agent strings, through
+    the Web.proxy and Web.user_agent methods respectively.
+  * Provides Web.agent, Web.get and Weg.post methods which access
+    WWW::Mechanize.
+  * Integrates Spidr::Agent into Web::Spider.
+  * Provides Web::Server, a customizable Rack web server that supports path
+    and host-name routing.
 
