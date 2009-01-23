@@ -39,7 +39,7 @@ of Ronin.
 
 == FEATURES/PROBLEMS:
 
-* Web access (utilizing Mechanize and Hpricot).
+* Web access (utilizing Mechanize and Nokogiri).
 * Integrates Spidr into Ronin::Web::Spider.
 * Provides a custom Rack web-server based on Rack::Builder.
 
