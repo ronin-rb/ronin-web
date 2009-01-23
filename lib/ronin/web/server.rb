@@ -134,10 +134,9 @@ module Ronin
       end
 
       #
-      # Runs the specified _server_ with the given _options_. If
-      # Mongrel is installed, Server.run will use the
-      # <tt>Rack::Handler::Mongrel</tt>, otherwise
-      # <tt>Rack::Handler::WEBrick</tt> will be used to run the _server_.
+      # Runs the specified _server_ with the given _options_. Server.run
+      # will use Mongrel to run the _server_, if it is installed. Otherwise
+      # WEBrick will be used to run the _server_.
       #
       # _options_ can contain the following keys:
       # <tt>:host</tt>:: The host the server will bind to, defaults to
