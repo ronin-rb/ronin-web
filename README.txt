@@ -56,6 +56,12 @@ of Ronin.
 
   $ sudo gem install ronin-web
 
+== SYNOPSIS:
+
+* Start the Ronin console with Ronin Web preloaded:
+
+  $ ronin-web
+
 == LICENSE:
 
 Copyright (c) 2006-2009 Hal Brodigan (postmodern.mod3 at gmail.com)
