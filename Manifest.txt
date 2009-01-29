@@ -2,6 +2,7 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
+bin/ronin-web
 lib/ronin/sessions/web.rb
 lib/ronin/web.rb
 lib/ronin/web/extensions.rb
