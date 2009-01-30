@@ -46,11 +46,11 @@ of Ronin.
 
 == REQUIREMENTS:
 
-* nokogiri >= 1.1.0
-* mechanize >= 0.9.0
-* spidr >= 0.1.3
-* rack >= 0.9.1
-* ronin >= 0.1.4
+* {nokogiri}[http://nokogiri.rubyforge.org/] >= 1.1.0
+* {mechanize}[http://mechanize.rubyforge.org/] >= 0.9.0
+* {spidr}[http://spidr.rubyforge.org/] >= 0.1.3
+* {rack}[http://rack.rubyforge.org/] >= 0.9.1
+* {ronin}[http://ronin.rubyforge.org/] >= 0.1.4
 
 == INSTALL:
 
