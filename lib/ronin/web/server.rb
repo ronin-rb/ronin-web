@@ -267,15 +267,15 @@ module Ronin
       end
 
       #
-      # Use the specified _block_ as the default route for all other
-      # requests.
+      # Use the given _server_ or _block_ as the default route for all
+      # other requests.
       #
       #   default do |env|
       #     [200, {'Content-Type' => 'text/html'}, 'lol train']
       #   end
       #
-      def default(&block)
-        @default = block
+      def default(server=nil,&block)
+        @default = (server || block)
         return self
       end
 
@@ -306,7 +306,7 @@ module Ronin
       end
 
       #
-      # Registers the specified _block_ to be called when receiving
+      # Registers the given _server_ or _block_ to be called when receiving
       # requests to host names which match the specified _pattern_.
       #
       #   hosts_like(/^a[0-9]\./) do
@@ -315,20 +315,20 @@ module Ronin
       #     end
       #   end
       #
-      def hosts_like(pattern,&block)
-        @virtual_host_patterns[pattern] = self.class.new(&block)
+      def hosts_like(pattern,server=nil,&block)
+        @virtual_host_patterns[pattern] = (server || self.class.new(&block))
       end
 
       #
-      # Registers the specified _block_ to be called when receiving
+      # Registers the given _server_ or _block_ to be called when receiving
       # requests for paths which match the specified _pattern_.
       #
       #   paths_like(/\.xml$/) do |env|
       #     ...
       #   end
       #
-      def paths_like(pattern,&block)
-        @path_patterns[pattern] = block
+      def paths_like(pattern,server=nil,&block)
+        @path_patterns[pattern] = (server || block)
         return self
       end
 
@@ -341,24 +341,27 @@ module Ronin
       #     ...
       #   end
       #
-      def host(name,&block)
-        connect(name,self.class.new(&block))
+      def host(name,server=nil,&block)
+        server ||= self.class.new(&block)
+
+        connect(name,server)
       end
 
       #
-      # Binds the specified URL _path_ to the given _block_.
+      # Binds the specified URL _path_ to the given _server_ or _block_.
       #
       #   bind '/secrets.xml' do |env|
       #     [200, {'Content-Type' => 'text/xml'}, "Made you look."]
       #   end
       #
-      def bind(path,&block)
-        @paths[path] = block
+      def bind(path,server=nil,&block)
+        @paths[path] = (server || block)
         return self
       end
 
       #
-      # Binds the specified URL directory _path_ to the given _block_.
+      # Binds the specified URL directory _path_ to the given 
+      # _server_ or _block_.
       #
       #   map '/downloads' do |env|
       #     response(
@@ -367,8 +370,8 @@ module Ronin
       #     )
       #   end
       #
-      def map(path,&block)
-        @directories[path] = block
+      def map(path,server=nil,&block)
+        @directories[path] = (server || block)
         return self
       end
 
