@@ -1,3 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 
-ronin -r 'ronin/web' $*
+require 'rubygems'
+
+require 'ronin/ui/command_line/commands/default'
+require 'ronin/ui/console'
+
+Ronin::UI::Console.auto_load << 'ronin-web'
+Ronin::UI::CommandLine::DefaultCommand.run(*ARGV)
