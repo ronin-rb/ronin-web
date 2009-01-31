@@ -267,27 +267,6 @@ module Ronin
       end
 
       #
-      # Use the given _server_ or _block_ as the default route for all
-      # other requests.
-      #
-      #   default do |env|
-      #     [200, {'Content-Type' => 'text/html'}, 'lol train']
-      #   end
-      #
-      def default(server=nil,&block)
-        @default = (server || block)
-        return self
-      end
-
-      #
-      # Connects the specified _server_ as a virtual host representing the
-      # specified host _name_.
-      #
-      def connect(name,server)
-        @virtual_hosts[name.to_s] = server
-      end
-
-      #
       # Returns the server that handles requests for the specified host
       # _name_.
       #
@@ -303,6 +282,19 @@ module Ronin
         end
 
         return nil
+      end
+
+      #
+      # Use the given _server_ or _block_ as the default route for all
+      # other requests.
+      #
+      #   default do |env|
+      #     [200, {'Content-Type' => 'text/html'}, 'lol train']
+      #   end
+      #
+      def default(server=nil,&block)
+        @default = (server || block)
+        return self
       end
 
       #
@@ -342,9 +334,7 @@ module Ronin
       #   end
       #
       def host(name,server=nil,&block)
-        server ||= self.class.new(&block)
-
-        connect(name,server)
+        @virtual_hosts[name.to_s] = (server || self.class.new(&block))
       end
 
       #
