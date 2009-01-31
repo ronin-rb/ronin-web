@@ -385,12 +385,12 @@ module Ronin
       end
 
       #
-      # Mounts the contents of the specified _directory_ to the given
+      # Binds the contents of the specified _directory_ to the given
       # prefix _path_.
       #
-      #   mount '/download/', '/tmp/files/'
+      #   directory '/download/', '/tmp/files/'
       #
-      def mount(path,directory)
+      def directory(path,directory)
         sub_dirs = path.split('/')
         directory = File.expand_path(directory)
 

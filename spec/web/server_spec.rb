@@ -24,7 +24,7 @@ describe Web::Server do
 
       file('/test/file.txt',File.join(WEB_SERVER_ROOT,'test.txt'))
 
-      mount('/test/mount/',WEB_SERVER_ROOT)
+      directory('/test/directory/',WEB_SERVER_ROOT)
     end
 
     @virtual_host = Web::Server.new do
@@ -102,14 +102,14 @@ describe Web::Server do
     @server.route_path(path).body.should == ["This is a test.\n"]
   end
 
-  it "should return files from mounted directories" do
-    path = '/test/mount/test.txt'
+  it "should return files from bound directories" do
+    path = '/test/directory/test.txt'
 
     @server.route_path(path).body.should == ["This is a test.\n"]
   end
 
-  it "should return the index file for a mounted directory" do
-    path = '/test/mount/'
+  it "should return the index file for a bound directory" do
+    path = '/test/directory/'
 
     @server.route_path(path).body.should == ["Index of files.\n"]
   end
