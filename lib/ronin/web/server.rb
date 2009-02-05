@@ -26,7 +26,7 @@ require 'cgi'
 
 begin
   require 'mongrel'
-rescue
+rescue LoadError
   require 'webrick'
 end
 
