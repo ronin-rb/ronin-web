@@ -64,6 +64,9 @@ of Ronin.
 
 == LICENSE:
 
+Ronin Web - A Ruby library for Ronin that provides support for web
+scraping and spidering functionality.
+
 Copyright (c) 2006-2009 Hal Brodigan (postmodern.mod3 at gmail.com)
 
 This program is free software; you can redistribute it and/or modify
