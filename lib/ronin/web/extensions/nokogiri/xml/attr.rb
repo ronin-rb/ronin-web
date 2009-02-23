@@ -1,4 +1,4 @@
-require 'nokogiri/xml/attr'
+require 'nokogiri'
 
 module Nokogiri
   module XML

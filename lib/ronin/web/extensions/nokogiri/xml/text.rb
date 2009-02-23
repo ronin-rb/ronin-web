@@ -1,4 +1,4 @@
-require 'nokogiri/xml/text'
+require 'nokogiri'
 
 module Nokogiri
   module XML
