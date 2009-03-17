@@ -33,6 +33,9 @@ module Ronin
 
       include UI::Diagnostics
 
+      # The default HTTP Request to use
+      DEFAULT_HTTP_REQUEST = Net::HTTP::Get
+
       #
       # Creates a new Web Server using the given configuration _block_.
       #
@@ -68,13 +71,13 @@ module Ronin
 
       def http_class(env)
         http_method = env['REQUEST_METHOD'].downcase.capitalize
-        http_class = Net::HTTP::Get
+        http_class = DEFAULT_HTTP_REQUEST
 
         if Net::HTTP.const_defined?(http_method)
           http_class = Net::HTTP.const_get(http_method)
 
           unless http_class.kind_of?(Net::HTTPRequest)
-            http_class = Net::HTTP::Get
+            http_class = DEFAULT_HTTP_REQUEST
           end
         end
 
@@ -95,7 +98,6 @@ module Ronin
         end
 
         print_info "Request Headers: #{headers.inspect}"
-
         return headers
       end
 
