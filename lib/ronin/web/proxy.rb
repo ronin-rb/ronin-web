@@ -63,7 +63,7 @@ module Ronin
           print_info "Response body:\n#{body}"
         end
 
-        [response.code, headers, (body || '')]
+        return [response.code, headers, (body || '')]
       end
 
       protected
@@ -92,7 +92,7 @@ module Ronin
               word.capitalize
             }.join('-')
 
-          headers[header_name] = value
+            headers[header_name] = value
           end
         end
 
