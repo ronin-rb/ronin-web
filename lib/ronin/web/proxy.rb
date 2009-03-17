@@ -22,6 +22,7 @@
 #
 
 require 'ronin/web/server'
+require 'ronin/network/http'
 require 'ronin/ui/diagnostics'
 
 require 'net/http'
@@ -106,8 +107,8 @@ module Ronin
 
         request = http_class(env).new(path, http_headers(env))
 
-        return Net::HTTP.start(url.host, url.port) do |http|
-          http.request(request)
+        Net.http_session do |http|
+          return http.request(request)
         end
       end
 
