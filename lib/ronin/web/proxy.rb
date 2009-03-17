@@ -74,6 +74,10 @@ module Ronin
 
         if Net::HTTP.const_defined?(http_method)
           http_class = Net::HTTP.const_get(http_method)
+
+          unless http_class.kind_of?(Net::HTTPRequest)
+            http_class = Net::HTTP::Get
+          end
         end
 
         return http_class
