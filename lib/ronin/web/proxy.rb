@@ -51,7 +51,7 @@ module Ronin
       end
 
       def proxy(env)
-        response = http_response(env['REQUEST_URI'],env)
+        response = http_response(env)
         headers = Rack::Utils::HeaderHash.new(response.to_hash)
 
         print_info "Status Code: #{response.code}"
@@ -97,8 +97,8 @@ module Ronin
         return headers
       end
 
-      def http_response(url,env)
-        url = URI(url.to_s)
+      def http_response(env)
+        url = URI(env['REQUEST_URI'].to_s)
 
         path = url.path
         path = "#{path}?#{url.query}" if url.query
