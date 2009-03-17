@@ -22,12 +22,16 @@
 #
 
 require 'ronin/web/web'
+require 'ronin/ui/diagnostics'
 
 require 'spidr/agent'
 
 module Ronin
   module Web
     class Spider < Spidr::Agent
+
+      include UI::Diagnostics
+
       #
       # Creates a new Spider object with the given _options_ and
       # _block_. If a _block_ is given, it will be passed the newly created
@@ -52,28 +56,14 @@ module Ronin
       # <tt>:ignore_exts</tt>:: An +Array+ of File extension patterns to not
       #                         visit.
       #
-      def self.agent(options={},&block)
-        self.new(self.default_options.merge(options),&block)
-      end
+      def initialize(options={},&block)
+        super(default_options.merge(options))
 
-      #
-      # Creates a new Spider object with the given _options_ and will begin
-      # spidering the specified host _name_. If a _block_ is given it
-      # will be passed the newly created Spider object, before the agent
-      # begins spidering.
-      #
-      def self.host(name,options={},&block)
-        super(name,self.default_options.merge(options),&block)
-      end
+        every_url do |url|
+          print_info("Spidering #{url}")
+        end
 
-      #
-      # Creates a new Spider object with the given _options_ and will begin
-      # spidering the host of the specified _url_. If a _block_ is
-      # given it will be passed the newly created Spider object, before
-      # the agent begins spidering.
-      #
-      def self.site(url,options={},&block)
-        super(url,self.default_options.merge(options),&block)
+        block.call(self) if block
       end
 
       protected
@@ -81,7 +71,7 @@ module Ronin
       #
       # Returns the default options for Spider.
       #
-      def self.default_options
+      def default_options
         {:proxy => Web.proxy, :user_agent => Web.user_agent}
       end
     end
