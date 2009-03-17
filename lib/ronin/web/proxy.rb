@@ -57,9 +57,7 @@ module Ronin
         print_info "Status Code: #{response.code}"
         print_info "Response Headers: #{headers.inspect}"
 
-        body = response.body
-
-        if body
+        if (body = response.body)
           print_info "Response body:\n#{body}"
         end
 
