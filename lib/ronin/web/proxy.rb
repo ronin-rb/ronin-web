@@ -85,8 +85,8 @@ module Ronin
         env.each do |name,value|
           if name =~ /^HTTP_/
             header_name = name.gsub(/^HTTP_/,'').split('_').map { |word|
-            word.capitalize
-          }.join('-')
+              word.capitalize
+            }.join('-')
 
           headers[header_name] = value
           end
@@ -105,7 +105,7 @@ module Ronin
 
         print_info "Path: #{path}"
 
-        request = http_class(env).new(path, http_headers(env))
+        request = http_class(env).new(path,http_headers(env))
 
         Net.http_session do |http|
           return http.request(request)
