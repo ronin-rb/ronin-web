@@ -22,6 +22,7 @@
 #
 
 require 'ronin/web/server'
+require 'ronin/ui/diagnostics'
 
 require 'net/http'
 
@@ -29,16 +30,37 @@ module Ronin
   module Web
     class Proxy < Server
 
+      include UI::Diagnostics
+
+      #
+      # Creates a new Web Server using the given configuration _block_.
+      #
+      # _options_ may contain the following keys:
+      # <tt>:host</tt>:: The host to bind to.
+      # <tt>:port</tt>:: The port to listen on.
+      # <tt>:config</tt>:: A +Hash+ of configurable variables to be used
+      #                    in responses.
+      #
+      def initialize(options={},&block)
+        super(options)
+
+        @default = method(:proxy)
+
+        instance_eval(&block) if block
+      end
+
       def proxy(env)
         response = http_response(env['REQUEST_URI'],env)
         headers = Rack::Utils::HeaderHash.new(response.to_hash)
 
-        STDERR.puts "Status Code: #{response.code}"
-        STDERR.puts "Response Headers: #{headers.inspect}"
+        print_info "Status Code: #{response.code}"
+        print_info "Response Headers: #{headers.inspect}"
 
         body = response.body
 
-        STDERR.puts "Response body:\n#{body}" if body
+        if body
+          print_info "Response body:\n#{body}"
+        end
 
         [response.code, headers, (body || '')]
       end
@@ -69,7 +91,7 @@ module Ronin
           end
         end
 
-        STDERR.puts "Request Headers: #{headers.inspect}"
+        print_info "Request Headers: #{headers.inspect}"
 
         return headers
       end
@@ -80,7 +102,7 @@ module Ronin
         path = url.path
         path = "#{path}?#{url.query}" if url.query
 
-        STDERR.puts "Path: #{path}"
+        print_info "Path: #{path}"
 
         request = http_class(env).new(path, http_headers(env))
 
