@@ -251,7 +251,7 @@ module Ronin
       #
       #   response("<data>lol</data>", :content_type => 'text/xml')
       #
-      def response(body=[],options={},&block)
+      def response(body='',options={},&block)
         status = (options.delete(:status) || 200)
         headers = {}
 
