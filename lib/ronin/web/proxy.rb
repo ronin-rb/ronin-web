@@ -54,17 +54,24 @@ module Ronin
       end
 
       def proxy(env)
-        response = http_response(env)
-        headers = Rack::Utils::HeaderHash.new(response.to_hash)
+        server_response = http_response(env)
+        server_headers = Rack::Utils::HeaderHash.new(
+          server_response.to_hash
+        )
 
-        print_info "Status Code: #{response.code}"
-        print_info "Response Headers: #{headers.inspect}"
+        print_info "Status Code: #{server_response.code}"
+        print_info "Response Headers: #{server_headers.inspect}"
 
-        if (body = response.body)
+        body = (server_response.body || '')
+
+        unless body.empty?
           print_info "Response body:\n#{body}"
         end
 
-        return [response.code, headers, (body || '')]
+        return response(
+          body,
+          server_headers.merge(:status => server_response.code)
+        )
       end
 
       protected
@@ -85,7 +92,7 @@ module Ronin
       end
 
       def http_headers(env)
-        headers = {}
+        client_headers = {}
 
         env.each do |name,value|
           if name =~ /^HTTP_/
@@ -93,12 +100,12 @@ module Ronin
               word.capitalize
             }.join('-')
 
-            headers[header_name] = value
+            client_headers[header_name] = value
           end
         end
 
-        print_info "Request Headers: #{headers.inspect}"
-        return headers
+        print_info "Request Headers: #{client_headers.inspect}"
+        return client_headers
       end
 
       def http_response(env)
@@ -109,10 +116,10 @@ module Ronin
 
         print_info "Path: #{path}"
 
-        request = http_class(env).new(path,http_headers(env))
+        client_request = http_class(env).new(path,http_headers(env))
 
         Net.http_session do |http|
-          return http.request(request)
+          return http.request(client_request)
         end
       end
 
