@@ -263,7 +263,7 @@ module Ronin
           headers[header_name] = value.to_s
         end
 
-        return Rack::Response.new(body,status,headers,&block)
+        return Rack::Response.new(body,status,headers,&block).to_a
       end
 
       #
