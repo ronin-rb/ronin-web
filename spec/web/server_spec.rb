@@ -75,68 +75,68 @@ describe Web::Server do
   it "should have a default response for un-matched paths" do
     path = '/test/default'
 
-    @server.route_path(path).body.should == ['This is default.']
+    get_path(@server,path).body.should == ['This is default.']
   end
 
   it "should bind a path to a certain response" do
     path = '/test/bind.xml'
 
-    @server.route_path(path).body.should == ['<secret/>']
+    get_path(@server,path).body.should == ['<secret/>']
   end
 
   it "should match paths with patterns" do
     path = '/test/path_patterns/secret.pdf'
 
-    @server.route_path(path).body.should == ['No secrets here.']
+    get_path(@server,path).body.should == ['No secrets here.']
   end
 
   it "should match paths to sub-directories" do
     path = '/test/map/impossible.html'
 
-    @server.route_path(path).body.should == ['mapped']
+    get_path(@server,path).body.should == ['mapped']
   end
 
   it "should return a response for a file" do
     path = '/test/file.txt'
 
-    @server.route_path(path).body.should == ["This is a test.\n"]
+    get_path(@server,path).body.should == ["This is a test.\n"]
   end
 
   it "should return files from bound directories" do
     path = '/test/directory/test.txt'
 
-    @server.route_path(path).body.should == ["This is a test.\n"]
+    get_path(@server,path).body.should == ["This is a test.\n"]
   end
 
   it "should return the index file for a bound directory" do
     path = '/test/directory/'
 
-    @server.route_path(path).body.should == ["Index of files.\n"]
+    get_path(@server,path).body.should == ["Index of files.\n"]
   end
 
   it "should match virtual hosts" do
     url = 'http://virtual.host.com/test/virtual_host.xml'
 
-    @server.route(url).body.should == ['<virtual/>']
+    get_url(@server,url).body.should == ['<virtual/>']
   end
 
   it "should match virtual hosts with patterns" do
     url = 'http://virtual0.host.com/test/virtual_host_patterns.xml'
 
-    @server.route(url).body.should == ['<virtual-patterns/>']
+    get_url(@server,url).body.should == ['<virtual-patterns/>']
   end
 
   it "should provide access to servers via their host-names" do
     virtual_host = @server.virtual_host('virtual.host.com')
     url = 'http://virtual.host.com/test/virtual_host.xml'
 
-    virtual_host.route(url).body.should == ['<virtual/>']
+    get_url(virtual_host,url).body.should == ['<virtual/>']
   end
 
   it "should provide access to servers via their host-names that match virtual host patterns" do
     virtual_host = @server.virtual_host('virtual1.host.com')
     url = 'http://virtual0.host.com/test/virtual_host_patterns.xml'
 
-    virtual_host.route(url).body.should == ['<virtual-patterns/>']
+    get_url(virtual_host,url).body.should == ['<virtual-patterns/>']
   end
 end
