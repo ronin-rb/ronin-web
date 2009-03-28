@@ -53,11 +53,9 @@ module Ronin
         instance_eval(&block) if block
       end
 
-      def proxy(env)
-        server_response = http_response(env)
-        server_headers = Rack::Utils::HeaderHash.new(
-          server_response.to_hash
-        )
+      def proxy(request)
+        server_response = http_response(request)
+        server_headers = server_response.to_hash
 
         print_info "Status Code: #{server_response.code}"
         print_info "Response Headers: #{server_headers.inspect}"
@@ -68,16 +66,13 @@ module Ronin
           print_info "Response body:\n#{body}"
         end
 
-        return response(
-          body,
-          server_headers.merge(:status => server_response.code)
-        )
+        return response(body,server_headers)
       end
 
       protected
 
-      def http_class(env)
-        http_method = env['REQUEST_METHOD'].downcase.capitalize
+      def http_class(request_method)
+        http_method = request_method.downcase.capitalize
         http_class = DEFAULT_HTTP_REQUEST
 
         if Net::HTTP.const_defined?(http_method)
@@ -91,10 +86,10 @@ module Ronin
         return http_class
       end
 
-      def http_headers(env)
+      def http_headers(request)
         client_headers = {}
 
-        env.each do |name,value|
+        request.env.each do |name,value|
           if name =~ /^HTTP_/
             header_name = name.gsub(/^HTTP_/,'').split('_').map { |word|
               word.capitalize
@@ -108,17 +103,14 @@ module Ronin
         return client_headers
       end
 
-      def http_response(env)
-        url = URI(env['REQUEST_URI'].to_s)
+      def http_response(request)
+        path = request.fullpath
+        http_method = http_class(request.request_method)
+        client_request = http_method.new(path,http_headers(request))
 
-        path = url.path
-        path = "#{path}?#{url.query}" if url.query
+        print_info "#{http_method::METHOD} #{path}"
 
-        print_info "Path: #{path}"
-
-        client_request = http_class(env).new(path,http_headers(env))
-
-        Net.http_session do |http|
+        Net.http_session(:host => request.host, :port => request.port) do |http|
           return http.request(client_request)
         end
       end
