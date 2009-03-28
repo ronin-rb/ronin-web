@@ -206,8 +206,8 @@ module Ronin
       #
       # Returns the HTTP 404 Not Found message for the requested path.
       #
-      def not_found(env)
-        path = env['PATH_INFO']
+      def not_found(request)
+        path = request.path_info
         body = %{<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html>
   <head>
@@ -228,14 +228,14 @@ module Ronin
       # an index file. If no index file can be found or _path_ points to a
       # non-existant file, a "404 Not Found" response will be returned.
       #
-      def return_file(path,env)
+      def return_file(path,request)
         if !(File.exists?(path))
-          return not_found(env)
+          return not_found(request)
         end
 
         if File.directory?(path)
           unless (path = index_of(path))
-            return not_found(env)
+            return not_found(request)
           end
         end
 
@@ -288,7 +288,7 @@ module Ronin
       # Use the given _server_ or _block_ as the default route for all
       # other requests.
       #
-      #   default do |env|
+      #   default do |request|
       #     [200, {'Content-Type' => 'text/html'}, 'lol train']
       #   end
       #
@@ -302,7 +302,7 @@ module Ronin
       # requests to host names which match the specified _pattern_.
       #
       #   hosts_like(/^a[0-9]\./) do
-      #     map('/download/') do |env|
+      #     map('/download/') do |request|
       #       ...
       #     end
       #   end
@@ -315,7 +315,7 @@ module Ronin
       # Registers the given _server_ or _block_ to be called when receiving
       # requests for paths which match the specified _pattern_.
       #
-      #   paths_like(/\.xml$/) do |env|
+      #   paths_like(/\.xml$/) do |request|
       #     ...
       #   end
       #
@@ -340,7 +340,7 @@ module Ronin
       #
       # Binds the specified URL _path_ to the given _server_ or _block_.
       #
-      #   bind '/secrets.xml' do |env|
+      #   bind '/secrets.xml' do |request|
       #     [200, {'Content-Type' => 'text/xml'}, "Made you look."]
       #   end
       #
@@ -353,7 +353,7 @@ module Ronin
       # Binds the specified URL directory _path_ to the given 
       # _server_ or _block_.
       #
-      #   map '/downloads' do |env|
+      #   map '/downloads' do |request|
       #     response(
       #       "Your somewhere inside the downloads directory",
       #       :content_type' => 'text/xml'
@@ -375,11 +375,11 @@ module Ronin
         file = File.expand_path(file)
         content_type = (options[:content_type] || content_type_for(file))
 
-        bind(path) do |env|
+        bind(path) do |request|
           if File.file?(file)
-            return_file(file,env)
+            return_file(file,request)
           else
-            not_found(env)
+            not_found(request)
           end
         end
       end
@@ -394,14 +394,14 @@ module Ronin
         sub_dirs = path.split('/')
         directory = File.expand_path(directory)
 
-        map(path) do |env|
-          http_path = File.expand_path(env['PATH_INFO'])
+        map(path) do |request|
+          http_path = File.expand_path(request.path_info)
           http_dirs = http_path.split('/')
 
           sub_path = http_dirs[sub_dirs.length..-1].join('/')
           absolute_path = File.join(directory,sub_path)
 
-          return_file(absolute_path,env)
+          return_file(absolute_path,request)
         end
       end
 
@@ -419,21 +419,22 @@ module Ronin
       def call(env)
         http_host = env['HTTP_HOST']
         http_path = File.expand_path(env['PATH_INFO'])
+        request = Rack::Request.new(env)
 
         if http_host
           if (server = virtual_host(http_host))
-            return server.call(env)
+            return server.call(request)
           end
         end
 
         if http_path
           if (block = @paths[http_path])
-            return block.call(env)
+            return block.call(request)
           end
 
           @path_patterns.each do |pattern,block|
             if http_path.match(pattern)
-              return block.call(env)
+              return block.call(request)
             end
           end
 
@@ -446,11 +447,11 @@ module Ronin
           }.sort.last
 
           if (sub_dir && (block = @directories[sub_dir]))
-            return block.call(env)
+            return block.call(request)
           end
         end
 
-        return @default.call(env)
+        return @default.call(request)
       end
 
       #
