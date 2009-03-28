@@ -423,7 +423,7 @@ module Ronin
 
         if http_host
           if (server = virtual_host(http_host))
-            return server.call(request)
+            return server.call(env)
           end
         end
 
