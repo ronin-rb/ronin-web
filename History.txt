@@ -1,3 +1,13 @@
+=== 0.1.2 / 2009-03-28
+
+* Added Ronin::Web::Proxy.
+* Added diagnostic messages to Ronin::Web::Spider.
+* Fixed Rack 0.9.1 compatibility bugs in Ronin::Web::Server.
+  * Server#response now uses Rack::Response.
+  * Ronin::Web::Server now uses a Rack::Request object instead of the
+    standard env Hash.
+* Updated specs for Ronin::Web::Server.
+
 === 0.1.1 / 2009-02-23
 
 * Added a git style sub-command (<tt>ronin-web</tt>) which starts the Ronin
