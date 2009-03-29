@@ -34,7 +34,7 @@ module Ronin
       DEFAULT_HTTP_REQUEST = Net::HTTP::Get
 
       #
-      # Creates a new Web Server using the given configuration _block_.
+      # Creates a new Web Proxy using the given configuration _block_.
       #
       # _options_ may contain the following keys:
       # <tt>:host</tt>:: The host to bind to.
@@ -50,6 +50,10 @@ module Ronin
         instance_eval(&block) if block
       end
 
+      #
+      # Proxies the specified Rack _request_ and returns a corresponding
+      # Rack response.
+      #
       def proxy(request)
         server_response = http_response(request)
         server_headers = server_response.to_hash
@@ -60,6 +64,13 @@ module Ronin
 
       protected
 
+      #
+      # Returns the Net::HTTP Request class that represents the specified
+      # HTTP _request_method_.
+      #
+      #   http_class('POST')
+      #   # => Net::HTTP::Post
+      #
       def http_class(request_method)
         http_method = request_method.downcase.capitalize
         http_class = DEFAULT_HTTP_REQUEST
@@ -75,6 +86,10 @@ module Ronin
         return http_class
       end
 
+      #
+      # Converts the Rack headers within the specified _request_ to
+      # Net::HTTP formatted HTTP headers.
+      #
       def http_headers(request)
         client_headers = {}
 
@@ -91,6 +106,9 @@ module Ronin
         return client_headers
       end
 
+      #
+      # Returns the Net::HTTP response for the specified Rack _request_.
+      # 
       def http_response(request)
         path = request.fullpath
         http_method = http_class(request.request_method)
