@@ -41,8 +41,9 @@ of Ronin.
 
 * Web access (utilizing Mechanize and Nokogiri).
 * Integrates Spidr into Ronin::Web::Spider.
-* Provides Ronin::Web::Server, a customizable Rack web server that supports
-  path and host-name routing.
+* Provides Ronin::Web::Server, a customizable Rack based Web Server that
+  supports path and host-name routing.
+* Provides Ronin::Web::Proxy, a configurable Rack based Web Proxy.
 
 == REQUIREMENTS:
 
