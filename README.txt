@@ -51,7 +51,7 @@ of Ronin.
 * {mechanize}[http://mechanize.rubyforge.org/] >= 0.9.0
 * {spidr}[http://spidr.rubyforge.org/] >= 0.1.3
 * {rack}[http://rack.rubyforge.org/] >= 0.9.1
-* {ronin}[http://ronin.rubyforge.org/] >= 0.1.4
+* {ronin}[http://ronin.rubyforge.org/] >= 0.2.2
 
 == INSTALL:
 
