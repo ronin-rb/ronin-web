@@ -23,15 +23,12 @@
 
 require 'ronin/web/server'
 require 'ronin/network/http'
-require 'ronin/ui/diagnostics'
 
 require 'net/http'
 
 module Ronin
   module Web
     class Proxy < Server
-
-      include UI::Diagnostics
 
       # The default HTTP Request to use
       DEFAULT_HTTP_REQUEST = Net::HTTP::Get
@@ -56,15 +53,7 @@ module Ronin
       def proxy(request)
         server_response = http_response(request)
         server_headers = server_response.to_hash
-
-        print_info "Status Code: #{server_response.code}"
-        print_info "Response Headers: #{server_headers.inspect}"
-
         body = (server_response.body || '')
-
-        unless body.empty?
-          print_info "Response body:\n#{body}"
-        end
 
         return response(body,server_headers)
       end
@@ -99,7 +88,6 @@ module Ronin
           end
         end
 
-        print_info "Request Headers: #{client_headers.inspect}"
         return client_headers
       end
 
@@ -107,8 +95,6 @@ module Ronin
         path = request.fullpath
         http_method = http_class(request.request_method)
         client_request = http_method.new(path,http_headers(request))
-
-        print_info "#{http_method::METHOD} #{path}"
 
         Net.http_session(:host => request.host, :port => request.port) do |http|
           return http.request(client_request)
