@@ -58,13 +58,18 @@ module Ronin
           url = URI(url.to_s)
         end
 
+        matches = []
+
         Fingerprint.tests.each do |name,blocks|
           blocks.each do |block|
-            return name if block.call(url)
+            if block.call(url)
+              matches << name
+              break
+            end
           end
         end
 
-        return nil
+        return matches
       end
     end
   end
