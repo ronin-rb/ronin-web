@@ -13,6 +13,7 @@ lib/ronin/web/extensions/nokogiri/xml/text.rb
 lib/ronin/web/extensions/nokogiri/xml/attr.rb
 lib/ronin/web/extensions/nokogiri/xml/element.rb
 lib/ronin/web/extensions/nokogiri/xml/document.rb
+lib/ronin/web/fingerprint.rb
 lib/ronin/web/server.rb
 lib/ronin/web/proxy.rb
 lib/ronin/web/spider.rb
