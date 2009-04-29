@@ -13,7 +13,7 @@ Hoe.new('ronin-web', Ronin::Web::VERSION) do |p|
     ['nokogiri', '>=1.2.0'],
     ['mechanize', '>=0.9.0'],
     ['spidr', '>=0.1.3'],
-    ['rack', '>=0.9.1'],
+    ['rack', '>=1.0.0'],
     ['ronin', '>=0.2.2']
   ]
 end
