@@ -5,7 +5,7 @@ require 'hoe'
 require './tasks/spec.rb'
 require './lib/ronin/web/version.rb'
 
-Hoe.new('ronin-web', Ronin::Web::VERSION) do |p|
+Hoe.spec('ronin-web') do |p|
   p.rubyforge_name = 'ronin'
   p.developer('Postmodern', 'postmodern.mod3@gmail.com')
   p.remote_rdoc_dir = 'docs/ronin-web'
