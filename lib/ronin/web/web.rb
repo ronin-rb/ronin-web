@@ -42,6 +42,13 @@ module Ronin
     end
 
     #
+    # Creates a new Nokogiri::HTML::Builder with the given _block_.
+    #
+    def Web.build_html(&block)
+      Nokogiri::HTML::Builder.new(&block)
+    end
+
+    #
     # Returns a Nokogiri::XML::Document object for the specified _body_
     # of xml and the given _block_.
     #
@@ -50,6 +57,13 @@ module Ronin
 
       block.call(doc) if block
       return doc
+    end
+
+    #
+    # Creates a new Nokogiri::XML::Builder with the given _block_.
+    #
+    def Web.build_xml(&block)
+      Nokogiri::XML::Builder.new(&block)
     end
 
     #
