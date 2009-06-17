@@ -44,6 +44,14 @@ module Ronin
     #
     # Creates a new Nokogiri::HTML::Builder with the given _block_.
     #
+    #   Web.build_html do
+    #     body {
+    #       div(:style => 'display:none;') {
+    #         object(:classid => 'blabla')
+    #       }
+    #     }
+    #   end
+    #
     def Web.build_html(&block)
       Nokogiri::HTML::Builder.new(&block)
     end
@@ -61,6 +69,13 @@ module Ronin
 
     #
     # Creates a new Nokogiri::XML::Builder with the given _block_.
+    #
+    #  Web.build_xml do
+    #    post(:id => 2) {
+    #      title { text("some example) }
+    #      body { text("this is one contrived example.") }
+    #    }
+    #  end
     #
     def Web.build_xml(&block)
       Nokogiri::XML::Builder.new(&block)
