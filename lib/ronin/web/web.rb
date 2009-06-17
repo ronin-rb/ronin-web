@@ -34,16 +34,22 @@ module Ronin
     # Returns a Nokogiri::HTML::Document object for the specified _body_
     # of html.
     #
-    def Web.html(body)
-      Nokogiri::HTML(body)
+    def Web.html(body,&block)
+      doc = Nokogiri::HTML(body)
+
+      block.call(doc) if block
+      return doc
     end
 
     #
     # Returns a Nokogiri::XML::Document object for the specified _body_
-    # of xml.
+    # of xml and the given _block_.
     #
-    def Web.xml(body)
-      Nokogiri::XML(body)
+    def Web.xml(body,&block)
+      doc = Nokogiri::XML(body)
+
+      block.call(doc) if block
+      return doc
     end
 
     #
