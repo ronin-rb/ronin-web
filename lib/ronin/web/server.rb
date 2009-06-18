@@ -134,30 +134,6 @@ module Ronin
       end
 
       #
-      # Runs the specified _server_ with the given _options_. Server.run
-      # will use Mongrel to run the _server_, if it is installed. Otherwise
-      # WEBrick will be used to run the _server_.
-      #
-      # _options_ can contain the following keys:
-      # <tt>:host</tt>:: The host the server will bind to, defaults to
-      #                  Server.default_host.
-      # <tt>:port</tt>:: The port the server will listen on, defaults to
-      #                  Server.default_port.
-      #                  
-      def Server.run(server,options={})
-        rack_options = {}
-
-        rack_options[:Host] = (options[:host] || Server.default_host)
-        rack_options[:Port] = (options[:port] || Server.default_port)
-
-        if Object.const_defined?('Mongrel')
-          Rack::Handler::Mongrel.run(server,rack_options)
-        else
-          Rack::Handler::WEBrick.run(server,rack_options)
-        end
-      end
-
-      #
       # Creates a new Web Server object with the given _block_ and starts
       # it using the given _options_.
       #
@@ -406,10 +382,21 @@ module Ronin
       end
 
       #
-      # Starts the server.
+      # Starts the server. Mongrel will be used to run the server, if it
+      # is installed, otherwise WEBrick will be used.
       #
       def start
-        Server.run(self, :host => @host, :port => @port)
+        rack_options = {
+          'Host' => (@host || Server.default_host),
+          'Port' => (@port || Server.default_port)
+        }
+
+        if Object.const_defined?('Mongrel')
+          Rack::Handler::Mongrel.run(self,rack_options)
+        else
+          Rack::Handler::WEBrick.run(self,rack_options)
+        end
+
         return self
       end
 
