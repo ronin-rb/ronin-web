@@ -205,7 +205,9 @@ module Ronin
       # an index file. If no index file can be found or _path_ points to a
       # non-existant file, a "404 Not Found" response will be returned.
       #
-      def return_file(path,request)
+      def return_file(path,request,content_type=nil)
+        content_type ||= content_type_for(path)
+
         if !(File.exists?(path))
           return not_found(request)
         end
@@ -216,7 +218,7 @@ module Ronin
           end
         end
 
-        return response(File.new(path), :content_type => content_type_for(path))
+        return response(File.new(path), :content_type => content_type)
       end
 
       #
@@ -350,15 +352,19 @@ module Ronin
       # Binds the contents of the specified _file_ to the specified URL
       # _path_, using the given _options_.
       #
+      # _options_ may contain the following keys:
+      # <tt>content_type</tt>:: The content-type to use when serving
+      #                         the file at the specified _path_.
+      #
       #   file '/robots.txt', '/path/to/my_robots.txt'
       #
       def file(path,file,options={})
         file = File.expand_path(file)
-        content_type = (options[:content_type] || content_type_for(file))
+        content_type = options[:content_type]
 
         bind(path) do |request|
           if File.file?(file)
-            return_file(file,request)
+            return_file(file,request,content_type)
           else
             not_found(request)
           end
