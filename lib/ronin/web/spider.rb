@@ -43,8 +43,8 @@ module Ronin
       # <tt>:user_agent</tt>:: The User-Agent string to send. Defaults to
       #                        Web.user_agent.
       # <tt>:referer</tt>:: The referer URL to send.
-      # <tt>:delay</tt>:: Duration in seconds to pause between spidering each
-      #                   link. Defaults to 0.
+      # <tt>:delay</tt>:: Duration in seconds to pause between spidering
+      #                   each link. Defaults to 0.
       # <tt>:host</tt>:: The host-name to visit.
       # <tt>:hosts</tt>:: An +Array+ of host patterns to visit.
       # <tt>:ignore_hosts</tt>:: An +Array+ of host patterns to not visit.
