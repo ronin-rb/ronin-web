@@ -57,7 +57,12 @@ module Ronin
       #                         visit.
       #
       def initialize(options={},&block)
-        super(default_options.merge(options))
+        options = {
+          :proxy => Web.proxy,
+          :user_agent => Web.user_agent
+        }.merge(options)
+
+        super(options)
 
         every_url do |url|
           print_info("Spidering #{url}")
@@ -66,14 +71,6 @@ module Ronin
         block.call(self) if block
       end
 
-      protected
-
-      #
-      # Returns the default options for Spider.
-      #
-      def default_options
-        {:proxy => Web.proxy, :user_agent => Web.user_agent}
-      end
     end
   end
 end
