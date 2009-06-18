@@ -127,7 +127,7 @@ module Ronin
       #
       #   Server.content_type 'text/xml', ['xml', 'xsl']
       #
-      def self.content_type(type,extensions)
+      def Server.content_type(type,extensions)
         extensions.each { |ext| Server.content_types[ext] = type }
 
         return self
