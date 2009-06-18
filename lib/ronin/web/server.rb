@@ -77,7 +77,7 @@ module Ronin
         @virtual_host_patterns = {}
         @virtual_hosts = {}
 
-        @path_patterns = {}
+        @patterns = {}
         @paths = {}
         @directories = {}
 
@@ -303,7 +303,7 @@ module Ronin
       #   end
       #
       def paths_like(pattern,server=nil,&block)
-        @path_patterns[pattern] = (server || block)
+        @patterns[pattern] = (server || block)
         return self
       end
 
@@ -430,7 +430,7 @@ module Ronin
             return block.call(request)
           end
 
-          @path_patterns.each do |pattern,block|
+          @patterns.each do |pattern,block|
             if http_path.match(pattern)
               return block.call(request)
             end
