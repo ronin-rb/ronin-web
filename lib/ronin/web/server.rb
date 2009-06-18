@@ -148,7 +148,8 @@ module Ronin
       #   # => "text/html"
       #
       def content_type(extension)
-        Server.content_types[extension] || 'application/x-unknown-content-type'
+        Server.content_types[extension] ||
+          'application/x-unknown-content-type'
       end
 
       #
@@ -228,7 +229,11 @@ module Ronin
       #   response("<data>lol</data>", :content_type => 'text/xml')
       #
       def response(body='',options={},&block)
-        status = (options.delete(:status) || options.delete('Status') || 200)
+        status = (
+          options.delete(:status) ||
+          options.delete('Status') ||
+          200
+        )
         headers = {}
 
         options.each do |name,value|
