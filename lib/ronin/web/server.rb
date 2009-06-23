@@ -73,6 +73,8 @@ module Ronin
         @directories = {}
 
         @default_mutex = Mutex.new
+        @vhost_patterns_mutex = Mutex.new
+        @vhosts_mutex = Mutex.new
         @patterns_mutex = Mutex.new
         @paths_mutex = Mutex.new
         @directories_mutex = Mutex.new
@@ -252,12 +254,16 @@ module Ronin
       def vhost(name)
         name = name.to_s
 
-        if @vhosts.has_key?(name)
-          return @vhosts[name]
+        @vhosts_mutex.synchronize do
+          if @vhosts.has_key?(name)
+            return @vhosts[name]
+          end
         end
 
-        @vhost_patterns.each do |pattern,server|
-          return server if name.match(pattern)
+        @vhost_patterns_mutex.synchronize do
+          @vhost_patterns.each do |pattern,server|
+            return server if name.match(pattern)
+          end
         end
 
         return nil
@@ -290,7 +296,13 @@ module Ronin
       #   end
       #
       def hosts_like(pattern,server=nil,&block)
-        @vhost_patterns[pattern] = (server || self.class.new(&block))
+        server ||= self.class.new(&block)
+
+        @vhost_patterns_mutex.synchronize do
+          @vhost_patterns[pattern] = server
+        end
+
+        return server
       end
 
       #
@@ -319,7 +331,13 @@ module Ronin
       #   end
       #
       def host(name,server=nil,&block)
-        @vhosts[name.to_s] = (server || self.class.new(&block))
+        server ||= self.class.new(&block)
+
+        @vhosts_mutex.synchronize do
+          @vhosts[name.to_s] = server
+        end
+
+        return server
       end
 
       #
@@ -434,8 +452,10 @@ module Ronin
         end
 
         if http_path
-          if (block = @paths[http_path])
-            return block.call(request)
+          @paths_mutex.synchronize do
+            if (block = @paths[http_path])
+              return block.call(request)
+            end
           end
 
           @patterns_mutex.synchronize do
