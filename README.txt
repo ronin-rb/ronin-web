@@ -61,7 +61,7 @@ of Ronin.
 
 * Start the Ronin console with Ronin Web preloaded:
 
-  $ ronin-web
+    $ ronin-web
 
 == EXAMPLES:
 
