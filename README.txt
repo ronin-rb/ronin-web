@@ -63,6 +63,99 @@ of Ronin.
 
   $ ronin-web
 
+== EXAMPLES:
+
+* Get a web-page:
+
+    Web.get('http://www.example.com/')
+
+* Get only the body of the web-page:
+
+    Web.get_body('http://www.example.com/')
+
+* Get a WWW::Mechanize agent:
+
+    agent = Web.agent
+
+* Parse HTML:
+
+    Web.html(open('some_file.html'))
+    # => <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+    <html>
+      <head>
+        <script type="text/javascript" src="redirect.js"></script>
+      </head>
+    </html>
+
+* Build a HTML document:
+
+    doc = Web.build_html do
+      html {
+        head {
+          script(:type => 'text/javascript', :src => 'redirect.js')
+        }
+      }
+    end
+    
+    puts doc.to_html
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+    <html><head><script src="redirect.js" type="text/javascript"></script></head></html>
+
+* Parse XML:
+
+    Web.xml(some_text)
+    => <?xml version="1.0"?>
+    <users>
+      <user>
+        <name>admin</name>
+        <password>0mni</password>
+      </user>
+    </users>
+
+
+* Build a XML document:
+
+    doc = Web.build_xml do
+      playlist {
+        mp3 {
+          file { text('02 THE WAIT.mp3') }
+          artist { text('Evil Nine') }
+          track { text('The Wait feat David Autokratz') }
+          duration { text('1000000000') }
+        }
+      }
+    end
+    
+    puts doc.to_xml
+    <?xml version="1.0"?>
+    <playlist>
+      <mp3>
+        <file>02 THE WAIT.mp3</file>
+        <artist>Evil Nine</artist>
+        <track>The Wait feat David Autokratz</track>
+        <duration>1000000000</duration>
+      </mp3>
+    </playlist>
+
+* Spider a web site:
+
+    Web::Spider.host('www.example.com') do |spider|
+      spider.every_url do |url|
+        ...
+      end
+
+      spider.every_page do |page|
+        ...
+      end
+    end
+
+* Serve files via a Web Server:
+
+    Web::Server.start do |server|
+      server.file '/opensearch.xml', '/tmp/test.xml'
+      server.directory '/download/', '/tmp/download/'
+    end
+
 == LICENSE:
 
 Ronin Web - A Ruby library for Ronin that provides support for web
