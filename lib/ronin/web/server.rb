@@ -51,26 +51,16 @@ module Ronin
       # The port to listen on
       attr_accessor :port
 
-      # The Hash of configurable variables for the server
-      attr_reader :config
-
       #
       # Creates a new Web Server using the given configuration _block_.
       #
       # _options_ may contain the following keys:
       # <tt>:host</tt>:: The host to bind to.
       # <tt>:port</tt>:: The port to listen on.
-      # <tt>:config</tt>:: A +Hash+ of configurable variables to be used
-      #                    in responses.
       #
       def initialize(options={},&block)
         @host = options[:host]
         @port = options[:port]
-        @config = {}
-
-        if options.has_key?(:config)
-          @config.merge!(options[:config])
-        end
 
         @default = method(:not_found)
 
