@@ -307,7 +307,9 @@ module Ronin
     #   Web.post('http://www.rubyinside.com') # => WWW::Mechanize::Page
     #
     def Web.post(url,options={},&block)
-      query = (options[:query] || {})
+      query = {}
+      query.merge!(options[:query]) if options[:query]
+
       page = Web.agent(options).post(url,query)
 
       block.call(page) if block
