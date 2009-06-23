@@ -27,6 +27,8 @@ require 'thread'
 
 begin
   require 'mongrel'
+rescue Gem::LoadError => e
+  raise(e)
 rescue LoadError
   require 'webrick'
 end
