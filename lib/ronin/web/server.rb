@@ -52,16 +52,21 @@ module Ronin
       # The port to listen on
       attr_accessor :port
 
+      # The handler to run the server under
+      attr_accessor :handler
+
       #
       # Creates a new Web Server using the given configuration _block_.
       #
       # _options_ may contain the following keys:
       # <tt>:host</tt>:: The host to bind to.
       # <tt>:port</tt>:: The port to listen on.
+      # <tt>:handler</tt>:: The handler to run the server under.
       #
       def initialize(options={},&block)
         @host = options[:host]
         @port = options[:port]
+        @handler = options[:handler]
 
         @default = method(:not_found)
 
@@ -423,17 +428,20 @@ module Ronin
       # is installed, otherwise WEBrick will be used.
       #
       def start
+        rack_handler = [@handler, 'Mongrel', 'WEBrick'].find do |name|
+          name && Rack::Handler.const_defined?(name)
+        end
+
+        unless rack_handler
+          raise(StandardError,"unable to find any Rack handlers",caller)
+        end
+
         rack_options = {
           'Host' => (@host || Server.default_host),
           'Port' => (@port || Server.default_port)
         }
 
-        if Object.const_defined?('Mongrel')
-          Rack::Handler::Mongrel.run(self,rack_options)
-        else
-          Rack::Handler::WEBrick.run(self,rack_options)
-        end
-
+        Rack::Handler.const_get(rack_handler).run(self,rack_options)
         return self
       end
 
