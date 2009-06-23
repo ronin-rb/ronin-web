@@ -23,6 +23,7 @@
 
 require 'uri'
 require 'cgi'
+require 'thread'
 
 begin
   require 'mongrel'
@@ -70,6 +71,11 @@ module Ronin
         @patterns = {}
         @paths = {}
         @directories = {}
+
+        @default_mutex = Mutex.new
+        @patterns_mutex = Mutex.new
+        @paths_mutex = Mutex.new
+        @directories_mutex = Mutex.new
 
         block.call(self) if block
       end
@@ -266,7 +272,10 @@ module Ronin
       #   end
       #
       def default(server=nil,&block)
-        @default = (server || block)
+        @default_mutex.synchronize do
+          @default = (server || block)
+        end
+
         return self
       end
 
@@ -293,7 +302,10 @@ module Ronin
       #   end
       #
       def paths_like(pattern,server=nil,&block)
-        @patterns[pattern] = (server || block)
+        @patterns_mutex.synchronize do
+          @patterns[pattern] = (server || block)
+        end
+
         return self
       end
 
@@ -318,7 +330,10 @@ module Ronin
       #   end
       #
       def bind(path,server=nil,&block)
-        @paths[path] = (server || block)
+        @paths_mutex.synchronize do
+          @paths[path] = (server || block)
+        end
+
         return self
       end
 
@@ -334,7 +349,10 @@ module Ronin
       #   end
       #
       def map(path,server=nil,&block)
-        @directories[path] = (server || block)
+        @directories_mutex.synchronize do
+          @directories[path] = (server || block)
+        end
+
         return self
       end
 
@@ -420,26 +438,36 @@ module Ronin
             return block.call(request)
           end
 
-          @patterns.each do |pattern,block|
-            if http_path.match(pattern)
-              return block.call(request)
+          @patterns_mutex.synchronize do
+            @patterns.each do |pattern,block|
+              if http_path.match(pattern)
+                return block.call(request)
+              end
             end
           end
 
           http_dirs = http_path.split('/')
 
-          sub_dir = @directories.keys.select { |path|
-            dirs = path.split('/')
+          @directories_mutex.synchronize do
+            sub_dir = @directories.keys.select { |path|
+              dirs = path.split('/')
 
-            http_dirs[0...dirs.length] == dirs
-          }.sort.last
+              http_dirs[0...dirs.length] == dirs
+            }.sort.last
 
-          if (sub_dir && (block = @directories[sub_dir]))
-            return block.call(request)
+            if (sub_dir && (block = @directories[sub_dir]))
+              return block.call(request)
+            end
           end
         end
 
-        return @default.call(request)
+        resp = nil
+
+        @default_mutex.synchronize do
+          resp = @default.call(request)
+        end
+
+        return resp
       end
 
       #
