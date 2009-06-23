@@ -65,8 +65,8 @@ module Ronin
 
         @default = method(:not_found)
 
-        @virtual_host_patterns = {}
-        @virtual_hosts = {}
+        @vhost_patterns = {}
+        @vhosts = {}
 
         @patterns = {}
         @paths = {}
@@ -249,14 +249,14 @@ module Ronin
       # Returns the server that handles requests for the specified host
       # _name_.
       #
-      def virtual_host(name)
+      def vhost(name)
         name = name.to_s
 
-        if @virtual_hosts.has_key?(name)
-          return @virtual_hosts[name]
+        if @vhosts.has_key?(name)
+          return @vhosts[name]
         end
 
-        @virtual_host_patterns.each do |pattern,server|
+        @vhost_patterns.each do |pattern,server|
           return server if name.match(pattern)
         end
 
@@ -290,7 +290,7 @@ module Ronin
       #   end
       #
       def hosts_like(pattern,server=nil,&block)
-        @virtual_host_patterns[pattern] = (server || self.class.new(&block))
+        @vhost_patterns[pattern] = (server || self.class.new(&block))
       end
 
       #
@@ -319,7 +319,7 @@ module Ronin
       #   end
       #
       def host(name,server=nil,&block)
-        @virtual_hosts[name.to_s] = (server || self.class.new(&block))
+        @vhosts[name.to_s] = (server || self.class.new(&block))
       end
 
       #
@@ -428,7 +428,7 @@ module Ronin
         request = Rack::Request.new(env)
 
         if http_host
-          if (server = virtual_host(http_host))
+          if (server = vhost(http_host))
             return server.call(env)
           end
         end

@@ -27,7 +27,7 @@ describe Web::Server do
       server.directory('/test/directory/',WEB_SERVER_ROOT)
     end
 
-    @virtual_host = Web::Server.new do |vhost|
+    @vhost = Web::Server.new do |vhost|
       vhost.bind('/test/virtual_host.xml') do |env|
         vhost.response('<virtual/>', :content_type => 'text/xml')
       end
@@ -127,14 +127,14 @@ describe Web::Server do
   end
 
   it "should provide access to servers via their host-names" do
-    virtual_host = @server.virtual_host('virtual.host.com')
+    virtual_host = @server.vhost('virtual.host.com')
     url = 'http://virtual.host.com/test/virtual_host.xml'
 
     get_url(virtual_host,url).body.should == ['<virtual/>']
   end
 
   it "should provide access to servers via their host-names that match virtual host patterns" do
-    virtual_host = @server.virtual_host('virtual1.host.com')
+    virtual_host = @server.vhost('virtual1.host.com')
     url = 'http://virtual0.host.com/test/virtual_host_patterns.xml'
 
     get_url(virtual_host,url).body.should == ['<virtual-patterns/>']
