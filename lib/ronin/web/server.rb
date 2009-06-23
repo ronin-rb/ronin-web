@@ -81,7 +81,7 @@ module Ronin
         @paths = {}
         @directories = {}
 
-        instance_eval(&block) if block
+        block.call(self) if block
       end
 
       #
@@ -144,7 +144,7 @@ module Ronin
       #
       # Returns the HTTP Content-Type for the specified file _extension_.
       #
-      #   content_type('html')
+      #   server.content_type('html')
       #   # => "text/html"
       #
       def content_type(extension)
@@ -155,7 +155,7 @@ module Ronin
       #
       # Returns the HTTP Content-Type for the specified _file_.
       #
-      #   srv.content_type_for('file.html')
+      #   server.content_type_for('file.html')
       #   # => "text/html"
       #
       def content_type_for(file)
@@ -228,7 +228,7 @@ module Ronin
       # _options_ may include the following keys:
       # <tt>:status</tt>:: The HTTP Response status code, defaults to 200.
       #
-      #   response("<data>lol</data>", :content_type => 'text/xml')
+      #   server.response("<data>lol</data>", :content_type => 'text/xml')
       #
       def response(body='',options={},&block)
         status = (
@@ -271,7 +271,7 @@ module Ronin
       # Use the given _server_ or _block_ as the default route for all
       # other requests.
       #
-      #   default do |request|
+      #   server.default do |request|
       #     [200, {'Content-Type' => 'text/html'}, 'lol train']
       #   end
       #
@@ -284,8 +284,8 @@ module Ronin
       # Registers the given _server_ or _block_ to be called when receiving
       # requests to host names which match the specified _pattern_.
       #
-      #   hosts_like(/^a[0-9]\./) do
-      #     map('/download/') do |request|
+      #   server.hosts_like(/^a[0-9]\./) do |vhost|
+      #     vhost.map('/download/') do |request|
       #       ...
       #     end
       #   end
@@ -298,7 +298,7 @@ module Ronin
       # Registers the given _server_ or _block_ to be called when receiving
       # requests for paths which match the specified _pattern_.
       #
-      #   paths_like(/\.xml$/) do |request|
+      #   server.paths_like(/\.xml$/) do |request|
       #     ...
       #   end
       #
@@ -312,7 +312,7 @@ module Ronin
       # connects it as a virtual host representing the specified host
       # _name_.
       #
-      #   host('cdn.evil.com') do
+      #   server.host('cdn.evil.com') do |server|
       #     ...
       #   end
       #
@@ -323,7 +323,7 @@ module Ronin
       #
       # Binds the specified URL _path_ to the given _server_ or _block_.
       #
-      #   bind '/secrets.xml' do |request|
+      #   server.bind '/secrets.xml' do |request|
       #     [200, {'Content-Type' => 'text/xml'}, "Made you look."]
       #   end
       #
@@ -336,8 +336,8 @@ module Ronin
       # Binds the specified URL directory _path_ to the given 
       # _server_ or _block_.
       #
-      #   map '/downloads' do |request|
-      #     response(
+      #   server.map '/downloads' do |request|
+      #     server.response(
       #       "Your somewhere inside the downloads directory",
       #       :content_type' => 'text/xml'
       #     )
@@ -356,7 +356,7 @@ module Ronin
       # <tt>content_type</tt>:: The content-type to use when serving
       #                         the file at the specified _path_.
       #
-      #   file '/robots.txt', '/path/to/my_robots.txt'
+      #   server.file '/robots.txt', '/path/to/my_robots.txt'
       #
       def file(path,file,options={})
         file = File.expand_path(file)
@@ -375,7 +375,7 @@ module Ronin
       # Binds the contents of the specified _directory_ to the given
       # prefix _path_.
       #
-      #   directory '/download/', '/tmp/files/'
+      #   server.directory '/download/', '/tmp/files/'
       #
       def directory(path,directory)
         sub_dirs = path.split('/')

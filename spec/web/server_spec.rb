@@ -5,43 +5,43 @@ require 'web/helpers/server'
 
 describe Web::Server do
   before(:all) do
-    @server = Web::Server.new do
-      default do |env|
-        response('This is default.')
+    @server = Web::Server.new do |server|
+      server.default do |env|
+        server.response('This is default.')
       end
 
-      bind('/test/bind.xml') do |env|
-        response('<secret/>', :content_type => 'text/xml')
+      server.bind('/test/bind.xml') do |env|
+        server.response('<secret/>', :content_type => 'text/xml')
       end
 
-      paths_like(/path_patterns\/secret\./) do |env|
-        response('No secrets here.')
+      server.paths_like(/path_patterns\/secret\./) do |env|
+        server.response('No secrets here.')
       end
 
-      map('/test/map') do |env|
-        response('mapped')
+      server.map('/test/map') do |env|
+        server.response('mapped')
       end
 
-      file('/test/file.txt',File.join(WEB_SERVER_ROOT,'test.txt'))
+      server.file('/test/file.txt',File.join(WEB_SERVER_ROOT,'test.txt'))
 
-      directory('/test/directory/',WEB_SERVER_ROOT)
+      server.directory('/test/directory/',WEB_SERVER_ROOT)
     end
 
-    @virtual_host = Web::Server.new do
-      bind('/test/virtual_host.xml') do |env|
-        response('<virtual/>', :content_type => 'text/xml')
-      end
-    end
-
-    @server.host('virtual.host.com') do
-      bind('/test/virtual_host.xml') do |env|
-        response('<virtual/>', :content_type => 'text/xml')
+    @virtual_host = Web::Server.new do |vhost|
+      vhost.bind('/test/virtual_host.xml') do |env|
+        vhost.response('<virtual/>', :content_type => 'text/xml')
       end
     end
 
-    @server.hosts_like(/^virtual[0-9]\./) do
-      bind('/test/virtual_host_patterns.xml') do |env|
-        response('<virtual-patterns/>', :content_type => 'text/xml')
+    @server.host('virtual.host.com') do |vhost|
+      vhost.bind('/test/virtual_host.xml') do |env|
+        vhost.response('<virtual/>', :content_type => 'text/xml')
+      end
+    end
+
+    @server.hosts_like(/^virtual[0-9]\./) do |vhost|
+      vhost.bind('/test/virtual_host_patterns.xml') do |env|
+        vhost.response('<virtual-patterns/>', :content_type => 'text/xml')
       end
     end
   end
