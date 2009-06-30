@@ -4,7 +4,6 @@ require 'rubygems'
 require 'hoe'
 require 'hoe/signing'
 require './tasks/spec.rb'
-require './lib/ronin/web/version.rb'
 
 Hoe.spec('ronin-web') do
   self.rubyforge_name = 'ronin'
