@@ -1,3 +1,21 @@
+=== 0.1.3 / 2009-07-02
+
+* Use Hoe >= 2.0.0.
+* Require spidr >= 0.1.9.
+* Require rack >= 1.0.0.
+* Require ronin >= 0.2.4.
+* Added Ronin::Web::Fingerprint.
+* Added Web.build_html.
+* Added Web.build_xml.
+* Allow Web.html to accept a block.
+* Allow Web.xml to accept a block.
+* Allow Server#return_file to accept a content_type option.
+* Make sure Ronin::Web::Server is thread safe.
+* Blocks passed to Server.new will not be instance_evaled.
+* Removed Spider#default_options.
+* Removed Server.run.
+* Removed Server#config.
+
 === 0.1.2 / 2009-03-28
 
 * Added Ronin::Web::Proxy.
