@@ -10,7 +10,6 @@ Hoe.spec('ronin-web') do
   self.developer('Postmodern', 'postmodern.mod3@gmail.com')
   self.remote_rdoc_dir = 'docs/ronin-web'
   self.extra_deps = [
-    ['nokogiri', '>=1.2.0'],
     ['mechanize', '>=0.9.0'],
     ['spidr', '>=0.1.9'],
     ['rack', '>=1.0.0'],
