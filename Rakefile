@@ -14,7 +14,7 @@ Hoe.spec('ronin-web') do
     ['mechanize', '>=0.9.0'],
     ['spidr', '>=0.1.9'],
     ['rack', '>=1.0.0'],
-    ['ronin', '>=0.2.2']
+    ['ronin', '>=0.2.4']
   ]
 end
 
