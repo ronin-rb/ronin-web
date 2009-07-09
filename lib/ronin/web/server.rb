@@ -424,7 +424,7 @@ module Ronin
       # be returned instead.
       #
       def handler_class
-        [@handler, 'Mongrel', 'WEBrick'].compact.find do |name|
+        [@handler, 'Thin', 'Mongrel', 'WEBrick'].compact.find do |name|
           begin
             return Rack::Handler.get(name)
           rescue Gem::LoadError => e
