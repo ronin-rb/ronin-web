@@ -46,6 +46,19 @@ describe Web::Server do
     end
   end
 
+  it "should return a suitable Rack::Handler for the web server" do
+    server = Web::Server.new
+    server.handler_class.should_not be_nil
+  end
+
+  it "should fall-back to a known Rack::Handler if the specified one cannot be found" do
+    server = Web::Server.new(:handler => 'Bla')
+    handler = server.handler_class
+
+    handler.should_not be_nil
+    handler.to_s.should_not =~ /Bla$/
+  end
+
   it "should have a default host to listen on" do
     Web::Server.default_host.should_not be_nil
   end
