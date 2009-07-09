@@ -426,10 +426,12 @@ module Ronin
       end
 
       #
-      # Starts the server. Mongrel will be used to run the server, if it
-      # is installed, otherwise WEBrick will be used.
+      # Returns the Rack::Handler class to use for the web server,
+      # based on the +handler+. If the +handler+ of the web server cannot
+      # be found, Rack::Handler::Mongrel or Rack::Handler::WEBrick will
+      # be returned instead.
       #
-      def start
+      def handler_class
         rack_handler = [@handler, 'Mongrel', 'WEBrick'].find do |name|
           name && Rack::Handler.const_defined?(name)
         end
@@ -438,12 +440,20 @@ module Ronin
           raise(StandardError,"unable to find any Rack handlers",caller)
         end
 
+        return Rack::Handler.get(rack_handler)
+      end
+
+      #
+      # Starts the server. Mongrel will be used to run the server, if it
+      # is installed, otherwise WEBrick will be used.
+      #
+      def start
         rack_options = {
           'Host' => (@host || Server.default_host),
           'Port' => (@port || Server.default_port)
         }
 
-        Rack::Handler.get(rack_handler).run(self,rack_options)
+        handler_class.run(self,rack_options)
         return self
       end
 
