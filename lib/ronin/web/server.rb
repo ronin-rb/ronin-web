@@ -25,14 +25,6 @@ require 'uri'
 require 'cgi'
 require 'thread'
 
-begin
-  require 'mongrel'
-rescue Gem::LoadError => e
-  raise(e)
-rescue LoadError
-  require 'webrick'
-end
-
 require 'rack'
 
 module Ronin
@@ -432,15 +424,17 @@ module Ronin
       # be returned instead.
       #
       def handler_class
-        rack_handler = [@handler, 'Mongrel', 'WEBrick'].find do |name|
-          name && Rack::Handler.const_defined?(name)
+        [@handler, 'Mongrel', 'WEBrick'].compact.find do |name|
+          begin
+            return Rack::Handler.get(name)
+          rescue Gem::LoadError => e
+            raise(e)
+          rescue NameError, ::LoadError
+            next
+          end
         end
 
-        unless rack_handler
-          raise(StandardError,"unable to find any Rack handlers",caller)
-        end
-
-        return Rack::Handler.get(rack_handler)
+        raise(StandardError,"unable to find any Rack handlers",caller)
       end
 
       #
