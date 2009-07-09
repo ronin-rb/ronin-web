@@ -443,7 +443,7 @@ module Ronin
           'Port' => (@port || Server.default_port)
         }
 
-        Rack::Handler.const_get(rack_handler).run(self,rack_options)
+        Rack::Handler.get(rack_handler).run(self,rack_options)
         return self
       end
 
