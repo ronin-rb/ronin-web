@@ -56,15 +56,15 @@ module Ronin
       # Creates a new Web Server using the given configuration _block_.
       #
       # _options_ may contain the following keys:
-      # <tt>:host</tt>:: The host to bind to.
-      # <tt>:port</tt>:: The port to listen on.
+      # <tt>:host</tt>:: The host to bind to. Defaults to Server.host.
+      # <tt>:port</tt>:: The port to listen on. Defaults to Server.port.
       # <tt>:background</tt>:: Specifies whether the server should be ran
       #                        in the background. Defaults to +false+.
       # <tt>:handler</tt>:: The handler to run the server under.
       #
       def initialize(options={},&block)
-        @host = options[:host]
-        @port = options[:port]
+        @host = (options[:host] || Server.default_host)
+        @port = (options[:port] || Server.default_port)
         @background = (options[:background] || false)
         @handler = options[:handler]
 
@@ -449,11 +449,7 @@ module Ronin
       # is installed, otherwise WEBrick will be used.
       #
       def start
-        options = {
-          'Host' => (@host || Server.default_host),
-          'Port' => (@port || Server.default_port)
-        }
-
+        options = {'Host' => @host, 'Port' => @port}
         runner = lambda { |handler,server,options|
           handler.run(server,options)
         }
