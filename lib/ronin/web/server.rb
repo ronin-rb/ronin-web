@@ -46,6 +46,9 @@ module Ronin
       # The port to listen on
       attr_accessor :port
 
+      # Specifies whether the server should run in the background
+      attr_accessor :background
+
       # The handler to run the server under
       attr_accessor :handler
 
@@ -55,11 +58,14 @@ module Ronin
       # _options_ may contain the following keys:
       # <tt>:host</tt>:: The host to bind to.
       # <tt>:port</tt>:: The port to listen on.
+      # <tt>:background</tt>:: Specifies whether the server should be ran
+      #                        in the background. Defaults to +false+.
       # <tt>:handler</tt>:: The handler to run the server under.
       #
       def initialize(options={},&block)
         @host = options[:host]
         @port = options[:port]
+        @background = (options[:background] || false)
         @handler = options[:handler]
 
         @default = method(:not_found)
@@ -71,6 +77,7 @@ module Ronin
         @paths = {}
         @directories = {}
 
+        @thread = nil
         @default_mutex = Mutex.new
         @vhost_patterns_mutex = Mutex.new
         @vhosts_mutex = Mutex.new
@@ -442,13 +449,34 @@ module Ronin
       # is installed, otherwise WEBrick will be used.
       #
       def start
-        rack_options = {
+        options = {
           'Host' => (@host || Server.default_host),
           'Port' => (@port || Server.default_port)
         }
 
-        handler_class.run(self,rack_options)
+        runner = lambda { |handler,server,options|
+          handler.run(server,options)
+        }
+
+        if @background
+          @thread = Thread.new(handler_class,self,options,&runner)
+        else
+          runner.call(handler_class,self,options)
+        end
+
         return self
+      end
+
+      #
+      # Stops the currently running web server thread.
+      #
+      def stop
+        if @thread
+          @thread.kill
+          @thread = nil
+        end
+
+        return true
       end
 
       #
