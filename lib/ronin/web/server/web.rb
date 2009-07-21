@@ -21,6 +21,12 @@
 #++
 #
 
-require 'ronin/web/server/base'
 require 'ronin/web/server/app'
-require 'ronin/web/server/web'
+
+module Ronin
+  module Web
+    def Web.server
+      Server::App
+    end
+  end
+end

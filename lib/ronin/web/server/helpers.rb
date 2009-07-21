@@ -21,6 +21,7 @@
 #++
 #
 
-require 'ronin/web/server/base'
-require 'ronin/web/server/app'
-require 'ronin/web/server/web'
+require 'ronin/web/server/helpers/rendering'
+require 'ronin/web/server/helpers/files'
+require 'ronin/web/server/helpers/hosts'
+require 'ronin/web/server/helpers/proxy'

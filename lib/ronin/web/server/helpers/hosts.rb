@@ -21,6 +21,18 @@
 #++
 #
 
-require 'ronin/web/server/base'
-require 'ronin/web/server/app'
-require 'ronin/web/server/web'
+module Ronin
+  module Web
+    module Server
+      module Helpers
+        module Hosts
+          def for_host(name_or_pattern,&block)
+            if request.host.match(name_or_pattern)
+              response = block.call()
+            end
+          end
+        end
+      end
+    end
+  end
+end

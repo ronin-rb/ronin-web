@@ -22,5 +22,12 @@
 #
 
 require 'ronin/web/server/base'
-require 'ronin/web/server/app'
-require 'ronin/web/server/web'
+
+module Ronin
+  module Web
+    module Server
+      class App < Base
+      end
+    end
+  end
+end

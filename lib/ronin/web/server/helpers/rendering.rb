@@ -21,6 +21,16 @@
 #++
 #
 
-require 'ronin/web/server/base'
-require 'ronin/web/server/app'
-require 'ronin/web/server/web'
+module Ronin
+  module Web
+    module Server
+      module Helpers
+        module Rendering
+          include Rack::Utils
+
+          alias h escape_html
+        end
+      end
+    end
+  end
+end

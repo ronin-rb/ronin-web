@@ -15,6 +15,16 @@ lib/ronin/web/extensions/nokogiri/xml/element.rb
 lib/ronin/web/extensions/nokogiri/xml/document.rb
 lib/ronin/web/fingerprint.rb
 lib/ronin/web/server.rb
+lib/ronin/web/server/helpers.rb
+lib/ronin/web/server/helpers/rendering.rb
+lib/ronin/web/server/helpers/files.rb
+lib/ronin/web/server/helpers/hosts.rb
+lib/ronin/web/server/helpers/proxy.rb
+lib/ronin/web/server/helpers/files.rb
+lib/ronin/web/server/helpers/hosts.rb
+lib/ronin/web/server/base.rb
+lib/ronin/web/server/app.rb
+lib/ronin/web/server/web.rb
 lib/ronin/web/proxy.rb
 lib/ronin/web/spider.rb
 lib/ronin/web/web.rb
