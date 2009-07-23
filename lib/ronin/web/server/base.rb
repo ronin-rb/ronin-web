@@ -118,35 +118,6 @@ module Ronin
           return self
         end
 
-        #
-        # Routes the specified _url_ to the call method.
-        #
-        def self.route(url)
-          url = URI(url.to_s)
-
-          return self.call(
-            'HTTP_HOST' => url.host,
-            'HTTP_PORT' => url.port,
-            'SERVER_PORT' => url.port,
-            'PATH_INFO' => url.path,
-            'QUERY_STRING' => url.query
-          )
-        end
-
-        #
-        # Routes the specified _path_ to the call method.
-        #
-        def self.route_path(path)
-          path, query = URI.decode(path.to_s).split('?',2)
-
-          return self.route(URI::HTTP.build(
-            :host => self.host,
-            :port => self.port,
-            :path => path,
-            :query => query
-          ))
-        end
-
         def self.any(path,options={},&block)
           get(path,options,&block)
           put(path,options,&block)
@@ -178,7 +149,7 @@ module Ronin
         protected
 
         def default_response
-          halt 404
+          halt 404, ''
         end
 
         enable :sessions
