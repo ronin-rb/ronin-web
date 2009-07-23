@@ -35,9 +35,11 @@ module Ronin
             #
             #   MyApp.file '/robots.txt', '/path/to/my_robots.txt'
             #
-            def self.file(http_path,path)
+            def self.file(http_path,path,custom_content_type=nil)
+              path = File.expand_path(path)
+
               any(http_path) do
-                return_file(path)
+                return_file(path,custom_content_type)
               end
             end
 
@@ -47,9 +49,13 @@ module Ronin
             #
             #   MyApp.directory '/download/', '/tmp/files/'
             #
-            def self.directory(http_path,directory)
+            def self.directory(http_path,directory,custom_content_type=nil)
+              directory = File.expand_path(directory)
+
               any(File.join(http_path,'*')) do
-                return_file(File.join(directory,File.expand_path(File.join('/',params[:splat]))))
+                full_path = File.join(directory,File.expand_path(File.join('',params[:splat])))
+
+                return_file(full_path,custom_content_type)
               end
             end
 
