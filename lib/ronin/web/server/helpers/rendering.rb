@@ -21,6 +21,8 @@
 #++
 #
 
+require 'rack/utils'
+
 module Ronin
   module Web
     module Server
