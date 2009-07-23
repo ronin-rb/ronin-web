@@ -46,14 +46,20 @@ module Ronin
           #
           #   return_file 'lol.jpg'
           #
-          def return_file(path)
+          #   return_file '/tmp/file', :html
+          #
+          def return_file(path,custom_content_type=nil)
             path = File.expand_path(path)
 
             unless File.file?(path)
               return pass
             end
 
-            content_type_for path
+            if custom_content_type
+              content_type custom_content_type
+            else
+              content_type_for path
+            end
 
             case request.request_method
             when 'GET', 'POST'
