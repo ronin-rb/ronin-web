@@ -60,31 +60,6 @@ module Ronin
         @@server_handler = nil
         @@server_background = false
 
-        @@default_block = nil
-        @@default_mutex = Mutex.new
-
-        #
-        # Sets the default block to the given _block_.
-        #
-        #   default do
-        #     status 200
-        #     content_type :html
-        #     
-        #     %{
-        #     <html>
-        #       <body>
-        #         <center><h1>YOU LOOSE THE GAME</h1></center>
-        #       </body>
-        #     </html>
-        #     }
-        #   end
-        #
-        def self.default(&block)
-          @@default_mutex.synchronize do
-            @@default_block = block
-          end
-        end
-
         def Server.handler
           @@server_handler
         end
@@ -179,7 +154,32 @@ module Ronin
           delete(path,options,&block)
         end
 
+        #
+        # Sets the default block to the given _block_.
+        #
+        #   default do
+        #     status 200
+        #     content_type :html
+        #     
+        #     %{
+        #     <html>
+        #       <body>
+        #         <center><h1>YOU LOOSE THE GAME</h1></center>
+        #       </body>
+        #     </html>
+        #     }
+        #   end
+        #
+        def self.default(&block)
+          define_method(:default_response,&block)
+          return self
+        end
+
         protected
+
+        def default_response
+          halt 404
+        end
 
         enable :sessions
 
@@ -190,13 +190,7 @@ module Ronin
         # Returns the HTTP 404 Not Found message for the requested path.
         #
         not_found do
-          @@default_mutex.synchronize do
-            if @@default_block
-              @@default_block.call()
-            else
-              halt 404
-            end
-          end
+          default_response
         end
 
       end
