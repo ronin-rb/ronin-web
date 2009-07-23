@@ -33,9 +33,9 @@ module Ronin
             #
             # Hosts the static contents within the specified _directory_.
             #
-            #   Server.public_dir 'path/to/another/public'
+            #   MyApp.public_dir 'path/to/another/public'
             #
-            def Server.public_dir(directory)
+            def self.public_dir(directory)
               directory = File.expand_path(directory)
 
               before do
