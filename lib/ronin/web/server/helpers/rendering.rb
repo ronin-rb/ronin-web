@@ -26,7 +26,7 @@ require 'rack/utils'
 module Ronin
   module Web
     module Server
-      module Helpers
+      module Helper
         module Rendering
           include Rack::Utils
 

@@ -23,7 +23,7 @@
 
 module Ronin
   module Web
-    module Servers
+    module Server
       module Helpers
         module Files
           # Directory index files
