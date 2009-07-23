@@ -57,15 +57,20 @@ module Ronin
         # Directory to search for views within
         VIEWS_DIR = File.join('ronin','web','server','views')
 
-        @@server_handler = nil
-        @@server_background = false
-
-        def Server.handler
-          @@server_handler
+        #
+        # Returns the name of the Rack Handler to run all servers under
+        # by default.
+        #
+        def Base.handler
+          @@ronin_web_server_handler ||= nil
         end
 
-        def Server.handler=(name)
-          @@server_handler = name
+        #
+        # Sets the handler, which all servers will be ran under by default,
+        # to the specified _name_.
+        #
+        def Base.handler=(name)
+          @@ronin_web_server_handler = name
         end
 
         #
@@ -75,7 +80,7 @@ module Ronin
         # be returned instead.
         #
         def self.handler_class
-          [self.handler, 'Thin', 'Mongrel', 'WEBrick'].compact.find do |name|
+          [Base.handler, 'Thin', 'Mongrel', 'WEBrick'].compact.find do |name|
             begin
               return Rack::Handler.get(name)
             rescue Gem::LoadError => e
