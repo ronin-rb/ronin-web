@@ -37,7 +37,7 @@ module Ronin
             #
             def self.file(http_path,path)
               any(http_path) do
-                return_file(request.path_info)
+                return_file(path)
               end
             end
 
