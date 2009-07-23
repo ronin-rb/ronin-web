@@ -30,31 +30,19 @@ module Ronin
 
         def self.included(base)
           base.module_eval do
-            @@public_dirs_mutex = Mutex.new
-            @@public_dirs = []
-
             #
-            # Hosts the static contents within the directory at the specified
-            # _path_.
+            # Hosts the static contents within the specified _directory_.
             #
             #   Server.public_dir 'path/to/another/public'
             #
-            def Server.public_dir(path)
-              @@public_dirs_mutex.synchronize do
-                @@public_dirs << File.expand_path(path)
+            def Server.public_dir(directory)
+              directory = File.expand_path(directory)
+
+              before do
+                full_path = File.join(directory,File.expand_path(File.join('',request.path_info)))
+
+                return_file(full_path) if File.file?(full_path)
               end
-            end
-
-            before do
-              path = @@public_dirs_mutex.synchronize do
-                @@public_dirs.each do |public_dir|
-                  path = File.join(public_dir,request.path_info)
-
-                  break path if File.file?(path)
-                end
-              end
-
-              return_file(path) if path
             end
           end
         end
