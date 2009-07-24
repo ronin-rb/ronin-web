@@ -107,8 +107,8 @@ module Ronin
         #
         def self.start(options={})
           rack_options = {
-            :Host => (options[:host] || self.default_host),
-            :Port => (options[:port] || self.default_port)
+            :Host => (options[:host] || DEFAULT_HOST),
+            :Port => (options[:port] || DEFAULT_PORT)
           }
           runner = lambda { |handler,server,options|
             handler.run(server,options)
