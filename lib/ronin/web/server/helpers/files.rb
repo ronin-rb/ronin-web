@@ -41,35 +41,6 @@ module Ronin
           end
 
           #
-          # Sets the content_type using the extension of the specified _path_
-          # and returns a File object.
-          #
-          #   return_file 'lol.jpg'
-          #
-          #   return_file '/tmp/file', :html
-          #
-          def return_file(path,custom_content_type=nil)
-            path = File.expand_path(path)
-
-            unless File.file?(path)
-              return pass
-            end
-
-            if custom_content_type
-              content_type custom_content_type
-            else
-              content_type_for path
-            end
-
-            case request.request_method
-            when 'GET', 'POST'
-              halt 200, File.new(path)
-            else
-              halt 302
-            end
-          end
-
-          #
           # Passes the path to the index file within the specified _path_
           # to the given _block_.
           #
@@ -85,6 +56,35 @@ module Ronin
             end
 
             pass
+          end
+
+          #
+          # Sets the content_type using the extension of the specified _path_
+          # and returns a File object.
+          #
+          #   return_file 'lol.jpg'
+          #
+          #   return_file '/tmp/file', :html
+          #
+          def return_file(path,custom_content_type=nil)
+            path = File.expand_path(path)
+
+            if File.directory?(path)
+              index_of(path) { |index| path = index }
+            end
+
+            if custom_content_type
+              content_type custom_content_type
+            else
+              content_type_for path
+            end
+
+            case request.request_method
+            when 'GET', 'POST'
+              halt 200, File.new(path)
+            else
+              halt 302
+            end
           end
         end
       end
