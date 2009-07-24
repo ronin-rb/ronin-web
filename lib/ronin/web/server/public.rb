@@ -39,7 +39,8 @@ module Ronin
               directory = File.expand_path(directory)
 
               before do
-                full_path = File.join(directory,File.expand_path(File.join('',request.path_info)))
+                sub_path = File.expand_path(File.join('',request.path_info))
+                full_path = File.join(directory,sub_path)
 
                 return_file(full_path) if File.file?(full_path)
               end
