@@ -29,8 +29,6 @@ require 'ronin/web/server/hosts'
 require 'ronin/static/finders'
 require 'ronin/templates/erb'
 
-require 'uri'
-require 'cgi'
 require 'thread'
 require 'rack'
 require 'sinatra'
