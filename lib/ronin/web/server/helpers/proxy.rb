@@ -62,7 +62,7 @@ module Ronin
               when 'text/html'
                 page = Nokogiri::HTML(body)
               when 'text/xml'
-                page = Nokogiri::HTML(body)
+                page = Nokogiri::XML(body)
               else
                 page = response.body
               end
