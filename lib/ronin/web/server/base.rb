@@ -25,7 +25,6 @@ require 'ronin/web/server/helpers/rendering'
 require 'ronin/web/server/helpers/proxy'
 require 'ronin/web/server/files'
 require 'ronin/web/server/hosts'
-require 'ronin/web/server/mapper'
 require 'ronin/static/finders'
 require 'ronin/templates/erb'
 
@@ -45,7 +44,6 @@ module Ronin
 
         include Files
         include Hosts
-        include Mapper
 
         # Default interface to run the Web Server on
         DEFAULT_HOST = '0.0.0.0'
@@ -166,6 +164,22 @@ module Ronin
         def self.default(&block)
           define_method(:default_response,&block)
           return self
+        end
+
+        #
+        # Maps all requests to the specified _http_path_ to the
+        # specified _server_.
+        #
+        #   MyApp.map '/subapp/', SubApp
+        #
+        def self.map(http_path,server)
+          http_path = File.join(http_path,'')
+
+          before do
+            if http_path == request.path_info[0..http_path.length]
+              server.call(request)
+            end
+          end
         end
 
         #
