@@ -26,9 +26,11 @@ require 'ronin/web/server/helpers/proxy'
 require 'ronin/web/server/public'
 require 'ronin/web/server/files'
 require 'ronin/web/server/hosts'
+require 'ronin/web/server/mapper'
 require 'ronin/static/finders'
 require 'ronin/templates/erb'
 
+require 'set'
 require 'thread'
 require 'rack'
 require 'sinatra'
@@ -45,12 +47,16 @@ module Ronin
         include Public
         include Files
         include Hosts
+        include Mapper
 
         # Default interface to run the Web Server on
         DEFAULT_HOST = '0.0.0.0'
 
         # Default port to run the Web Server on
         DEFAULT_PORT = 8080
+
+        # Default list of index file-names to search for in directories
+        DEFAULT_INDICES = ['index.html', 'index.html']
 
         # Directory to search for views within
         VIEWS_DIR = File.join('ronin','web','server','views')
@@ -69,6 +75,21 @@ module Ronin
         #
         def Base.handler=(name)
           @@ronin_web_server_handler = name
+        end
+
+        #
+        # Returns the set of index file-names to search for within
+        # directories.
+        #
+        def Base.indices
+          @@ronin_web_server_indices ||= Set[]
+        end
+
+        #
+        # Adds specified _name_ to Base.indices.
+        #
+        def Base.index(name)
+          Base.indices << name.to_s
         end
 
         #
