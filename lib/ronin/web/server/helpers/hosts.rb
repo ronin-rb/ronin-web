@@ -30,20 +30,32 @@ module Ronin
           # Calls the given _block_ if the host field fo the request
           # matches the specified _name_or_pattern_.
           #
+          #   downloads = 0
+          #
           #   get '/file' do
           #     for_host /^ftp/ do
+          #       downloads += 1
+          #   
           #       content_type :txt
-          #       'ftp file'
+          #       'some file'
           #     end
           #
           #     for_host /^www/ do
-          #       'ftp file'
+          #       downloads += 1
+          #   
+          #       'some file'
+          #     end
+          #
+          #     for_host 'localhost' do
+          #       "Total Downloads: #{downloads}"
           #     end
           #   end
           #
           def for_host(name_or_pattern,&block)
-            if request.host.match(name_or_pattern)
-              block.call()
+            if name_or_pattern.kind_of?(Regexp)
+              block.call() if request.host =~ name_or_pattern
+            else
+              block.call() if request.host == name_or_pattern
             end
           end
         end
