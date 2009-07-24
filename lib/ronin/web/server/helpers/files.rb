@@ -70,19 +70,21 @@ module Ronin
           end
 
           #
-          # Returns the index file contained within the _path_ of the specified
-          # directory. If no index file can be found, +nil+ will be returned.
+          # Passes the path to the index file within the specified _path_
+          # to the given _block_.
           #
-          def index_of(path)
+          def index_of(path,&block)
             path = File.expand_path(path)
 
-            INDICES.each do |name|
+            Base.indices.each do |name|
               index = File.join(path,name)
 
-              return index if File.file?(index)
+              if File.file?(index)
+                return block.call(index)
+              end
             end
 
-            return nil
+            pass
           end
         end
       end
