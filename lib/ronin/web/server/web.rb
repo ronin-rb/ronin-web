@@ -25,8 +25,18 @@ require 'ronin/web/server/app'
 
 module Ronin
   module Web
-    def Web.server
-      Server::App
+    #
+    # Returns the Ronin Web Server. When called for the first time
+    # the server will be started in the background with the given
+    # _options_.
+    #
+    def Web.server(options={})
+      unless class_variable_defined?('@@ronin_web_server')
+        @@ronin_web_server = Server::App
+        @@ronin_web_server.start(options.merge(:background => true))
+      end
+
+      return @@ronin_web_server
     end
   end
 end
