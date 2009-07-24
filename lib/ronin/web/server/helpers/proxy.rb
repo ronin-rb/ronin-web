@@ -64,14 +64,16 @@ module Ronin
               when 'text/xml'
                 page = Nokogiri::XML(body)
               else
-                page = response.body
+                page = nil
               end
 
-              if block
-                page = (block.call(response,page) || page)
-              end
+              if page
+                if block
+                  page = (block.call(response,page) || page)
+                end
 
-              page.to_s
+                page.to_s
+              end
             end
           end
         end
