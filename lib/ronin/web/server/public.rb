@@ -25,9 +25,6 @@ module Ronin
   module Web
     module Server
       module Public
-        # Directory to search for static content within
-        DIR = File.join('ronin','web','server','public')
-
         def self.included(base)
           base.module_eval do
             #
