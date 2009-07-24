@@ -53,7 +53,7 @@ module Ronin
               end
             end
 
-            return body
+            halt(response.code, body)
           end
 
           def proxy_page(options={},&block)
