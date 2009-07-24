@@ -38,7 +38,7 @@ module Ronin
             def self.hosts_like(pattern,server)
               before do
                 if request.host.match(pattern)
-                  server.call(request)
+                  halt(*server.call(request.env))
                 end
               end
             end
@@ -54,7 +54,7 @@ module Ronin
 
               before do
                 if request.host == name
-                  server.call(request)
+                  halt(*server.call(request.env))
                 end
               end
             end
