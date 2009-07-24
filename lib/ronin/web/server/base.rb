@@ -23,7 +23,6 @@
 
 require 'ronin/web/server/helpers/rendering'
 require 'ronin/web/server/helpers/proxy'
-require 'ronin/web/server/public'
 require 'ronin/web/server/files'
 require 'ronin/web/server/hosts'
 require 'ronin/web/server/mapper'
@@ -44,7 +43,6 @@ module Ronin
         include Rack::Utils
         include Templates::Erb
 
-        include Public
         include Files
         include Hosts
         include Mapper
@@ -168,6 +166,22 @@ module Ronin
         def self.default(&block)
           define_method(:default_response,&block)
           return self
+        end
+
+        #
+        # Hosts the static contents within the specified _directory_.
+        #
+        #   MyApp.public_dir 'path/to/another/public'
+        #
+        def self.public_dir(directory)
+          directory = File.expand_path(directory)
+
+          before do
+            sub_path = File.expand_path(File.join('',request.path_info))
+            full_path = File.join(directory,sub_path)
+
+            return_file(full_path) if File.file?(full_path)
+          end
         end
 
         protected
