@@ -27,6 +27,7 @@ require 'ronin/web/server/files'
 require 'ronin/web/server/hosts'
 require 'ronin/static/finders'
 require 'ronin/templates/erb'
+require 'ronin/extensions/meta'
 
 require 'set'
 require 'thread'
@@ -162,7 +163,7 @@ module Ronin
         #   end
         #
         def self.default(&block)
-          define_method(:default_response,&block)
+          class_def(:default_response,&block)
           return self
         end
 
