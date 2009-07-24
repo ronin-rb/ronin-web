@@ -26,9 +26,24 @@ module Ronin
     module Server
       module Helpers
         module Hosts
+          #
+          # Calls the given _block_ if the host field fo the request
+          # matches the specified _name_or_pattern_.
+          #
+          #   get '/file' do
+          #     for_host /^ftp/ do
+          #       content_type :txt
+          #       'ftp file'
+          #     end
+          #
+          #     for_host /^www/ do
+          #       'ftp file'
+          #     end
+          #   end
+          #
           def for_host(name_or_pattern,&block)
             if request.host.match(name_or_pattern)
-              response = block.call()
+              block.call()
             end
           end
         end
