@@ -53,7 +53,8 @@ module Ronin
               directory = File.expand_path(directory)
 
               any(File.join(http_path,'*')) do
-                full_path = File.join(directory,File.expand_path(File.join('',params[:splat])))
+                sub_path = File.expand_path(File.join('',params[:splat].first))
+                full_path = File.join(directory,sub_path)
 
                 return_file(full_path,custom_content_type)
               end
