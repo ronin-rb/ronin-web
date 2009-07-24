@@ -55,7 +55,7 @@ module Ronin
             if name_or_pattern.kind_of?(Regexp)
               block.call() if request.host =~ name_or_pattern
             else
-              block.call() if request.host == name_or_pattern
+              block.call() if request.host == name_or_pattern.to_s
             end
           end
         end
