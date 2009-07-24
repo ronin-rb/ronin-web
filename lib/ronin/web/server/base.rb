@@ -176,12 +176,12 @@ module Ronin
           http_path = File.join(http_path,'')
 
           before do
-            if http_path == request.path_info[0..http_path.length]
+            if http_path == request.path_info[0,http_path.length]
               # remove the http_path from the beginning of the path
               # before passing it to the server
               request.env['PATH_INFO'] = request.path_info[http_path.length-1..-1]
 
-              server.call(request)
+              halt(*server.call(request.env))
             end
           end
         end
