@@ -33,7 +33,7 @@ describe Web::Server::Files do
     last_response.body.should == "Another file.\n"
   end
 
-  it "should host the contents of directories at a common path" do
+  it "should host the contents of directories that share a common path" do
     get '/tests/directory/file2.txt'
 
     last_response.should be_ok
