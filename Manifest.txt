@@ -40,12 +40,13 @@ spec/web/server/classes/public2/static2.txt
 spec/web/server/classes/files/dir/file.txt
 spec/web/server/classes/files/dir/index.html
 spec/web/server/classes/files/dir2/file2.txt
+spec/web/server/classes/files/dir3/page.xml
 spec/web/server/classes/files/file.txt
-spec/web/server/classes/files/page.xml
 spec/web/server/classes/sub_app.rb
 spec/web/server/classes/test_app.rb
 spec/web/server/classes/files_app.rb
+spec/web/server/classes/hosts_app.rb
 spec/web/server/helpers/server.rb
 spec/web/server/base_spec.rb
 spec/web/server/files_spec.rb
-
+spec/web/server/hosts_spec.rb
