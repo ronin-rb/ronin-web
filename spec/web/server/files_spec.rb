@@ -46,6 +46,12 @@ describe Web::Server::Files do
     last_response.body.should == "Another file.\n"
   end
 
+  it "should prevent directory traversal when hosting a directory" do
+    get '/test/directory/./././//..///.///..///./../files_spec.rb'
+
+    last_response.should_not be_ok
+  end
+
   it "should host the contents of directories that share a common path" do
     get '/tests/directory/file2.txt'
 
