@@ -79,7 +79,7 @@ module Ronin
         # directories.
         #
         def Base.indices
-          @@ronin_web_server_indices ||= Set[]
+          @@ronin_web_server_indices ||= Set[DEFAULT_INDICES]
         end
 
         #
