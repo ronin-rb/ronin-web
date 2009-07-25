@@ -5,7 +5,7 @@ require 'web/server/classes/test_app'
 require 'web/server/helpers/server'
 
 describe Web::Server::Base do
-  include ServerHelpers
+  include Helpers::Web::Server
 
   before(:all) do
     self.app = TestApp

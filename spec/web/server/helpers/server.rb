@@ -1,15 +1,19 @@
 require 'spec/interop/test'
 require 'rack/test'
 
-module ServerHelpers
-  include Rack::Test::Methods
+module Helpers
+  module Web
+    module Server
+      include Rack::Test::Methods
 
-  def app=(server)
-    @app = server
-    @app.set :environment, :test
-  end
+      def app=(server)
+        @app = server
+        @app.set :environment, :test
+      end
 
-  def app
-    @app
+      def app
+        @app
+      end
+    end
   end
 end

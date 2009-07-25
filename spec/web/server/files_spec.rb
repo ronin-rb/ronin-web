@@ -6,7 +6,7 @@ require 'web/server/helpers/server'
 require 'web/server/classes/files_app'
 
 describe Web::Server::Files do
-  include ServerHelpers
+  include Helpers::Web::Server
 
   before(:all) do
     self.app = FilesApp
