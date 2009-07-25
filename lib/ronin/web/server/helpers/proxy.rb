@@ -21,6 +21,8 @@
 #++
 #
 
+require 'ronin/network/http'
+
 module Ronin
   module Web
     module Server
@@ -49,7 +51,7 @@ module Ronin
               if block.arity == 2
                 body = (block.call(response,body) || body)
               else
-                body = (block.call(response) || body)
+                body = (block.call(body) || body)
               end
             end
 
