@@ -26,6 +26,19 @@ describe Web::Server::Files do
     last_response.content_type.should =~ /\/xml$/
   end
 
+  it "should allow overriding the content_type of files" do
+    get '/tests/content_type/custom'
+
+    last_response.should be_ok
+    last_response.content_type.should == 'text/plain'
+  end
+
+  it "should ignore missing files that are hosted" do
+    get '/test/missing'
+
+    last_response.should_not be_ok
+  end
+
   it "should host the contents of a directory" do
     get '/tests/directory/file.txt'
 
