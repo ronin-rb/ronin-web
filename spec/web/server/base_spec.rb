@@ -12,7 +12,8 @@ describe Web::Server::Base do
   end
 
   it "should define a set of index file-names to search for" do
-    TestApp.indices.should == Set[TestApp::DEFAULT_INDICES]
+    (TestApp.indices. & TestApp::DEFAULT_INDICES).should ==
+      (TestApp::DEFAULT_INDICES & TestApp.indices)
   end
 
   it "should allow for defining new index file-names to search for" do
