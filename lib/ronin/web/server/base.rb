@@ -53,7 +53,7 @@ module Ronin
         DEFAULT_PORT = 8080
 
         # Default list of index file-names to search for in directories
-        DEFAULT_INDICES = ['index.html', 'index.html']
+        DEFAULT_INDICES = ['index.html', 'index.htm']
 
         # Directory to search for views within
         VIEWS_DIR = File.join('ronin','web','server','views')
