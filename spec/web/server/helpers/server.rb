@@ -14,6 +14,14 @@ module Helpers
       def app
         @app
       end
+
+      def get_host(path,host,params={},headers={})
+        get(path,params,headers.merge('HTTP_HOST' => host))
+      end
+
+      def post_host(path,host,params={},headers={})
+        post(path,params,headers.merge('HTTP_HOST' => host))
+      end
     end
   end
 end
