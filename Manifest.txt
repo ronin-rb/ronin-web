@@ -35,4 +35,9 @@ spec/web/helpers/server.rb
 spec/web/helpers/root/index.html
 spec/web/helpers/root/test.txt
 spec/web/extensions/nokogiri_spec.rb
-spec/web/server_spec.rb
+spec/web/server/classes/public1/static1.txt
+spec/web/server/classes/public2/static2.txt
+spec/web/server/classes/sub_app.rb
+spec/web/server/classes/test_app.rb
+spec/web/server/helpers/server.rb
+spec/web/server/base_spec.rb
