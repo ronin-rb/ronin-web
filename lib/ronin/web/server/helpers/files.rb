@@ -30,7 +30,8 @@ module Ronin
           INDICES = ['index.htm', 'index.html']
 
           #
-          # Sets the content_type based on the extension of the specified _path_.
+          # Sets the content_type based on the extension of the specified
+          # _path_.
           #
           #   content_type_for 'file.html'
           #
@@ -59,8 +60,8 @@ module Ronin
           end
 
           #
-          # Sets the content_type using the extension of the specified _path_
-          # and returns a File object.
+          # Sets the content_type using the extension of the specified
+          # _path_ and returns a File object.
           #
           #   return_file 'lol.jpg'
           #
