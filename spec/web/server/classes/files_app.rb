@@ -7,6 +7,11 @@ class FilesApp < Ronin::Web::Server::Base
   file '/tests/file',
        File.join(File.dirname(__FILE__),'files','file.txt')
 
+  get '/tests/content_type/custom' do
+    return_file File.join(File.dirname(__FILE__),'files','page.xml'),
+                'text/plain'
+  end
+
   file '/tests/content_type',
        File.join(File.dirname(__FILE__),'files','page.xml')
 
