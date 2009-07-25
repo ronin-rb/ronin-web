@@ -8,6 +8,11 @@ module ServerHelpers
     end
   end
 
+  def app=(server)
+    @app = server
+    @app.set :environment, :test
+  end
+
   def app
     @app
   end

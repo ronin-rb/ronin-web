@@ -8,7 +8,7 @@ describe Web::Server::Base do
   include ServerHelpers
 
   before(:all) do
-    @app = TestApp
+    self.app = TestApp
   end
 
   it "should define a set of index file-names to search for" do
