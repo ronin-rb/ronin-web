@@ -52,7 +52,8 @@ module Ronin
               index = File.join(path,name)
 
               if File.file?(index)
-                return block.call(index)
+                block.call(index) if block
+                return index
               end
             end
 
