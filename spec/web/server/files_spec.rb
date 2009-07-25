@@ -65,4 +65,10 @@ describe Web::Server::Files do
     last_response.should be_ok
     last_response.body.should == "The index.\n"
   end
+
+  it "should not return anything if there is no index file was found" do
+    get '/tests/directory/no_index/'
+
+    last_response.should_not be_ok
+  end
 end
