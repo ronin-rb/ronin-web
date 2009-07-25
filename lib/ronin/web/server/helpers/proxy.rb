@@ -45,17 +45,27 @@ module Ronin
             end
             
             options = default_options.merge(options)
-            response, body = Net.http_request(options)
+            http_response = Net.http_request(options)
+
+            response = Rack::Response.new(
+              [http_response.body],
+              http_response.code,
+              http_response.to_hash
+            )
 
             if block
-              if block.arity == 2
-                body = (block.call(response,body) || body)
+              old_body = response.body.first
+
+              new_body = if block.arity == 2
+                block.call(response,old_body)
               else
-                body = (block.call(body) || body)
+                block.call(old_body)
               end
+
+              response.body[0] = (new_body || old_body)
             end
 
-            halt(response.code, body)
+            halt(response)
           end
 
           def proxy_page(options={},&block)
