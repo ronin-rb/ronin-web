@@ -70,6 +70,8 @@ module Ronin
           def return_file(path,custom_content_type=nil)
             path = File.expand_path(path)
 
+            pass unless File.exists?(path)
+
             if File.directory?(path)
               index_of(path) { |index| path = index }
             end
