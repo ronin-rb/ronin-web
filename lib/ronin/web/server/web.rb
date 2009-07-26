@@ -30,6 +30,12 @@ module Ronin
     # the server will be started in the background with the given
     # _options_.
     #
+    #   Web.server do
+    #     get '/hello' do
+    #       'world'
+    #     end
+    #   end
+    #
     def Web.server(options={},&block)
       unless class_variable_defined?('@@ronin_web_server')
         @@ronin_web_server = Server::App
