@@ -80,9 +80,7 @@ module Ronin
               end
 
               if page
-                if block
-                  page = (block.call(response,page) || page)
-                end
+                block.call(response,page) if block
 
                 page.to_s
               end
