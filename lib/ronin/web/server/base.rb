@@ -212,6 +212,9 @@ module Ronin
 
         protected
 
+        #
+        # Returns an HTTP 404 response with an empty body.
+        #
         def default_response
           halt 404, ''
         end
@@ -221,9 +224,6 @@ module Ronin
         helpers Helpers::Rendering
         helpers Helpers::Proxy
 
-        #
-        # Returns the HTTP 404 Not Found message for the requested path.
-        #
         not_found do
           default_response
         end
