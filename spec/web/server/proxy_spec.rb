@@ -32,4 +32,18 @@ describe Web::Server::Helpers::Proxy do
     last_response.body.should_not =~ /erlang/i
     last_response.body.should =~ /Fixed Gear Bicycle/
   end
+
+  it "should allow modification of proxied HTML documents" do
+    get_host '/r/ruby', 'www.reddit.com'
+
+    last_response.should be_ok
+    last_response.body.should_not =~ /rails/i
+  end
+
+  it "should allow modification of proxied XML documents" do
+    get_host '/rss.php', 'milw0rm.com'
+
+    last_response.should be_ok
+    last_response.body.should_not =~ /(XSS|SQLi|SQL\s+Injection)/i
+  end
 end
