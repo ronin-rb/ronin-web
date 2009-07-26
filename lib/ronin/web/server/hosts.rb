@@ -30,30 +30,30 @@ module Ronin
         def self.included(base)
           base.module_eval do
             #
-            # Registers the given _server_ to be called when receiving
-            # requests to host names which match the specified _pattern_.
-            #
-            #   MyApp.hosts_like(/^a[0-9]\./, FileProxy)
-            #
-            def self.hosts_like(pattern,server)
-              before do
-                if request.host.match(pattern)
-                  halt(*server.call(request.env))
-                end
-              end
-            end
-
-            #
             # Registers the specified _server_ to be called when receiving
             # requests for the specified host _name_.
             #
-            #   MyApp.host('cdn.evil.com', EvilServer)
+            #   MyApp.host 'cdn.evil.com', EvilServer
             #
             def self.host(name,server)
               name = name.to_s
 
               before do
                 if request.host == name
+                  halt(*server.call(request.env))
+                end
+              end
+            end
+
+            #
+            # Registers the given _server_ to be called when receiving
+            # requests to host names which match the specified _pattern_.
+            #
+            #   MyApp.hosts_like /^a[0-9]\./, FileProxy
+            #
+            def self.hosts_like(pattern,server)
+              before do
+                if request.host.match(pattern)
                   halt(*server.call(request.env))
                 end
               end
