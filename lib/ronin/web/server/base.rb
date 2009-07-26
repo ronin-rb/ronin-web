@@ -139,6 +139,13 @@ module Ronin
           return self
         end
 
+        #
+        # Binds the given _block_ to any request for the specified _path_.
+        #
+        #   any '/submit' do
+        #     puts request.inspect
+        #   end
+        #
         def self.any(path,options={},&block)
           get(path,options,&block)
           put(path,options,&block)
