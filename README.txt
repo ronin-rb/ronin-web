@@ -151,9 +151,13 @@ of Ronin.
 
 * Serve files via a Web Server:
 
-    Web::Server.start do |server|
-      server.file '/opensearch.xml', '/tmp/test.xml'
-      server.directory '/download/', '/tmp/download/'
+    Web.server do
+      file '/opensearch.xml', '/tmp/test.xml'
+      directory '/download/', '/tmp/download/'
+    end
+
+    Web.server.get '/test' do
+      'Test 1 2 1 2'
     end
 
 == LICENSE:
