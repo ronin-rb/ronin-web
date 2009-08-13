@@ -127,7 +127,14 @@ module Ronin
             :Port => (options[:port] || DEFAULT_PORT)
           }
           runner = lambda { |handler,server,options|
-            handler.run(server,options)
+            handler.run(server,options) do |server|
+              trap(:INT) do
+                ## Use thins' hard #stop! if available, otherwise just #stop
+                server.respond_to?(:stop!) ? server.stop! : server.stop
+              end
+
+              set :running, true
+            end
           }
 
           if options[:background]
