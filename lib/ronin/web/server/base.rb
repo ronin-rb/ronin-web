@@ -138,11 +138,12 @@ module Ronin
         #                        run in the background or run in
         #                        the foreground.
         #
-        def self.start(options={})
+        def self.run!(options={})
           rack_options = {
             :Host => (options[:host] || self.host),
             :Port => (options[:port] || self.port)
           }
+
           runner = lambda { |handler,server,options|
             handler.run(server,options) do |server|
               trap(:INT) do
