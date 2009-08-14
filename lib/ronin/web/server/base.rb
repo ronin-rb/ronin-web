@@ -58,6 +58,9 @@ module Ronin
         # Directory to search for views within
         VIEWS_DIR = File.join('ronin','web','server','views')
 
+        set :host, DEFAULT_HOST
+        set :port, DEFAULT_PORT
+
         #
         # Returns the name of the Rack Handler to run all servers under
         # by default.
@@ -137,8 +140,8 @@ module Ronin
         #
         def self.start(options={})
           rack_options = {
-            :Host => (options[:host] || DEFAULT_HOST),
-            :Port => (options[:port] || DEFAULT_PORT)
+            :Host => (options[:host] || self.host),
+            :Port => (options[:port] || self.port)
           }
           runner = lambda { |handler,server,options|
             handler.run(server,options) do |server|
