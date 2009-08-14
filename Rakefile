@@ -4,6 +4,7 @@ require 'rubygems'
 require 'hoe'
 require 'hoe/signing'
 require './tasks/spec.rb'
+require './tasks/yard.rb'
 
 Hoe.spec('ronin-web') do
   self.rubyforge_name = 'ronin'
@@ -15,6 +16,7 @@ Hoe.spec('ronin-web') do
     ['sinatra', '>=0.9.2'],
     ['ronin', '>=0.2.4']
   ]
+  self.spec_extras = {:has_rdoc => 'yard'}
 end
 
 # vim: syntax=Ruby
