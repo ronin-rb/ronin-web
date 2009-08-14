@@ -29,16 +29,6 @@ module Ronin
     module Web
       include Session
 
-      setup_session do
-        parameter :web_proxy,
-                  :default => lambda { Ronin::Web.proxy },
-                  :description => 'Web Proxy'
-
-        parameter :web_user_agent,
-                  :default => lambda { Ronin::Web.user_agent },
-                  :description => 'Web User-Agent'
-      end
-
       protected
 
       def web_agent(options={},&block)
