@@ -90,13 +90,27 @@ module Ronin
         end
 
         #
+        # Returns the Array of handlers to attempt to use when starting
+        # the server.
+        #
+        def self.handlers
+          handlers = self.server
+
+          if Base.handler
+            handlers = [Base.handler] + handlers
+          end
+
+          return handlers
+        end
+
+        #
         # Returns the Rack::Handler class to use for the web server,
         # based on the +handler+. If the +handler+ of the web server cannot
         # be found, Rack::Handler::Mongrel or Rack::Handler::WEBrick will
         # be returned instead.
         #
         def self.handler_class
-          [Base.handler, 'Thin', 'Mongrel', 'WEBrick'].compact.find do |name|
+          self.handlers.find do |name|
             begin
               return Rack::Handler.get(name)
             rescue Gem::LoadError => e
@@ -137,10 +151,12 @@ module Ronin
             end
           }
 
+          handler = self.handler_class
+
           if options[:background]
-            Thread.new(self.handler_class,self,rack_options,&runner)
+            Thread.new(handler,self,rack_options,&runner)
           else
-            runner.call(self.handler_class,self,rack_options)
+            runner.call(handler,self,rack_options)
           end
 
           return self
