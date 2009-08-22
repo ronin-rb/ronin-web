@@ -235,6 +235,8 @@ module Ronin
     # @example Get a new agent, with a custom User-Agent string.
     #   Web.agent(:user_agent => 'wooden pants')
     #
+    # @see http://mechanize.rubyforge.org/mechanize/WWW/Mechanize.html
+    #
     def Web.agent(options={},&block)
       agent = WWW::Mechanize.new
 
@@ -273,6 +275,8 @@ module Ronin
     #       puts title.inner_text
     #     end
     #   end
+    #
+    # @see http://mechanize.rubyforge.org/mechanize/WWW/Mechanize/Page.html
     #
     def Web.get(url,options={},&block)
       page = Web.agent(options).get(url)
