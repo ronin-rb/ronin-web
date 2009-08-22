@@ -21,7 +21,6 @@
 #++
 #
 
-require 'ronin/web/server'
 require 'ronin/network/http'
 
 require 'uri/http'
@@ -338,22 +337,6 @@ module Ronin
 
       block.call(body) if block
       return body
-    end
-
-    #
-    # Returns a persisant web server.
-    #
-    # _options_ may contain the following keys:
-    # <tt>:host</tt>:: The host to bind to.
-    # <tt>:port</tt>:: The port to listen on.
-    # <tt>:handler</tt>:: The handler to run the server under.
-    #
-    def Web.server(options={})
-      unless options.empty?
-        @@ronin_web_server = Server.new(options)
-      else
-        @@ronin_web_server ||= Server.new(options)
-      end
     end
   end
 end
