@@ -42,8 +42,8 @@ module Ronin
             end
 
             #
-            # Hosts the contents of the specified _directory_ at the specified
-            # _http_path_.
+            # Hosts the contents of the specified _directory_ at the
+            # specified _http_path_.
             #
             #   MyApp.directory '/download/', '/tmp/files/'
             #
