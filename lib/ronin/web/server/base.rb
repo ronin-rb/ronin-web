@@ -169,6 +169,7 @@ module Ronin
         #
         # Binds the given _block_ to any request for the specified _path_.
         #
+        # @example
         #   any '/submit' do
         #     puts request.inspect
         #   end
@@ -183,6 +184,7 @@ module Ronin
         #
         # Sets the default block to the given _block_.
         #
+        # @example
         #   default do
         #     status 200
         #     content_type :html
@@ -205,6 +207,7 @@ module Ronin
         # Maps all requests to the specified _http_path_ to the
         # specified _server_.
         #
+        # @example
         #   MyApp.map '/subapp/', SubApp
         #
         def self.map(http_path,server)
@@ -224,6 +227,7 @@ module Ronin
         #
         # Hosts the static contents within the specified _directory_.
         #
+        # @example
         #   MyApp.public_dir 'path/to/another/public'
         #
         def self.public_dir(directory)

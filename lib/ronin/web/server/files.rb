@@ -31,6 +31,7 @@ module Ronin
             # Hosts the contents of the specified _path_ at the specified
             # _http_path_.
             #
+            # @example
             #   MyApp.file '/robots.txt', '/path/to/my_robots.txt'
             #
             def self.file(http_path,path,custom_content_type=nil)
@@ -45,6 +46,7 @@ module Ronin
             # Hosts the contents of the specified _directory_ at the
             # specified _http_path_.
             #
+            # @example
             #   MyApp.directory '/download/', '/tmp/files/'
             #
             def self.directory(http_path,directory,custom_content_type=nil)

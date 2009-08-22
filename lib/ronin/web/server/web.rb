@@ -28,6 +28,7 @@ module Ronin
     # the server will be started in the background with the given
     # _options_.
     #
+    # @example
     #   Web.server do
     #     get '/hello' do
     #       'world'

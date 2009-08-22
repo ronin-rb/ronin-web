@@ -42,6 +42,7 @@ module Ronin
     #
     # Creates a new Nokogiri::HTML::Builder with the given _block_.
     #
+    # @example
     #   Web.build_html do
     #     body {
     #       div(:style => 'display:none;') {
@@ -68,6 +69,7 @@ module Ronin
     #
     # Creates a new Nokogiri::XML::Builder with the given _block_.
     #
+    # @example
     #  Web.build_xml do
     #    post(:id => 2) {
     #      title { text("some example) }
@@ -173,11 +175,14 @@ module Ronin
     #                           of each fragment, once received from the
     #                           server.
     #
+    # @example Open the _url_.
     #   Web.open('http://www.hackety.org/')
     #
+    # @example Open the _url_, using a custom User-Agent alias.
     #   Web.open('http://tenderlovemaking.com/',
     #     :user_agent_alias => 'Linux Mozilla')
     #
+    # @example Open the _url_, using a custom User-Agent string.
     #   Web.open('http://www.wired.com/', :user_agent => 'the future')
     #
     def Web.open(url,options={})
@@ -214,15 +219,20 @@ module Ronin
     end
 
     #
-    # Creates a new Mechanize agent with the given _options_.
+    # Creates a new Mechanize Agent with the given _options_.
     #
     # _options_ may contain the following keys:
     # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
     # <tt>:user_agent</tt>:: The User-Agent string to use.
     # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
     #
+    # @example Get a new agent.
     #   Web.agent
+    #
+    # @example Get a new agent, with a custom User-Agent alias.
     #   Web.agent(:user_agent_alias => 'Linux Mozilla')
+    #
+    # @example Get a new agent, with a custom User-Agent string.
     #   Web.agent(:user_agent => 'wooden pants')
     #
     def Web.agent(options={},&block)
@@ -246,16 +256,18 @@ module Ronin
     end
 
     #
-    # Gets the specified _url_ with the given _options_. If a _block_ is
-    # given, it will be passed the retrieved page.
+    # Gets the Mechanize Page specified _url_ with the given _options_.
+    # If a _block_ is given, it will be passed the retrieved page.
     #
     # _options_ may contain the following keys:
     # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
     # <tt>:user_agent</tt>:: The User-Agent string to use.
     # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
     #
+    # @example Get the page at the _url_.
     #   Web.get('http://www.0x000000.com') # => WWW::Mechanize::Page
     #
+    # @example Pass the page at the _url_ to the given _block_.
     #   Web.get('http://www.rubyinside.com') do |page|
     #     page.search('div.post/h2/a').each do |title|
     #       puts title.inner_text
@@ -270,17 +282,19 @@ module Ronin
     end
 
     #
-    # Gets the specified _url_ with the given _options_, returning the body
-    # of the requested page. If a _block_ is given, it will be passed the
-    # body of the retrieved page.
+    # Gets the body of the specified _url_ with the given _options_.
+    # If a _block_ is given, it will be passed the body of the retrieved
+    # page.
     #
     # _options_ may contain the following keys:
     # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
     # <tt>:user_agent</tt>:: The User-Agent string to use.
     # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
     #
+    # @example Get the body of the page at the _url_.
     #   Web.get_body('http://www.rubyinside.com') # => String
     #
+    # @example Pass the body of the page at the _url_ to the given _block_.
     #   Web.get_body('http://www.rubyinside.com') do |body|
     #     puts body
     #   end
@@ -302,6 +316,7 @@ module Ronin
     # <tt>:user_agent</tt>:: The User-Agent string to use.
     # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
     #
+    # @example
     #   Web.post('http://www.rubyinside.com') # => WWW::Mechanize::Page
     #
     def Web.post(url,options={},&block)
@@ -324,8 +339,10 @@ module Ronin
     # <tt>:user_agent</tt>:: The User-Agent string to use.
     # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
     #
+    # @example
     #   Web.post_body('http://www.rubyinside.com') # => String
     #
+    # @example
     #   Web.post_body('http://www.rubyinside.com') do |body|
     #     puts body
     #   end

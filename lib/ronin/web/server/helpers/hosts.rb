@@ -28,6 +28,7 @@ module Ronin
           # Calls the given _block_ if the host field fo the request
           # matches the specified _name_or_pattern_.
           #
+          # @example
           #   downloads = 0
           #
           #   get '/file' do

@@ -31,6 +31,7 @@ module Ronin
             # Registers the specified _server_ to be called when receiving
             # requests for the specified host _name_.
             #
+            # @example
             #   MyApp.host 'cdn.evil.com', EvilServer
             #
             def self.host(name,server)
@@ -47,6 +48,7 @@ module Ronin
             # Registers the given _server_ to be called when receiving
             # requests to host names which match the specified _pattern_.
             #
+            # @example
             #   MyApp.hosts_like /^a[0-9]\./, FileProxy
             #
             def self.hosts_like(pattern,server)

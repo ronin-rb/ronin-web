@@ -31,6 +31,7 @@ module Ronin
           # Sets the content_type based on the extension of the specified
           # _path_.
           #
+          # @example
           #   content_type_for 'file.html'
           #
           def content_type_for(path)
@@ -62,8 +63,10 @@ module Ronin
           # Sets the content_type using the extension of the specified
           # _path_ and returns a File object.
           #
+          # @example
           #   return_file 'lol.jpg'
           #
+          # @example
           #   return_file '/tmp/file', :html
           #
           def return_file(path,custom_content_type=nil)
