@@ -110,6 +110,8 @@ module Ronin
         # be found, Rack::Handler::Mongrel or Rack::Handler::WEBrick will
         # be returned instead.
         #
+        # @raise [StandardError] None of the handlers could be loaded.
+        #
         def self.handler_class
           self.handlers.find do |name|
             begin
