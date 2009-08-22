@@ -190,7 +190,7 @@ module Ronin
         #     %{
         #     <html>
         #       <body>
-        #         <center><h1>YOU LOOSE THE GAME</h1></center>
+        #         <center><h1>YOU LOSE THE GAME</h1></center>
         #       </body>
         #     </html>
         #     }
