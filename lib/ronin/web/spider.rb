@@ -54,6 +54,8 @@ module Ronin
       # <tt>:ignore_exts</tt>:: An +Array+ of File extension patterns to not
       #                         visit.
       #
+      # @see http://spidr.rubyforge.org/docs/classes/Spidr/Agent.html
+      #
       def initialize(options={},&block)
         options = {
           :proxy => Web.proxy,
