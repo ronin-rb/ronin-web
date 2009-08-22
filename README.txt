@@ -151,6 +151,8 @@ of Ronin.
 
 * Serve files via a Web Server:
 
+    require 'ronin/web/server'
+
     Web.server do
       file '/opensearch.xml', '/tmp/test.xml'
       directory '/download/', '/tmp/download/'
