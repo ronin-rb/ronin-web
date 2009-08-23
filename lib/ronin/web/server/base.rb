@@ -48,7 +48,7 @@ module Ronin
         DEFAULT_HOST = '0.0.0.0'
 
         # Default port to run the Web Server on
-        DEFAULT_PORT = 8080
+        DEFAULT_PORT = 8000
 
         # Default list of index file-names to search for in directories
         DEFAULT_INDICES = ['index.html', 'index.htm']
