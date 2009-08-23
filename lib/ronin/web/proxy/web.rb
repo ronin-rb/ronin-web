@@ -19,6 +19,24 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/web/proxy/base'
 require 'ronin/web/proxy/app'
-require 'ronin/web/proxy/web'
+
+module Ronin
+  module Web
+    #
+    # Returns the Ronin Web Proxy. When called for the first time
+    # the proxy will be started in the background with the given
+    # _options_.
+    #
+    def Web.proxy(options={},&block)
+      unless class_variable_defined?('@@ronin_web_proxy')
+        @@ronin_web_proxy = Proxy::App
+        @@ronin_web_proxy.run!(options.merge(:background => true))
+      end
+
+      @@ronin_web_proxy.class_eval(&block)
+
+      return @@ronin_web_proxy
+    end
+  end
+end

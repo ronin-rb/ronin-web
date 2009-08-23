@@ -20,5 +20,12 @@
 #
 
 require 'ronin/web/proxy/base'
-require 'ronin/web/proxy/app'
-require 'ronin/web/proxy/web'
+
+module Ronin
+  module Web
+    module Proxy
+      class App < Base
+      end
+    end
+  end
+end

@@ -26,6 +26,8 @@ lib/ronin/web/server/app.rb
 lib/ronin/web/server/web.rb
 lib/ronin/web/proxy.rb
 lib/ronin/web/proxy/base.rb
+lib/ronin/web/proxy/app.rb
+lib/ronin/web/proxy/web.rb
 lib/ronin/web/spider.rb
 lib/ronin/web/web.rb
 lib/ronin/web/version.rb
