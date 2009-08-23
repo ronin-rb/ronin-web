@@ -26,7 +26,7 @@ module Ronin
     module Proxy
       class Base < Server::Base
 
-        any '/*' do
+        default do
           proxy
         end
 
