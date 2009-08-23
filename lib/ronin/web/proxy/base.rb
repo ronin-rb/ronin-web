@@ -26,6 +26,11 @@ module Ronin
     module Proxy
       class Base < Server::Base
 
+        # The default port to run the Web Proxy on
+        DEFAULT_PORT = 8080
+
+        set :port, DEFAULT_PORT
+
         default do
           proxy
         end
