@@ -23,6 +23,7 @@ require 'ronin/web/extensions'
 require 'ronin/web/web'
 require 'ronin/web/spider'
 require 'ronin/web/server'
+require 'ronin/web/proxy'
 require 'ronin/web/version'
 require 'ronin/config'
 
