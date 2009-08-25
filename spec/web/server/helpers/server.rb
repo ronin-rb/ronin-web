@@ -3,7 +3,7 @@ begin
 rescue Gem::LoadError => e
   raise(e)
 rescue ::LoadError
-  STDERR.puts "please install the test-unit gem in order to run the spec tests"
+  STDERR.puts "Error: please install the test-unit gem in order to run the spec tests"
   exit -1
 end
 
@@ -12,7 +12,7 @@ begin
 rescue Gem::LoadError => e
   raise(e)
 rescue ::LoadError
-  STDERR.puts "please install the rack-test gem in order to run the spec tests"
+  STDERR.puts "Error: please install the rack-test gem in order to run the spec tests"
   exit -1
 end
 
