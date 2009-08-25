@@ -16,7 +16,9 @@ Hoe.spec('ronin-web') do
     ['sinatra', '>=0.9.2'],
     ['ronin', '>=0.2.4']
   ]
+
   self.extra_dev_deps = [
+    ['test-unit', '=1.2.3'],
     ['rack-test', '>=0.4.1']
   ]
 
