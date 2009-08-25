@@ -16,6 +16,10 @@ Hoe.spec('ronin-web') do
     ['sinatra', '>=0.9.2'],
     ['ronin', '>=0.2.4']
   ]
+  self.extra_dev_deps = [
+    ['rack-test', '>=0.4.1']
+  ]
+
   self.spec_extras = {:has_rdoc => 'yard'}
 end
 
