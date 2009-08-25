@@ -2,9 +2,7 @@ require 'spec/interop/test'
 
 begin
   require 'rack/test'
-rescue Gem::LoadError => e
-  raise(e)
-rescue ::LoadError
+rescue LoadError
   STDERR.puts "please `gem install rack-test` in order to run the spec tests"
   exit -1
 end
