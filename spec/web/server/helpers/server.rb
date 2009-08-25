@@ -3,7 +3,7 @@ require 'spec/interop/test'
 begin
   require 'rack/test'
 rescue LoadError
-  STDERR.puts "please `gem install rack-test` in order to run the spec tests"
+  STDERR.puts "please install the rack-test gem in order to run the spec tests"
   exit -1
 end
 
