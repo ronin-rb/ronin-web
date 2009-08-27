@@ -20,7 +20,7 @@
 #
 
 require 'ronin/web/web'
-require 'ronin/ui/diagnostics'
+require 'ronin/ui/output/helpers'
 
 require 'spidr/agent'
 
@@ -28,7 +28,7 @@ module Ronin
   module Web
     class Spider < Spidr::Agent
 
-      include UI::Diagnostics
+      include UI::Output::Helpers
 
       #
       # Creates a new Spider object with the given _options_ and
