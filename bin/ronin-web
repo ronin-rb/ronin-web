@@ -11,4 +11,4 @@ require 'ronin/ui/command_line/commands/console'
 require 'ronin/ui/console'
 
 Ronin::UI::Console.auto_load << 'ronin/web'
-Ronin::UI::CommandLine::Commands::Console.run(*ARGV)
+Ronin::UI::CommandLine::Commands::Console.start
