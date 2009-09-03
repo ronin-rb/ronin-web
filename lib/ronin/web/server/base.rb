@@ -25,6 +25,7 @@ require 'ronin/web/server/files'
 require 'ronin/web/server/hosts'
 require 'ronin/static/finders'
 require 'ronin/templates/erb'
+require 'ronin/ui/output'
 require 'ronin/extensions/meta'
 
 require 'set'
@@ -40,6 +41,7 @@ module Ronin
         include Static::Finders
         include Rack::Utils
         include Templates::Erb
+        extend UI::Output
 
         include Files
         include Hosts
@@ -145,6 +147,9 @@ module Ronin
           }
 
           runner = lambda { |handler,server,options|
+            print_info "Starting Web Server on #{options[:Host]}:#{options[:Port]}"
+            print_debug "Using Web Server handler #{handler}"
+
             handler.run(server,options) do |server|
               trap(:INT) do
                 ## Use thins' hard #stop! if available, otherwise just #stop
