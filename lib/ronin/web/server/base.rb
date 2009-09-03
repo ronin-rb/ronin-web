@@ -152,7 +152,8 @@ module Ronin
 
             handler.run(server,options) do |server|
               trap(:INT) do
-                ## Use thins' hard #stop! if available, otherwise just #stop
+                # Use thins' hard #stop! if available,
+                # otherwise just #stop
                 server.respond_to?(:stop!) ? server.stop! : server.stop
               end
 
