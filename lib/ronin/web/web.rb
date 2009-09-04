@@ -106,33 +106,14 @@ module Ronin
     end
 
     #
-    # Returns the default Ronin Web proxy port.
-    #
-    def Web.default_proxy_port
-      Network::HTTP.default_proxy_port
-    end
-
-    #
-    # Sets the default Ronin Web proxy port to the specified _port_.
-    #
-    def Web.default_proxy_port=(port)
-      Network::HTTP.default_proxy_port = port
-    end
-
-    #
     # Proxy information for Ronin::Web to use.
     #
     # @return [Network::HTTP::Proxy] The Ronin Web proxy information.
     #
+    # @see Ronin::Network::HTTP.proxy
+    #
     def Web.proxy
       Network::HTTP.proxy
-    end
-
-    #
-    # Resets the Web proxy settings.
-    #
-    def Web.disable_proxy
-      Network::HTTP.disable_proxy
     end
 
     #
@@ -143,20 +124,7 @@ module Ronin
     # @return [URI::HTTP] The HTTP URI that represents the proxy.
     #
     def Web.proxy_url(proxy_info=Web.proxy)
-      if Web.proxy[:host]
-        userinfo = nil
-
-        if (Web.proxy[:user] || Web.proxy[:password])
-          userinfo = "#{Web.proxy[:user]}:#{Web.proxy[:password]}"
-        end
-
-        return URI::HTTP.build(
-          :host => Web.proxy[:host],
-          :port => Web.proxy[:port],
-          :userinfo => userinfo,
-          :path => '/'
-        )
-      end
+      Network::HTTP::Proxy.new(proxy_info).url
     end
 
     #
