@@ -29,8 +29,16 @@ require 'open-uri'
 module Ronin
   module Web
     #
-    # Returns a Nokogiri::HTML::Document object for the specified _body_
-    # of html.
+    # Parses the body of a document into a HTML document object.
+    #
+    # @param [String, IO] body The body of the document to parse.
+    #
+    # @yield [doc] If a block is given, it will be passed the newly
+    #              created document object.
+    # @yieldparam [Nokogiri::HTML::Document] doc The new HTML document
+    #                                            object.
+    #
+    # @return [Nokogiri::HTML::Document] The new HTML document object.
     #
     def Web.html(body,&block)
       doc = Nokogiri::HTML(body)
@@ -40,7 +48,11 @@ module Ronin
     end
 
     #
-    # Creates a new Nokogiri::HTML::Builder with the given _block_.
+    # Creates a new Nokogiri::HTML::Builder.
+    #
+    # @yield [] The block that will be used to construct the HTML document.
+    #
+    # @return [Nokogiri::HTML::Builder] The new HTML builder object.
     #
     # @example
     #   Web.build_html do
@@ -56,8 +68,16 @@ module Ronin
     end
 
     #
-    # Returns a Nokogiri::XML::Document object for the specified _body_
-    # of xml and the given _block_.
+    # Parses the body of a document into a XML document object.
+    #
+    # @param [String, IO] body The body of the document to parse.
+    #
+    # @yield [doc] If a block is given, it will be passed the newly
+    #              created document object.
+    # @yieldparam [Nokogiri::XML::Document] doc The new XML document
+    #                                           object.
+    #
+    # @return [Nokogiri::XML::Document] The new XML document object.
     #
     def Web.xml(body,&block)
       doc = Nokogiri::XML(body)
@@ -67,7 +87,11 @@ module Ronin
     end
 
     #
-    # Creates a new Nokogiri::XML::Builder with the given _block_.
+    # Creates a new Nokogiri::XML::Builder.
+    #
+    # @yield [] The block that will be used to construct the XML document.
+    #
+    # @return [Nokogiri::XML::Builder] The new XML builder object.
     #
     # @example
     #  Web.build_xml do
@@ -96,7 +120,9 @@ module Ronin
     end
 
     #
-    # Returns the +Hash+ of the Ronin Web proxy information.
+    # Proxy information for Ronin::Web to use.
+    #
+    # @return [Network::HTTP::Proxy] The Ronin Web proxy information.
     #
     def Web.proxy
       Network::HTTP.proxy
@@ -110,8 +136,11 @@ module Ronin
     end
 
     #
-    # Creates a HTTP URI based from the given _proxy_info_ hash. The
-    # _proxy_info_ hash defaults to Web.proxy, if not given.
+    # Creates a HTTP URI based on a Hash of proxy information.
+    #
+    # @param [Network::HTTP::Proxy, Hash] proxy_info The proxy information.
+    #
+    # @return [URI::HTTP] The HTTP URI that represents the proxy.
     #
     def Web.proxy_url(proxy_info=Web.proxy)
       if Web.proxy[:host]
@@ -131,58 +160,71 @@ module Ronin
     end
 
     #
-    # Returns the supported Web User-Agent Aliases.
+    # @return [Array] The supported Web User-Agent Aliases.
     #
     def Web.user_agent_aliases
       WWW::Mechanize::AGENT_ALIASES
     end
 
     #
-    # Returns the Ronin Web User-Agent
+    # @return [String, nil] The Ronin Web User-Agent
     #
     def Web.user_agent
       Network::HTTP.user_agent
     end
 
     #
-    # Sets the Ronin Web User-Agent to the specified _new_agent_.
+    # Sets the Ronin Web User-Agent.
+    #
+    # @param [String] new_agent The User-Agent string to use.
+    #
+    # @return [String] The new User-Agent string.
     #
     def Web.user_agent=(new_agent)
       Network::HTTP.user_agent = new_agent
     end
 
     #
-    # Sets the Ronin Web User-Agent to the specified user agent alias
-    # _name_.
+    # Sets the Ronin Web User-Agent.
+    #
+    # @param [String] name The User-Agent alias to use.
+    #
+    # @return [String] The new User-Agent string.
     #
     def Web.user_agent_alias=(name)
       Network::HTTP.user_agent = Web.user_agent_aliases[name.to_s]
     end
 
     #
-    # Opens the _url_ with the given _options_. The contents of the _url_
-    # will be returned.
+    # Opens a URL as a temporary file.
     #
-    # _options_ may contain the following keys:
-    # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
-    # <tt>:user_agent</tt>:: The User-Agent string to use.
-    # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
-    # <tt>:user</tt>:: The HTTP Basic Authentication user name.
-    # <tt>:password</tt>:: The HTTP Basic Authentication password.
-    # <tt>:content_length_proc</tt>:: A callback which will be passed the
-    #                                 content-length of the HTTP response.
-    # <tt>:progress_proc</tt>:: A callback which will be passed the size
-    #                           of each fragment, once received from the
-    #                           server.
+    # @param [Hash] options Additional options.
+    # @option options [String] :user_agent_alias The User-Agent Alias to
+    #                                            use.
+    # @option options [String] :user_agent The User-Agent string to use.
+    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    #                                                     Proxy information.
+    # @option options [String] :user The HTTP Basic Authentication
+    #                                user name.
+    # @option options [String] :password The HTTP Basic Authentication
+    #                                    password.
+    # @option options [Proc] :content_length_proc A callback which will be
+    #                                             passed the content-length
+    #                                             of the HTTP response.
+    # @option options [Proc] :progress_proc A callback which will be passed
+    #                                       the size of each fragment, once
+    #                                       received from the server.
     #
-    # @example Open the _url_.
+    # @return [File] The contents of the URL.
+    #
+    # @example Open a given URL.
     #   Web.open('http://www.hackety.org/')
     #
-    # @example Open the _url_, using a custom User-Agent alias.
+    # @example Open a given URL, using a custom User-Agent alias.
     #   Web.open('http://tenderlovemaking.com/',
     #     :user_agent_alias => 'Linux Mozilla')
     #
-    # @example Open the _url_, using a custom User-Agent string.
+    # @example Open a given URL, using a custom User-Agent string.
     #   Web.open('http://www.wired.com/', :user_agent => 'the future')
     #
     def Web.open(url,options={})
@@ -219,20 +261,28 @@ module Ronin
     end
 
     #
-    # Creates a new Mechanize Agent with the given _options_.
+    # Creates a new Mechanize Agent.
     #
-    # _options_ may contain the following keys:
-    # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
-    # <tt>:user_agent</tt>:: The User-Agent string to use.
-    # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
+    # @param [Hash] options Additional options.
+    # @option options [String] :user_agent_alias The User-Agent Alias
+    #                                            to use.
+    # @option options [String] :user_agent The User-Agent string to use.
+    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    #                                                     Proxy information.
     #
-    # @example Get a new agent.
+    # @yield [agent] If a block is given, it will be passed the newly
+    #                created Mechanize agent.
+    # @yieldparam [WWW::Mechanize] agent The new Mechanize agent.
+    #
+    # @return [WWW::Mechanize] The new Mechanize agent.
+    #
+    # @example Create a new agent.
     #   Web.agent
     #
-    # @example Get a new agent, with a custom User-Agent alias.
+    # @example Create a new agent, with a custom User-Agent alias.
     #   Web.agent(:user_agent_alias => 'Linux Mozilla')
     #
-    # @example Get a new agent, with a custom User-Agent string.
+    # @example Create a new agent, with a custom User-Agent string.
     #   Web.agent(:user_agent => 'wooden pants')
     #
     # @see http://mechanize.rubyforge.org/mechanize/WWW/Mechanize.html
@@ -258,18 +308,27 @@ module Ronin
     end
 
     #
-    # Gets the Mechanize Page specified _url_ with the given _options_.
-    # If a _block_ is given, it will be passed the retrieved page.
+    # Creates a Mechanize Page for the contents at a given URL.
     #
-    # _options_ may contain the following keys:
-    # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
-    # <tt>:user_agent</tt>:: The User-Agent string to use.
-    # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
+    # @param [URI::Generic, String] url The URL to request.
+    # @param [Hash] options Additional options.
+    # @option options [String] :user_agent_alias The User-Agent Alias
+    #                                            to use.
+    # @option options [String] :user_agent The User-Agent string to use.
+    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    #                                                     Proxy information.
     #
-    # @example Get the page at the _url_.
-    #   Web.get('http://www.0x000000.com') # => WWW::Mechanize::Page
+    # @yield [page] If a block is given, it will be passed the page
+    #               for the requested URL.
+    # @yieldparam [WWW::Mechanize::Page] page The requested page.
     #
-    # @example Pass the page at the _url_ to the given _block_.
+    # @return [WWW::Mechanize::Page] The requested page.
+    #
+    # @example
+    #   Web.get('http://www.0x000000.com')
+    #   # => WWW::Mechanize::Page
+    #
+    # @example
     #   Web.get('http://www.rubyinside.com') do |page|
     #     page.search('div.post/h2/a').each do |title|
     #       puts title.inner_text
@@ -286,19 +345,27 @@ module Ronin
     end
 
     #
-    # Gets the body of the specified _url_ with the given _options_.
-    # If a _block_ is given, it will be passed the body of the retrieved
-    # page.
+    # Requests the body of the Mechanize Page created from the response
+    # of the given URL.
     #
-    # _options_ may contain the following keys:
-    # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
-    # <tt>:user_agent</tt>:: The User-Agent string to use.
-    # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
+    # @param [URI::Generic, String] url The URL to request.
+    # @param [Hash] options Additional options.
+    # @option options [String] :user_agent_alias The User-Agent Alias
+    #                                            to use.
+    # @option options [String] :user_agent The User-Agent string to use.
+    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    #                                                     Proxy information.
     #
-    # @example Get the body of the page at the _url_.
+    # @yield [body] If a block is given, it will be passed the body
+    #               of the page.
+    # @yieldparam [String] body The requested body of the page.
+    #
+    # @return [String] The requested body of the page.
+    #
+    # @example
     #   Web.get_body('http://www.rubyinside.com') # => String
     #
-    # @example Pass the body of the page at the _url_ to the given _block_.
+    # @example
     #   Web.get_body('http://www.rubyinside.com') do |body|
     #     puts body
     #   end
@@ -311,17 +378,27 @@ module Ronin
     end
 
     #
-    # Posts the specified _url_ with the given _options_. If a _block_ is
-    # given, it will be passed the posted page.
+    # Posts to a given URL and creates a Mechanize Page from the response.
     #
-    # _options_ may contain the following keys:
-    # <tt>:query</tt>:: The query parameters to post to the specified _url_.
-    # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
-    # <tt>:user_agent</tt>:: The User-Agent string to use.
-    # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
+    # @param [URI::Generic, String] url The URL to request.
+    # @param [Hash] options Additional options.
+    # @option options [Hash] :query Additional query parameters to
+    #                               post with.
+    # @option options [String] :user_agent_alias The User-Agent Alias
+    #                                            to use.
+    # @option options [String] :user_agent The User-Agent string to use.
+    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    #                                                     Proxy information.
+    #
+    # @yield [page] If a block is given, it will be passed the page
+    #               for the requested URL.
+    # @yieldparam [WWW::Mechanize::Page] page The requested page.
+    #
+    # @return [WWW::Mechanize::Page] The requested page.
     #
     # @example
-    #   Web.post('http://www.rubyinside.com') # => WWW::Mechanize::Page
+    #   Web.post('http://www.rubyinside.com')
+    #   # => WWW::Mechanize::Page
     #
     def Web.post(url,options={},&block)
       query = {}
@@ -334,17 +411,29 @@ module Ronin
     end
 
     #
-    # Poststhe specified _url_ with the given _options_, returning the body
-    # of the posted page. If a _block_ is given, it will be passed the
-    # body of the posted page.
+    # Posts to a given URL and returns the body of the Mechanize Page
+    # created from the response.
     #
-    # _options_ may contain the following keys:
-    # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
-    # <tt>:user_agent</tt>:: The User-Agent string to use.
-    # <tt>:proxy</tt>:: A +Hash+ of the proxy information to use.
+    # @param [URI::Generic, String] url The URL to request.
+    # @param [Hash] options Additional options.
+    # @option options [Hash] :query Additional query parameters to
+    #                               post with.
+    # @option options [String] :user_agent_alias The User-Agent Alias
+    #                                            to use.
+    # @option options [String] :user_agent The User-Agent string to use.
+    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    #                                                     Proxy information.
+    #
+    # @yield [body] If a block is given, it will be passed the body of
+    #               the page.
+    # @yieldparam [WWW::Mechanize::Page] page The body of the requested
+    #                                         page.
+    #
+    # @return [WWW::Mechanize::Page] The body of the requested page.
     #
     # @example
-    #   Web.post_body('http://www.rubyinside.com') # => String
+    #   Web.post_body('http://www.rubyinside.com')
+    #   # => String
     #
     # @example
     #   Web.post_body('http://www.rubyinside.com') do |body|
