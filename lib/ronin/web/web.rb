@@ -121,7 +121,9 @@ module Ronin
     #
     # @param [Network::HTTP::Proxy, Hash] proxy_info The proxy information.
     #
-    # @return [URI::HTTP] The HTTP URI that represents the proxy.
+    # @return [URI::HTTP, nil] The HTTP URI that represents the proxy.
+    #                          If the proxy is diabled, +nil+ will be
+    #                          returned.
     #
     def Web.proxy_url(proxy_info=Web.proxy)
       Network::HTTP::Proxy.new(proxy_info).url
