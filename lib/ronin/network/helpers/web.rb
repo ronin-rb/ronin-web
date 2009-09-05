@@ -154,6 +154,8 @@ module Ronin
         # @param [URI::Generic, String] url The URL to post to.
         # @param [Hash] options Additional options to initialize the
         #                       agent with.
+        # @option options [Hash] :query Additional query parameters to
+        #                               post with.
         # @option options [Hash] :proxy (web_proxy) Proxy information.
         # @option options [String] :user_agent (+@web_user_agent+)
         #                                      User-Agent string to use.
