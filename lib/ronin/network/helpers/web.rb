@@ -110,10 +110,12 @@ module Ronin
         # @return [String] The requested body of the page.
         #
         def web_get_body(url,options={},&block)
-          body = web_agent(options).get(url).body
+          web_get(url,options) do |page|
+            body = page.body
 
-          block.call(body) if block
-          return body
+            block.call(body) if block
+            return body
+          end
         end
 
         #
@@ -164,10 +166,12 @@ module Ronin
         # @return [String] The requested body of the page.
         #
         def web_post_body(url,options={},&block)
-          body = web_agent(options).post(url).body
+          web_post(url,options) do |page|
+            body = page.body
 
-          block.call(body) if block
-          return body
+            block.call(body) if block
+            return body
+          end
         end
       end
     end
