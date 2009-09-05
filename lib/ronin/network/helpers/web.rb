@@ -31,10 +31,14 @@ module Ronin
         protected
 
         def web_agent(options={},&block)
-          options[:proxy] ||= @web_proxy
-          options[:user_agent] ||= @web_user_agent
+          unless @web_agent
+            options[:proxy] ||= @web_proxy
+            options[:user_agent] ||= @web_user_agent
 
-          return Ronin::Web.agent(options,&block)
+            @web_agent = Ronin::Web.agent(options,&block)
+          end
+
+          return @web_agent
         end
 
         def web_get(uri,options={},&block)
