@@ -3,7 +3,6 @@ Manifest.txt
 README.txt
 Rakefile
 bin/ronin-web
-lib/ronin/sessions/web.rb
 lib/ronin/web.rb
 lib/ronin/web/extensions.rb
 lib/ronin/web/extensions/nokogiri.rb
@@ -33,6 +32,7 @@ lib/ronin/web/proxy/web.rb
 lib/ronin/web/spider.rb
 lib/ronin/web/web.rb
 lib/ronin/web/version.rb
+lib/ronin/network/helpers/web.rb
 tasks/spec.rb
 tasks/yard.rb
 spec/spec_helper.rb
