@@ -72,7 +72,7 @@ module Ronin
         #
         # Creates a Mechanize Page for the contents at a given URL.
         #
-        # @param [URI::Generic, String] uri The URL to request.
+        # @param [URI::Generic, String] url The URL to request.
         # @param [Hash] options Additional options to initialize the
         #                       agent with.
         # @option options [Hash] :proxy (web_proxy) Proxy information.
@@ -85,8 +85,8 @@ module Ronin
         #
         # @return [WWW::Mechanize::Page] The requested page.
         #
-        def web_get(uri,options={},&block)
-          page = web_agent(options).get(uri)
+        def web_get(url,options={},&block)
+          page = web_agent(options).get(url)
 
           block.call(page) if block
           return page
@@ -96,7 +96,7 @@ module Ronin
         # Requests the body of the Mechanize Page created from the response
         # of the given URL.
         #
-        # @param [URI::Generic, String] uri The URL to request.
+        # @param [URI::Generic, String] url The URL to request.
         # @param [Hash] options Additional options to initialize the
         #                       agent with.
         # @option options [Hash] :proxy (web_proxy) Proxy information.
@@ -109,8 +109,8 @@ module Ronin
         #
         # @return [String] The requested body of the page.
         #
-        def web_get_body(uri,options={},&block)
-          body = web_agent(options).get(uri).body
+        def web_get_body(url,options={},&block)
+          body = web_agent(options).get(url).body
 
           block.call(body) if block
           return body
@@ -120,7 +120,7 @@ module Ronin
         # Posts to a given URL and creates a Mechanize Page from the
         # response.
         #
-        # @param [URI::Generic, String] uri The URL to post to.
+        # @param [URI::Generic, String] url The URL to post to.
         # @param [Hash] options Additional options to initialize the
         #                       agent with.
         # @option options [Hash] :proxy (web_proxy) Proxy information.
@@ -133,8 +133,8 @@ module Ronin
         #
         # @return [WWW::Mechanize::Page] The requested page.
         #
-        def web_post(uri,options={},&block)
-          page = web_agent(options).post(uri)
+        def web_post(url,options={},&block)
+          page = web_agent(options).post(url)
 
           block.call(page) if block
           return page
@@ -144,7 +144,7 @@ module Ronin
         # Posts to a given URL and returns the body of the Mechanize Page
         # created from the response.
         #
-        # @param [URI::Generic, String] uri The URL to post to.
+        # @param [URI::Generic, String] url The URL to post to.
         # @param [Hash] options Additional options to initialize the
         #                       agent with.
         # @option options [Hash] :proxy (web_proxy) Proxy information.
@@ -158,8 +158,8 @@ module Ronin
         #
         # @return [String] The requested body of the page.
         #
-        def web_post_body(uri,options={},&block)
-          body = web_agent(options).post(uri).body
+        def web_post_body(url,options={},&block)
+          body = web_agent(options).post(url).body
 
           block.call(body) if block
           return body
