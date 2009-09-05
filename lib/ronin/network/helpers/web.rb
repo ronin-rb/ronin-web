@@ -20,6 +20,7 @@
 #
 
 require 'ronin/network/helpers/helper'
+require 'ronin/network/http/proxy'
 require 'ronin/web/web'
 
 module Ronin
@@ -30,9 +31,18 @@ module Ronin
 
         protected
 
+        def web_proxy
+          HTTP::Proxy.new(
+            :host => @web_proxy_host,
+            :port => @web_proxy_port,
+            :user => @web_proxy_user,
+            :password => @web_proxy_password
+          )
+        end
+
         def web_agent(options={},&block)
           unless @web_agent
-            options[:proxy] ||= @web_proxy
+            options[:proxy] ||= web_proxy
             options[:user_agent] ||= @web_user_agent
 
             @web_agent = Ronin::Web.agent(options,&block)
