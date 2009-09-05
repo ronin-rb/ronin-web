@@ -123,6 +123,8 @@ module Ronin
         # @param [URI::Generic, String] url The URL to post to.
         # @param [Hash] options Additional options to initialize the
         #                       agent with.
+        # @option options [Hash] :query Additional query parameters to
+        #                               post with.
         # @option options [Hash] :proxy (web_proxy) Proxy information.
         # @option options [String] :user_agent (+@web_user_agent+)
         #                                      User-Agent string to use.
@@ -134,6 +136,9 @@ module Ronin
         # @return [WWW::Mechanize::Page] The requested page.
         #
         def web_post(url,options={},&block)
+          query = {}
+          query.merge!(options[:query]) if options[:query]
+
           page = web_agent(options).post(url)
 
           block.call(page) if block
