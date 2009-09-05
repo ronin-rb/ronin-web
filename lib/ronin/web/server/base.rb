@@ -62,39 +62,57 @@ module Ronin
         set :port, DEFAULT_PORT
 
         #
-        # Returns the name of the Rack Handler to run all servers under
-        # by default.
+        # The default Rack Handler to run all web servers with.
+        #
+        # @return [String] The class name of the Rack Handler to use.
+        #
+        # @since 0.2.0
         #
         def Base.handler
           @@ronin_web_server_handler ||= nil
         end
 
         #
-        # Sets the handler, which all servers will be ran under by default,
-        # to the specified _name_.
+        # Sets the default Rack Handler to run all web servers with.
+        #
+        # @param [String] name The name of the handler.
+        # @return [String] The name of the new handler.
+        #
+        # @since 0.2.0
         #
         def Base.handler=(name)
           @@ronin_web_server_handler = name
         end
 
         #
-        # Returns the set of index file-names to search for within
-        # directories.
+        # The list of index files to search for when requesting the
+        # contents of a directory.
+        #
+        # @return [Set] The names of index files.
+        #
+        # @since 0.2.0
         #
         def Base.indices
           @@ronin_web_server_indices ||= Set[*DEFAULT_INDICES]
         end
 
         #
-        # Adds specified _name_ to Base.indices.
+        # Adds a new index to the +Base.indices+ list.
+        #
+        # @param [String, Symbol] name The index name to add.
+        #
+        # @since 0.2.0
         #
         def Base.index(name)
           Base.indices << name.to_s
         end
 
         #
-        # Returns the Array of handlers to attempt to use when starting
-        # the server.
+        # The list of Rack Handlers to attempt to use for a web server.
+        #
+        # @return [Array] The names of handler classes.
+        #
+        # @since 0.2.0
         #
         def self.handlers
           handlers = self.server
@@ -107,12 +125,15 @@ module Ronin
         end
 
         #
-        # Returns the Rack::Handler class to use for the web server,
-        # based on the +handler+. If the +handler+ of the web server cannot
-        # be found, Rack::Handler::Mongrel or Rack::Handler::WEBrick will
-        # be returned instead.
+        # Attempts to load the desired Rack Handler to run the web server
+        # with.
+        #
+        # @return [Rack::Handler] The handler class to use to run
+        #                         the web server.
         #
         # @raise [StandardError] None of the handlers could be loaded.
+        #
+        # @since 0.2.0
         #
         def self.handler_class
           self.handlers.find do |name|
@@ -129,16 +150,19 @@ module Ronin
         end
 
         #
-        # Starts the server with the given _options_. Mongrel will be
-        # used to run the server, if it is installed, otherwise WEBrick
-        # will be used.
+        # Run the web server using the Rack Handler returned by
+        # +handler_class+.
         #
-        # _options_ may contain the following keys:
-        # <tt>:host</tt>:: The host the server will listen on.
-        # <tt>:port</tt>:: The port the server will bind to.
-        # <tt>:background</tt>:: Specifies wether the server will
-        #                        run in the background or run in
-        #                        the foreground.
+        # @param [Hash] options Additional options.
+        # @option options [String] :host The host the server will listen on.
+        # @option options [Integer] :port The port the server will bind to.
+        # @option options [true, false] :background (false)
+        #                                           Specifies wether the
+        #                                           server will run in the
+        #                                           background or run in
+        #                                           the foreground.
+        #
+        # @since 0.2.0
         #
         def self.run!(options={})
           rack_options = {
@@ -173,12 +197,18 @@ module Ronin
         end
 
         #
-        # Binds the given _block_ to any request for the specified _path_.
+        # Handles any type of request for a given path.
+        #
+        # @param [String] path The URL path to handle requests for.
+        #
+        # @yield [] The block that will handle the request.
         #
         # @example
         #   any '/submit' do
         #     puts request.inspect
         #   end
+        #
+        # @since 0.2.0
         #
         def self.any(path,options={},&block)
           get(path,options,&block)
@@ -188,7 +218,9 @@ module Ronin
         end
 
         #
-        # Sets the default block to the given _block_.
+        # Sets the default request handler.
+        #
+        # @yield [] The block that will handle all other requests.
         #
         # @example
         #   default do
@@ -204,17 +236,23 @@ module Ronin
         #     }
         #   end
         #
+        # @since 0.2.0
+        #
         def self.default(&block)
           class_def(:default_response,&block)
           return self
         end
 
         #
-        # Maps all requests to the specified _http_path_ to the
-        # specified _server_.
+        # Routes all requests within a given directory into another
+        # web server.
+        #
+        # @param [Base, #call] server The web server to route requests to.
         #
         # @example
         #   MyApp.map '/subapp/', SubApp
+        #
+        # @since 0.2.0
         #
         def self.map(http_path,server)
           http_path = File.join(http_path,'')
@@ -231,10 +269,15 @@ module Ronin
         end
 
         #
-        # Hosts the static contents within the specified _directory_.
+        # Hosts the static contents within a given directory.
+        #
+        # @param [String] directory The path to a directory to serve
+        #                           static content from.
         #
         # @example
         #   MyApp.public_dir 'path/to/another/public'
+        #
+        # @since 0.2.0
         #
         def self.public_dir(directory)
           directory = File.expand_path(directory)
@@ -251,6 +294,8 @@ module Ronin
 
         #
         # Returns an HTTP 404 response with an empty body.
+        #
+        # @since 0.2.0
         #
         def default_response
           halt 404, ''
