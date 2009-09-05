@@ -247,6 +247,9 @@ module Ronin
         # Routes all requests within a given directory into another
         # web server.
         #
+        # @param [String] dir The directory that requests for will be
+        #                     routed to another web server.
+        #
         # @param [Base, #call] server The web server to route requests to.
         #
         # @example
@@ -254,14 +257,14 @@ module Ronin
         #
         # @since 0.2.0
         #
-        def self.map(http_path,server)
-          http_path = File.join(http_path,'')
+        def self.map(dir,server)
+          dir = File.join(dir,'')
 
           before do
-            if http_path == request.path_info[0,http_path.length]
-              # remove the http_path from the beginning of the path
+            if dir == request.path_info[0,dir.length]
+              # remove the dir from the beginning of the path
               # before passing it to the server
-              request.env['PATH_INFO'] = request.path_info[http_path.length-1..-1]
+              request.env['PATH_INFO'] = request.path_info[dir.length-1..-1]
 
               halt(*server.call(request.env))
             end
