@@ -156,11 +156,10 @@ module Ronin
         # @param [Hash] options Additional options.
         # @option options [String] :host The host the server will listen on.
         # @option options [Integer] :port The port the server will bind to.
-        # @option options [true, false] :background (false)
-        #                                           Specifies wether the
-        #                                           server will run in the
-        #                                           background or run in
-        #                                           the foreground.
+        # @option options [Boolean] :background (false)
+        #                                       Specifies wether the server
+        #                                       will run in the background
+        #                                       or run in the foreground.
         #
         # @since 0.2.0
         #
