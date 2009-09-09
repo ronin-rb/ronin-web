@@ -25,8 +25,14 @@ module Ronin
       module Helpers
         module Hosts
           #
-          # Calls the given _block_ if the host field fo the request
-          # matches the specified _name_or_pattern_.
+          # Calls a given block for requests with matching Host headers.
+          #
+          # @param [Regexp, String] name_or_pattern
+          #   The exact name or pattern to match Host headers.
+          #
+          # @yield []
+          #   The given block will be called when a request is received
+          #   with the matching Host header.
           #
           # @example
           #   downloads = 0
