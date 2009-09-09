@@ -36,7 +36,8 @@ module Ronin
         # +@web_proxy_port+, +@web_proxy_user+ and +@web_proxy_password+
         # instance variables.
         #
-        # @return [Network::HTTP::Proxy] The current proxy information.
+        # @return [Network::HTTP::Proxy]
+        #   The current proxy information.
         #
         def web_proxy
           HTTP::Proxy.new(
@@ -50,13 +51,17 @@ module Ronin
         #
         # Provides a persistant Mechanize agent.
         #
-        # @param [Hash] options Additional options for initializing the
-        #                       agent.
-        # @option options [Hash] :proxy (web_proxy) Proxy information.
-        # @option options [String] :user_agent (+@web_user_agent+)
-        #                                      User-Agent string to use.
+        # @param [Hash] options
+        #   Additional options for initializing the agent.
         #
-        # @return [WWW::Mechanize] The agent.
+        # @option options [Hash] :proxy (web_proxy)
+        #   Proxy information.
+        #
+        # @option options [String] :user_agent (+@web_user_agent+)
+        #   User-Agent string to use.
+        #
+        # @return [WWW::Mechanize]
+        #   The agent.
         #
         def web_agent(options={},&block)
           unless @web_agent
@@ -72,18 +77,27 @@ module Ronin
         #
         # Creates a Mechanize Page for the contents at a given URL.
         #
-        # @param [URI::Generic, String] url The URL to request.
-        # @param [Hash] options Additional options to initialize the
-        #                       agent with.
-        # @option options [Hash] :proxy (web_proxy) Proxy information.
+        # @param [URI::Generic, String] url
+        #   The URL to request.
+        #
+        # @param [Hash] options
+        #   Additional options to initialize the agent with.
+        #
+        # @option options [Hash] :proxy (web_proxy)
+        #   Proxy information.
+        #
         # @option options [String] :user_agent (+@web_user_agent+)
-        #                                      User-Agent string to use.
+        #   User-Agent string to use.
         #
-        # @yield [page] If a block is given, it will be passed the page
-        #               for the requested URL.
-        # @yieldparam [WWW::Mechanize::Page] page The requested page.
+        # @yield [page]
+        #   If a block is given, it will be passed the page for the
+        #   requested URL.
         #
-        # @return [WWW::Mechanize::Page] The requested page.
+        # @yieldparam [WWW::Mechanize::Page] page
+        #   The requested page.
+        #
+        # @return [WWW::Mechanize::Page]
+        #   The requested page.
         #
         def web_get(url,options={},&block)
           page = web_agent(options).get(url)
@@ -96,18 +110,26 @@ module Ronin
         # Requests the body of the Mechanize Page created from the response
         # of the given URL.
         #
-        # @param [URI::Generic, String] url The URL to request.
-        # @param [Hash] options Additional options to initialize the
-        #                       agent with.
-        # @option options [Hash] :proxy (web_proxy) Proxy information.
+        # @param [URI::Generic, String] url
+        #   The URL to request.
+        #
+        # @param [Hash] options
+        #   Additional options to initialize the agent with.
+        #
+        # @option options [Hash] :proxy (web_proxy)
+        #   Proxy information.
+        #
         # @option options [String] :user_agent (+@web_user_agent+)
-        #                                      User-Agent string to use.
+        #   User-Agent string to use.
         #
-        # @yield [body] If a block is given, it will be passed the body
-        #               of the page.
-        # @yieldparam [String] body The requested body of the page.
+        # @yield [body]
+        #   If a block is given, it will be passed the body of the page.
         #
-        # @return [String] The requested body of the page.
+        # @yieldparam [String] body
+        #   The requested body of the page.
+        #
+        # @return [String]
+        #   The requested body of the page.
         #
         def web_get_body(url,options={},&block)
           web_get(url,options) do |page|
@@ -122,20 +144,30 @@ module Ronin
         # Posts to a given URL and creates a Mechanize Page from the
         # response.
         #
-        # @param [URI::Generic, String] url The URL to post to.
-        # @param [Hash] options Additional options to initialize the
-        #                       agent with.
-        # @option options [Hash] :query Additional query parameters to
-        #                               post with.
-        # @option options [Hash] :proxy (web_proxy) Proxy information.
+        # @param [URI::Generic, String] url
+        #   The URL to post to.
+        #
+        # @param [Hash] options
+        #   Additional options to initialize the agent with.
+        #
+        # @option options [Hash] :query
+        #   Additional query parameters to post with.
+        #
+        # @option options [Hash] :proxy (web_proxy)
+        #   Proxy information.
+        #
         # @option options [String] :user_agent (+@web_user_agent+)
-        #                                      User-Agent string to use.
+        #   User-Agent string to use.
         #
-        # @yield [page] If a block is given, it will be passed the page
-        #               for the requested URL.
-        # @yieldparam [WWW::Mechanize::Page] page The requested page.
+        # @yield [page]
+        #   If a block is given, it will be passed the page for the
+        #   requested URL.
         #
-        # @return [WWW::Mechanize::Page] The requested page.
+        # @yieldparam [WWW::Mechanize::Page] page
+        #   The requested page.
+        #
+        # @return [WWW::Mechanize::Page]
+        #   The requested page.
         #
         def web_post(url,options={},&block)
           query = {}
@@ -151,21 +183,29 @@ module Ronin
         # Posts to a given URL and returns the body of the Mechanize Page
         # created from the response.
         #
-        # @param [URI::Generic, String] url The URL to post to.
-        # @param [Hash] options Additional options to initialize the
-        #                       agent with.
-        # @option options [Hash] :query Additional query parameters to
-        #                               post with.
-        # @option options [Hash] :proxy (web_proxy) Proxy information.
+        # @param [URI::Generic, String] url
+        #   The URL to post to.
+        #
+        # @param [Hash] options
+        #   Additional options to initialize the agent with.
+        #
+        # @option options [Hash] :query
+        #   Additional query parameters to post with.
+        #
+        # @option options [Hash] :proxy (web_proxy)
+        #   Proxy information.
+        #
         # @option options [String] :user_agent (+@web_user_agent+)
-        #                                      User-Agent string to use.
+        #   User-Agent string to use.
         #
-        # @yield [body] If a block is given, it will be passed the body of
-        #               the page.
-        # @yieldparam [WWW::Mechanize::Page] page The body of the requested
-        #                                         page.
+        # @yield [body]
+        #   If a block is given, it will be passed the body of the page.
         #
-        # @return [String] The requested body of the page.
+        # @yieldparam [WWW::Mechanize::Page] page
+        #   The body of the requested page.
+        #
+        # @return [String]
+        #   The requested body of the page.
         #
         def web_post_body(url,options={},&block)
           web_post(url,options) do |page|
