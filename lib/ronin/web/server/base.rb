@@ -108,7 +108,7 @@ module Ronin
         end
 
         #
-        # The list of Rack Handlers to attempt to use for a web server.
+        # The list of Rack Handlers to attempt to use with the web server.
         #
         # @return [Array] The names of handler classes.
         #
@@ -196,9 +196,9 @@ module Ronin
         end
 
         #
-        # Handles any type of request for a given path.
+        # Route any type of request for a given URL pattern.
         #
-        # @param [String] path The URL path to handle requests for.
+        # @param [String] path The URL pattern to handle requests for.
         #
         # @yield [] The block that will handle the request.
         #
@@ -217,7 +217,7 @@ module Ronin
         end
 
         #
-        # Sets the default request handler.
+        # Sets the default route.
         #
         # @yield [] The block that will handle all other requests.
         #
@@ -247,7 +247,7 @@ module Ronin
         # web server.
         #
         # @param [String] dir The directory that requests for will be
-        #                     routed to another web server.
+        #                     routed from.
         #
         # @param [Base, #call] server The web server to route requests to.
         #
