@@ -64,7 +64,8 @@ module Ronin
         #
         # The default Rack Handler to run all web servers with.
         #
-        # @return [String] The class name of the Rack Handler to use.
+        # @return [String]
+        #   The class name of the Rack Handler to use.
         #
         # @since 0.2.0
         #
@@ -75,8 +76,11 @@ module Ronin
         #
         # Sets the default Rack Handler to run all web servers with.
         #
-        # @param [String] name The name of the handler.
-        # @return [String] The name of the new handler.
+        # @param [String] name
+        #   The name of the handler.
+        #
+        # @return [String]
+        #   The name of the new handler.
         #
         # @since 0.2.0
         #
@@ -88,7 +92,8 @@ module Ronin
         # The list of index files to search for when requesting the
         # contents of a directory.
         #
-        # @return [Set] The names of index files.
+        # @return [Set]
+        #   The names of index files.
         #
         # @since 0.2.0
         #
@@ -99,7 +104,8 @@ module Ronin
         #
         # Adds a new index to the +Base.indices+ list.
         #
-        # @param [String, Symbol] name The index name to add.
+        # @param [String, Symbol] name
+        #   The index name to add.
         #
         # @since 0.2.0
         #
@@ -110,7 +116,8 @@ module Ronin
         #
         # The list of Rack Handlers to attempt to use with the web server.
         #
-        # @return [Array] The names of handler classes.
+        # @return [Array]
+        #   The names of handler classes.
         #
         # @since 0.2.0
         #
@@ -128,10 +135,11 @@ module Ronin
         # Attempts to load the desired Rack Handler to run the web server
         # with.
         #
-        # @return [Rack::Handler] The handler class to use to run
-        #                         the web server.
+        # @return [Rack::Handler]
+        #   The handler class to use to run the web server.
         #
-        # @raise [StandardError] None of the handlers could be loaded.
+        # @raise [StandardError]
+        #   None of the handlers could be loaded.
         #
         # @since 0.2.0
         #
@@ -154,12 +162,16 @@ module Ronin
         # +handler_class+.
         #
         # @param [Hash] options Additional options.
-        # @option options [String] :host The host the server will listen on.
-        # @option options [Integer] :port The port the server will bind to.
+        #
+        # @option options [String] :host
+        #   The host the server will listen on.
+        #
+        # @option options [Integer] :port
+        #   The port the server will bind to.
+        #
         # @option options [Boolean] :background (false)
-        #                                       Specifies wether the server
-        #                                       will run in the background
-        #                                       or run in the foreground.
+        #   Specifies wether the server will run in the background or run
+        #   in the foreground.
         #
         # @since 0.2.0
         #
@@ -198,9 +210,11 @@ module Ronin
         #
         # Route any type of request for a given URL pattern.
         #
-        # @param [String] path The URL pattern to handle requests for.
+        # @param [String] path
+        #   The URL pattern to handle requests for.
         #
-        # @yield [] The block that will handle the request.
+        # @yield []
+        #   The block that will handle the request.
         #
         # @example
         #   any '/submit' do
@@ -219,7 +233,8 @@ module Ronin
         #
         # Sets the default route.
         #
-        # @yield [] The block that will handle all other requests.
+        # @yield []
+        #   The block that will handle all other requests.
         #
         # @example
         #   default do
@@ -246,10 +261,11 @@ module Ronin
         # Routes all requests within a given directory into another
         # web server.
         #
-        # @param [String] dir The directory that requests for will be
-        #                     routed from.
+        # @param [String] dir
+        #   The directory that requests for will be routed from.
         #
-        # @param [Base, #call] server The web server to route requests to.
+        # @param [Base, #call] server
+        #   The web server to route requests to.
         #
         # @example
         #   MyApp.map '/subapp/', SubApp
@@ -273,8 +289,8 @@ module Ronin
         #
         # Hosts the static contents within a given directory.
         #
-        # @param [String] directory The path to a directory to serve
-        #                           static content from.
+        # @param [String] directory
+        #   The path to a directory to serve static content from.
         #
         # @example
         #   MyApp.public_dir 'path/to/another/public'
