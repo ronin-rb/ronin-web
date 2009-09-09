@@ -63,6 +63,8 @@ module Ronin
           # @return [String]
           #   The path to the index file.
           #
+          # @since 0.2.0
+          #
           def index_of(path,&block)
             path = File.expand_path(path)
 
@@ -92,6 +94,8 @@ module Ronin
           #
           # @example
           #   return_file '/tmp/file', :html
+          #
+          # @since 0.2.0
           #
           def return_file(path,custom_content_type=nil)
             path = File.expand_path(path)
