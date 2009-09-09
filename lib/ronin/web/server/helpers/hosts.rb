@@ -56,6 +56,8 @@ module Ronin
           #     end
           #   end
           #
+          # @since 0.2.0
+          #
           def for_host(name_or_pattern,&block)
             if name_or_pattern.kind_of?(Regexp)
               halt(*block.call()) if request.host =~ name_or_pattern
