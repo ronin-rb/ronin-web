@@ -45,7 +45,7 @@ module Ronin
           #
           # @example
           #   get '/login.php' do
-          #     proxy do
+          #     proxy do |body|
           #       body.gsub(/https/,'http')
           #     end
           #   end
