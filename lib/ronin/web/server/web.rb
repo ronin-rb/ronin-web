@@ -24,9 +24,19 @@ require 'ronin/web/server/app'
 module Ronin
   module Web
     #
-    # Returns the Ronin Web Server. When called for the first time
-    # the server will be started in the background with the given
-    # _options_.
+    # Returns the Ronin Web Server.
+    #
+    # @param [Hash] options
+    #   Additional options.
+    #
+    # @yield [server]
+    #   If a block is given, it will be passed the current web server.
+    #
+    # @yieldparam [Server::App]
+    #   The current web server class.
+    #
+    # @return [Server::App]
+    #   The current web server class.
     #
     # @example
     #   Web.server do
@@ -34,6 +44,9 @@ module Ronin
     #       'world'
     #     end
     #   end
+    #
+    # @see Server::Base.run!
+    # @since 0.2.0
     #
     def Web.server(options={},&block)
       unless class_variable_defined?('@@ronin_web_server')
