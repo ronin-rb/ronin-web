@@ -28,11 +28,21 @@ module Ronin
         def self.included(base)
           base.module_eval do
             #
-            # Hosts the contents of the specified _path_ at the specified
-            # _http_path_.
+            # Hosts the contents of a file.
+            #
+            # @param [String] http_path
+            #   The path the web server will host the file at.
+            #
+            # @param [String] path
+            #   The path to the local file.
+            #
+            # @param [Symbol] custom_content_type
+            #   Optional content-type to host the file as.
             #
             # @example
             #   MyApp.file '/robots.txt', '/path/to/my_robots.txt'
+            #
+            # @since 0.2.0
             #
             def self.file(http_path,path,custom_content_type=nil)
               path = File.expand_path(path)
@@ -43,11 +53,22 @@ module Ronin
             end
 
             #
-            # Hosts the contents of the specified _directory_ at the
-            # specified _http_path_.
+            # Hosts the contents of the directory.
+            #
+            # @param [String] http_path
+            #   The path the web server will host the directory at.
+            #
+            # @param [String] directory
+            #   The path to the local directory.
+            #
+            # @param [Symbol] custom_content_type
+            #   Optional content-type to host the contents of the directory
+            #   with.
             #
             # @example
             #   MyApp.directory '/download/', '/tmp/files/'
+            #
+            # @since 0.2.0
             #
             def self.directory(http_path,directory,custom_content_type=nil)
               directory = File.expand_path(directory)
