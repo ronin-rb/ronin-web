@@ -98,20 +98,20 @@ module Ronin
           # @param [Hash] options
           #   Additional options to use when proxying the request.
           #
-          # @yield [(response), page]
+          # @yield [(response), doc]
           #   If a block is given, it will be passed the optional response
-          #   of the proxied request and the page representing the
+          #   of the proxied request and the document representing the
           #   proxied request.
           #
           # @yieldparam [Net::HTTP::Response] response
           #   The response of the proxied request.
           #
-          # @yieldparam [Nokogiri::HTML, Nokogiri::XML] page
-          #   The page representing the proxied request.
+          # @yieldparam [Nokogiri::HTML, Nokogiri::XML] doc
+          #   The document representing the proxied request.
           #
           # @example
           #   get '/login.php' do
-          #     proxy do
+          #     proxy do |doc|
           #       doc.search('form/@action').each do |action|
           #         action.inner_text = action.inner_text.gsub(
           #           /^https/, 'http'
@@ -122,21 +122,27 @@ module Ronin
           #
           # @since 0.2.0
           #
-          def proxy_page(options={},&block)
+          def proxy_doc(options={},&block)
             proxy(options) do |response,body|
               case response.content_type
               when 'text/html'
-                page = Nokogiri::HTML(body)
+                doc = Nokogiri::HTML(body)
               when 'text/xml'
-                page = Nokogiri::XML(body)
+                doc = Nokogiri::XML(body)
               else
-                page = nil
+                doc = nil
               end
 
-              if page
-                block.call(response,page) if block
+              if doc
+                if block
+                  if block.arity == 2
+                    block.call(response,doc)
+                  else
+                    block.call(doc)
+                  end
+                end
 
-                page.to_s
+                doc.to_s
               end
             end
           end
