@@ -26,6 +26,32 @@ module Ronin
     module Server
       module Helpers
         module Proxy
+          #
+          # Proxies the current request.
+          #
+          # @param [Hash] options
+          #   Additional options to use when proxying the request.
+          #
+          # @yield [(response), body]
+          #   If a block is given, it will be passed the optional response
+          #   of the proxied request and the body received from the
+          #   proxied request.
+          #
+          # @yieldparam [Net::HTTP::Response] response
+          #   The response of the proxied request.
+          #
+          # @yieldparam [String] body
+          #   The body from the proxied request.
+          #
+          # @example
+          #   get '/login.php' do
+          #     proxy do
+          #       body.gsub(/https/,'http')
+          #     end
+          #   end
+          #
+          # @since 0.2.0
+          #
           def proxy(options={},&block)
             default_options = {
               :host => request.host,
@@ -66,6 +92,36 @@ module Ronin
             halt(response)
           end
 
+          #
+          # Proxies the current request.
+          #
+          # @param [Hash] options
+          #   Additional options to use when proxying the request.
+          #
+          # @yield [(response), page]
+          #   If a block is given, it will be passed the optional response
+          #   of the proxied request and the page representing the
+          #   proxied request.
+          #
+          # @yieldparam [Net::HTTP::Response] response
+          #   The response of the proxied request.
+          #
+          # @yieldparam [Nokogiri::HTML, Nokogiri::XML] page
+          #   The page representing the proxied request.
+          #
+          # @example
+          #   get '/login.php' do
+          #     proxy do
+          #       doc.search('form/@action').each do |action|
+          #         action.inner_text = action.inner_text.gsub(
+          #           /^https/, 'http'
+          #         )
+          #       end
+          #     end
+          #   end
+          #
+          # @since 0.2.0
+          #
           def proxy_page(options={},&block)
             proxy(options) do |response,body|
               case response.content_type
