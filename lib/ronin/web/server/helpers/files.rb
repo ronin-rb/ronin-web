@@ -28,11 +28,18 @@ module Ronin
           INDICES = ['index.htm', 'index.html']
 
           #
-          # Sets the content_type based on the extension of the specified
-          # _path_.
+          # Sets the content_type based on the extension of a given file.
+          #
+          # @param [String] path
+          #   The path to guess the content-type for.
+          #
+          # @return [String]
+          #   The MIME content-type of the file.
           #
           # @example
           #   content_type_for 'file.html'
+          #
+          # @since 0.2.0
           #
           def content_type_for(path)
             ext = File.extname(path).downcase
@@ -41,8 +48,20 @@ module Ronin
           end
 
           #
-          # Passes the path to the index file within the specified _path_
-          # to the given _block_.
+          # Finds the index file for a given directory.
+          #
+          # @param [String] path
+          #   The path of the directory.
+          #
+          # @yield [index_path]
+          #   If a block is given, it will be passed the path of the
+          #   index file for the given directory.
+          # 
+          # @yieldparam [String] index_path
+          #   The path to the index file.
+          #
+          # @return [String]
+          #   The path to the index file.
           #
           def index_of(path,&block)
             path = File.expand_path(path)
@@ -60,8 +79,13 @@ module Ronin
           end
 
           #
-          # Sets the content_type using the extension of the specified
-          # _path_ and returns a File object.
+          # Returns a file to the client with the appropriate content-type.
+          #
+          # @param [String] path
+          #   The path of the file to return.
+          #
+          # @param [Symbol] custom_content_type
+          #   Optional content-type to return the file with.
           #
           # @example
           #   return_file 'lol.jpg'
