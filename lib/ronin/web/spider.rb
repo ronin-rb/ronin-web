@@ -33,29 +33,53 @@ module Ronin
       #
       # Creates a new Spider object.
       #
-      # @param [Hash] options Additional options.
-      # @option options [Hash] :proxy (Web.proxy)
-      #                               The proxy to use while spidering.
-      # @option options [String] :user_agent The User-Agent string to send.
-      # @option options [String] :referer The referer URL to send.
-      # @option options [Integer] :delay (0)
-      #                                  Duration in seconds to pause
-      #                                  between spidering each link.
-      # @option options [String, Regexp] :host The host-name to visit.
-      # @option options [Array] :hosts Patterns of host-names to visit.
-      # @option options [Array] :ignore_hosts Patterns of host-names not
-      #                                       to visit.
-      # @option options [Array] :ports Ports to visit.
-      # @option options [Array] :ignore_ports Ports not to visit.
-      # @option options [Array] :links Patterns of links to visit.
-      # @option options [Array] :ignore_links Patterns of links not to visit.
-      # @option options [Array] :ext Patterns of file extensions to accept.
-      # @option options [Array] :ignore_exts Patterns of file extensions
-      #                                      to ignore.
+      # @param [Hash] options
+      #   Additional options.
       #
-      # @yield [spider] If a block is given, it will be passed the newly
-      #                 created spider.
-      # @yieldparam [Spider] spider The newly created spider.
+      # @option options [Hash] :proxy (Web.proxy)
+      #   The proxy to use while spidering.
+      #
+      # @option options [String] :user_agent
+      #   The User-Agent string to send.
+      #
+      # @option options [String] :referer
+      #   The referer URL to send.
+      #
+      # @option options [Integer] :delay (0)
+      #   Duration in seconds to pause between spidering each link.
+      #
+      # @option options [String, Regexp] :host
+      #   The host-name to visit.
+      #
+      # @option options [Array] :hosts
+      #   Patterns of host-names to visit.
+      #
+      # @option options [Array] :ignore_hosts
+      #   Patterns of host-names not to visit.
+      #
+      # @option options [Array] :ports
+      #   Ports to visit.
+      #
+      # @option options [Array] :ignore_ports
+      #   Ports not to visit.
+      #
+      # @option options [Array] :links
+      #   Patterns of links to visit.
+      #
+      # @option options [Array] :ignore_links
+      #   Patterns of links not to visit.
+      #
+      # @option options [Array] :ext
+      #   Patterns of file extensions to accept.
+      #
+      # @option options [Array] :ignore_exts
+      #   Patterns of file extensions to ignore.
+      #
+      # @yield [spider]
+      #   If a block is given, it will be passed the newly created spider.
+      #
+      # @yieldparam [Spider] spider
+      #   The newly created spider.
       #
       # @see http://spidr.rubyforge.org/docs/classes/Spidr/Agent.html
       #
