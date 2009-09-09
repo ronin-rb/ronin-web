@@ -28,11 +28,19 @@ module Ronin
         def self.included(base)
           base.module_eval do
             #
-            # Registers the specified _server_ to be called when receiving
-            # requests for the specified host _name_.
+            # Routes requests with a specific Host header to another
+            # web server.
+            #
+            # @param [String] name
+            #   The host-name to route requests for.
+            #
+            # @param [Base, #call] server
+            #   The web server to route the requests to.
             #
             # @example
             #   MyApp.host 'cdn.evil.com', EvilServer
+            #
+            # @since 0.2.0
             #
             def self.host(name,server)
               name = name.to_s
@@ -45,11 +53,19 @@ module Ronin
             end
 
             #
-            # Registers the given _server_ to be called when receiving
-            # requests to host names which match the specified _pattern_.
+            # Routes requests with a matching Host header to another web
+            # server.
+            #
+            # @param [Regexp, String] pattern
+            #   The pattern to match Host headers of requests.
+            #
+            # @param [Base, #call] server
+            #   The server to route the requests to.
             #
             # @example
             #   MyApp.hosts_like /^a[0-9]\./, FileProxy
+            #
+            # @since 0.2.0
             #
             def self.hosts_like(pattern,server)
               before do
