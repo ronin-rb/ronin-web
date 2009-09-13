@@ -19,9 +19,9 @@ class ProxyApp < Ronin::Web::Server::Base
   end
 
   get '/r/ruby' do
-    proxy_page do |response,page|
+    proxy_doc do |response,doc|
       for_host(/reddit\.com/) do
-        page.search('div.link').each do |link|
+        doc.search('div.link').each do |link|
           if link.at('a.title').inner_text =~ /rails/i
             link.remove
           end
@@ -31,9 +31,9 @@ class ProxyApp < Ronin::Web::Server::Base
   end
 
   get '/rss.php' do
-    proxy_page do |response,page|
+    proxy_doc do |response,doc|
       for_host('milworm.com') do
-        page.search('//item').each do |item|
+        doc.search('//item').each do |item|
           if item.inner_text =~ /(XSS|SQLi|SQL\s+Injection)/i
             item.remove
           end
