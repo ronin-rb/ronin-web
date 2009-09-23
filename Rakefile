@@ -14,7 +14,7 @@ Hoe.spec('ronin-web') do
     ['mechanize', '>=0.9.0'],
     ['spidr', '>=0.1.9'],
     ['sinatra', '>=0.9.4'],
-    ['ronin', '>=0.2.4']
+    ['ronin', '>=0.3.0']
   ]
 
   self.extra_dev_deps = [
