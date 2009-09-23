@@ -43,18 +43,6 @@ install or update Overlays.
   supports path and host-name routing.
 * Provides Ronin::Web::Proxy, a configurable Rack based Web Proxy.
 
-== REQUIREMENTS:
-
-* {nokogiri}[http://nokogiri.rubyforge.org/] >= 1.1.0
-* {mechanize}[http://mechanize.rubyforge.org/] >= 0.9.0
-* {spidr}[http://spidr.rubyforge.org/] >= 0.1.3
-* {rack}[http://rack.rubyforge.org/] >= 0.9.1
-* {ronin}[http://ronin.rubyforge.org/] >= 0.2.2
-
-== INSTALL:
-
-  $ sudo gem install ronin-web
-
 == SYNOPSIS:
 
 * Start the Ronin console with Ronin Web preloaded:
@@ -159,6 +147,18 @@ install or update Overlays.
     Web.server.get '/test' do
       'Test 1 2 1 2'
     end
+
+== REQUIREMENTS:
+
+* {nokogiri}[http://nokogiri.rubyforge.org/] >= 1.1.0
+* {mechanize}[http://mechanize.rubyforge.org/] >= 0.9.0
+* {spidr}[http://spidr.rubyforge.org/] >= 0.1.3
+* {rack}[http://rack.rubyforge.org/] >= 0.9.1
+* {ronin}[http://ronin.rubyforge.org/] >= 0.2.2
+
+== INSTALL:
+
+  $ sudo gem install ronin-web
 
 == LICENSE:
 
