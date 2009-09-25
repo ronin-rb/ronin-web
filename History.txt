@@ -6,6 +6,7 @@
 * Require rspec >= 1.2.8.
 * Require test-unit >= 1.2.3.
 * Require rack-test >= 0.4.1.
+* Require yard >= 0.2.3.5.
 * Added Ronin::Web::Server::Base.
 * Added Ronin::Web::Server::Files.
 * Added Ronin::Web::Server::Hosts.
