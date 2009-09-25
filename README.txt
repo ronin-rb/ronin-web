@@ -113,25 +113,25 @@ install or update Overlays.
     end
     
     puts doc.to_xml
-    <?xml version="1.0"?>
-    <playlist>
-      <mp3>
-        <file>02 THE WAIT.mp3</file>
-        <artist>Evil Nine</artist>
-        <track>The Wait feat David Autokratz</track>
-        <duration>1000000000</duration>
-      </mp3>
-    </playlist>
+    # <?xml version="1.0"?>
+    # <playlist>
+    #   <mp3>
+    #     <file>02 THE WAIT.mp3</file>
+    #     <artist>Evil Nine</artist>
+    #     <track>The Wait feat David Autokratz</track>
+    #     <duration>1000000000</duration>
+    #   </mp3>
+    # </playlist>
 
 * Spider a web site:
 
     Web::Spider.host('www.example.com') do |spider|
       spider.every_url do |url|
-        ...
+        # ...
       end
 
       spider.every_page do |page|
-        ...
+        # ...
       end
     end
 
