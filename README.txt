@@ -67,11 +67,11 @@ install or update Overlays.
 
     Web.html(open('some_file.html'))
     # => <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-    <html>
-      <head>
-        <script type="text/javascript" src="redirect.js"></script>
-      </head>
-    </html>
+    # <html>
+    #   <head>
+    #     <script type="text/javascript" src="redirect.js"></script>
+    #   </head>
+    # </html>
 
 * Build a HTML document:
 
@@ -84,19 +84,19 @@ install or update Overlays.
     end
     
     puts doc.to_html
-    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-    <html><head><script src="redirect.js" type="text/javascript"></script></head></html>
+    # <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+    # <html><head><script src="redirect.js" type="text/javascript"></script></head></html>
 
 * Parse XML:
 
     Web.xml(some_text)
-    => <?xml version="1.0"?>
-    <users>
-      <user>
-        <name>admin</name>
-        <password>0mni</password>
-      </user>
-    </users>
+    # => <?xml version="1.0"?>
+    # <users>
+    #   <user>
+    #     <name>admin</name>
+    #     <password>0mni</password>
+    #   </user>
+    # </users>
 
 
 * Build a XML document:
