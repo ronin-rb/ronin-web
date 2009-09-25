@@ -150,7 +150,6 @@ install or update Overlays.
 
 == REQUIREMENTS:
 
-* {nokogiri}[http://nokogiri.rubyforge.org/] >= 1.3.3
 * {mechanize}[http://mechanize.rubyforge.org/] >= 0.9.3
 * {spidr}[http://spidr.rubyforge.org/] >= 0.1.9
 * {sinatra}[http://www.sinatrarb.com/] >= 0.9.4
