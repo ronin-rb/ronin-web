@@ -61,9 +61,11 @@ module Ronin
     #
     # @example
     #   Web.build_html do
-    #     body {
-    #       div(:style => 'display:none;') {
-    #         object(:classid => 'blabla')
+    #     html {
+    #       body {
+    #         div(:style => 'display:none;') {
+    #           object(:classid => 'blabla')
+    #         }
     #       }
     #     }
     #   end
