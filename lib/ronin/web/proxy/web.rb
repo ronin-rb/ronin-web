@@ -27,7 +27,7 @@ module Ronin
     # Returns the Ronin Web Proxy. When called for the first time
     # the proxy will be started in the background.
     #
-    # @see Ronin::Web::Server::Base.run!
+    # @see Server::Base.run!
     #
     def Web.proxy_server(options={},&block)
       unless class_variable_defined?('@@ronin_web_proxy')
