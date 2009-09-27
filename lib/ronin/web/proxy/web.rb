@@ -28,7 +28,7 @@ module Ronin
     # the proxy will be started in the background with the given
     # _options_.
     #
-    def Web.proxy(options={},&block)
+    def Web.proxy_server(options={},&block)
       unless class_variable_defined?('@@ronin_web_proxy')
         @@ronin_web_proxy = Proxy::App
         @@ronin_web_proxy.run!(options.merge(:background => true))
