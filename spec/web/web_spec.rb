@@ -128,10 +128,27 @@ describe Web do
       agent.user_agent.should == 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3'
     end
 
-    it "should raise a RuntimeError exception for bad :proxy options" do
-      lambda {
-        Web.agent(:proxy => 42)
-      }.should raise_error(RuntimeError)
+    describe ":proxy" do
+      it "should accept Proxy values" do
+        pending "WWW::Mechanize needs reader methods for the proxy settings"
+      end
+
+      it "should accept Hash values" do
+      end
+
+      it "should accept String values" do
+        pending "WWW::Mechanize needs reader methods for the proxy settings"
+      end
+
+      it "should default to Web.proxy" do
+        pending "WWW::Mechanize needs reader methods for the proxy settings"
+      end
+
+      it "should raise a RuntimeError exception for bad :proxy options" do
+        lambda {
+          Web.agent(:proxy => 42)
+        }.should raise_error(RuntimeError)
+      end
     end
   end
 
