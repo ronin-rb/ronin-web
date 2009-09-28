@@ -40,6 +40,7 @@ spec/spec_helper.rb
 spec/web/helpers/server.rb
 spec/web/helpers/root/index.html
 spec/web/helpers/root/test.txt
+spec/web/web_spec.rb
 spec/web/extensions/nokogiri_spec.rb
 spec/web/server/classes/public1/static1.txt
 spec/web/server/classes/public2/static2.txt
