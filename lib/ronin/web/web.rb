@@ -215,7 +215,8 @@ module Ronin
     # @option options [String] :user_agent
     #   The User-Agent string to use.
     #
-    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    # @option options [Network::HTTP::Proxy, Hash, String] :proxy
+    #   (Web.proxy)
     #   Proxy information.
     #
     # @option options [String] :user
