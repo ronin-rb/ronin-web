@@ -291,7 +291,8 @@ module Ronin
     # @option options [String] :user_agent
     #   The User-Agent string to use.
     #
-    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
+    # @option options [Network::HTTP::Proxy, Hash, String] :proxy
+    #   (Web.proxy)
     #   Proxy information.
     #
     # @yield [agent]
@@ -326,7 +327,16 @@ module Ronin
         agent.user_agent = Web.user_agent
       end
 
-      proxy = (options[:proxy] || Web.proxy)
+      proxy = if options[:proxy].kind_of?(Hash)
+                options[:proxy]
+              elsif options[:proxy].kind_of?(String)
+                Network::HTTP::Proxy.parse(options[:proxy])
+              elsif options[:proxy].nil?
+                Web.proxy
+              else
+                raise(RuntimeError,"the given :proxy option is neither a Proxy, Hash or String",caller)
+              end
+
       if proxy[:host]
         agent.set_proxy(proxy[:host],proxy[:port],proxy[:user],proxy[:password])
       end
