@@ -127,6 +127,12 @@ describe Web do
       
       agent.user_agent.should == 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3'
     end
+
+    it "should raise a RuntimeError exception for bad :proxy options" do
+      lambda {
+        Web.agent(:proxy => 42)
+      }.should raise_error(RuntimeError)
+    end
   end
 
   it "should be able to get WWW::Mechanize pages" do
