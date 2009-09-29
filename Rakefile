@@ -12,7 +12,7 @@ Hoe.spec('ronin-web') do
   self.remote_rdoc_dir = 'docs/ronin-web'
   self.extra_deps = [
     ['mechanize', '>=0.9.3'],
-    ['spidr', '>=0.1.10'],
+    ['spidr', '>=0.2.0'],
     ['sinatra', '>=0.9.4'],
     ['ronin', '>=0.3.0']
   ]
