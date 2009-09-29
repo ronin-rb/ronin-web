@@ -31,15 +31,14 @@ module Ronin
       protected
 
       def each_target(&block)
-        scan_queue = Queue.new
+        print_info "Started web spidering ..."
 
-        spider_thread = Thread.new(scan_queue) do |scan_queue|
-          run { |page| scan_queue << page }
+        run do |page|
+          print_info "Scanning page: #{page.url}"
+          block.call(page)
         end
 
-        until (scan_queue.empty? || @paused == true)
-          block.call(scan_queue.pop)
-        end
+        print_info "Finished web spidering."
       end
 
     end
