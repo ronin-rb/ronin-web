@@ -35,8 +35,8 @@ module Ronin
 
         history.clear
 
-        unless hosts.empty?
-          enqueue("http://#{hosts.first}/")
+        unless visit_hosts.empty?
+          enqueue("http://#{visit_hosts.first}/")
         end
 
         run do |page|
