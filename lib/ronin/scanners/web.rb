@@ -35,6 +35,10 @@ module Ronin
 
         history.clear
 
+        unless hosts.empty?
+          enqueue("http://#{hosts.first}/")
+        end
+
         run do |page|
           print_info "Scanning page: #{page.url}"
           block.call(page)
