@@ -33,6 +33,8 @@ module Ronin
       def each_target(&block)
         print_info "Started web spidering ..."
 
+        history.clear
+
         run do |page|
           print_info "Scanning page: #{page.url}"
           block.call(page)
