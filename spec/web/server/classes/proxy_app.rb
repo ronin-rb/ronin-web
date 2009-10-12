@@ -30,9 +30,9 @@ class ProxyApp < Ronin::Web::Server::Base
     end
   end
 
-  get '/rss.php' do
+  get '/feed/vulnerabilities/latest.rss' do
     proxy_doc do |response,doc|
-      for_host('milworm.com') do
+      for_host('osvdb.org') do
         doc.search('//item').each do |item|
           if item.inner_text =~ /(XSS|SQLi|SQL\s+Injection)/i
             item.remove

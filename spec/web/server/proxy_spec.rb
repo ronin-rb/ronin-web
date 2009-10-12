@@ -41,7 +41,7 @@ describe Web::Server::Helpers::Proxy do
   end
 
   it "should allow modification of proxied XML documents" do
-    get_host '/rss.php', 'milw0rm.com'
+    get_host '/feed/vulnerabilities/latest.rss', 'osvdb.org'
 
     last_response.should be_ok
     last_response.body.should_not =~ /(XSS|SQLi|SQL\s+Injection)/i
