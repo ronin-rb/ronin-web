@@ -108,8 +108,8 @@ module Ronin
     # @example
     #  Web.build_xml do
     #    post(:id => 2) {
-    #      title { text("some example") }
-    #      body { text("this is one contrived example.") }
+    #      title { text('some example') }
+    #      body { text('this is one contrived example.') }
     #    }
     #  end
     #
@@ -148,7 +148,7 @@ module Ronin
     #   # => "http://www.example.com:8081"
     #
     # @example
-    #   Web.proxy_url("www.example.com:9000")
+    #   Web.proxy_url('www.example.com:9000')
     #   # => "http://www.example.com:9000"
     #
     def Web.proxy_url(proxy_info=Web.proxy)
