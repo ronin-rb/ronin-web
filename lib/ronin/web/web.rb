@@ -108,7 +108,7 @@ module Ronin
     # @example
     #  Web.build_xml do
     #    post(:id => 2) {
-    #      title { text("some example) }
+    #      title { text("some example") }
     #      body { text("this is one contrived example.") }
     #    }
     #  end
