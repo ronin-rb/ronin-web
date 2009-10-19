@@ -151,7 +151,7 @@ install or update Overlays.
 == REQUIREMENTS:
 
 * {mechanize}[http://mechanize.rubyforge.org/] >= 0.9.3
-* {spidr}[http://spidr.rubyforge.org/] >= 0.1.9
+* {spidr}[http://spidr.rubyforge.org/] >= 0.2.0
 * {sinatra}[http://www.sinatrarb.com/] >= 0.9.4
 * {ronin}[http://ronin.rubyforge.org/] >= 0.3.0
 
