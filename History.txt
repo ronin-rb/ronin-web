@@ -1,3 +1,11 @@
+=== 0.2.1 / 2009-10-18
+
+* Require spidr >= 0.2.0.
+* Added Ronin::Scanners::Web.
+* Added more specs for Ronin::Web and Ronin::Scanners::Web.
+* Renamed Ronin::Web.proxy to Ronin::Web.proxy_server, to not conflict
+  with the original Ronin::Web.proxy method.
+
 === 0.2.0 / 2009-09-24
 
 * Require ronin >= 0.3.0.
