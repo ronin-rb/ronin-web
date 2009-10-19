@@ -53,11 +53,11 @@ install or update Overlays.
 
 * Get a web-page:
 
-    Web.get('http://www.example.com/')
+    Web.get('http://www.rubyinside.com/')
 
 * Get only the body of the web-page:
 
-    Web.get_body('http://www.example.com/')
+    Web.get_body('http://www.rubyinside.com/')
 
 * Get a WWW::Mechanize agent:
 

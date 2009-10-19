@@ -237,7 +237,7 @@ module Ronin
     #   The contents of the URL.
     #
     # @example Open a given URL.
-    #   Web.open('http://www.hackety.org/')
+    #   Web.open('http://rubyflow.com/')
     #
     # @example Open a given URL, using a custom User-Agent alias.
     #   Web.open('http://tenderlovemaking.com/',
@@ -374,7 +374,7 @@ module Ronin
     #   The requested page.
     #
     # @example
-    #   Web.get('http://www.0x000000.com')
+    #   Web.get('http://www.rubyinside.com')
     #   # => WWW::Mechanize::Page
     #
     # @example
