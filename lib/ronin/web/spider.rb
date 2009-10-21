@@ -39,7 +39,7 @@ module Ronin
       # @option options [Hash] :proxy (Web.proxy)
       #   The proxy to use while spidering.
       #
-      # @option options [String] :user_agent
+      # @option options [String] :user_agent (Web.user_agent)
       #   The User-Agent string to send.
       #
       # @option options [String] :referer
