@@ -111,7 +111,7 @@ module Ronin
           #
           # @example
           #   get '/login.php' do
-          #     proxy do |doc|
+          #     proxy_doc do |doc|
           #       doc.search('form/@action').each do |action|
           #         action.inner_text = action.inner_text.gsub(
           #           /^https/, 'http'
