@@ -20,9 +20,9 @@
 #
 
 require 'ronin/web/server/helpers/rendering'
+require 'ronin/web/server/helpers/files'
+require 'ronin/web/server/helpers/hosts'
 require 'ronin/web/server/helpers/proxy'
-require 'ronin/web/server/files'
-require 'ronin/web/server/hosts'
 require 'ronin/static/finders'
 require 'ronin/templates/erb'
 require 'ronin/ui/output'
@@ -42,9 +42,6 @@ module Ronin
         include Rack::Utils
         include Templates::Erb
         extend UI::Output
-
-        include Files
-        include Hosts
 
         # Default interface to run the Web Server on
         DEFAULT_HOST = '0.0.0.0'
@@ -308,6 +305,186 @@ module Ronin
           end
         end
 
+        #
+        # Hosts the contents of a file.
+        #
+        # @param [String] http_path
+        #   The path the web server will host the file at.
+        #
+        # @param [String] path
+        #   The path to the local file.
+        #
+        # @param [Symbol] custom_content_type
+        #   Optional content-type to host the file as.
+        #
+        # @example
+        #   MyApp.file '/robots.txt', '/path/to/my_robots.txt'
+        #
+        # @since 0.2.0
+        #
+        def self.file(http_path,path,custom_content_type=nil)
+          path = File.expand_path(path)
+
+          any(http_path) do
+            return_file(path,custom_content_type)
+          end
+        end
+
+        #
+        # Hosts the contents of the directory.
+        #
+        # @param [String] http_path
+        #   The path the web server will host the directory at.
+        #
+        # @param [String] directory
+        #   The path to the local directory.
+        #
+        # @param [Symbol] custom_content_type
+        #   Optional content-type to host the contents of the directory
+        #   with.
+        #
+        # @example
+        #   MyApp.directory '/download/', '/tmp/files/'
+        #
+        # @since 0.2.0
+        #
+        def self.directory(http_path,directory,custom_content_type=nil)
+          directory = File.expand_path(directory)
+
+          any(File.join(http_path,'*')) do
+            sub_path = File.expand_path(File.join('',params[:splat].first))
+            full_path = File.join(directory,sub_path)
+
+            return_file(full_path,custom_content_type)
+          end
+        end
+
+        #
+        # Routes requests with a specific Host header to another
+        # web server.
+        #
+        # @param [String] name
+        #   The host-name to route requests for.
+        #
+        # @param [Base, #call] server
+        #   The web server to route the requests to.
+        #
+        # @example
+        #   MyApp.host 'cdn.evil.com', EvilServer
+        #
+        # @since 0.2.0
+        #
+        def self.host(name,server)
+          name = name.to_s
+
+          before do
+            if request.host == name
+              halt(*server.call(request.env))
+            end
+          end
+        end
+
+        #
+        # Routes requests with a matching Host header to another web
+        # server.
+        #
+        # @param [Regexp, String] pattern
+        #   The pattern to match Host headers of requests.
+        #
+        # @param [Base, #call] server
+        #   The server to route the requests to.
+        #
+        # @example
+        #   MyApp.hosts_like /^a[0-9]\./, FileProxy
+        #
+        # @since 0.2.0
+        #
+        def self.hosts_like(pattern,server)
+          before do
+            if request.host.match(pattern)
+              halt(*server.call(request.env))
+            end
+          end
+        end
+
+        #
+        # Proxies requests to a given path.
+        #
+        # @param [String] path
+        #   The path to proxy requests for.
+        #
+        # @param [Hash] options
+        #   Additional options.
+        # 
+        # @yield [(response), body]
+        #   If a block is given, it will be passed the optional
+        #   response of the proxied request and the body received
+        #   from the proxied request.
+        #
+        # @yieldparam [Net::HTTP::Response] response
+        #   The response.
+        #
+        # @yieldparam [String] body
+        #   The body from the response.
+        #
+        # @example
+        #   proxy '/login.php' do |body|
+        #     body.gsub(/https/,'http')
+        #   end
+        #
+        # @example
+        #   proxy '/login*' do |response,body|
+        #   end
+        #
+        # @since 0.2.0
+        #
+        def self.proxy(path,options={},&block)
+          any(path) do
+            proxy(options,&block)
+          end
+        end
+
+        #
+        # Proxies requests to a given path.
+        #
+        # @param [String] path
+        #   The path to proxy requests for.
+        #
+        # @param [Hash] options
+        #   Additional options.
+        # 
+        # @yield [(response), page]
+        #   If a block is given, it will be passed the optional
+        #   response of the proxied request and the page from the
+        #   proxied request.
+        #
+        # @yieldparam [Net::HTTP::Response] response
+        #   The response.
+        #
+        # @yieldparam [Nokogiri::HTML, Nokogiri::XML] page
+        #   The page from the response.
+        #
+        # @example
+        #   proxy_page '/login.php' do |page|
+        #     body.search('@action').each do |action|
+        #       action.inner_text = action.inner_text.gsub(
+        #         /https/, 'http'
+        #       )
+        #     end
+        #   end
+        #
+        # @example
+        #   proxy_page '/login*' do |response,body|
+        #   end
+        #
+        # @since 0.2.0
+        #
+        def self.proxy_page(path,options={},&block)
+          any(path) do
+            proxy_page(options,&block)
+          end
+        end
+
         protected
 
         #
@@ -322,6 +499,8 @@ module Ronin
         enable :sessions
 
         helpers Helpers::Rendering
+        helpers Helpers::Files
+        helpers Helpers::Hosts
         helpers Helpers::Proxy
 
         not_found do

@@ -21,9 +21,6 @@ lib/ronin/web/server/helpers/proxy.rb
 lib/ronin/web/server/helpers/files.rb
 lib/ronin/web/server/helpers/hosts.rb
 lib/ronin/web/server/base.rb
-lib/ronin/web/server/files.rb
-lib/ronin/web/server/hosts.rb
-lib/ronin/web/server/proxy.rb
 lib/ronin/web/server/app.rb
 lib/ronin/web/server/web.rb
 lib/ronin/web/proxy.rb
