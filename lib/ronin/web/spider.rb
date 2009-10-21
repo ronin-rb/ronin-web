@@ -48,32 +48,37 @@ module Ronin
       # @option options [Integer] :delay (0)
       #   Duration in seconds to pause between spidering each link.
       #
-      # @option options [String, Regexp] :host
+      # @option options [Array] :schemes (['http', 'https'])
+      #   The list of acceptable URI schemes to visit.
+      #   The +https+ scheme will be ignored if +net/https+ cannot be
+      #   loaded.
+      #
+      # @option options [String] :host
       #   The host-name to visit.
       #
-      # @option options [Array] :hosts
-      #   Patterns of host-names to visit.
+      # @option options [Array<String, Regexp, Proc>] :hosts
+      #   The patterns which match the host-names to visit.
       #
-      # @option options [Array] :ignore_hosts
-      #   Patterns of host-names not to visit.
+      # @option options [Array<String, Regexp, Proc>] :ignore_hosts
+      #   The patterns which match the host-names to not visit.
       #
-      # @option options [Array] :ports
-      #   Ports to visit.
+      # @option options [Array<Integer, Regexp, Proc>] :ports
+      #   The patterns which match the ports to visit.
       #
-      # @option options [Array] :ignore_ports
-      #   Ports not to visit.
+      # @option options [Array<Integer, Regexp, Proc>] :ignore_ports
+      #   The patterns which match the ports to not visit.
       #
-      # @option options [Array] :links
-      #   Patterns of links to visit.
+      # @option options [Array<String, Regexp, Proc>] :links
+      #   The patterns which match the links to visit.
       #
-      # @option options [Array] :ignore_links
-      #   Patterns of links not to visit.
+      # @option options [Array<String, Regexp, Proc>] :ignore_links
+      #   The patterns which match the links to not visit.
       #
-      # @option options [Array] :ext
-      #   Patterns of file extensions to accept.
+      # @option options [Array<String, Regexp, Proc>] :exts
+      #   The patterns which match the URI path extensions to visit.
       #
-      # @option options [Array] :ignore_exts
-      #   Patterns of file extensions to ignore.
+      # @option options [Array<String, Regexp, Proc>] :ignore_exts
+      #   The patterns which match the URI path extensions to not visit.
       #
       # @yield [spider]
       #   If a block is given, it will be passed the newly created spider.
