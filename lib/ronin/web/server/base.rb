@@ -428,12 +428,8 @@ module Ronin
         #   The body from the response.
         #
         # @example
-        #   proxy '/login.php' do |body|
+        #   proxy '/login.php' do |response,body|
         #     body.gsub(/https/,'http')
-        #   end
-        #
-        # @example
-        #   proxy '/login*' do |response,body|
         #   end
         #
         # @since 0.2.0
@@ -465,16 +461,12 @@ module Ronin
         #   The page from the response.
         #
         # @example
-        #   proxy_doc '/login.php' do |page|
-        #     body.search('@action').each do |action|
+        #   proxy_doc '/login*' do |response,body|
+        #     doc.search('form/@action').each do |action|
         #       action.inner_text = action.inner_text.gsub(
-        #         /https/, 'http'
+        #         /^https/, 'http'
         #       )
         #     end
-        #   end
-        #
-        # @example
-        #   proxy_doc '/login*' do |response,body|
         #   end
         #
         # @since 0.2.0
