@@ -85,7 +85,7 @@ module Ronin
             #   The page from the response.
             #
             # @example
-            #   proxy '/login.php' do |page|
+            #   proxy_page '/login.php' do |page|
             #     body.search('@action').each do |action|
             #       action.inner_text = action.inner_text.gsub(
             #         /https/, 'http'
@@ -94,7 +94,7 @@ module Ronin
             #   end
             #
             # @example
-            #   proxy '/login*' do |response,body|
+            #   proxy_page '/login*' do |response,body|
             #   end
             #
             # @since 0.2.0
