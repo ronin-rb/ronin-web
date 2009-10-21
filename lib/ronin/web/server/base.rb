@@ -465,7 +465,7 @@ module Ronin
         #   The page from the response.
         #
         # @example
-        #   proxy_page '/login.php' do |page|
+        #   proxy_doc '/login.php' do |page|
         #     body.search('@action').each do |action|
         #       action.inner_text = action.inner_text.gsub(
         #         /https/, 'http'
@@ -474,14 +474,14 @@ module Ronin
         #   end
         #
         # @example
-        #   proxy_page '/login*' do |response,body|
+        #   proxy_doc '/login*' do |response,body|
         #   end
         #
         # @since 0.2.0
         #
-        def self.proxy_page(path,options={},&block)
+        def self.proxy_doc(path,options={},&block)
           any(path) do
-            proxy_page(options,&block)
+            proxy_doc(options,&block)
           end
         end
 
