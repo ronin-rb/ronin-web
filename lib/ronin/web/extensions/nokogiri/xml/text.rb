@@ -2,7 +2,7 @@ require 'nokogiri'
 
 module Nokogiri
   module XML
-    class Text < Node
+    class Text < CharacterData
 
       def similar?(other)
         super(other) && (self.content == other.content)
