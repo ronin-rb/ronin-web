@@ -36,7 +36,7 @@ module Ronin
         history.clear
 
         unless visit_hosts.empty?
-          enqueue("http://#{visit_hosts.first}/")
+          enqueue(URI::HTTP.build(:host => visit_hosts.first))
         end
 
         run do |page|
