@@ -30,6 +30,15 @@ module Ronin
 
       protected
 
+      #
+      # Spiders all web-pages.
+      #
+      # @yield [page]
+      #   Every spidered page will be passed to a given block.
+      #
+      # @yieldparam [Spidr::Page] page
+      #   A spidered page.
+      #
       def each_target(&block)
         print_info "Started web spidering ..."
 
