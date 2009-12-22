@@ -35,6 +35,7 @@ lib/ronin/scanners/web.rb
 tasks/spec.rb
 tasks/yard.rb
 spec/spec_helper.rb
+spec/helpers/output.rb
 spec/web/helpers/server.rb
 spec/web/helpers/root/index.html
 spec/web/helpers/root/test.txt
