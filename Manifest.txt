@@ -1,7 +1,7 @@
 COPYING.txt
-History.txt
+History.rdoc
 Manifest.txt
-README.txt
+README.rdoc
 Rakefile
 bin/ronin-web
 lib/ronin/web.rb

@@ -9,7 +9,10 @@ require './tasks/yard.rb'
 Hoe.spec('ronin-web') do
   self.rubyforge_name = 'ronin'
   self.developer('Postmodern', 'postmodern.mod3@gmail.com')
+  self.readme_file = 'README.rdoc'
+  self.history_file = 'History.rdoc'
   self.remote_rdoc_dir = 'docs/ronin-web'
+
   self.extra_deps = [
     ['nokogiri', '>=1.4.1'],
     ['mechanize', '>=0.9.3'],
