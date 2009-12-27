@@ -1,3 +1,4 @@
+COPYING.txt
 History.txt
 Manifest.txt
 README.txt
