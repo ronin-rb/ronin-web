@@ -26,7 +26,7 @@ describe Web do
       }
     end
 
-    doc.to_html.include?("<html><body><div>hello</div></body></html>").should == true
+    doc.to_html.should include("<html><body><div>hello</div></body></html>")
   end
 
   it "should be able to parse XML" do
@@ -47,7 +47,7 @@ describe Web do
       }
     end
 
-    doc.to_xml.include?("<root>\n  <stuff name=\"bla\">hello</stuff>\n</root>").should == true
+    doc.to_xml.should include("<root>\n  <stuff name=\"bla\">hello</stuff>\n</root>")
   end
 
   it "should have a default proxy" do

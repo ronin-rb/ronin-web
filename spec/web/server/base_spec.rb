@@ -17,7 +17,7 @@ describe Web::Server::Base do
 
   it "should allow for defining new index file-names to search for" do
     TestApp.index 'index.xml'
-    TestApp.indices.include?('index.xml').should == true
+    TestApp.indices.should include('index.xml')
   end
 
   it "should find a suitable Rack::Handler for the web server" do
