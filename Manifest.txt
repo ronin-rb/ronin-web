@@ -33,7 +33,6 @@ lib/ronin/web/web.rb
 lib/ronin/web/version.rb
 lib/ronin/network/helpers/web.rb
 lib/ronin/scanners/web.rb
-tasks/spec.rb
 tasks/yard.rb
 spec/spec_helper.rb
 spec/helpers/output.rb
