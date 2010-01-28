@@ -24,7 +24,7 @@ Hoe.spec('ronin-web') do
   ]
 
   self.extra_dev_deps = [
-    ['rspec', '>=1.2.8'],
+    ['rspec', '>=1.3.0'],
     ['yard', '>=0.5.2'],
     ['test-unit', '=1.2.3'],
     ['rack-test', '>=0.4.1']
