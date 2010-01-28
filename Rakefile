@@ -3,15 +3,17 @@
 require 'rubygems'
 require 'hoe'
 require 'hoe/signing'
-require './tasks/spec.rb'
-require './tasks/yard.rb'
+
+Hoe.plugin :yard
 
 Hoe.spec('ronin-web') do
   self.rubyforge_name = 'ronin'
   self.developer('Postmodern', 'postmodern.mod3@gmail.com')
-  self.readme_file = 'README.rdoc'
-  self.history_file = 'History.rdoc'
-  self.remote_rdoc_dir = 'docs/ronin-web'
+
+  self.rspec_options += ['--colour', '--format', 'specdoc']
+
+  self.yard_options += ['--protected']
+  self.remote_yard_dir = 'docs/ronin-web'
 
   self.extra_deps = [
     ['nokogiri', '>=1.4.1'],
@@ -27,8 +29,6 @@ Hoe.spec('ronin-web') do
     ['test-unit', '=1.2.3'],
     ['rack-test', '>=0.4.1']
   ]
-
-  self.spec_extras = {:has_rdoc => 'yard'}
 end
 
 # vim: syntax=Ruby
