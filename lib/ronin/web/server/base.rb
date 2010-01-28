@@ -23,7 +23,6 @@ require 'ronin/web/server/helpers/rendering'
 require 'ronin/web/server/helpers/files'
 require 'ronin/web/server/helpers/hosts'
 require 'ronin/web/server/helpers/proxy'
-require 'ronin/static/finders'
 require 'ronin/templates/erb'
 require 'ronin/ui/output'
 require 'ronin/extensions/meta'
@@ -32,13 +31,14 @@ require 'set'
 require 'thread'
 require 'rack'
 require 'sinatra'
+require 'static_paths/finders'
 
 module Ronin
   module Web
     module Server
       class Base < Sinatra::Base
 
-        include Static::Finders
+        include StaticPaths::Finders
         include Rack::Utils
         include Templates::Erb
         extend UI::Output
