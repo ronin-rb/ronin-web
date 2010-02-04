@@ -1,4 +1,4 @@
-=== 0.2.1 / 2009-10-18
+### 0.2.1 / 2009-10-18
 
 * Require spidr >= 0.2.0.
 * Added Ronin::Scanners::Web.
@@ -6,7 +6,7 @@
 * Renamed Ronin::Web.proxy to Ronin::Web.proxy_server, to not conflict
   with the original Ronin::Web.proxy method.
 
-=== 0.2.0 / 2009-09-24
+### 0.2.0 / 2009-09-24
 
 * Require ronin >= 0.3.0.
 * Require mechanize >= 0.9.3.
@@ -31,7 +31,7 @@
 * Refactored the Ronin::Web::Server to build ontop of Sinatra.
 * Refactored Ronin::Network::Helpers::Web.
 
-=== 0.1.3 / 2009-07-02
+### 0.1.3 / 2009-07-02
 
 * Use Hoe >= 2.0.0.
 * Require spidr >= 0.1.9.
@@ -49,7 +49,7 @@
 * Removed Server.run.
 * Removed Server#config.
 
-=== 0.1.2 / 2009-03-28
+### 0.1.2 / 2009-03-28
 
 * Added Ronin::Web::Proxy.
 * Added diagnostic messages to Ronin::Web::Spider.
@@ -59,10 +59,10 @@
     standard env Hash.
 * Updated specs for Ronin::Web::Server.
 
-=== 0.1.1 / 2009-02-23
+### 0.1.1 / 2009-02-23
 
-* Added a git style sub-command (<tt>ronin-web</tt>) which starts the Ronin
-  console with <tt>ronin/web</tt> preloaded.
+* Added a git style sub-command (`ronin-web`) which starts the Ronin
+  console with `ronin/web` preloaded.
 * Require Nokogiri >= 1.2.0.
 * Require Ronin >= 0.2.1.
 * Updated Ronin::Web::Server:
@@ -72,7 +72,7 @@
 * Fixed a bug when loading the Nokogiri extensions with Nokogiri >= 1.2.0.
 * Updated README.txt.
 
-=== 0.1.0 / 2009-01-22
+### 0.1.0 / 2009-01-22
 
 * Initial release.
   * Provides Web.html and Web.xml methods, which use Nokogiri::HTML and

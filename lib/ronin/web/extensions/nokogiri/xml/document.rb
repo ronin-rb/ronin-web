@@ -9,7 +9,7 @@ module Nokogiri
       #
       # @return [Integer]
       #   The total number of children and sub-children of the document.
-      #   Returns +0+ if the document has no root element.
+      #   Returns `0` if the document has no root element.
       #
       def total_children
         return 0 unless root

@@ -1,4 +1,4 @@
-= Ronin Web
+# Ronin Web
 
 * http://ronin.rubyforge.org/web/
 * http://github.com/postmodern/ronin-web
@@ -6,7 +6,7 @@
 * http://groups.google.com/group/ronin-ruby
 * irc.freenode.net #ronin
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 Ronin Web is a Ruby library for Ronin that provides support for web
 scraping and spidering functionality.
@@ -15,28 +15,28 @@ Ronin is a Ruby platform for exploit development and security research.
 Ronin allows for the rapid development and distribution of code, exploits
 or payloads over many common Source-Code-Management (SCM) systems.
 
-=== Ruby
+### Ruby
 
 Ronin's Ruby environment allows security researchers to leverage Ruby with
 ease. The Ruby environment contains a multitude of convenience methods
 for working with data in Ruby, a Ruby Object Database, a customized Ruby
 Console and an extendable command-line interface.
 
-=== Extend
+### Extend
 
 Ronin's more specialized features are provided by additional Ronin
 libraries, which users can choose to install. These libraries can allow
 one to write and run Exploits and Payloads, scan for PHP vulnerabilities,
 perform Google Dorks  or run 3rd party scanners.
 
-=== Publish
+### Publish
 
 Ronin allows users to publish and share code, exploits, payloads or other
 data via Overlays. Overlays are directories of code and data that can be
 hosted on any SVN, Hg, Git or Rsync server. Ronin makes it easy to create,
 install or update Overlays.
 
-== FEATURES:
+## FEATURES:
 
 * Web access (utilizing Mechanize and Nokogiri).
 * Integrates Spidr into Ronin::Web::Spider.
@@ -44,27 +44,27 @@ install or update Overlays.
   supports path and host-name routing.
 * Provides Ronin::Web::Proxy, a configurable Sinatra based Web Proxy.
 
-== SYNOPSIS:
+## SYNOPSIS:
 
-* Start the Ronin console with Ronin Web preloaded:
+Start the Ronin console with Ronin Web preloaded:
 
     $ ronin-web
 
-== EXAMPLES:
+## EXAMPLES:
 
-* Get a web-page:
+Get a web-page:
 
     Web.get('http://www.rubyinside.com/')
 
-* Get only the body of the web-page:
+Get only the body of the web-page:
 
     Web.get_body('http://www.rubyinside.com/')
 
-* Get a WWW::Mechanize agent:
+Get a WWW::Mechanize agent:
 
     agent = Web.agent
 
-* Parse HTML:
+Parse HTML:
 
     Web.html(open('some_file.html'))
     # => <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
@@ -74,7 +74,7 @@ install or update Overlays.
     #   </head>
     # </html>
 
-* Build a HTML document:
+Build a HTML document:
 
     doc = Web.build_html do
       html {
@@ -88,7 +88,7 @@ install or update Overlays.
     # <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
     # <html><head><script src="redirect.js" type="text/javascript"></script></head></html>
 
-* Parse XML:
+Parse XML:
 
     Web.xml(some_text)
     # => <?xml version="1.0"?>
@@ -100,7 +100,7 @@ install or update Overlays.
     # </users>
 
 
-* Build a XML document:
+Build a XML document:
 
     doc = Web.build_xml do
       playlist {
@@ -124,7 +124,7 @@ install or update Overlays.
     #   </mp3>
     # </playlist>
 
-* Spider a web site:
+Spider a web site:
 
     Web::Spider.host('www.example.com') do |spider|
       spider.every_url do |url|
@@ -136,7 +136,7 @@ install or update Overlays.
       end
     end
 
-* Serve files via a Web Server:
+Serve files via a Web Server:
 
     require 'ronin/web/server'
 
@@ -149,18 +149,18 @@ install or update Overlays.
       'Test 1 2 1 2'
     end
 
-== REQUIREMENTS:
+## REQUIREMENTS:
 
-* {mechanize}[http://mechanize.rubyforge.org/] >= 0.9.3
-* {spidr}[http://spidr.rubyforge.org/] >= 0.2.0
-* {sinatra}[http://www.sinatrarb.com/] >= 0.9.4
-* {ronin}[http://ronin.rubyforge.org/] >= 0.3.0
+* [mechanize](http://mechanize.rubyforge.org/) >= 0.9.3
+* [spidr](http://spidr.rubyforge.org/) >= 0.2.0
+* [sinatra](http://www.sinatrarb.com/) >= 0.9.4
+* [ronin](http://ronin.rubyforge.org/) >= 0.3.0
 
-== INSTALL:
+## INSTALL:
 
-  $ sudo gem install ronin-web
+    $ sudo gem install ronin-web
 
-== LICENSE:
+## LICENSE:
 
 Ronin Web - A Ruby library for Ronin that provides support for web
 scraping and spidering functionality.

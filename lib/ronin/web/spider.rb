@@ -50,7 +50,7 @@ module Ronin
       #
       # @option options [Array] :schemes (['http', 'https'])
       #   The list of acceptable URI schemes to visit.
-      #   The +https+ scheme will be ignored if +net/https+ cannot be
+      #   The `https` scheme will be ignored if `net/https` cannot be
       #   loaded.
       #
       # @option options [String] :host

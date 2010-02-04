@@ -32,8 +32,8 @@ module Ronin
         protected
 
         #
-        # Combines the proxy information set by the +@web_proxy_host+,
-        # +@web_proxy_port+, +@web_proxy_user+ and +@web_proxy_password+
+        # Combines the proxy information set by the `@web_proxy_host`,
+        # `@web_proxy_port`, `@web_proxy_user` and `@web_proxy_password`
         # instance variables.
         #
         # @return [Network::HTTP::Proxy]
@@ -57,7 +57,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (+@web_user_agent+)
+        # @option options [String] :user_agent (`@web_user_agent`)
         #   User-Agent string to use.
         #
         # @return [WWW::Mechanize]
@@ -86,7 +86,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (+@web_user_agent+)
+        # @option options [String] :user_agent (`@web_user_agent`)
         #   User-Agent string to use.
         #
         # @yield [page]
@@ -119,7 +119,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (+@web_user_agent+)
+        # @option options [String] :user_agent (`@web_user_agent`)
         #   User-Agent string to use.
         #
         # @yield [body]
@@ -156,7 +156,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (+@web_user_agent+)
+        # @option options [String] :user_agent (`@web_user_agent`)
         #   User-Agent string to use.
         #
         # @yield [page]
@@ -195,7 +195,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (+@web_user_agent+)
+        # @option options [String] :user_agent (`@web_user_agent`)
         #   User-Agent string to use.
         #
         # @yield [body]

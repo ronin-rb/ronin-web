@@ -137,7 +137,7 @@ module Ronin
     #
     # @return [URI::HTTP, nil]
     #   The HTTP URI that represents the proxy. If the proxy is diabled,
-    #   +nil+ will be returned.
+    #   `nil` will be returned.
     #
     # @example
     #   Web.proxy_url

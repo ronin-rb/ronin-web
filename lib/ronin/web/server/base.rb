@@ -99,7 +99,7 @@ module Ronin
         end
 
         #
-        # Adds a new index to the +Base.indices+ list.
+        # Adds a new index to the {Base.indices} list.
         #
         # @param [String, Symbol] name
         #   The index name to add.
@@ -156,7 +156,7 @@ module Ronin
 
         #
         # Run the web server using the Rack Handler returned by
-        # +handler_class+.
+        # {handler_class}.
         #
         # @param [Hash] options Additional options.
         #
