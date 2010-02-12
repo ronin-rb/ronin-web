@@ -166,7 +166,7 @@ module Ronin
     #   The supported Web User-Agent Aliases.
     #
     def Web.user_agent_aliases
-      WWW::Mechanize::AGENT_ALIASES
+      Mechanize::AGENT_ALIASES
     end
 
     #
@@ -299,10 +299,10 @@ module Ronin
     #   If a block is given, it will be passed the newly created Mechanize
     #   agent.
     #
-    # @yieldparam [WWW::Mechanize] agent
+    # @yieldparam [Mechanize] agent
     #   The new Mechanize agent.
     #
-    # @return [WWW::Mechanize]
+    # @return [Mechanize]
     #   The new Mechanize agent.
     #
     # @example Create a new agent.
@@ -314,10 +314,10 @@ module Ronin
     # @example Create a new agent, with a custom User-Agent string.
     #   Web.agent(:user_agent => 'wooden pants')
     #
-    # @see http://mechanize.rubyforge.org/mechanize/WWW/Mechanize.html
+    # @see http://mechanize.rubyforge.org/mechanize/Mechanize.html
     #
     def Web.agent(options={},&block)
-      agent = WWW::Mechanize.new
+      agent = Mechanize.new
 
       if options[:user_agent_alias]
         agent.user_agent_alias = options[:user_agent_alias]
@@ -367,15 +367,15 @@ module Ronin
     #   If a block is given, it will be passed the page for the requested
     #   URL.
     #
-    # @yieldparam [WWW::Mechanize::Page] page
+    # @yieldparam [Mechanize::Page] page
     #   The requested page.
     #
-    # @return [WWW::Mechanize::Page]
+    # @return [Mechanize::Page]
     #   The requested page.
     #
     # @example
     #   Web.get('http://www.rubyinside.com')
-    #   # => WWW::Mechanize::Page
+    #   # => Mechanize::Page
     #
     # @example
     #   Web.get('http://www.rubyinside.com') do |page|
@@ -384,7 +384,7 @@ module Ronin
     #     end
     #   end
     #
-    # @see http://mechanize.rubyforge.org/mechanize/WWW/Mechanize/Page.html
+    # @see http://mechanize.rubyforge.org/mechanize/Mechanize/Page.html
     #
     def Web.get(url,options={},&block)
       page = Web.agent(options).get(url)
@@ -461,15 +461,15 @@ module Ronin
     #   If a block is given, it will be passed the page for the requested
     #   URL.
     #
-    # @yieldparam [WWW::Mechanize::Page] page
+    # @yieldparam [Mechanize::Page] page
     #   The requested page.
     #
-    # @return [WWW::Mechanize::Page]
+    # @return [Mechanize::Page]
     #   The requested page.
     #
     # @example
     #   Web.post('http://www.rubyinside.com')
-    #   # => WWW::Mechanize::Page
+    #   # => Mechanize::Page
     #
     def Web.post(url,options={},&block)
       query = {}
@@ -506,10 +506,10 @@ module Ronin
     # @yield [body]
     #   If a block is given, it will be passed the body of the page.
     #
-    # @yieldparam [WWW::Mechanize::Page] page
+    # @yieldparam [Mechanize::Page] page
     #   The body of the requested page.
     #
-    # @return [WWW::Mechanize::Page]
+    # @return [Mechanize::Page]
     #   The body of the requested page.
     #
     # @example

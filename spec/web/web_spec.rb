@@ -93,7 +93,7 @@ describe Web do
   it "should allow setting of the User-Agent string using an alias" do
     Web.user_agent_alias = 'Mac FireFox'
 
-    Web.user_agent.should == "Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.8.0.3) Gecko/20060426 Firefox/1.5.0.3"
+    Web.user_agent.should == "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6"
   end
 
   it "should open URLs as temporary files" do
@@ -107,8 +107,8 @@ describe Web do
       Web.user_agent = nil
     end
 
-    it "should provide WWW::Mechanize agents" do
-      Web.agent.class.should == WWW::Mechanize
+    it "should provide Mechanize agents" do
+      Web.agent.class.should == Mechanize
     end
 
     it "should use the Ronin User-Agent string" do
@@ -125,23 +125,23 @@ describe Web do
     it "should support using a custom User-Agent alias" do
       agent = Web.agent(:user_agent_alias => 'iPhone')
       
-      agent.user_agent.should == 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3'
+      agent.user_agent.should == "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3"
     end
 
     describe ":proxy" do
       it "should accept Proxy values" do
-        pending "WWW::Mechanize needs reader methods for the proxy settings"
+        pending "Mechanize needs reader methods for the proxy settings"
       end
 
       it "should accept Hash values" do
       end
 
       it "should accept String values" do
-        pending "WWW::Mechanize needs reader methods for the proxy settings"
+        pending "Mechanize needs reader methods for the proxy settings"
       end
 
       it "should default to Web.proxy" do
-        pending "WWW::Mechanize needs reader methods for the proxy settings"
+        pending "Mechanize needs reader methods for the proxy settings"
       end
 
       it "should raise a RuntimeError exception for bad :proxy options" do
@@ -152,14 +152,14 @@ describe Web do
     end
   end
 
-  it "should be able to get WWW::Mechanize pages" do
+  it "should be able to get Mechanize pages" do
     page = Web.get('http://www.example.com/')
 
-    page.class.should == WWW::Mechanize::Page
+    page.class.should == Mechanize::Page
     page.at('title').inner_text.should == 'Example Web Page'
   end
 
-  it "should be able to get the bodies of WWW::Mechanize pages" do
+  it "should be able to get the bodies of Mechanize pages" do
     body = Web.get_body('http://www.example.com/')
 
     body.should =~ /Example Web Page/

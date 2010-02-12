@@ -60,7 +60,7 @@ Get only the body of the web-page:
 
     Web.get_body('http://www.rubyinside.com/')
 
-Get a WWW::Mechanize agent:
+Get a Mechanize agent:
 
     agent = Web.agent
 

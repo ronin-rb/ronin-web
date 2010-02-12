@@ -60,7 +60,7 @@ module Ronin
         # @option options [String] :user_agent (`@web_user_agent`)
         #   User-Agent string to use.
         #
-        # @return [WWW::Mechanize]
+        # @return [Mechanize]
         #   The agent.
         #
         def web_agent(options={},&block)
@@ -93,10 +93,10 @@ module Ronin
         #   If a block is given, it will be passed the page for the
         #   requested URL.
         #
-        # @yieldparam [WWW::Mechanize::Page] page
+        # @yieldparam [Mechanize::Page] page
         #   The requested page.
         #
-        # @return [WWW::Mechanize::Page]
+        # @return [Mechanize::Page]
         #   The requested page.
         #
         def web_get(url,options={},&block)
@@ -163,10 +163,10 @@ module Ronin
         #   If a block is given, it will be passed the page for the
         #   requested URL.
         #
-        # @yieldparam [WWW::Mechanize::Page] page
+        # @yieldparam [Mechanize::Page] page
         #   The requested page.
         #
-        # @return [WWW::Mechanize::Page]
+        # @return [Mechanize::Page]
         #   The requested page.
         #
         def web_post(url,options={},&block)
@@ -201,7 +201,7 @@ module Ronin
         # @yield [body]
         #   If a block is given, it will be passed the body of the page.
         #
-        # @yieldparam [WWW::Mechanize::Page] page
+        # @yieldparam [Mechanize::Page] page
         #   The body of the requested page.
         #
         # @return [String]
