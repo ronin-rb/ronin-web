@@ -1,12 +1,12 @@
 # Ronin Web
 
-* http://ronin.rubyforge.org/web/
-* http://github.com/postmodern/ronin-web
-* http://github.com/postmodern/ronin-web/issues
-* http://groups.google.com/group/ronin-ruby
+* [ronin.rubyforge.org/web](http://ronin.rubyforge.org/web/)
+* [github.com/postmodern/ronin-web](http://github.com/postmodern/ronin-web/)
+* [github.com/postmodern/ronin-web/issues](http://github.com/postmodern/ronin-web/issues)
+* [groups.google.com/group/ronin-ruby](http://groups.google.com/group/ronin-ruby)
 * irc.freenode.net #ronin
 
-## DESCRIPTION:
+## Description
 
 Ronin Web is a Ruby library for Ronin that provides support for web
 scraping and spidering functionality.
@@ -36,7 +36,7 @@ data via Overlays. Overlays are directories of code and data that can be
 hosted on any SVN, Hg, Git or Rsync server. Ronin makes it easy to create,
 install or update Overlays.
 
-## FEATURES:
+## Features
 
 * Web access (utilizing Mechanize and Nokogiri).
 * Integrates Spidr into Ronin::Web::Spider.
@@ -44,13 +44,13 @@ install or update Overlays.
   supports path and host-name routing.
 * Provides Ronin::Web::Proxy, a configurable Sinatra based Web Proxy.
 
-## SYNOPSIS:
+## Synopsis
 
 Start the Ronin console with Ronin Web preloaded:
 
     $ ronin-web
 
-## EXAMPLES:
+## Examples
 
 Get a web-page:
 
@@ -149,18 +149,18 @@ Serve files via a Web Server:
       'Test 1 2 1 2'
     end
 
-## REQUIREMENTS:
+## Requirements
 
-* [mechanize](http://mechanize.rubyforge.org/) >= 0.9.3
+* [mechanize](http://mechanize.rubyforge.org/) >= 1.0.0
 * [spidr](http://spidr.rubyforge.org/) >= 0.2.0
 * [sinatra](http://www.sinatrarb.com/) >= 0.9.4
 * [ronin](http://ronin.rubyforge.org/) >= 0.3.0
 
-## INSTALL:
+## Install
 
     $ sudo gem install ronin-web
 
-## LICENSE:
+## License
 
 Ronin Web - A Ruby library for Ronin that provides support for web
 scraping and spidering functionality.
