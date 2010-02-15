@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-02-11}
+  s.date = %q{2010-02-12}
   s.default_executable = %q{ronin-web}
-  s.description = %q{}
+  s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{postmodern.mod3@gmail.com}
   s.executables = ["ronin-web"]
   s.extra_rdoc_files = [
@@ -54,6 +54,7 @@ Gem::Specification.new do |s|
     "lib/ronin/web/spider.rb",
     "lib/ronin/web/version.rb",
     "lib/ronin/web/web.rb",
+    "ronin-web.gemspec",
     "spec/helpers/output.rb",
     "spec/scanners/web_spec.rb",
     "spec/spec_helper.rb",
@@ -86,7 +87,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{}
+  s.summary = %q{A Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.test_files = [
     "spec/spec_helper.rb",
     "spec/web/extensions/nokogiri_spec.rb",
