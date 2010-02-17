@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-02-12}
+  s.date = %q{2010-02-17}
   s.default_executable = %q{ronin-web}
   s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{postmodern.mod3@gmail.com}
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "bin/ronin-web",
-    "lib/ronin/network/helpers/web.rb",
+    "lib/ronin/network/mixins/web.rb",
     "lib/ronin/scanners/web.rb",
     "lib/ronin/web.rb",
     "lib/ronin/web/extensions.rb",
