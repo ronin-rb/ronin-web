@@ -27,12 +27,32 @@ module Ronin
     module Mixins
       module Web
 
+        # The Web Proxy host to connect to
+        parameter :web_proxy_host,
+                  :type => String,
+                  :description => 'Web Proxy host'
+
+        # The Web Proxy port to connect to
+        parameter :web_proxy_port,
+                  :type => Integer,
+                  :description => 'Web Proxy port'
+
+        # The Web Proxy user to authenticate with
+        parameter :web_proxy_user,
+                  :type => String,
+                  :description => 'Web Proxy authentication user'
+
+        # The Web Proxy password to authenticate with
+        parameter :web_proxy_password,
+                  :type => String,
+                  :description => 'Web Proxy authentication password'
+
         protected
 
         #
-        # Combines the proxy information set by the `@web_proxy_host`,
-        # `@web_proxy_port`, `@web_proxy_user` and `@web_proxy_password`
-        # instance variables.
+        # Combines the proxy information set by the {#web_proxy_host},
+        # {#web_proxy_port}, {#web_proxy_user} and {#web_proxy_password}
+        # parameters.
         #
         # @return [Network::HTTP::Proxy]
         #   The current proxy information.
@@ -55,7 +75,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (`@web_user_agent`)
+        # @option options [String] :user_agent (web_user_agent)
         #   User-Agent string to use.
         #
         # @return [Mechanize]
@@ -84,7 +104,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (`@web_user_agent`)
+        # @option options [String] :user_agent (web_user_agent)
         #   User-Agent string to use.
         #
         # @yield [page]
@@ -117,7 +137,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (`@web_user_agent`)
+        # @option options [String] :user_agent (web_user_agent)
         #   User-Agent string to use.
         #
         # @yield [body]
@@ -154,7 +174,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (`@web_user_agent`)
+        # @option options [String] :user_agent (web_user_agent)
         #   User-Agent string to use.
         #
         # @yield [page]
@@ -193,7 +213,7 @@ module Ronin
         # @option options [Hash] :proxy (web_proxy)
         #   Proxy information.
         #
-        # @option options [String] :user_agent (`@web_user_agent`)
+        # @option options [String] :user_agent (web_user_agent)
         #   User-Agent string to use.
         #
         # @yield [body]
