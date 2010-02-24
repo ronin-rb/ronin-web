@@ -19,7 +19,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/network/mixins/helper'
 require 'ronin/network/http/proxy'
 require 'ronin/web/web'
 
@@ -27,7 +26,6 @@ module Ronin
   module Network
     module Mixins
       module Web
-        include Helper
 
         protected
 
