@@ -7,6 +7,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = 'ronin-web'
     gem.version = Ronin::Web::VERSION
+    gem.licenses = ['GPL-2']
     gem.summary = %Q{A Ruby library for Ronin that provides support for web scraping and spidering functionality.}
     gem.description = %Q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
     gem.email = 'postmodern.mod3@gmail.com'
