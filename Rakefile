@@ -24,6 +24,7 @@ begin
     gem.add_development_dependency 'rack-test', '~> 0.4.1'
     gem.has_rdoc = 'yard'
   end
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
