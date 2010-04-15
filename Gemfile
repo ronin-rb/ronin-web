@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 ronin_ruby = "git://github.com/ronin-ruby"
 
 group :runtime do
+  gem 'data_paths',	'~> 0.2.1'
   gem 'nokogiri',	'~> 1.4.1'
   gem 'mechanize',	'~> 1.0.0'
   gem 'spidr',		'~> 0.2.0'

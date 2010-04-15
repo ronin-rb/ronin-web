@@ -31,14 +31,14 @@ require 'set'
 require 'thread'
 require 'rack'
 require 'sinatra'
-require 'static_paths/finders'
+require 'data_paths/finders'
 
 module Ronin
   module Web
     module Server
       class Base < Sinatra::Base
 
-        include StaticPaths::Finders
+        include DataPaths::Finders
         include Rack::Utils
         include Templates::Erb
         extend UI::Output
