@@ -7,6 +7,7 @@ group :runtime do
   gem 'mechanize',	'~> 1.0.0'
   gem 'spidr',		'~> 0.2.0'
   gem 'sinatra',	'~> 0.9.4'
+  gem 'ronin-ext',	'~> 0.1.0', :git => "#{ronin_ruby}/ronin-ext.git"
   gem 'ronin',		'~> 0.4.0', :git => "#{ronin_ruby}/ronin.git"
 end
 
