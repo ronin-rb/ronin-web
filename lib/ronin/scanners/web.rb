@@ -20,7 +20,7 @@
 #
 
 require 'ronin/web/spider'
-require 'ronin/scanners/scanner'
+require 'ronin/scanner/scanner'
 
 module Ronin
   module Scanners
