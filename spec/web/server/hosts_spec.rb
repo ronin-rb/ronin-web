@@ -1,6 +1,6 @@
+require 'spec_helper'
 require 'ronin/web/server'
 
-require 'spec_helper'
 require 'web/server/classes/hosts_app'
 require 'web/server/helpers/server'
 

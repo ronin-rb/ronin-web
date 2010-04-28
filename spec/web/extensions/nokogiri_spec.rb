@@ -1,6 +1,6 @@
+require 'spec_helper'
 require 'ronin/web/extensions/nokogiri'
 
-require 'spec_helper'
 require 'nokogiri'
 
 describe Nokogiri::HTML do

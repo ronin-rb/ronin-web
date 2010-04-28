@@ -1,6 +1,5 @@
-require 'ronin/web/web'
-
 require 'spec_helper'
+require 'ronin/web/web'
 
 describe Web do
   it "should have a VERSION constant" do

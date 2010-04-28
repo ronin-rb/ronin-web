@@ -1,6 +1,6 @@
+require 'spec_helper'
 require 'ronin/scanners/web'
 
-require 'spec_helper'
 require 'helpers/output'
 
 describe Scanners::Web do
