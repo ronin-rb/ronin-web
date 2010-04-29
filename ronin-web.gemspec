@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-04-15}
+  s.date = %q{2010-04-29}
   s.default_executable = %q{ronin-web}
   s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{postmodern.mod3@gmail.com}
@@ -81,33 +81,32 @@ Gem::Specification.new do |s|
     "spec/web/server/helpers/server.rb",
     "spec/web/server/hosts_spec.rb",
     "spec/web/server/proxy_spec.rb",
-    "spec/web/web_spec.rb"
+    "spec/web_spec.rb"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin-web}
   s.licenses = ["GPL-2"]
-  s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{A Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.test_files = [
-    "spec/web/server/base_spec.rb",
-    "spec/web/server/hosts_spec.rb",
-    "spec/web/server/files_spec.rb",
-    "spec/web/server/helpers/server.rb",
-    "spec/web/server/proxy_spec.rb",
-    "spec/web/server/classes/hosts_app.rb",
-    "spec/web/server/classes/proxy_app.rb",
-    "spec/web/server/classes/files_app.rb",
-    "spec/web/server/classes/test_app.rb",
-    "spec/web/server/classes/sub_app.rb",
+    "spec/helpers/output.rb",
+    "spec/scanners/web_spec.rb",
+    "spec/spec_helper.rb",
     "spec/web/extensions/nokogiri_spec.rb",
-    "spec/web/web_spec.rb",
     "spec/web/helpers/server.rb",
     "spec/web/proxy/base_spec.rb",
-    "spec/spec_helper.rb",
-    "spec/scanners/web_spec.rb",
-    "spec/helpers/output.rb"
+    "spec/web/server/base_spec.rb",
+    "spec/web/server/classes/files_app.rb",
+    "spec/web/server/classes/hosts_app.rb",
+    "spec/web/server/classes/proxy_app.rb",
+    "spec/web/server/classes/sub_app.rb",
+    "spec/web/server/classes/test_app.rb",
+    "spec/web/server/files_spec.rb",
+    "spec/web/server/helpers/server.rb",
+    "spec/web/server/hosts_spec.rb",
+    "spec/web/server/proxy_spec.rb",
+    "spec/web_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -120,7 +119,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<mechanize>, ["~> 1.0.0"])
       s.add_runtime_dependency(%q<spidr>, ["~> 0.2.0"])
       s.add_runtime_dependency(%q<sinatra>, ["~> 0.9.4"])
-      s.add_runtime_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+      s.add_runtime_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_runtime_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_development_dependency(%q<bundler>, ["~> 0.9.19"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
@@ -133,7 +132,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mechanize>, ["~> 1.0.0"])
       s.add_dependency(%q<spidr>, ["~> 0.2.0"])
       s.add_dependency(%q<sinatra>, ["~> 0.9.4"])
-      s.add_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+      s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_dependency(%q<bundler>, ["~> 0.9.19"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
@@ -147,7 +146,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mechanize>, ["~> 1.0.0"])
     s.add_dependency(%q<spidr>, ["~> 0.2.0"])
     s.add_dependency(%q<sinatra>, ["~> 0.9.4"])
-    s.add_dependency(%q<ronin-ext>, ["~> 0.1.0"])
+    s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
     s.add_dependency(%q<ronin>, ["~> 0.4.0"])
     s.add_dependency(%q<bundler>, ["~> 0.9.19"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
