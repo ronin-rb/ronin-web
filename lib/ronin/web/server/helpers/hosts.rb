@@ -58,12 +58,14 @@ module Ronin
           #
           # @since 0.2.0
           #
-          def for_host(name_or_pattern,&block)
-            if name_or_pattern.kind_of?(Regexp)
-              halt(*block.call()) if request.host =~ name_or_pattern
-            else
-              halt(*block.call()) if request.host == name_or_pattern.to_s
-            end
+          def for_host(name_or_pattern)
+            result = if name_or_pattern.kind_of?(Regexp)
+                       request.host =~ name_or_pattern
+                     else
+                       request.host == name_or_pattern.to_s
+                     end
+
+            halt(*yield())
           end
         end
       end

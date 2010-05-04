@@ -88,7 +88,7 @@ module Ronin
       #
       # @see http://spidr.rubyforge.org/docs/classes/Spidr/Agent.html
       #
-      def initialize(options={},&block)
+      def initialize(options={})
         options = {
           :proxy => Web.proxy,
           :user_agent => Web.user_agent
@@ -100,7 +100,7 @@ module Ronin
           print_info("Spidering #{url}")
         end
 
-        block.call(self) if block
+        yield self if block_given?
       end
 
     end

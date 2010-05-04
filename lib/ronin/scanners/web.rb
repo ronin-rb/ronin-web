@@ -39,7 +39,7 @@ module Ronin
       # @yieldparam [Spidr::Page] page
       #   A spidered page.
       #
-      def each_target(&block)
+      def each_target
         print_info "Started web spidering ..."
 
         history.clear
@@ -50,7 +50,7 @@ module Ronin
 
         run do |page|
           print_info "Scanning page: #{page.url}"
-          block.call(page)
+          yield page
         end
 
         print_info "Finished web spidering."

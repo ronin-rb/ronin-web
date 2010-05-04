@@ -43,10 +43,10 @@ module Ronin
     #
     # @return [Nokogiri::HTML::Document] The new HTML document object.
     #
-    def Web.html(body,&block)
+    def Web.html(body)
       doc = Nokogiri::HTML(body)
 
-      block.call(doc) if block
+      yield doc if block_given?
       return doc
     end
 
@@ -89,10 +89,10 @@ module Ronin
     #
     # @return [Nokogiri::XML::Document] The new XML document object.
     #
-    def Web.xml(body,&block)
+    def Web.xml(body)
       doc = Nokogiri::XML(body)
 
-      block.call(doc) if block
+      yield doc if block_given?
       return doc
     end
 
@@ -316,7 +316,7 @@ module Ronin
     #
     # @see http://mechanize.rubyforge.org/mechanize/Mechanize.html
     #
-    def Web.agent(options={},&block)
+    def Web.agent(options={})
       agent = Mechanize.new
 
       if options[:user_agent_alias]
@@ -341,7 +341,7 @@ module Ronin
         agent.set_proxy(proxy[:host],proxy[:port],proxy[:user],proxy[:password])
       end
 
-      block.call(agent) if block
+      yield agent if block_given?
       return agent
     end
 
@@ -386,10 +386,10 @@ module Ronin
     #
     # @see http://mechanize.rubyforge.org/mechanize/Mechanize/Page.html
     #
-    def Web.get(url,options={},&block)
+    def Web.get(url,options={})
       page = Web.agent(options).get(url)
 
-      block.call(page) if block
+      yield page if block_given?
       return page
     end
 
@@ -429,10 +429,10 @@ module Ronin
     #     puts body
     #   end
     #
-    def Web.get_body(url,options={},&block)
+    def Web.get_body(url,options={})
       body = Web.get(url,options).body
 
-      block.call(body) if block
+      yield body if block_given?
       return body
     end
 
@@ -471,13 +471,13 @@ module Ronin
     #   Web.post('http://www.rubyinside.com')
     #   # => Mechanize::Page
     #
-    def Web.post(url,options={},&block)
+    def Web.post(url,options={})
       query = {}
       query.merge!(options[:query]) if options[:query]
 
       page = Web.agent(options).post(url,query)
 
-      block.call(page) if block
+      yield page if block_given?
       return page
     end
 
@@ -521,10 +521,10 @@ module Ronin
     #     puts body
     #   end
     #
-    def Web.post_body(url,options={},&block)
+    def Web.post_body(url,options={})
       body = Web.post(url,options).body
 
-      block.call(body) if block
+      yield body if block_given?
       return body
     end
   end

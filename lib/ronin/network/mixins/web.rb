@@ -117,10 +117,10 @@ module Ronin
         # @return [Mechanize::Page]
         #   The requested page.
         #
-        def web_get(url,options={},&block)
+        def web_get(url,options={})
           page = web_agent(options).get(url)
 
-          block.call(page) if block
+          yield page if block_given?
           return page
         end
 
@@ -149,11 +149,11 @@ module Ronin
         # @return [String]
         #   The requested body of the page.
         #
-        def web_get_body(url,options={},&block)
+        def web_get_body(url,options={})
           web_get(url,options) do |page|
             body = page.body
 
-            block.call(body) if block
+            yield body if block_given?
             return body
           end
         end
@@ -187,13 +187,13 @@ module Ronin
         # @return [Mechanize::Page]
         #   The requested page.
         #
-        def web_post(url,options={},&block)
+        def web_post(url,options={})
           query = {}
           query.merge!(options[:query]) if options[:query]
 
           page = web_agent(options).post(url)
 
-          block.call(page) if block
+          yield page if block_given?
           return page
         end
 
@@ -225,11 +225,11 @@ module Ronin
         # @return [String]
         #   The requested body of the page.
         #
-        def web_post_body(url,options={},&block)
+        def web_post_body(url,options={})
           web_post(url,options) do |page|
             body = page.body
 
-            block.call(body) if block
+            yield body if block_given?
             return body
           end
         end

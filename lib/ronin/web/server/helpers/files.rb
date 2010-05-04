@@ -65,14 +65,14 @@ module Ronin
           #
           # @since 0.2.0
           #
-          def index_of(path,&block)
+          def index_of(path)
             path = File.expand_path(path)
 
             Base.indices.each do |name|
               index = File.join(path,name)
 
               if File.file?(index)
-                block.call(index) if block
+                yield index if block_given?
                 return index
               end
             end
