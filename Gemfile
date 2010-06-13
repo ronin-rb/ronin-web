@@ -9,7 +9,6 @@ group :runtime do
   gem 'sinatra',	'~> 0.9.4'
   gem 'ronin-support',	'~> 0.1.0', :git => "#{ronin_ruby}/ronin-support.git"
   gem 'ronin',		'~> 0.4.0', :git => "#{ronin_ruby}/ronin.git"
-  gem 'ronin-scanners',	'~> 0.2.0', :git => "#{ronin_ruby}/ronin-scanners.git"
 end
 
 group :development do
