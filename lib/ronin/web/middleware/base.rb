@@ -64,6 +64,21 @@ module Ronin
         protected
 
         #
+        # Unescapes the given data.
+        #
+        # @param [String] data
+        #   The given data.
+        #
+        # @return [String]
+        #   The unescaped data.
+        #
+        # @since 0.2.2
+        #
+        def unescape(data)
+          Rack::Utils.unescape(data)
+        end
+
+        #
         # Returns the MIME type for a path.
         #
         # @param [String] path

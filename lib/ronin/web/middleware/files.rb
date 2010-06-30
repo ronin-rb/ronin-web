@@ -29,7 +29,7 @@ module Ronin
       #
       #     use Ronin::Web::Middleware::Files do |files|
       #       files.map '/foo.txt', 'foo.txt'
-      #       files.map '/awesome.exe', 'trojan.exe'
+      #       files.map '/downloads/awesome.exe', 'trojan.exe'
       #     end
       #
       class Files < Base
@@ -111,7 +111,7 @@ module Ronin
         # @since 0.2.2
         #
         def call(env)
-          path = File.expand_path(env['PATH_INFO'])
+          path = File.expand_path(unescape(env['PATH_INFO']))
 
           if @files.has_key?(path)
             local_path = @files[path]
