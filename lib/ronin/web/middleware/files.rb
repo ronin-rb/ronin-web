@@ -29,7 +29,7 @@ module Ronin
       #
       #     use Ronin::Web::Middleware::Files do |files|
       #       files.map '/foo.txt', 'foo.txt'
-      #       files.map '/downloads/awesome.exe', 'trojan.exe'
+      #       files.map /\.exe$/, 'trojan.exe'
       #     end
       #
       class Files < Base
@@ -73,13 +73,19 @@ module Ronin
         #
         # Maps the local path to a remote path.
         #
-        # @param [String] remote_path
+        # @param [Regexp, String] remote_path
         #   The remote path to expose.
         #
         # @param [String] local_path
         #   The local path to host.
         #
         # @return [true]
+        #
+        # @example Mapping a path
+        #   map '/foo.txt', 'foo.txt'
+        #
+        # @example Mapping multiple paths using a regular expression
+        #   map /\.exe$/, 'trojan.exe'
         #
         # @since 0.2.2
         #
@@ -102,10 +108,14 @@ module Ronin
         def call(env)
           path = File.expand_path(unescape(env['PATH_INFO']))
 
-          if @files.has_key?(path)
-            local_path = @files[path]
+          @files.each do |pattern,local_path|
+            matched = if patterh.kind_of?(Regexp)
+                        path =~ pattern
+                      else
+                        path == pattern
+                      end
 
-            return response_for(local_path)
+            return response_for(local_path) if matched
           end
 
           super(env)
