@@ -26,11 +26,26 @@ module Ronin
     module Middleware
       class Base
 
+        # The default status code to return
+        attr_accessor :status
+
+        # The default headers to return
+        attr_reader :headers
+
         #
         # Creates a new middleware object.
         #
         # @param [#call] app
         #   The application the middleware will sit in front of.
+        #
+        # @param [Hash] options
+        #   Additional options.
+        #
+        # @option options [Integer] :status (200)
+        #   The status code to return.
+        #
+        # @option options [Hash] :headers
+        #   The headers to return.
         #
         # @yield [middleware]
         #   If a block is given, it will be passed the new middleware.
@@ -40,8 +55,13 @@ module Ronin
         #
         # @since 0.2.2
         #
-        def initialize(app)
+        def initialize(app,options={})
           @app = app
+
+          @status = (options[:status] || 200)
+          @headers = {}
+
+          @headers.merge!(options[:headers]) if options.has_key?(:headers)
 
           yield self if block_given?
         end
@@ -91,6 +111,53 @@ module Ronin
         #
         def mime_type_for(path)
           Rack::Mime.mime_type(File.extname(path))
+        end
+
+        #
+        # Creates a new response.
+        #
+        # @param [Array, IO] body
+        #   The body for the response.
+        #
+        # @param [Hash] headers
+        #   Additional headers for the response.
+        #
+        # @yield [response]
+        #   If a block is given, it will be passed the new response.
+        #
+        # @yieldparam [Rack::Response] response
+        #   The new response object.
+        #
+        # @return [Rack::Response]
+        #   The new response object.
+        #
+        # @since 0.2.2
+        #
+        def response(body=[],headers={},&block)
+          Rack::Response.new(body,@status,@headers.merge(headers),&block)
+        end
+
+        #
+        # Creates a new response for a file.
+        #
+        # @param [String] path
+        #   The path to the file.
+        #
+        # @param [Hash] headers
+        #   Additional headers for the response.
+        #
+        # @return [Rack::Response]
+        #   The new response object.
+        #
+        # @see #response
+        #
+        # @since 0.2.2
+        #
+        def response_for(path,headers={})
+          response(
+            File.new(path),
+            headers.merge('Content-Type' => mime_type_for(path))
+          )
         end
 
       end

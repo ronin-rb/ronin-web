@@ -37,12 +37,6 @@ module Ronin
         # The mapping of remote paths to local paths
         attr_reader :files
 
-        # The status code to return
-        attr_accessor :status
-
-        # The headers to return
-        attr_reader :headers
-
         #
         # Creates a new {Files} middleware.
         #
@@ -71,12 +65,7 @@ module Ronin
         #
         def initialize(app,options={},&block)
           @files = {}
-
-          @status = (options[:status] || 200)
-          @headers = {}
-
-          @headers.merge!(options[:headers]) if options[:headers]
-          @files.merge!(options[:files]) if options[:files]
+          @files.merge!(options[:files]) if options.has_key?(:files)
 
           super(app,&block)
         end
@@ -116,11 +105,7 @@ module Ronin
           if @files.has_key?(path)
             local_path = @files[path]
 
-            return [
-              @status,
-              @headers.merge('Content-Type' => mime_type_for(local_path)),
-              File.new(local_path)
-            ]
+            return response_for(local_path)
           end
 
           super(env)
