@@ -40,6 +40,8 @@ install or update Overlays.
 
 * Web access (utilizing Mechanize and Nokogiri).
 * Integrates Spidr into Ronin::Web::Spider.
+* Provides a collection of useful Rack Middleware:
+  * {Ronin::Web::Middleware::Files}
 * Provides Ronin::Web::Server, a customizable Sinatra based Web Server that
   supports path and host-name routing.
 * Provides Ronin::Web::Proxy, a configurable Sinatra based Web Proxy.
