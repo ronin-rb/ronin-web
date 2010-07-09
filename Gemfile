@@ -34,4 +34,4 @@ group(:test) do
   gem 'rack-test',	'~> 0.4.1'
 end
 
-gem 'rspec',	'~> 1.3.0', :group => [:development, :test]
+gem 'rspec',	'~> 2.0.0.beta.16', :group => [:development, :test]
