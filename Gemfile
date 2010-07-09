@@ -30,8 +30,7 @@ group(:doc) do
 end
 
 group(:test) do
-  gem 'test-unit',	'1.2.3'
-  gem 'rack-test',	'~> 0.4.1'
+  gem 'rack-test',	'~> 0.5.4'
 end
 
 gem 'rspec',	'~> 2.0.0.beta.16', :group => [:development, :test]

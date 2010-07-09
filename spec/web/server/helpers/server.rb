@@ -1,13 +1,4 @@
 begin
-  require 'rspec/interop/test'
-rescue Gem::LoadError => e
-  raise(e)
-rescue ::LoadError
-  STDERR.puts "Error: please install the test-unit gem in order to run the spec tests"
-  exit -1
-end
-
-begin
   require 'rack/test'
 rescue Gem::LoadError => e
   raise(e)
