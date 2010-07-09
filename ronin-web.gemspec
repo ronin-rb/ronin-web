@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-06-12}
+  s.date = %q{2010-07-09}
   s.default_executable = %q{ronin-web}
   s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{postmodern.mod3@gmail.com}
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
-    ".specopts",
+    ".rspec",
     ".yardopts",
     "COPYING.txt",
     "ChangeLog.md",
@@ -123,7 +123,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, ["~> 0.9.19"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.4.0"])
-      s.add_development_dependency(%q<rspec>, ["~> 1.3.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
     else
       s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
       s.add_dependency(%q<nokogiri>, ["~> 1.4.1"])
@@ -135,7 +135,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bundler>, ["~> 0.9.19"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
-      s.add_dependency(%q<rspec>, ["~> 1.3.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
     end
   else
     s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
@@ -148,7 +148,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, ["~> 0.9.19"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
     s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
-    s.add_dependency(%q<rspec>, ["~> 1.3.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
   end
 end
 
