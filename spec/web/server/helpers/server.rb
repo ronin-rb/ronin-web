@@ -1,5 +1,5 @@
 begin
-  require 'spec/interop/test'
+  require 'rspec/interop/test'
 rescue Gem::LoadError => e
   raise(e)
 rescue ::LoadError
@@ -21,13 +21,11 @@ module Helpers
     module Server
       include Rack::Test::Methods
 
+      attr_reader :app
+
       def app=(server)
         @app = server
         @app.set :environment, :test
-      end
-
-      def app
-        @app
       end
 
       def get_host(path,host,params={},headers={})
