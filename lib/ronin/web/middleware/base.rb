@@ -119,6 +119,9 @@ module Ronin
         # @param [Array, IO] body
         #   The body for the response.
         #
+        # @param [Integer] status
+        #   The HTTP Status Code for the response.
+        #
         # @param [Hash] headers
         #   Additional headers for the response.
         #
@@ -133,8 +136,8 @@ module Ronin
         #
         # @since 0.2.2
         #
-        def response(body=[],headers={},&block)
-          Rack::Response.new(body,@status,@headers.merge(headers),&block)
+        def response(body=[],status=nil,headers={},&block)
+          Rack::Response.new(body,(status || @status),@headers.merge(headers),&block)
         end
 
         #
@@ -142,6 +145,9 @@ module Ronin
         #
         # @param [String] path
         #   The path to the file.
+        #
+        # @param [Integer] status
+        #   The HTTP Status Code for the response.
         #
         # @param [Hash] headers
         #   Additional headers for the response.
@@ -153,11 +159,8 @@ module Ronin
         #
         # @since 0.2.2
         #
-        def response_for(path,headers={})
-          response(
-            File.new(path),
-            headers.merge('Content-Type' => mime_type_for(path))
-          )
+        def response_for(path,status=nil,headers={})
+          response(File.new(path),status,headers.merge('Content-Type' => mime_type_for(path)))
         end
 
       end
