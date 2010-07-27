@@ -102,6 +102,21 @@ module Ronin
         end
 
         #
+        # Sanitizes a path received by the middleware.
+        #
+        # @param [String] path
+        #   The unsanitized path.
+        #
+        # @return [String]
+        #   The unescaped and absolute path.
+        #
+        # @since 0.2.2
+        #
+        def sanitize_path(path)
+          File.expand_path(unescape(path))
+        end
+
+        #
         # Returns the MIME type for a path.
         #
         # @param [String] path
