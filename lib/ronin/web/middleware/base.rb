@@ -27,6 +27,9 @@ module Ronin
       class Base
 
         # The default status code to return
+        DEFAULT_STATUS = 200
+
+        # The status code to return
         attr_accessor :status
 
         # The default headers to return
@@ -41,7 +44,7 @@ module Ronin
         # @param [Hash] options
         #   Additional options.
         #
-        # @option options [Integer] :status (200)
+        # @option options [Integer] :status (DEFAULT_STATUS)
         #   The status code to return.
         #
         # @option options [Hash] :headers
@@ -58,7 +61,7 @@ module Ronin
         def initialize(app,options={})
           @app = app
 
-          @status = (options[:status] || 200)
+          @status = (options[:status] || DEFAULT_STATUS)
           @headers = {}
 
           @headers.merge!(options[:headers]) if options.has_key?(:headers)
