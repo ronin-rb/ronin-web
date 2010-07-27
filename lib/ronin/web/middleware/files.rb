@@ -52,7 +52,7 @@ module Ronin
         # @option options [Hash] :headers
         #   The headers to return.
         #
-        # @option options [Hash] :files
+        # @option options [Hash] :paths
         #   The mapping of remote paths to local paths.
         #
         # @yield [files]
@@ -65,7 +65,7 @@ module Ronin
         #
         def initialize(app,options={},&block)
           @files = {}
-          @files.merge!(options[:files]) if options.has_key?(:files)
+          @files.merge!(options[:paths]) if options.has_key?(:paths)
 
           super(app,&block)
         end
@@ -106,7 +106,7 @@ module Ronin
         # @since 0.2.2
         #
         def call(env)
-          path = File.expand_path(unescape(env['PATH_INFO']))
+          path = sanitize_path(env['PATH_INFO'])
 
           @files.each do |pattern,local_path|
             matched = if patterh.kind_of?(Regexp)
