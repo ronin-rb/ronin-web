@@ -53,7 +53,9 @@ module Ronin
           @directories = {}
 
           if options.has_key?(:paths)
-            @directories.merge!(options[:paths])
+            @directories.each do |remote_path,local_dir|
+              map(remote_path,local_dir)
+            end
           end
 
           super(app,&block)

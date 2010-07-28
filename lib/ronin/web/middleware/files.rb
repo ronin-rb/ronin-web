@@ -65,7 +65,12 @@ module Ronin
         #
         def initialize(app,options={},&block)
           @files = {}
-          @files.merge!(options[:paths]) if options.has_key?(:paths)
+
+          if options.has_key?(:paths)
+            options[:paths].each do |remote_path,local_path|
+              map(remote_path,local_path)
+            end
+          end
 
           super(app,&block)
         end
