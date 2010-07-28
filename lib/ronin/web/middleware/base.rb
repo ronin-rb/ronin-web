@@ -64,7 +64,9 @@ module Ronin
           @default_status = (options[:default_status] || DEFAULT_STATUS)
           @default_headers = {}
 
-          @default_headers.merge!(options[:default_headers]) if options.has_key?(:default_headers)
+          if options.has_key?(:default_headers)
+            @default_headers.merge!(options[:default_headers])
+          end
 
           yield self if block_given?
         end
