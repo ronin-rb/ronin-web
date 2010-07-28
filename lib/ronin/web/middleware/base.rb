@@ -33,7 +33,7 @@ module Ronin
         attr_accessor :default_status
 
         # The default headers to return
-        attr_reader :headers
+        attr_reader :default_headers
 
         #
         # Creates a new middleware object.
@@ -47,7 +47,7 @@ module Ronin
         # @option options [Integer] :default_status (DEFAULT_STATUS)
         #   The status code to return.
         #
-        # @option options [Hash] :headers
+        # @option options [Hash] :default_headers
         #   The headers to return.
         #
         # @yield [middleware]
@@ -62,9 +62,9 @@ module Ronin
           @app = app
 
           @default_status = (options[:default_status] || DEFAULT_STATUS)
-          @headers = {}
+          @default_headers = {}
 
-          @headers.merge!(options[:headers]) if options.has_key?(:headers)
+          @default_headers.merge!(options[:default_headers]) if options.has_key?(:default_headers)
 
           yield self if block_given?
         end
@@ -155,7 +155,7 @@ module Ronin
         # @since 0.2.2
         #
         def response(body=[],status=nil,headers={},&block)
-          Rack::Response.new(body,(status || @default_status),@headers.merge(headers),&block)
+          Rack::Response.new(body,(status || @default_status),@default_headers.merge(headers),&block)
         end
 
         #
