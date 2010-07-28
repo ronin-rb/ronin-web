@@ -7,7 +7,7 @@ group(:runtime) do
   gem 'nokogiri',	'~> 1.4.1'
   gem 'mechanize',	'~> 1.0.0'
   gem 'spidr',		'~> 0.2.0'
-  gem 'sinatra',	'~> 0.9.4'
+  gem 'sinatra',	'~> 1.0'
   gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
   gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
 end
