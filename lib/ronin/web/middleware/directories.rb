@@ -27,7 +27,7 @@ module Ronin
       class Directories < Base
 
         # The mapping of remote paths to local directories 
-        attr_reader :directories
+        attr_reader :paths
 
         #
         # Creates a new {Directoies} middleware.
@@ -50,10 +50,10 @@ module Ronin
         # @since 0.2.2
         #
         def initialize(app,options={},&block)
-          @directories = {}
+          @paths = {}
 
           if options.has_key?(:paths)
-            @directories.each do |remote_path,local_dir|
+            @paths.each do |remote_path,local_dir|
               map(remote_path,local_dir)
             end
           end
@@ -75,7 +75,7 @@ module Ronin
         # @since 0.2.2
         #
         def map(remote_path,local_dir)
-          @directories[remote_path + '/'] = local_dir
+          @paths[remote_path + '/'] = local_dir
           return true
         end
 
@@ -94,7 +94,7 @@ module Ronin
         def call(env)
           path = sanitize_path(env['PATH_INFO'])
 
-          @directories.each do |remote_path,local_path|
+          @paths.each do |remote_path,local_path|
             if path[0,remote_path.length] == remote_path
               sub_path = path[remote_path.length..-1]
 

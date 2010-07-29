@@ -35,7 +35,7 @@ module Ronin
       class Files < Base
 
         # The mapping of remote paths to local paths
-        attr_reader :files
+        attr_reader :paths
 
         #
         # Creates a new {Files} middleware.
@@ -64,7 +64,7 @@ module Ronin
         # @since 0.2.2
         #
         def initialize(app,options={},&block)
-          @files = {}
+          @paths = {}
 
           if options.has_key?(:paths)
             options[:paths].each do |remote_path,local_path|
@@ -95,7 +95,7 @@ module Ronin
         # @since 0.2.2
         #
         def map(remote_path,local_path)
-          @files[remote_path] = local_path
+          @paths[remote_path] = local_path
           return true
         end
 
@@ -113,7 +113,7 @@ module Ronin
         def call(env)
           path = sanitize_path(env['PATH_INFO'])
 
-          @files.each do |pattern,local_path|
+          @paths.each do |pattern,local_path|
             matched = if patterh.kind_of?(Regexp)
                         path =~ pattern
                       else
