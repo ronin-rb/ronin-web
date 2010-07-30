@@ -83,6 +83,14 @@ module Ronin
         # @return [VHosts]
         #   The vhosts middleware.
         #
+        # @example
+        #   vhosts.map 'secret.example.com', SecretApp
+        #
+        # @example
+        #   vhosts.map 'secret.example.com' do |request|
+        #     response ['Nothing here'], 404
+        #   end
+        #
         # @since 0.2.2
         #
         def map(vhost,sub_app=nil,&block)
