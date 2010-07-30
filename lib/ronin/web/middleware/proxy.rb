@@ -112,7 +112,8 @@ module Ronin
         end
 
         #
-        # Uses a given block to determine whether or not to manipulate requests.
+        # Uses a given block to determine whether or not to manipulate
+        # requests.
         #
         # @yield [request]
         #   The given block will be passed each request.
@@ -131,7 +132,8 @@ module Ronin
         end
 
         #
-        # Uses a given block to determine whether or not to manipulate responses.
+        # Uses a given block to determine whether or not to manipulate
+        # responses.
         #
         # @yield [response]
         #   The given block will be passed every proxied response.
@@ -153,7 +155,8 @@ module Ronin
         # Uses the given block to manipulate incoming requests.
         #
         # @yield [request]
-        #   The given block will receive every incoming request, before it is proxied.
+        #   The given block will receive every incoming request, before it
+        #   is proxied.
         #
         # @yieldparam [Request] request
         #   A proxied request.
@@ -226,8 +229,8 @@ module Ronin
         end
 
         #
-        # Receives incoming requests, proxies them, allowing manipulation of the
-        # requests and their responses.
+        # Receives incoming requests, proxies them, allowing manipulation
+        # of the requests and their responses.
         #
         # @param [Hash, Rack::Request] env
         #   The request.

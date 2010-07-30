@@ -157,7 +157,12 @@ module Ronin
         # @since 0.2.2
         #
         def response(body=[],status=nil,headers={},&block)
-          Rack::Response.new(body,(status || @default_status),@default_headers.merge(headers),&block)
+          Rack::Response.new(
+            body,
+            (status || @default_status),
+            @default_headers.merge(headers),
+            &block
+          )
         end
 
         #
@@ -180,7 +185,11 @@ module Ronin
         # @since 0.2.2
         #
         def response_for(path,status=nil,headers={})
-          response(File.new(path),status,headers.merge('Content-Type' => mime_type_for(path)))
+          response(
+            File.new(path),
+            status,
+            headers.merge('Content-Type' => mime_type_for(path))
+          )
         end
 
       end

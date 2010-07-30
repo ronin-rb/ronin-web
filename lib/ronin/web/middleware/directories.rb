@@ -42,7 +42,8 @@ module Ronin
         #   The mapping of remote paths to local directories.
         #
         # @yield [directories]
-        #   If a block is given, it will be passed the new directories middleware.
+        #   If a block is given, it will be passed the new directories
+        #   middleware.
         #
         # @yieldparam [Directories] directories
         #   The new directories middleware object.

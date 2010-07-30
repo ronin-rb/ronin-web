@@ -99,7 +99,8 @@ module Ronin
         end
 
         #
-        # Routes a request to an another application based on the virtual-host.
+        # Routes a request to an another application based on the
+        # virtual-host.
         #
         # @param [Hash, Rack::Request] env
         #   The request.

@@ -55,8 +55,8 @@ module Ronin
         #   The IP addresses and applications.
         #
         # @yield [ip_router]
-        #   If a block is given, it will be passed the newly created IP router
-        #   middleware.
+        #   If a block is given, it will be passed the newly created IP
+        #   router middleware.
         #
         # @yieldparam [IPRouter] ip_router
         #   The new IP router middleware object.
