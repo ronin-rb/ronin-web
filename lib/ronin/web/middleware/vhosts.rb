@@ -74,13 +74,19 @@ module Ronin
         # @param [#call] sub_app
         #   The application that will receive requests for the virtual-host.
         #
+        # @yield [request]
+        #   The given block will receive requests for the virtual-host.
+        #
+        # @yieldparam [Rack::Request] request
+        #   An incoming request.
+        #
         # @return [VHosts]
         #   The vhosts middleware.
         #
         # @since 0.2.2
         #
-        def map(vhost,sub_app)
-          @vhosts[vhost] = sub_app
+        def map(vhost,sub_app=nil,&block)
+          @vhosts[vhost] = (sub_app || block)
           return self
         end
 
