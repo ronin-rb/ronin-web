@@ -26,6 +26,17 @@ require 'ipaddr'
 module Ronin
   module Web
     module Middleware
+      #
+      # A Rack middleware for routing requests to other applications based
+      # on what IP address the request was sent from.
+      #
+      #     use Ronin::Web::Middleware::IPRouter do |router|
+      #       router.map '212.18.45.0/24', BannedApp
+      #       router.map '192.168.0.0/16' do |request|
+      #         response ['Nothing here'], 404
+      #       end
+      #     end
+      #
       class IPRouter < Base
 
         # The mapping of IP addresses to applications
