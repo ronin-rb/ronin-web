@@ -59,7 +59,7 @@ module Ronin
           @vhosts = {}
 
           if options[:vhosts]
-            @vhosts.merge!(options[:vhosts])
+            options[:vhosts].each { |vhost,app| map(vhost,app) }
           end
 
           super(app,options,&block)
