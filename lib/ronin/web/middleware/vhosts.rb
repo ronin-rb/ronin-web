@@ -25,8 +25,8 @@ module Ronin
   module Web
     module Middleware
       #
-      # A Rack middleware for routing requests to other apps based on the
-      # HTTP Host header.
+      # A Rack middleware for routing requests to other applications based
+      # on the HTTP Host header.
       #
       #     use Ronin::Web::Middleware::VHosts do |vhosts| do
       #       vhosts.map 'cdn.example.com', CDNApp
