@@ -27,8 +27,8 @@ module Ronin
   module Web
     module Middleware
       #
-      # A Rack middleware for routing requests to other applications based
-      # on what IP address the request was sent from.
+      # A Rack middleware for filtering requests based on what IP address
+      # the request was sent from.
       #
       #     use Ronin::Web::Middleware::IPFilter do |filter|
       #       filter.map '212.18.45.0/24', BannedApp
@@ -43,7 +43,7 @@ module Ronin
         attr_reader :rules
 
         #
-        # Creates a new IP Router middleware.
+        # Creates a new IP Filter middleware.
         #
         # @param [#call] app
         #   The application that the ip filter sits in front of.
