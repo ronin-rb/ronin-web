@@ -39,8 +39,8 @@ module Ronin
       #
       class IPFilter < Base
 
-        # The mapping of IP addresses to applications
-        attr_reader :routes
+        # The rules of the IP filter
+        attr_reader :rules
 
         #
         # Creates a new IP Router middleware.
@@ -64,7 +64,7 @@ module Ronin
         # @since 0.2.2
         #
         def initialize(app,options={},&block)
-          @routes = {}
+          @rules = {}
 
           if options[:ips]
             options[:ips].each { |ip,app| map(ip,app) }
@@ -106,7 +106,7 @@ module Ronin
         def map(ip,app=nil,&block)
           ip = IPAddr.new(ip) unless ip.kind_of?(IPAddr)
 
-          @routes[ip] = (app || block)
+          @rules[ip] = (app || block)
           return self
         end
 
@@ -124,7 +124,7 @@ module Ronin
         def call(env)
           remote_ip = env['REMOTE_ADDR']
 
-          @routes.each do |ip,app|
+          @rules.each do |ip,app|
             return app.call(env) if ip.include?(remote_ip)
           end
 
