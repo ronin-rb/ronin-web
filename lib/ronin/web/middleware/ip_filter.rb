@@ -30,14 +30,14 @@ module Ronin
       # A Rack middleware for routing requests to other applications based
       # on what IP address the request was sent from.
       #
-      #     use Ronin::Web::Middleware::IPRouter do |router|
-      #       router.map '212.18.45.0/24', BannedApp
-      #       router.map '192.168.0.0/16' do |request|
+      #     use Ronin::Web::Middleware::IPFilter do |filter|
+      #       filter.map '212.18.45.0/24', BannedApp
+      #       filter.map '192.168.0.0/16' do |request|
       #         response ['Nothing here'], 404
       #       end
       #     end
       #
-      class IPRouter < Base
+      class IPFilter < Base
 
         # The mapping of IP addresses to applications
         attr_reader :routes
@@ -46,7 +46,7 @@ module Ronin
         # Creates a new IP Router middleware.
         #
         # @param [#call] app
-        #   The application that the ip router sits in front of.
+        #   The application that the ip filter sits in front of.
         #
         # @param [Hash] options
         #   Additional options.
@@ -54,12 +54,12 @@ module Ronin
         # @option options [Hash{IPAddr => #call}] :ips
         #   The IP addresses and applications.
         #
-        # @yield [ip_router]
+        # @yield [ip_filter]
         #   If a block is given, it will be passed the newly created IP
-        #   router middleware.
+        #   filter middleware.
         #
-        # @yieldparam [IPRouter] ip_router
-        #   The new IP router middleware object.
+        # @yieldparam [IPFilter] ip_filter
+        #   The new IP filter middleware object.
         #
         # @since 0.2.2
         #
@@ -90,14 +90,14 @@ module Ronin
         # @yieldparam [Rack::Request] request
         #   A request coming from the specified IP addresses.
         #
-        # @return [IPRouter]
-        #   The IP router middleware.
+        # @return [IPFilter]
+        #   The IP filter middleware.
         #
         # @example
-        #   router.map '210.18.0.0/16', BannedApp
+        #   filter.map '210.18.0.0/16', BannedApp
         #
         # @example
-        #   router.map '210.18.0.0/16' do |request|
+        #   filter.map '210.18.0.0/16' do |request|
         #     response ['Banned!']
         #   end
         #
@@ -111,7 +111,7 @@ module Ronin
         end
 
         #
-        # Routes requests based on what IP address they are sent from.
+        # Filters requests based on what IP address they are sent from.
         #
         # @param [Hash, Rack::Request] env
         #   An incoming request.
