@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/campaign'
+
 require 'ipaddr'
 
 module Ronin
@@ -28,6 +30,9 @@ module Ronin
       # Represents a rule used in the {Filter} middleware.
       #
       class Rule
+
+        # The Campaign who's targetted hosts will be filtered.
+        attr_reader :campaign
 
         # The Virtual-Host to filter for.
         attr_reader :vhost
@@ -50,6 +55,9 @@ module Ronin
         # @param [Hash] options
         #   Filtering options.
         #
+        # @option options [String] :campaign
+        #   The name of the campaign who's targetted hosts will be filtered.
+        #
         # @option options [String, Regexp] :vhost
         #   The Virtual-Host to filter for.
         #
@@ -68,6 +76,10 @@ module Ronin
         # @since 0.2.2
         #
         def initialize(options={})
+          if options[:campaign]
+            @campaign = Campaign.first(:name => options[:campaign])
+          end
+
           @vhost = options[:vhost]
 
           if (raw_ip = options[:ip])
@@ -95,7 +107,12 @@ module Ronin
         # @since 0.2.2
         #
         def match?(request)
+          ip = request.ip
           matched = true
+
+          if @campaign
+            matched &&= (@campaign.addresses.count(:address => ip) == 1)
+          end
 
           if @vhost
             matched &&= if @vhost.kind_of?(Regexp)
@@ -106,7 +123,7 @@ module Ronin
           end
 
           if @ip
-            matched &&= @ip.include?(request.ip)
+            matched &&= @ip.include?(ip)
           end
 
           if (request.referer && @referer)

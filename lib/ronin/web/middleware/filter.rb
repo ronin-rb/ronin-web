@@ -87,6 +87,9 @@ module Ronin
         # @param [Hash] options
         #   Filter options.
         #
+        # @option options [String] :campaign
+        #   The name of the campaign who's targetted hosts will be filtered.
+        #
         # @option options [String, Regexp] :vhost
         #   The Virtual-Host to filter for.
         #
