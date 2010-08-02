@@ -38,7 +38,7 @@ module Ronin
         # @since 0.2.2
         #
         def host=(new_host)
-          @env['HTTP_HOST'] = @env['SERVER_NAME'] = new_host
+          @env['HTTP_HOST'] = new_host
         end
 
         #
@@ -162,18 +162,6 @@ module Ronin
         alias referrer= referer=
 
         #
-        # The body of the request.
-        #
-        # @return [String, IO]
-        #  The body of the request.
-        #
-        # @since 0.2.2
-        #
-        def body
-          (@body || super)
-        end
-
-        #
         # Changes the body of the request.
         #
         # @param [String] new_body
@@ -185,7 +173,7 @@ module Ronin
         # @since 0.2.2
         #
         def body=(new_body)
-          @body = new_body
+          @env['rack.input'] = new_body
         end
 
       end
