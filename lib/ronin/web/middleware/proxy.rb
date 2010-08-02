@@ -242,45 +242,49 @@ module Ronin
         #
         def call(env)
           request = Request.new(env)
-          match = false
+          matched = true
 
-          match ||= if @host
-                      if @host.kind_of?(Regexp)
+          if @host
+            matched &&= if @host.kind_of?(Regexp)
                         request.host =~ @host
                       else
                         request.host == @host
                       end
-                    end
+          end
 
-          match ||= if @port
-                      if @port.kind_of?(Range)
+          if @port
+            matched &&= if @port.kind_of?(Range)
                         @port.include?(request.port)
                       else
                         request.port == @port
                       end
-                    end
+          end
 
-          match ||= (@request_method && request.request_method == @request_method)
+          if @request_method
+            matched &&= (request.request_method == @request_method)
+          end
 
-          match ||= if @request_path
-                      if @request_path.kind_of?(Regexp)
+          if @request_path
+            matched &&= if @request_path.kind_of?(Regexp)
                         request.path =~ @request_path
                       else
                         request.path[0,@request_path.length] == @request_path
                       end
-                    end
+          end
 
-          match ||= if @request_query
-                      if @request_query.kind_of?(Regexp)
+          if @request_query
+            matched &&= if @request_query.kind_of?(Regexp)
                         request.query_string =~ @request_query
                       else
                         request.query_string == @request_query
                       end
-                    end
+          end
 
-          match ||= (@requests_like_block && @requests_like_block.call(request))
+          if @requests_like_block
+            matched &&= @requests_like_block.call(request)
+          end
 
-          if match
+          if matched
             if @proxy_requests_block
               request = (@proxy_requests_block.call(request) || request)
             end
@@ -289,23 +293,25 @@ module Ronin
           end
 
           response = proxy(request)
-          match = false
+          matched = true
 
-          match ||= if @response_status
-                      if @response_status.kind_of?(Range)
-                        @response_status.include?(response.status)
-                      else
-                        response.status == @response_status
-                      end
-                    end
+          if @response_status
+            matched &&= if @response_status.kind_of?(Range)
+                          @response_status.include?(response.status)
+                        else
+                          response.status == @response_status
+                        end
+          end
 
-          match ||= if @response_body
-                      response.body.any? { |chunk| chunk.match(@response_body) }
-                    end
+          if @response_body
+            matched &&= response.body.any? { |chunk| chunk.match(@response_body) }
+          end
 
-          match ||= (@responses_like_block && @responses_like_block.call(response))
+          if @responses_like_block
+            matched &&= @responses_like_block.call(response)
+          end
 
-          if (@proxy_responses_block && match)
+          if (@proxy_responses_block && matched)
             response = (@proxy_responses_block.call(response) || response)
           end
 
