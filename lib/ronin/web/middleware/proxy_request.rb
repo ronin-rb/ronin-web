@@ -24,7 +24,7 @@ require 'rack/request'
 module Ronin
   module Web
     module Middleware
-      class Request < Rack::Request
+      class ProxyRequest < Rack::Request
 
         def host=(new_host)
           @env['HTTP_HOST'] = @env['SERVER_NAME'] = new_host

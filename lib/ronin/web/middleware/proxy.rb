@@ -20,7 +20,7 @@
 #
 
 require 'ronin/web/middleware/base'
-require 'ronin/web/middleware/request'
+require 'ronin/web/middleware/proxy_request'
 
 require 'ronin/network/http'
 
@@ -118,7 +118,7 @@ module Ronin
         # @yield [request]
         #   The given block will be passed each request.
         #
-        # @yieldparam [Request] request
+        # @yieldparam [ProxyRequest] request
         #   A request received by the middleware.
         #
         # @return [Proxy]
@@ -158,7 +158,7 @@ module Ronin
         #   The given block will receive every incoming request, before it
         #   is proxied.
         #
-        # @yieldparam [Request] request
+        # @yieldparam [ProxyRequest] request
         #   A proxied request.
         #
         # @return [Proxy]
@@ -193,7 +193,7 @@ module Ronin
         #
         # Proxies a request.
         #
-        # @param [Request] request
+        # @param [ProxyRequest] request
         #   The request to send.
         #
         # @return [Rack::Response]
@@ -241,7 +241,7 @@ module Ronin
         # @since 0.2.2
         #
         def call(env)
-          request = Request.new(env)
+          request = ProxyRequest.new(env)
           matched = true
 
           if @host
