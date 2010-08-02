@@ -104,12 +104,14 @@ module Ronin
         #
         # Specifies that the request is a XML HTTP Request.
         #
-        # @return [true]
-        #   The request is now an XML HTTP Request.
+        # @return [ProxyRequest]
+        #   The request.
+        #
+        # @since 0.2.2
         #
         def xhr!
           @env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
-          return true
+          return self
         end
 
         #
