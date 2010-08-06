@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-07-09}
+  s.date = %q{2010-08-06}
   s.default_executable = %q{ronin-web}
   s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{postmodern.mod3@gmail.com}
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "COPYING.txt",
     "ChangeLog.md",
     "Gemfile",
+    "Gemfile.lock",
     "README.md",
     "Rakefile",
     "bin/ronin-web",
@@ -56,7 +57,6 @@ Gem::Specification.new do |s|
     "lib/ronin/web/web.rb",
     "ronin-web.gemspec",
     "spec/helpers/output.rb",
-    "spec/scanners/web_spec.rb",
     "spec/spec_helper.rb",
     "spec/web/extensions/nokogiri_spec.rb",
     "spec/web/helpers/root/index.html",
@@ -90,7 +90,6 @@ Gem::Specification.new do |s|
   s.summary = %q{A Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.test_files = [
     "spec/helpers/output.rb",
-    "spec/scanners/web_spec.rb",
     "spec/spec_helper.rb",
     "spec/web/extensions/nokogiri_spec.rb",
     "spec/web/helpers/server.rb",
@@ -117,10 +116,10 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.1"])
       s.add_runtime_dependency(%q<mechanize>, ["~> 1.0.0"])
       s.add_runtime_dependency(%q<spidr>, ["~> 0.2.0"])
-      s.add_runtime_dependency(%q<sinatra>, ["~> 0.9.4"])
+      s.add_runtime_dependency(%q<sinatra>, ["~> 1.0"])
       s.add_runtime_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_runtime_dependency(%q<ronin>, ["~> 0.4.0"])
-      s.add_development_dependency(%q<bundler>, ["~> 0.9.19"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.4.0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
@@ -129,10 +128,10 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<nokogiri>, ["~> 1.4.1"])
       s.add_dependency(%q<mechanize>, ["~> 1.0.0"])
       s.add_dependency(%q<spidr>, ["~> 0.2.0"])
-      s.add_dependency(%q<sinatra>, ["~> 0.9.4"])
+      s.add_dependency(%q<sinatra>, ["~> 1.0"])
       s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_dependency(%q<ronin>, ["~> 0.4.0"])
-      s.add_dependency(%q<bundler>, ["~> 0.9.19"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
       s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
@@ -142,10 +141,10 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<nokogiri>, ["~> 1.4.1"])
     s.add_dependency(%q<mechanize>, ["~> 1.0.0"])
     s.add_dependency(%q<spidr>, ["~> 0.2.0"])
-    s.add_dependency(%q<sinatra>, ["~> 0.9.4"])
+    s.add_dependency(%q<sinatra>, ["~> 1.0"])
     s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
     s.add_dependency(%q<ronin>, ["~> 0.4.0"])
-    s.add_dependency(%q<bundler>, ["~> 0.9.19"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
     s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
     s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
