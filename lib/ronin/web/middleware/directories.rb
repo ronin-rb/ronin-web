@@ -24,6 +24,14 @@ require 'ronin/web/middleware/base'
 module Ronin
   module Web
     module Middleware
+      #
+      # A Rack middleware to host local directories at specific remote
+      # paths.
+      #
+      #     use Ronin::Web::Middleware::Directories do |dirs|
+      #       dirs.map '/downloads', '/tmp/ronin_downloads'
+      #     end
+      #
       class Directories < Base
 
         # The mapping of remote paths to local directories 

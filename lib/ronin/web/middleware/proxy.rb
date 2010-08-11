@@ -27,6 +27,9 @@ require 'ronin/network/http'
 module Ronin
   module Web
     module Middleware
+      #
+      # A Rack middleware for proxying requests.
+      #
       class Proxy < Base
 
         # The host to proxy
