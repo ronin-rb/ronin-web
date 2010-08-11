@@ -237,10 +237,15 @@ module Ronin
           end
 
           http_response = Net.http_request(options)
+          http_headers = {}
+
+          http_response.each_capitalized do |name,value|
+            http_headers[name] = value
+          end
 
           return [
             http_response.code,
-            http_response.to_hash,
+            http_headers,
             [http_response.body]
           ]
         end
