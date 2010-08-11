@@ -136,7 +136,7 @@ module Ronin
         #
         # Creates a new response.
         #
-        # @param [Array, IO] body
+        # @param [String, Array, IO] body
         #   The body for the response.
         #
         # @param [Integer] status
@@ -145,24 +145,38 @@ module Ronin
         # @param [Hash] headers
         #   Additional headers for the response.
         #
-        # @yield [response]
+        # @yield [[status,headers,body]]
         #   If a block is given, it will be passed the new response.
         #
-        # @yieldparam [Rack::Response] response
-        #   The new response object.
+        # @yieldparam [Integer] status
+        #   The HTTP Status code of the response.
         #
-        # @return [Rack::Response]
-        #   The new response object.
+        # @yieldparam [Hash] headers
+        #   The Headers of the response.
+        #
+        # @yieldparam [Array] body
+        #   The body of the response.
+        #
+        # @return [Array]
+        #   The new response.
+        #
+        # @example Create a response.
+        #   response ['Hello'], 200, {'Content-Type' => 'text/txt'}
+        #
+        # @example Create a response using a String.
+        #   response 'Hello'
         #
         # @since 0.2.2
         #
-        def response(body=[],status=nil,headers={},&block)
-          Rack::Response.new(
-            body,
-            (status || @default_status),
-            @default_headers.merge(headers),
-            &block
-          )
+        def response(body=[],status=nil,headers={})
+          status ||= @default_status
+          headers = @default_headers.merge(headers)
+          body = [body] if body.kind_of?(String)
+          response = [status,headers,body]
+
+          yield(response) if block_given?
+
+          response
         end
 
         #
