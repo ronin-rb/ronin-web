@@ -23,6 +23,7 @@ require 'ronin/web/middleware/base'
 require 'ronin/web/middleware/proxy_request'
 
 require 'ronin/network/http'
+require 'set'
 
 module Ronin
   module Web
@@ -45,6 +46,11 @@ module Ronin
       #     end
       #
       class Proxy < Base
+
+        # Blacklisted HTTP response Headers.
+        HEADERS_BLACKLIST = Set[
+          'Transfer-Encoding'
+        ]
 
         # The host to proxy
         attr_accessor :host
@@ -240,7 +246,9 @@ module Ronin
           http_headers = {}
 
           http_response.each_capitalized do |name,value|
-            http_headers[name] = value
+            unless HEADERS_BLACKLIST.include?(name)
+              http_headers[name] = value
+            end
           end
 
           return [
