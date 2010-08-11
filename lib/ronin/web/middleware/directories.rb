@@ -30,7 +30,7 @@ module Ronin
         attr_reader :paths
 
         #
-        # Creates a new {Directoies} middleware.
+        # Creates a new {Directories} middleware.
         #
         # @param [#call] app
         #   The application the middleware sits in front of.
