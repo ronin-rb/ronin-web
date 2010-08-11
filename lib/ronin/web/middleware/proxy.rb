@@ -30,6 +30,20 @@ module Ronin
       #
       # A Rack middleware for proxying requests.
       #
+      #     use Ronin::Web::Middleware::Proxy do |proxy|
+      #       proxy.every_request do |request|
+      #         puts request.url
+      #       end
+      #
+      #       proxy.every_response do |response|
+      #         response[1].each do |name,value|
+      #           puts "#{name}: #{value}"
+      #         end
+      #
+      #         puts response[2]
+      #       end
+      #     end
+      #
       class Proxy < Base
 
         # The host to proxy
@@ -199,7 +213,7 @@ module Ronin
         # @param [ProxyRequest] request
         #   The request to send.
         #
-        # @return [Rack::Response]
+        # @return [Array]
         #   The response from the request.
         #
         def proxy(request)
@@ -224,11 +238,11 @@ module Ronin
 
           http_response = Net.http_request(options)
 
-          return Rack::Response.new(
-            [http_response.body],
+          return [
             http_response.code,
-            http_response.to_hash
-          )
+            http_response.to_hash,
+            [http_response.body]
+          ]
         end
 
         #
@@ -238,7 +252,7 @@ module Ronin
         # @param [Hash, Rack::Request] env
         #   The request.
         #
-        # @return [Rack::Response]
+        # @return [Array]
         #   The response.
         #
         # @since 0.2.2
