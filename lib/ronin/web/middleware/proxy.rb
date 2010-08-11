@@ -254,7 +254,7 @@ module Ronin
           return [
             http_response.code,
             http_headers,
-            [http_response.body]
+            [http_response.body || '']
           ]
         end
 
