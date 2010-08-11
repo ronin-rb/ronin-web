@@ -155,7 +155,7 @@ module Ronin
         end
 
         #
-        # Uses the given block to manipulate incoming requests.
+        # Uses the given block to intercept incoming requests.
         #
         # @yield [request]
         #   The given block will receive every incoming request, before it
@@ -169,13 +169,13 @@ module Ronin
         #
         # @since 0.2.2
         #
-        def proxy_requests(&block)
-          @proxy_requests_block = block
+        def every_request(&block)
+          @every_request_block = block
           return self
         end
 
         #
-        # Uses the given block to manipulate proxied responses.
+        # Uses the given block to intercept proxied responses.
         #
         # @yield [response]
         #   The given block will receive every proxied response.
@@ -188,8 +188,8 @@ module Ronin
         #
         # @since 0.2.2
         #
-        def proxy_responses(&block)
-          @proxy_responses_block = block
+        def every_response(&block)
+          @every_response_block = block
           return self
         end
 
@@ -288,8 +288,8 @@ module Ronin
           end
 
           if matched
-            if @proxy_requests_block
-              request = (@proxy_requests_block.call(request) || request)
+            if @every_request_block
+              request = (@every_request_block.call(request) || request)
             end
           else
             return super(env)
@@ -314,8 +314,8 @@ module Ronin
             matched &&= @responses_like_block.call(response)
           end
 
-          if (@proxy_responses_block && matched)
-            response = (@proxy_responses_block.call(response) || response)
+          if (@every_response_block && matched)
+            response = (@every_response_block.call(response) || response)
           end
 
           return response
