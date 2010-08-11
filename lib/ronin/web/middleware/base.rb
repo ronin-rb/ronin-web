@@ -139,11 +139,11 @@ module Ronin
         # @param [String, Array, IO] body
         #   The body for the response.
         #
-        # @param [Integer] status
-        #   The HTTP Status Code for the response.
-        #
         # @param [Hash] headers
         #   Additional headers for the response.
+        #
+        # @param [Integer] status
+        #   The HTTP Status Code for the response.
         #
         # @yield [[status,headers,body]]
         #   If a block is given, it will be passed the new response.
@@ -161,14 +161,14 @@ module Ronin
         #   The new response.
         #
         # @example Create a response.
-        #   response ['Hello'], 200, {'Content-Type' => 'text/txt'}
+        #   response ['Hello'], {'Content-Type' => 'text/txt'}, 200
         #
-        # @example Create a response using a String.
+        # @example Create a response with just a String.
         #   response 'Hello'
         #
         # @since 0.2.2
         #
-        def response(body=[],status=nil,headers={})
+        def response(body=[],headers={},status=nil)
           status ||= @default_status
           headers = @default_headers.merge(headers)
           body = [body] if body.kind_of?(String)
@@ -185,11 +185,11 @@ module Ronin
         # @param [String] path
         #   The path to the file.
         #
-        # @param [Integer] status
-        #   The HTTP Status Code for the response.
-        #
         # @param [Hash] headers
         #   Additional headers for the response.
+        #
+        # @param [Integer] status
+        #   The HTTP Status Code for the response.
         #
         # @return [Rack::Response]
         #   The new response object.
@@ -198,11 +198,11 @@ module Ronin
         #
         # @since 0.2.2
         #
-        def response_for(path,status=nil,headers={})
+        def response_for(path,headers={},status=nil)
           response(
             File.new(path),
-            status,
-            headers.merge('Content-Type' => mime_type_for(path))
+            headers.merge('Content-Type' => mime_type_for(path)),
+            status
           )
         end
 
