@@ -114,7 +114,7 @@ module Ronin
           path = sanitize_path(env['PATH_INFO'])
 
           @paths.each do |pattern,local_path|
-            matched = if patterh.kind_of?(Regexp)
+            matched = if pattern.kind_of?(Regexp)
                         path =~ pattern
                       else
                         path == pattern
