@@ -37,11 +37,11 @@ module Ronin
       #       end
       #
       #       proxy.every_response do |response|
-      #         response[1].each do |name,value|
+      #         response.headers.each do |name,value|
       #           puts "#{name}: #{value}"
       #         end
       #
-      #         puts response[2]
+      #         puts response.body
       #       end
       #     end
       #
@@ -161,7 +161,7 @@ module Ronin
         # @yield [response]
         #   The given block will be passed every proxied response.
         #
-        # @yieldparam [Rack::Response] response
+        # @yieldparam [Response] response
         #   A response returned from a proxied request.
         #
         # @return [Proxy]
@@ -200,7 +200,7 @@ module Ronin
         # @yield [response]
         #   The given block will receive every proxied response.
         #
-        # @yieldparam [Rack::Response] response
+        # @yieldparam [Response] response
         #   A proxied response.
         #
         # @return [Proxy]
@@ -219,7 +219,7 @@ module Ronin
         # @param [ProxyRequest] request
         #   The request to send.
         #
-        # @return [Array]
+        # @return [Response]
         #   The response from the request.
         #
         def proxy(request)
@@ -251,11 +251,11 @@ module Ronin
             end
           end
 
-          return [
+          return Response.new(
             http_response.code,
             http_headers,
-            [http_response.body || '']
-          ]
+            (http_response.body || '')
+          )
         end
 
         #
@@ -265,7 +265,7 @@ module Ronin
         # @param [Hash, Rack::Request] env
         #   The request.
         #
-        # @return [Array]
+        # @return [Array, Response]
         #   The response.
         #
         # @since 0.2.2
