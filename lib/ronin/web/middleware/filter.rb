@@ -143,7 +143,7 @@ module Ronin
         # @param [Hash, Rack::Request] env
         #   An incoming request.
         #
-        # @return [Rack::Response]
+        # @return [Array, Response]
         #   A response.
         #
         # @since 0.2.2

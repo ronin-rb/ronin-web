@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/web/middleware/response'
+
 require 'rack'
 
 module Ronin
@@ -145,17 +147,11 @@ module Ronin
         # @param [Integer] status
         #   The HTTP Status Code for the response.
         #
-        # @yield [[status,headers,body]]
+        # @yield [response]
         #   If a block is given, it will be passed the new response.
         #
-        # @yieldparam [Integer] status
-        #   The HTTP Status code of the response.
-        #
-        # @yieldparam [Hash] headers
-        #   The Headers of the response.
-        #
-        # @yieldparam [Array] body
-        #   The body of the response.
+        # @yieldparam [Response] response
+        #   The new response.
         #
         # @return [Array]
         #   The new response.
@@ -172,7 +168,7 @@ module Ronin
           status ||= @default_status
           headers = @default_headers.merge(headers)
           body = [body] if body.kind_of?(String)
-          response = [status,headers,body]
+          response = Response.new(status,headers,body)
 
           yield(response) if block_given?
 
@@ -191,7 +187,7 @@ module Ronin
         # @param [Integer] status
         #   The HTTP Status Code for the response.
         #
-        # @return [Rack::Response]
+        # @return [Response]
         #   The new response object.
         #
         # @see #response

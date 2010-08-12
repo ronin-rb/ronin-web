@@ -105,7 +105,7 @@ module Ronin
         # @param [Hash, Rack::Request] env
         #   The request.
         #
-        # @return [Array, Rack::Response]
+        # @return [Array, Response]
         #   The response.
         #
         # @since 0.2.2
