@@ -316,7 +316,7 @@ module Ronin
 
           if matched
             if @every_request_block
-              request = (@every_request_block.call(request) || request)
+              @every_request_block.call(request)
             end
           else
             return super(env)
@@ -342,7 +342,7 @@ module Ronin
           end
 
           if (@every_response_block && matched)
-            response = (@every_response_block.call(response) || response)
+            @every_response_block.call(response)
           end
 
           return response
