@@ -276,18 +276,18 @@ module Ronin
 
           if @host
             matched &&= if @host.kind_of?(Regexp)
-                        request.host =~ @host
-                      else
-                        request.host == @host
-                      end
+                          request.host =~ @host
+                        else
+                          request.host == @host
+                        end
           end
 
           if @port
             matched &&= if @port.kind_of?(Range)
-                        @port.include?(request.port)
-                      else
-                        request.port == @port
-                      end
+                          @port.include?(request.port)
+                        else
+                          request.port == @port
+                        end
           end
 
           if @request_method
@@ -296,18 +296,18 @@ module Ronin
 
           if @request_path
             matched &&= if @request_path.kind_of?(Regexp)
-                        request.path =~ @request_path
-                      else
-                        request.path[0,@request_path.length] == @request_path
-                      end
+                          request.path =~ @request_path
+                        else
+                          request.path[0,@request_path.length] == @request_path
+                        end
           end
 
           if @request_query
             matched &&= if @request_query.kind_of?(Regexp)
-                        request.query_string =~ @request_query
-                      else
-                        request.query_string == @request_query
-                      end
+                          request.query_string =~ @request_query
+                        else
+                          request.query_string == @request_query
+                        end
           end
 
           if @requests_like_block
