@@ -2,15 +2,13 @@ source 'https://rubygems.org'
 
 RONIN = 'git://github.com/ronin-ruby'
 
-group(:runtime) do
-  gem 'data_paths',	'~> 0.2.1'
-  gem 'nokogiri',	'~> 1.4.1'
-  gem 'mechanize',	'~> 1.0.0'
-  gem 'spidr',		'~> 0.2.0'
-  gem 'sinatra',	'~> 1.0'
-  gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
-  gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
-end
+gem 'data_paths',	'~> 0.2.1'
+gem 'nokogiri',	'~> 1.4.1'
+gem 'mechanize',	'~> 1.0.0'
+gem 'spidr',		'~> 0.2.0'
+gem 'sinatra',	'~> 1.0'
+gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
+gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
 
 group(:development) do
   gem 'bundler',	'~> 1.0.0'
