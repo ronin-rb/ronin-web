@@ -9,7 +9,7 @@ end
 
 module Helpers
   module Web
-    module Server
+    module RackApp
       include Rack::Test::Methods
 
       attr_reader :app

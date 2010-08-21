@@ -2,11 +2,11 @@ require 'spec_helper'
 require 'ronin/web/server'
 
 require 'web/server/classes/hosts_app'
-require 'web/server/helpers/server'
+require 'web/helpers/rack_app'
 
 describe Web::Server do
   describe "hosts" do
-    include Helpers::Web::Server
+    include Helpers::Web::RackApp
 
     before(:all) do
       self.app = HostsApp

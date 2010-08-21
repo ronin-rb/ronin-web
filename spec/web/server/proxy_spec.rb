@@ -1,12 +1,12 @@
 require 'spec_helper'
 require 'ronin/web/server'
 
-require 'web/server/helpers/server'
 require 'web/server/classes/proxy_app'
+require 'web/helpers/rack_app'
 
 describe Web::Server do
   describe "proxy" do
-    include Helpers::Web::Server
+    include Helpers::Web::RackApp
 
     before(:all) do
       self.app = ProxyApp
