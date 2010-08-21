@@ -167,12 +167,11 @@ module Ronin
         def response(body=[],headers={},status=nil)
           status ||= @default_status
           headers = @default_headers.merge(headers)
-          body = [body] if body.kind_of?(String)
-          response = Response.new(status,headers,body)
+          response = Response.new(body,status,headers)
 
           yield(response) if block_given?
 
-          response
+          return response
         end
 
         #

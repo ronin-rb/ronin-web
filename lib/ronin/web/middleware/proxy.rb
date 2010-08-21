@@ -236,11 +236,15 @@ module Ronin
             options[:form_data] = request.POST
           end
 
+          headers = {}
+
           request.env.each do |name,value|
             if name =~ /^HTTP_/
-              options[name.sub('HTTP_','').downcase.to_sym] = value
+              headers[name.sub('HTTP_','').downcase.to_sym] = value
             end
           end
+
+          options[:headers] = headers
 
           http_response = Net.http_request(options)
           http_headers = {}
@@ -252,9 +256,9 @@ module Ronin
           end
 
           return Response.new(
+            (http_response.body || ''),
             http_response.code,
             http_headers,
-            (http_response.body || '')
           )
         end
 
