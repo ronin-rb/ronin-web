@@ -60,6 +60,7 @@ module Ronin
         #
         def initialize(app,options={},&block)
           @paths = {}
+          @paths_order = []
 
           if options.has_key?(:paths)
             @paths.each do |remote_path,local_dir|
@@ -85,6 +86,12 @@ module Ronin
         #
         def map(remote_path,local_dir)
           @paths[remote_path + '/'] = local_dir
+          
+          # sort paths by number of sub-directories
+          @paths_order = @paths.keys.sort_by do |path|
+            -(path.split('/').length)
+          end
+
           return true
         end
 
@@ -103,8 +110,9 @@ module Ronin
         def call(env)
           path = sanitize_path(env['PATH_INFO'])
 
-          @paths.each do |remote_path,local_path|
+          @paths_order.each do |remote_path|
             if path[0,remote_path.length] == remote_path
+              local_path = @paths[remote_path]
               sub_path = path[remote_path.length..-1]
 
               return response_for(File.join(local_path,sub_path))
