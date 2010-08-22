@@ -439,7 +439,7 @@ module Ronin
         helpers Helpers::Hosts
         helpers Helpers::Proxy
 
-        not_found do
+        any '*' do
           default_response
         end
 
