@@ -68,7 +68,7 @@ module Ronin
           @paths_order = []
 
           if options.has_key?(:paths)
-            @paths.each do |remote_path,local_dir|
+            options[:paths].each do |remote_path,local_dir|
               map(remote_path,local_dir)
             end
           end
@@ -130,10 +130,12 @@ module Ronin
           # finds the remote directory that the paths starts with or is
           # equal to.
           remote_path = @paths_order.find do |remote_path|
-                          (path[0,remote_path.length] == remote_path) && (
+                          if remote_path == '/'
+                            true
+                          elsif path[0,remote_path.length] == remote_path
                             (path[remote_path.length] == '/') ||
                             (path.length == remote_path.length)
-                          )
+                          end
                         end
 
           if remote_path
