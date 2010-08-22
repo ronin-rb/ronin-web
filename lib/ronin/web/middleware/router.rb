@@ -20,7 +20,7 @@
 #
 
 require 'ronin/web/middleware/base'
-require 'ronin/web/middleware/rule'
+require 'ronin/web/middleware/rules'
 
 module Ronin
   module Web
@@ -44,10 +44,6 @@ module Ronin
       #       # route requests by User-Agent
       #       router.rule :user_agent => /Microsoft/, :to => IEApp
       #
-      #       # route requests using custom logic
-      #       router.rule :when => lambda { |request| request.form_data? },
-      #                   :to => FormApp
-      #
       #       # mix route options together
       #       router.rule :ip => '212.18.45.0/24',
       #                   :user_agent => /Microsoft/, :to => PwnApp
@@ -55,8 +51,16 @@ module Ronin
       #
       class Router < Base
 
-        # The rules to router requests by
-        attr_reader :rules
+        RULES = {
+          :campaign => Rules::CampaignRule,
+          :vhost => Rules::VHostRule,
+          :ip => Rules::IPRule,
+          :referer => Rules::RefererRule,
+          :user_agent => Rules::UserAgentRule
+        }
+
+        # The routes of the router
+        attr_reader :routes
 
         #
         # Creates a new Router middleware.
@@ -77,7 +81,7 @@ module Ronin
         # @since 0.3.0
         #
         def initialize(app,options={},&block)
-          @rules = {}
+          @routes = {}
 
           super(app,options,&block)
         end
@@ -102,9 +106,6 @@ module Ronin
         #
         # @option options [String, Regexp] :user_agent
         #   The User-Agent string to route.
-        #
-        # @option options [Proc] :when
-        #   Custom logic to use when routing requests.
         #
         # @option options [#call] :to
         #   The application that will receive routed requests.
@@ -132,9 +133,17 @@ module Ronin
         #
         def rule(options={},&block)
           app = (options.delete(:to) || block)
-          rule = Rule.new(options)
+          rules = []
 
-          @rules[rule] = app
+          options.each do |name,value|
+            unless RULES.has_key?(name)
+              raise(ArgumentError,"unknown option #{name.inspect}",caller)
+            end
+
+            rules << RULES[name].new(value)
+          end
+
+          @routes[rules] = app
           return rule
         end
 
@@ -152,8 +161,10 @@ module Ronin
         def call(env)
           request = Rack::Request.new(env)
 
-          @rules.each do |rule,app|
-            return app.call(env) if rule.match?(request)
+          @routes.each do |rules,app|
+            if rules.all? { |rule| rule.match?(request) }
+              return app.call(env)
+            end
           end
 
           super(env)
