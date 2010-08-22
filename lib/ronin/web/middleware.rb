@@ -22,5 +22,5 @@
 require 'ronin/web/middleware/base'
 require 'ronin/web/middleware/files'
 require 'ronin/web/middleware/directories'
-require 'ronin/web/middleware/filter'
+require 'ronin/web/middleware/router'
 require 'ronin/web/middleware/proxy'

@@ -26,52 +26,52 @@ module Ronin
   module Web
     module Middleware
       #
-      # A Rack middleware for filtering requests based on predefined rules.
+      # A Rack middleware for routing requests based on predefined rules.
       #
-      #     use Ronin::Web::Middleware::Filter do |filter|
-      #       # filter requests by source IP address
-      #       filter.rule :ip => '212.18.45.0/24', :to => BannedApp
-      #       filter.rule :ip => '192.168.0.0/16' do |request|
+      #     use Ronin::Web::Middleware::Router do |router|
+      #       # route requests by source IP address
+      #       router.rule :ip => '212.18.45.0/24', :to => BannedApp
+      #       router.rule :ip => '192.168.0.0/16' do |request|
       #         response ['Nothing here'], 404
       #       end
       #
-      #       # filter requests by Referer URL
-      #       filter.rule :referer => 'http://www.sexy.com/', :to => TrapApp
-      #       filter.rule :referer => /\.google\./ do |request|
+      #       # route requests by Referer URL
+      #       router.rule :referer => 'http://www.sexy.com/', :to => TrapApp
+      #       router.rule :referer => /\.google\./ do |request|
       #         response ['Nothing to see here.'], 404
       #       end
       #
-      #       # filter requests by User-Agent
-      #       filter.rule :user_agent => /Microsoft/, :to => IEApp
+      #       # route requests by User-Agent
+      #       router.rule :user_agent => /Microsoft/, :to => IEApp
       #
-      #       # filter requests using custom logic
-      #       filter.rule :when => lambda { |request| request.form_data? },
+      #       # route requests using custom logic
+      #       router.rule :when => lambda { |request| request.form_data? },
       #                   :to => FormApp
       #
-      #       # mix filter options together
-      #       filter.rule :ip => '212.18.45.0/24', :user_agent => /Microsoft/, :to => PwnApp
+      #       # mix route options together
+      #       router.rule :ip => '212.18.45.0/24', :user_agent => /Microsoft/, :to => PwnApp
       #     end
       #
-      class Filter < Base
+      class Router < Base
 
-        # The rules to filter requests by
+        # The rules to router requests by
         attr_reader :rules
 
         #
-        # Creates a new Filter middleware.
+        # Creates a new Router middleware.
         #
         # @param [#call] app
-        #   The application that the filter sits in front of.
+        #   The application that the router sits in front of.
         #
         # @param [Hash] options
         #   Additional options.
         #
-        # @yield [filter]
+        # @yield [router]
         #   If a block is given, it will be passed the newly created
-        #   filter middleware.
+        #   router middleware.
         #
-        # @yieldparam [Filter] filter
-        #   The new filter middleware object.
+        # @yieldparam [Router] router
+        #   The new router middleware object.
         #
         # @since 0.3.0
         #
@@ -82,46 +82,46 @@ module Ronin
         end
 
         #
-        # Defines a rule to filter requests by.
+        # Defines a rule to route requests by.
         #
         # @param [Hash] options
         #   Filter options.
         #
         # @option options [String] :campaign
-        #   The name of the campaign who's targetted hosts will be filtered.
+        #   The name of the campaign who's targetted hosts will be routed.
         #
         # @option options [String, Regexp] :vhost
-        #   The Virtual-Host to filter for.
+        #   The Virtual-Host to route.
         #
         # @option options [String, IPAddr] :ip
-        #   The IP address or IP range to fitler.
+        #   The IP address or IP range to route.
         #
         # @option options [String, Regexp] :referer
-        #   The Referer URL or pattern to filter.
+        #   The Referer URL or pattern to route.
         #
         # @option options [String, Regexp] :user_agent
-        #   The User-Agent string to filter.
+        #   The User-Agent string to route.
         #
         # @option options [Proc] :when
-        #   Custom logic to use when filtering requests.
+        #   Custom logic to use when routing requests.
         #
         # @option options [#call] :to
-        #   The application that will receive filtered requests.
+        #   The application that will receive routed requests.
         #
         # @yield [request]
-        #   If a block is given, it will receive filtered requests.
+        #   If a block is given, it will receive routed requests.
         #
         # @yieldparam [Rack::Request] request
-        #   A filtered request.
+        #   A routed request.
         #
         # @return [Rule]
-        #   The new filter rule.
+        #   The new router rule.
         #
-        # @example Filter requests going to an application.
-        #   filter.rule :ip => '210.18.0.0/16', :to => BannedApp
+        # @example Route requests going to an application.
+        #   router.rule :ip => '210.18.0.0/16', :to => BannedApp
         #
-        # @example Accept filtered requests using a block.
-        #   filter.rule :ip => '210.18.0.0/16' do |request|
+        # @example Accept routed requests using a block.
+        #   router.rule :ip => '210.18.0.0/16' do |request|
         #     response ['Banned!']
         #   end
         #
