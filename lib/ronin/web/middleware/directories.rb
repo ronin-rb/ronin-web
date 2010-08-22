@@ -56,7 +56,7 @@ module Ronin
         # @yieldparam [Directories] directories
         #   The new directories middleware object.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def initialize(app,options={},&block)
           @paths = {}
@@ -82,7 +82,7 @@ module Ronin
         #
         # @return [true]
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def map(remote_path,local_dir)
           @paths[remote_path + '/'] = local_dir
@@ -105,7 +105,7 @@ module Ronin
         # @return [Array, Response]
         #   The response.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def call(env)
           path = sanitize_path(env['PATH_INFO'])

@@ -73,7 +73,7 @@ module Ronin
         # @option options [Proc] :when
         #   Custom logic to use when filtering requests.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def initialize(options={})
           if options[:campaign]
@@ -104,7 +104,7 @@ module Ronin
         # @return [Boolean]
         #   Specifies whether the request matches the filter rule.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def match?(request)
           ip = request.ip

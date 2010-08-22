@@ -61,7 +61,7 @@ module Ronin
         # @yieldparam [Files] files
         #   The new files middleware object.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def initialize(app,options={},&block)
           @paths = {}
@@ -92,7 +92,7 @@ module Ronin
         # @example Mapping multiple paths using a regular expression
         #   map /\.exe$/, 'trojan.exe'
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def map(remote_path,local_path)
           @paths[remote_path] = local_path
@@ -108,7 +108,7 @@ module Ronin
         # @return [Array, Response]
         #   The response.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def call(env)
           path = sanitize_path(env['PATH_INFO'])

@@ -44,7 +44,7 @@ module Ronin
         # @return [String]
         #   The unescaped and absolute path.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def sanitize_path(path)
           File.expand_path(unescape(path))
@@ -59,7 +59,7 @@ module Ronin
         # @return [String]
         #   The MIME type for the path.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def mime_type_for(path)
           Rack::Mime.mime_type(File.extname(path))
@@ -94,7 +94,7 @@ module Ronin
         # @example Create a response with just a String.
         #   response 'Hello'
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def response(body=[],headers={},status=nil)
           response = Response.new(body,status,headers)
@@ -120,7 +120,7 @@ module Ronin
         #
         # @see #response
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def response_for(path,headers={},status=nil)
           response(

@@ -73,7 +73,7 @@ module Ronin
         # @yieldparam [Filter] filter
         #   The new filter middleware object.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def initialize(app,options={},&block)
           @rules = {}
@@ -127,7 +127,7 @@ module Ronin
         #
         # @see Rule#initialize
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def rule(options={},&block)
           app = (options.delete(:to) || block)
@@ -146,7 +146,7 @@ module Ronin
         # @return [Array, Response]
         #   A response.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def call(env)
           request = Rack::Request.new(env)

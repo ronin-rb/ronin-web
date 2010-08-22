@@ -58,7 +58,7 @@ module Ronin
         # @yieldparam [Base] middleware
         #   The new middleware object.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def initialize(app,options={})
           @app = app
@@ -82,7 +82,7 @@ module Ronin
         # @return [Rack::Response]
         #   The response.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def call(env)
           @app.call(env)
@@ -117,7 +117,7 @@ module Ronin
         # @example Create a response with just a String.
         #   response 'Hello'
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def response(body=[],headers={},status=nil)
           status ||= @default_status

@@ -115,7 +115,7 @@ module Ronin
         # @yieldparam [Proxy] proxy
         #   The new proxy middleware object.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def initialize(app,options={},&block)
           @host = options[:host]
@@ -147,7 +147,7 @@ module Ronin
         # @return [Proxy]
         #   The proxy middleware.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def requests_like(&block)
           @requests_like_block = block
@@ -167,7 +167,7 @@ module Ronin
         # @return [Proxy]
         #   The proxy middleware.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def responses_like(&block)
           @responses_like_block = block
@@ -187,7 +187,7 @@ module Ronin
         # @return [Proxy]
         #   The proxy middleware.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def every_request(&block)
           @every_request_block = block
@@ -206,7 +206,7 @@ module Ronin
         # @return [Proxy]
         #   The proxy middleware.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def every_response(&block)
           @every_response_block = block
@@ -272,7 +272,7 @@ module Ronin
         # @return [Array, Response]
         #   The response.
         #
-        # @since 0.2.2
+        # @since 0.3.0
         #
         def call(env)
           request = ProxyRequest.new(env)
