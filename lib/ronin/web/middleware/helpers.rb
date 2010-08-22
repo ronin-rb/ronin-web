@@ -65,6 +65,8 @@ module Ronin
           Rack::Mime.mime_type(File.extname(path))
         end
 
+        alias content_type_for mime_type_for
+
         #
         # Creates a new response.
         #
