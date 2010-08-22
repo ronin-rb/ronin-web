@@ -123,7 +123,7 @@ module Ronin
           status ||= @default_status
           headers = @default_headers.merge(headers)
 
-          return super(body,status,headers)
+          return super(body,headers,status)
         end
 
       end
