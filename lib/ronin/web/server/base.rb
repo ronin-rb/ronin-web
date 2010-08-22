@@ -272,6 +272,27 @@ module Ronin
         end
 
         #
+        # Hosts the contents of files.
+        #
+        # @yield [files]
+        #   The given block will be passed the files middleware to configure.
+        #
+        # @yieldparam [Middleware::Files]
+        #   The files middleware object.
+        #
+        # @example
+        #   files do |files|
+        #     files.map '/foo.txt', 'foo.txt'
+        #     files.map /\.exe$/, 'trojan.exe'
+        #   end
+        #
+        # @since 0.3.0
+        #
+        def self.files(&block)
+          use(Middleware::Files,&block)
+        end
+
+        #
         # Hosts the contents of the directory.
         #
         # @param [String] remote_path
@@ -287,6 +308,29 @@ module Ronin
         #
         def self.directory(remote_path,local_path)
           use Middleware::Directories, :paths => {remote_path => local_path}
+        end
+
+        #
+        # Hosts the contents of directories.
+        #
+        # @yield [dirs]
+        #   The given block will be passed the directories middleware to
+        #   configure.
+        #
+        # @yieldparam [Middleware::Directories]
+        #   The directories middleware object.
+        #
+        # @example
+        #   directories do |dirs|
+        #     dirs.map '/downloads', '/tmp/ronin_downloads'
+        #     dirs.map '/images', '/tmp/ronin_images'
+        #     dirs.map '/pdfs', '/tmp/ronin_pdfs'
+        #   end
+        #
+        # @since 0.3.0
+        #
+        def self.directories(&block)
+          use(Middleware::Directories,&block)
         end
 
         #
