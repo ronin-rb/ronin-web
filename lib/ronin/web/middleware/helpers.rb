@@ -31,20 +31,9 @@ module Ronin
       # Middleware and Rack Apps.
       #
       module Helpers
-        #
-        # Unescapes the given data.
-        #
-        # @param [String] data
-        #   The given data.
-        #
-        # @return [String]
-        #   The unescaped data.
-        #
-        # @since 0.2.2
-        #
-        def unescape(data)
-          Rack::Utils.unescape(data)
-        end
+        include Rack::Utils
+
+        alias h escape_html
 
         #
         # Sanitizes a path received by the middleware.
