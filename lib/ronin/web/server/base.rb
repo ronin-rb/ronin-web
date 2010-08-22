@@ -40,7 +40,6 @@ module Ronin
       class Base < Sinatra::Base
 
         include DataPaths::Finders
-        include Rack::Utils
         include Templates::Erb
         include UI::Output::Helpers
         extend UI::Output::Helpers
