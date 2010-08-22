@@ -19,9 +19,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/web/server/helpers/files'
 require 'ronin/web/server/helpers/hosts'
 require 'ronin/web/server/helpers/proxy'
+require 'ronin/web/middleware/files'
+require 'ronin/web/middleware/directories'
 require 'ronin/web/middleware/helpers'
 require 'ronin/templates/erb'
 require 'ronin/ui/output'
@@ -284,9 +285,45 @@ module Ronin
         end
 
         #
+        # Hosts the contents of a file.
+        #
+        # @param [String] remote_path
+        #   The path the web server will host the file at.
+        #
+        # @param [String] local_path
+        #   The path to the local file.
+        #
+        # @example
+        #   MyApp.file '/robots.txt', '/path/to/my_robots.txt'
+        #
+        # @since 0.3.0
+        #
+        def self.file(remote_path,local_path)
+          use Middleware::Files, :paths => {remote_path => local_path}
+        end
+
+        #
+        # Hosts the contents of the directory.
+        #
+        # @param [String] remote_path
+        #   The path the web server will host the directory at.
+        #
+        # @param [String] local_path
+        #   The path to the local directory.
+        #
+        # @example
+        #   MyApp.directory '/download/', '/tmp/files/'
+        #
+        # @since 0.2.0
+        #
+        def self.directory(remote_path,local_path)
+          use Middleware::Directories, :path => {remote_path => local_path}
+        end
+
+        #
         # Hosts the static contents within a given directory.
         #
-        # @param [String] directory
+        # @param [String] path
         #   The path to a directory to serve static content from.
         #
         # @example
@@ -294,69 +331,8 @@ module Ronin
         #
         # @since 0.2.0
         #
-        def self.public_dir(directory)
-          directory = File.expand_path(directory)
-
-          before do
-            sub_path = File.expand_path(File.join('',request.path_info))
-            full_path = File.join(directory,sub_path)
-
-            return_file(full_path) if File.file?(full_path)
-          end
-        end
-
-        #
-        # Hosts the contents of a file.
-        #
-        # @param [String] http_path
-        #   The path the web server will host the file at.
-        #
-        # @param [String] path
-        #   The path to the local file.
-        #
-        # @param [Symbol] custom_content_type
-        #   Optional content-type to host the file as.
-        #
-        # @example
-        #   MyApp.file '/robots.txt', '/path/to/my_robots.txt'
-        #
-        # @since 0.2.0
-        #
-        def self.file(http_path,path,custom_content_type=nil)
-          path = File.expand_path(path)
-
-          any(http_path) do
-            return_file(path,custom_content_type)
-          end
-        end
-
-        #
-        # Hosts the contents of the directory.
-        #
-        # @param [String] http_path
-        #   The path the web server will host the directory at.
-        #
-        # @param [String] directory
-        #   The path to the local directory.
-        #
-        # @param [Symbol] custom_content_type
-        #   Optional content-type to host the contents of the directory
-        #   with.
-        #
-        # @example
-        #   MyApp.directory '/download/', '/tmp/files/'
-        #
-        # @since 0.2.0
-        #
-        def self.directory(http_path,directory,custom_content_type=nil)
-          directory = File.expand_path(directory)
-
-          any(File.join(http_path,'*')) do
-            sub_path = File.expand_path(File.join('',params[:splat].first))
-            full_path = File.join(directory,sub_path)
-
-            return_file(full_path,custom_content_type)
-          end
+        def self.public_dir(path)
+          self.directory('/',path)
         end
 
         #
@@ -491,7 +467,6 @@ module Ronin
         enable :sessions
 
         helpers Middleware::Helpers
-        helpers Helpers::Files
         helpers Helpers::Hosts
         helpers Helpers::Proxy
 
