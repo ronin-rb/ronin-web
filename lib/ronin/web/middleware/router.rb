@@ -49,7 +49,8 @@ module Ronin
       #                   :to => FormApp
       #
       #       # mix route options together
-      #       router.rule :ip => '212.18.45.0/24', :user_agent => /Microsoft/, :to => PwnApp
+      #       router.rule :ip => '212.18.45.0/24',
+      #                   :user_agent => /Microsoft/, :to => PwnApp
       #     end
       #
       class Router < Base
