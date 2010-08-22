@@ -50,12 +50,6 @@ module Ronin
         # Default port to run the Web Server on
         DEFAULT_PORT = 8000
 
-        # Default list of index file-names to search for in directories
-        DEFAULT_INDICES = ['index.html', 'index.htm']
-
-        # Directory to search for views within
-        VIEWS_DIR = File.join('ronin','web','server','views')
-
         set :host, DEFAULT_HOST
         set :port, DEFAULT_PORT
 
@@ -84,31 +78,6 @@ module Ronin
         #
         def Base.handler=(name)
           @@ronin_web_server_handler = name
-        end
-
-        #
-        # The list of index files to search for when requesting the
-        # contents of a directory.
-        #
-        # @return [Set]
-        #   The names of index files.
-        #
-        # @since 0.2.0
-        #
-        def Base.indices
-          @@ronin_web_server_indices ||= Set[*DEFAULT_INDICES]
-        end
-
-        #
-        # Adds a new index to the {Base.indices} list.
-        #
-        # @param [String, Symbol] name
-        #   The index name to add.
-        #
-        # @since 0.2.0
-        #
-        def Base.index(name)
-          Base.indices << name.to_s
         end
 
         #

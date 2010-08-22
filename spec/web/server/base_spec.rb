@@ -11,15 +11,6 @@ describe Web::Server::Base do
     self.app = TestApp
   end
 
-  it "should define a set of index file-names to search for" do
-    TestApp.indices.should == TestApp::DEFAULT_INDICES.to_set
-  end
-
-  it "should allow for defining new index file-names to search for" do
-    TestApp.index 'index.xml'
-    TestApp.indices.should include('index.xml')
-  end
-
   it "should find a suitable Rack::Handler for the web server" do
     TestApp.handler_class.should_not be_nil
   end
