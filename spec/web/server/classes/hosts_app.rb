@@ -30,8 +30,8 @@ class HostsApp < Ronin::Web::Server::Base
     'Generic Response'
   end
 
-  host 'example.com', WWWApp
-  hosts_like /^ftp\./, FTPApp
+  vhost 'example.com', WWWApp
+  vhosts_like /^ftp\./, FTPApp
 
   get '/file' do
     'Generic File'

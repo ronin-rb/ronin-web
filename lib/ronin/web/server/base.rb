@@ -348,9 +348,9 @@ module Ronin
         # @example
         #   MyApp.host 'cdn.evil.com', EvilServer
         #
-        # @since 0.2.0
+        # @since 0.3.0
         #
-        def self.host(name,server)
+        def self.vhost(name,server)
           name = name.to_s
 
           before do
@@ -373,9 +373,9 @@ module Ronin
         # @example
         #   MyApp.hosts_like /^a[0-9]\./, FileProxy
         #
-        # @since 0.2.0
+        # @since 0.3.0
         #
-        def self.hosts_like(pattern,server)
+        def self.vhosts_like(pattern,server)
           before do
             if request.host.match(pattern)
               halt(*server.call(request.env))
