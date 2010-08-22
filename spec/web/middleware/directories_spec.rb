@@ -15,6 +15,7 @@ describe Web::Middleware::Directories do
         dirs.map '/test', root_path('test1')
         dirs.map '/test/sub', root_path('test2')
         dirs.map '/test/overriden', root_path('test3')
+        dirs.map '/', root_path
       end
 
       get '/test/overriden/*' do
@@ -60,6 +61,13 @@ describe Web::Middleware::Directories do
 
     last_response.should be_ok
     last_response.body.should == "test2\n"
+  end
+
+  it "should map local directories to the root directory" do
+    get '/test1/test1.txt'
+
+    last_response.should be_ok
+    last_response.body.should == "test1\n"
   end
 
   it "should match requests before the app" do
