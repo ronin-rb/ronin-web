@@ -21,6 +21,8 @@
 
 require 'ronin/web/middleware/base'
 
+require 'set'
+
 module Ronin
   module Web
     module Middleware
@@ -33,6 +35,9 @@ module Ronin
       #     end
       #
       class Directories < Base
+
+        # The predefined index file names
+        INDEX_NAMES = %w[index.html index.xhtml index.htm]
 
         # The mapping of remote paths to local directories 
         attr_reader :paths
@@ -72,6 +77,18 @@ module Ronin
         end
 
         #
+        # The names of index files.
+        #
+        # @return [Set]
+        #   The set of index file names.
+        #
+        # @since 0.3.0
+        #
+        def Directories.index_names
+          @@directories_index_names ||= Set.new(INDEX_NAMES)
+        end
+
+        #
         # Maps a remote path to a local directory.
         #
         # @param [String] remote_path
@@ -85,7 +102,7 @@ module Ronin
         # @since 0.3.0
         #
         def map(remote_path,local_dir)
-          @paths[remote_path + '/'] = local_dir
+          @paths[remote_path] = local_dir
           
           # sort paths by number of sub-directories
           @paths_order = @paths.keys.sort_by do |path|
@@ -110,12 +127,27 @@ module Ronin
         def call(env)
           path = sanitize_path(env['PATH_INFO'])
 
-          @paths_order.each do |remote_path|
-            if path[0,remote_path.length] == remote_path
-              local_dir = @paths[remote_path]
-              sub_path = path[remote_path.length..-1]
-              local_path = File.join(local_dir,sub_path)
+          # finds the remote directory that the paths starts with or is
+          # equal to.
+          remote_path = @paths_order.find do |remote_path|
+                          (path[0,remote_path.length] == remote_path) && (
+                            (path[remote_path.length] == '/') ||
+                            (path.length == remote_path.length)
+                          )
+                        end
 
+          if remote_path
+            local_dir = @paths[remote_path]
+            sub_path = path[remote_path.length..-1]
+
+            if sub_path.empty?
+              # attempt to find an index file in the directory
+              Directories.index_names.each do |index|
+                local_path = File.join(local_dir,index)
+                return response_for(local_path) if File.file?(local_path)
+              end
+            else
+              local_path = File.join(local_dir,sub_path)
               return response_for(local_path) if File.file?(local_path)
             end
           end
