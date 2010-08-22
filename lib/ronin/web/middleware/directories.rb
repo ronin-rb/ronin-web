@@ -112,10 +112,11 @@ module Ronin
 
           @paths_order.each do |remote_path|
             if path[0,remote_path.length] == remote_path
-              local_path = @paths[remote_path]
+              local_dir = @paths[remote_path]
               sub_path = path[remote_path.length..-1]
+              local_path = File.join(local_dir,sub_path)
 
-              return response_for(File.join(local_path,sub_path))
+              return response_for(local_path) if File.file?(local_path)
             end
           end
 
