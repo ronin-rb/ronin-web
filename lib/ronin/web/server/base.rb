@@ -286,7 +286,7 @@ module Ronin
         # @since 0.2.0
         #
         def self.directory(remote_path,local_path)
-          use Middleware::Directories, :path => {remote_path => local_path}
+          use Middleware::Directories, :paths => {remote_path => local_path}
         end
 
         #
