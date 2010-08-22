@@ -235,7 +235,7 @@ module Ronin
         #   The web server to route requests to.
         #
         # @example
-        #   MyApp.map '/subapp/', SubApp
+        #   map '/subapp/', SubApp
         #
         # @since 0.2.0
         #
@@ -263,7 +263,7 @@ module Ronin
         #   The path to the local file.
         #
         # @example
-        #   MyApp.file '/robots.txt', '/path/to/my_robots.txt'
+        #   file '/robots.txt', '/path/to/my_robots.txt'
         #
         # @since 0.3.0
         #
@@ -302,7 +302,7 @@ module Ronin
         #   The path to the local directory.
         #
         # @example
-        #   MyApp.directory '/download/', '/tmp/files/'
+        #   directory '/download/', '/tmp/files/'
         #
         # @since 0.2.0
         #
@@ -340,7 +340,7 @@ module Ronin
         #   The path to a directory to serve static content from.
         #
         # @example
-        #   MyApp.public_dir 'path/to/another/public'
+        #   public_dir 'path/to/another/public'
         #
         # @since 0.2.0
         #
@@ -359,7 +359,7 @@ module Ronin
         #   The web server to route the requests to.
         #
         # @example
-        #   MyApp.host 'cdn.evil.com', EvilServer
+        #   host 'cdn.evil.com', EvilServer
         #
         # @since 0.3.0
         #
@@ -384,7 +384,7 @@ module Ronin
         #   The server to route the requests to.
         #
         # @example
-        #   MyApp.hosts_like /^a[0-9]\./, FileProxy
+        #   hosts_like /^a[0-9]\./, FileProxy
         #
         # @since 0.3.0
         #
