@@ -42,7 +42,7 @@ module Ronin
         include DataPaths::Finders
         include Rack::Utils
         include Templates::Erb
-        extend UI::Output
+        extend UI::Output::Helpers
 
         # Default interface to run the Web Server on
         DEFAULT_HOST = '0.0.0.0'
