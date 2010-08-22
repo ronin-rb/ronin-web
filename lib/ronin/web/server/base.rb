@@ -28,18 +28,15 @@ require 'ronin/templates/erb'
 require 'ronin/ui/output'
 require 'ronin/extensions/meta'
 
-require 'set'
 require 'thread'
 require 'rack'
 require 'sinatra'
-require 'data_paths/finders'
 
 module Ronin
   module Web
     module Server
       class Base < Sinatra::Base
 
-        include DataPaths::Finders
         include Templates::Erb
         include UI::Output::Helpers
         extend UI::Output::Helpers
