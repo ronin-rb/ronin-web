@@ -19,10 +19,10 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/web/server/helpers/rendering'
 require 'ronin/web/server/helpers/files'
 require 'ronin/web/server/helpers/hosts'
 require 'ronin/web/server/helpers/proxy'
+require 'ronin/web/middleware/helpers'
 require 'ronin/templates/erb'
 require 'ronin/ui/output'
 require 'ronin/extensions/meta'
@@ -490,7 +490,7 @@ module Ronin
 
         enable :sessions
 
-        helpers Helpers::Rendering
+        helpers Middleware::Helpers
         helpers Helpers::Files
         helpers Helpers::Hosts
         helpers Helpers::Proxy
