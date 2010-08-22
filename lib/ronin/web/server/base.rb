@@ -42,6 +42,7 @@ module Ronin
         include DataPaths::Finders
         include Rack::Utils
         include Templates::Erb
+        include UI::Output::Helpers
         extend UI::Output::Helpers
 
         # Default interface to run the Web Server on
