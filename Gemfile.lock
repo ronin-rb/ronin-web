@@ -134,7 +134,7 @@ DEPENDENCIES
   rdiscount (~> 1.6.3)
   ronin (~> 0.4.0)!
   ronin-support (~> 0.1.0)!
-  rspec (~> 2.0.0.beta.16)
+  rspec (~> 2.0.0.beta.20)
   sinatra (~> 1.0)
   spidr (~> 0.2.0)
   yard (~> 0.5.3)
