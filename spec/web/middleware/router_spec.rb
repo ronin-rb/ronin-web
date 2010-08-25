@@ -21,9 +21,9 @@ describe Web::Middleware::Router do
       end
 
       use Ronin::Web::Middleware::Router do |router|
-        router.rule :referer => /google\.com/, :to => FakeApp
+        router.draw :referer => /google\.com/, :to => FakeApp
 
-        router.rule :user_agent => /MSIE/,
+        router.draw :user_agent => /MSIE/,
                     :referer => /myspace\.com/,
                     :to => FakeApp
       end

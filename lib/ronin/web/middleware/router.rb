@@ -30,22 +30,22 @@ module Ronin
       #
       #     use Ronin::Web::Middleware::Router do |router|
       #       # route requests by source IP address
-      #       router.rule :ip => '212.18.45.0/24', :to => BannedApp
-      #       router.rule :ip => '192.168.0.0/16' do |request|
+      #       router.draw :ip => '212.18.45.0/24', :to => BannedApp
+      #       router.draw :ip => '192.168.0.0/16' do |request|
       #         response ['Nothing here'], 404
       #       end
       #
       #       # route requests by Referer URL
-      #       router.rule :referer => 'http://www.sexy.com/', :to => TrapApp
-      #       router.rule :referer => /\.google\./ do |request|
+      #       router.draw :referer => 'http://www.sexy.com/', :to => TrapApp
+      #       router.draw :referer => /\.google\./ do |request|
       #         response ['Nothing to see here.'], 404
       #       end
       #
       #       # route requests by User-Agent
-      #       router.rule :user_agent => /Microsoft/, :to => IEApp
+      #       router.draw :user_agent => /Microsoft/, :to => IEApp
       #
       #       # mix route options together
-      #       router.rule :ip => '212.18.45.0/24',
+      #       router.draw :ip => '212.18.45.0/24',
       #                   :user_agent => /Microsoft/, :to => PwnApp
       #     end
       #
@@ -120,18 +120,16 @@ module Ronin
         #   The new router rule.
         #
         # @example Route requests going to an application.
-        #   router.rule :ip => '210.18.0.0/16', :to => BannedApp
+        #   router.draw :ip => '210.18.0.0/16', :to => BannedApp
         #
         # @example Accept routed requests using a block.
-        #   router.rule :ip => '210.18.0.0/16' do |request|
+        #   router.draw :ip => '210.18.0.0/16' do |request|
         #     response ['Banned!']
         #   end
         #
-        # @see Rule#initialize
-        #
         # @since 0.3.0
         #
-        def rule(options={},&block)
+        def draw(options={},&block)
           app = (options.delete(:to) || block)
           rules = []
 
