@@ -53,7 +53,7 @@ module Ronin
           #
           def match?(request)
             if @user_agent.kind_of?(Regexp)
-              request.user_agent =~ @user_agent
+              !((request.user_agent =~ @user_agent).nil?)
             else
               request.user_agent.include?(@user_agent)
             end

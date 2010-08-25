@@ -53,7 +53,7 @@ module Ronin
           #
           def match?(request)
             if @referer.kind_of?(Regexp)
-              request.referer =~ @referer
+              !((request.referer =~ @referer).nil?)
             else
               request.referer == @referer
             end

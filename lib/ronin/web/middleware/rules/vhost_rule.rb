@@ -53,7 +53,7 @@ module Ronin
           #
           def match?(request)
             if @vhost.kind_of?(Regexp)
-              request.host =~ @vhost
+              !((request.host =~ @vhost).nil?)
             else
               request.host == @vhost
             end
