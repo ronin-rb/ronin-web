@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'ronin/web/middleware/router'
 
 require 'web/helpers/rack_app'
-require 'web/middleware/classes/routed_app'
 
 describe Web::Middleware::Router do
   include Helpers::Web::RackApp
@@ -54,7 +53,7 @@ describe Web::Middleware::Router do
     }
 
     last_response.should be_ok
-    last_response.body.should == 'real'
+    last_response.body.should_not == 'fake'
   end
 
   it "should still route un-matched requests to the app" do
