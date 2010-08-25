@@ -144,7 +144,7 @@ module Ronin
           end
 
           @routes[rules] = app
-          return rule
+          return rules
         end
 
         #
