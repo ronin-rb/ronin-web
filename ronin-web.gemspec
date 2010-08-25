@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ronin-web}
-  s.version = "0.2.2"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-08-06}
+  s.date = %q{2010-08-24}
   s.default_executable = %q{ronin-web}
   s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{postmodern.mod3@gmail.com}
@@ -39,13 +39,21 @@ Gem::Specification.new do |s|
     "lib/ronin/web/extensions/nokogiri/xml/element.rb",
     "lib/ronin/web/extensions/nokogiri/xml/node.rb",
     "lib/ronin/web/extensions/nokogiri/xml/text.rb",
+    "lib/ronin/web/middleware.rb",
     "lib/ronin/web/middleware/base.rb",
     "lib/ronin/web/middleware/directories.rb",
     "lib/ronin/web/middleware/files.rb",
-    "lib/ronin/web/middleware/filter.rb",
+    "lib/ronin/web/middleware/helpers.rb",
     "lib/ronin/web/middleware/proxy.rb",
     "lib/ronin/web/middleware/proxy_request.rb",
-    "lib/ronin/web/middleware/rule.rb",
+    "lib/ronin/web/middleware/response.rb",
+    "lib/ronin/web/middleware/router.rb",
+    "lib/ronin/web/middleware/rules.rb",
+    "lib/ronin/web/middleware/rules/campaign_rule.rb",
+    "lib/ronin/web/middleware/rules/ip_rule.rb",
+    "lib/ronin/web/middleware/rules/referer_rule.rb",
+    "lib/ronin/web/middleware/rules/user_agent_rule.rb",
+    "lib/ronin/web/middleware/rules/vhost_rules.rb",
     "lib/ronin/web/proxy.rb",
     "lib/ronin/web/proxy/app.rb",
     "lib/ronin/web/proxy/base.rb",
@@ -54,10 +62,8 @@ Gem::Specification.new do |s|
     "lib/ronin/web/server/app.rb",
     "lib/ronin/web/server/base.rb",
     "lib/ronin/web/server/helpers.rb",
-    "lib/ronin/web/server/helpers/files.rb",
     "lib/ronin/web/server/helpers/hosts.rb",
     "lib/ronin/web/server/helpers/proxy.rb",
-    "lib/ronin/web/server/helpers/rendering.rb",
     "lib/ronin/web/server/web.rb",
     "lib/ronin/web/spider.rb",
     "lib/ronin/web/version.rb",
@@ -66,9 +72,18 @@ Gem::Specification.new do |s|
     "spec/helpers/output.rb",
     "spec/spec_helper.rb",
     "spec/web/extensions/nokogiri_spec.rb",
-    "spec/web/helpers/root/index.html",
-    "spec/web/helpers/root/test.txt",
-    "spec/web/helpers/server.rb",
+    "spec/web/helpers/rack_app.rb",
+    "spec/web/helpers/root.rb",
+    "spec/web/helpers/root/test1.txt",
+    "spec/web/helpers/root/test1/index.html",
+    "spec/web/helpers/root/test1/test1.txt",
+    "spec/web/helpers/root/test2.txt",
+    "spec/web/helpers/root/test2/test2.txt",
+    "spec/web/helpers/root/test3.txt",
+    "spec/web/helpers/root/test3/test3.txt",
+    "spec/web/middleware/directories_spec.rb",
+    "spec/web/middleware/files_spec.rb",
+    "spec/web/middleware/response_spec.rb",
     "spec/web/proxy/base_spec.rb",
     "spec/web/server/base_spec.rb",
     "spec/web/server/classes/files/dir/file.txt",
@@ -76,15 +91,12 @@ Gem::Specification.new do |s|
     "spec/web/server/classes/files/dir2/file2.txt",
     "spec/web/server/classes/files/dir3/page.xml",
     "spec/web/server/classes/files/file.txt",
-    "spec/web/server/classes/files_app.rb",
     "spec/web/server/classes/hosts_app.rb",
     "spec/web/server/classes/proxy_app.rb",
     "spec/web/server/classes/public1/static1.txt",
     "spec/web/server/classes/public2/static2.txt",
     "spec/web/server/classes/sub_app.rb",
     "spec/web/server/classes/test_app.rb",
-    "spec/web/server/files_spec.rb",
-    "spec/web/server/helpers/server.rb",
     "spec/web/server/hosts_spec.rb",
     "spec/web/server/proxy_spec.rb",
     "spec/web_spec.rb"
@@ -99,16 +111,17 @@ Gem::Specification.new do |s|
     "spec/helpers/output.rb",
     "spec/spec_helper.rb",
     "spec/web/extensions/nokogiri_spec.rb",
-    "spec/web/helpers/server.rb",
+    "spec/web/helpers/rack_app.rb",
+    "spec/web/helpers/root.rb",
+    "spec/web/middleware/directories_spec.rb",
+    "spec/web/middleware/files_spec.rb",
+    "spec/web/middleware/response_spec.rb",
     "spec/web/proxy/base_spec.rb",
     "spec/web/server/base_spec.rb",
-    "spec/web/server/classes/files_app.rb",
     "spec/web/server/classes/hosts_app.rb",
     "spec/web/server/classes/proxy_app.rb",
     "spec/web/server/classes/sub_app.rb",
     "spec/web/server/classes/test_app.rb",
-    "spec/web/server/files_spec.rb",
-    "spec/web/server/helpers/server.rb",
     "spec/web/server/hosts_spec.rb",
     "spec/web/server/proxy_spec.rb",
     "spec/web_spec.rb"
@@ -128,8 +141,8 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.4.0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.5.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.0.0.beta.20"])
     else
       s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
       s.add_dependency(%q<nokogiri>, ["~> 1.4.1"])
@@ -140,8 +153,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<ronin>, ["~> 0.4.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
-      s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
-      s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
+      s.add_dependency(%q<jeweler>, ["~> 1.5.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.20"])
     end
   else
     s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
@@ -153,8 +166,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<ronin>, ["~> 0.4.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
-    s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
-    s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.16"])
+    s.add_dependency(%q<jeweler>, ["~> 1.5.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.20"])
   end
 end
 
