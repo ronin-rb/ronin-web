@@ -1,9 +1,9 @@
 require 'spec_helper'
 require 'ronin/spec/database'
-require 'ronin/web/middleware/rules/campaign_rule'
+require 'ronin/web/middleware/filters/campaign_filter'
 
-describe Web::Middleware::Rules::CampaignRule do
-  subject { Web::Middleware::Rules::CampaignRule }
+describe Web::Middleware::Filters::CampaignFilter do
+  subject { Web::Middleware::Filters::CampaignFilter }
 
   let(:name) { 'Ronin::Web::Middleware' }
   let(:ip) { '192.168.1.42' }
@@ -24,8 +24,8 @@ describe Web::Middleware::Rules::CampaignRule do
   end
 
   it "should match requests by IP Address and targeting Campaign" do
-    rule = subject.new(name)
+    filter = subject.new(name)
 
-    rule.match?(@request).should == true
+    filter.match?(@request).should == true
   end
 end

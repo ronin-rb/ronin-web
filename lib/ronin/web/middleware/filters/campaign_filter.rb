@@ -24,15 +24,15 @@ require 'ronin/campaign'
 module Ronin
   module Web
     module Middleware
-      module Rules
+      module Filters
         #
-        # A Rule used to match requests coming from IP Addresses that are
+        # A Filter used to match requests coming from IP Addresses that are
         # targeted by a specified Campaign.
         #
-        class CampaignRule
+        class CampaignFilter
 
           #
-          # Creates a new campaign rule.
+          # Creates a new campaign filter.
           #
           # @param [String] name
           #   The name of the campaign to match against.
@@ -47,13 +47,13 @@ module Ronin
           end
 
           #
-          # Matches the rule against the request.
+          # Matches the filter against the request.
           #
           # @param [Rack::Request] request
           #   The incoming request.
           #
           # @return [Boolean]
-          #   Specifies whether the rule matched the request.
+          #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
           #

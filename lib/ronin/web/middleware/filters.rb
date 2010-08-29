@@ -19,8 +19,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/web/middleware/rules/ip_rule'
-require 'ronin/web/middleware/rules/campaign_rule'
-require 'ronin/web/middleware/rules/vhost_rule'
-require 'ronin/web/middleware/rules/referer_rule'
-require 'ronin/web/middleware/rules/user_agent_rule'
+require 'ronin/web/middleware/filters/ip_filter'
+require 'ronin/web/middleware/filters/campaign_filter'
+require 'ronin/web/middleware/filters/vhost_filter'
+require 'ronin/web/middleware/filters/referer_filter'
+require 'ronin/web/middleware/filters/user_agent_filter'

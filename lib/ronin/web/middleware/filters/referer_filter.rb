@@ -22,14 +22,14 @@
 module Ronin
   module Web
     module Middleware
-      module Rules
+      module Filters
         #
-        # A Rule to match requests based on their HTTP Referer URL.
+        # A Filter to match requests based on their HTTP Referer URL.
         #
-        class RefererRule
+        class RefererFilter
 
           #
-          # Creates a new HTTP Referer rule.
+          # Creates a new HTTP Referer filter.
           #
           # @param [String, Regexp] referer
           #   The HTTP Referer URL pattern to match against.
@@ -41,13 +41,13 @@ module Ronin
           end
 
           #
-          # Matches the rule against the request.
+          # Matches the filter against the request.
           #
           # @param [Rack::Request] request
           #   The incoming request.
           #
           # @return [Boolean]
-          #   Specifies whether the rule matched the request.
+          #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
           #

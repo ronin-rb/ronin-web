@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-08-24}
+  s.date = %q{2010-08-29}
   s.default_executable = %q{ronin-web}
   s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{postmodern.mod3@gmail.com}
@@ -43,17 +43,18 @@ Gem::Specification.new do |s|
     "lib/ronin/web/middleware/base.rb",
     "lib/ronin/web/middleware/directories.rb",
     "lib/ronin/web/middleware/files.rb",
+    "lib/ronin/web/middleware/filters.rb",
+    "lib/ronin/web/middleware/filters/campaign_filter.rb",
+    "lib/ronin/web/middleware/filters/ip_filter.rb",
+    "lib/ronin/web/middleware/filters/referer_filter.rb",
+    "lib/ronin/web/middleware/filters/user_agent_filter.rb",
+    "lib/ronin/web/middleware/filters/vhost_filter.rb",
     "lib/ronin/web/middleware/helpers.rb",
     "lib/ronin/web/middleware/proxy.rb",
     "lib/ronin/web/middleware/proxy_request.rb",
     "lib/ronin/web/middleware/response.rb",
     "lib/ronin/web/middleware/router.rb",
-    "lib/ronin/web/middleware/rules.rb",
-    "lib/ronin/web/middleware/rules/campaign_rule.rb",
-    "lib/ronin/web/middleware/rules/ip_rule.rb",
-    "lib/ronin/web/middleware/rules/referer_rule.rb",
-    "lib/ronin/web/middleware/rules/user_agent_rule.rb",
-    "lib/ronin/web/middleware/rules/vhost_rules.rb",
+    "lib/ronin/web/middleware/rule.rb",
     "lib/ronin/web/proxy.rb",
     "lib/ronin/web/proxy/app.rb",
     "lib/ronin/web/proxy/base.rb",
@@ -83,7 +84,13 @@ Gem::Specification.new do |s|
     "spec/web/helpers/root/test3/test3.txt",
     "spec/web/middleware/directories_spec.rb",
     "spec/web/middleware/files_spec.rb",
+    "spec/web/middleware/filters/campaign_filter_spec.rb",
+    "spec/web/middleware/filters/ip_filter_spec.rb",
+    "spec/web/middleware/filters/referer_filter_spec.rb",
+    "spec/web/middleware/filters/user_agent_filter_spec.rb",
+    "spec/web/middleware/filters/vhost_filter_spec.rb",
     "spec/web/middleware/response_spec.rb",
+    "spec/web/middleware/router_spec.rb",
     "spec/web/proxy/base_spec.rb",
     "spec/web/server/base_spec.rb",
     "spec/web/server/classes/files/dir/file.txt",
@@ -115,7 +122,14 @@ Gem::Specification.new do |s|
     "spec/web/helpers/root.rb",
     "spec/web/middleware/directories_spec.rb",
     "spec/web/middleware/files_spec.rb",
+    "spec/web/middleware/filters/campaign_filter_spec.rb",
+    "spec/web/middleware/filters/ip_filter_spec.rb",
+    "spec/web/middleware/filters/referer_filter_spec.rb",
+    "spec/web/middleware/filters/user_agent_filter_spec.rb",
+    "spec/web/middleware/filters/vhost_filter_spec.rb",
+    "spec/web/middleware/proxy_spec.rb",
     "spec/web/middleware/response_spec.rb",
+    "spec/web/middleware/router_spec.rb",
     "spec/web/proxy/base_spec.rb",
     "spec/web/server/base_spec.rb",
     "spec/web/server/classes/hosts_app.rb",
@@ -132,6 +146,8 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<dm-core>, ["~> 1.0.0"])
+      s.add_runtime_dependency(%q<dm-migrations>, ["~> 1.0.0"])
       s.add_runtime_dependency(%q<data_paths>, ["~> 0.2.1"])
       s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.1"])
       s.add_runtime_dependency(%q<mechanize>, ["~> 1.0.0"])
@@ -144,6 +160,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.0.0.beta.20"])
     else
+      s.add_dependency(%q<dm-core>, ["~> 1.0.0"])
+      s.add_dependency(%q<dm-migrations>, ["~> 1.0.0"])
       s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
       s.add_dependency(%q<nokogiri>, ["~> 1.4.1"])
       s.add_dependency(%q<mechanize>, ["~> 1.0.0"])
@@ -157,6 +175,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, ["~> 2.0.0.beta.20"])
     end
   else
+    s.add_dependency(%q<dm-core>, ["~> 1.0.0"])
+    s.add_dependency(%q<dm-migrations>, ["~> 1.0.0"])
     s.add_dependency(%q<data_paths>, ["~> 0.2.1"])
     s.add_dependency(%q<nokogiri>, ["~> 1.4.1"])
     s.add_dependency(%q<mechanize>, ["~> 1.0.0"])

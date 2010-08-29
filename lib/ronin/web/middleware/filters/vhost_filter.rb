@@ -22,40 +22,40 @@
 module Ronin
   module Web
     module Middleware
-      module Rules
+      module Filters
         #
-        # A Rule to match requests based on the User Agent header.
+        # A Filter to match requests by their HTTP Host header.
         #
-        class UserAgentRule
+        class VHostFilter
 
           #
-          # Creates a new User Agent rule.
+          # Creates a new vhost filter.
           #
-          # @param [String, Regexp] user_agent
-          #   The User Agent pattern to match against.
+          # @param [String, Regexp] vhost
+          #   The virtual host pattern to match against.
           #
           # @since 0.3.0
           #
-          def initialize(user_agent)
-            @user_agent = user_agent
+          def initialize(vhost)
+            @vhost = vhost
           end
 
           #
-          # Matches the rule against the request.
+          # Matches the filter against the request.
           #
           # @param [Rack::Request] request
           #   The incoming request.
           #
           # @return [Boolean]
-          #   Specifies whether the rule matched the request.
+          #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
           #
           def match?(request)
-            if @user_agent.kind_of?(Regexp)
-              !((request.user_agent =~ @user_agent).nil?)
+            if @vhost.kind_of?(Regexp)
+              !((request.host =~ @vhost).nil?)
             else
-              request.user_agent.include?(@user_agent)
+              request.host == @vhost
             end
           end
 

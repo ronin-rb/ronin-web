@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'ronin/web/middleware/rules/user_agent_rule'
+require 'ronin/web/middleware/filters/user_agent_filter'
 
-describe Web::Middleware::Rules::UserAgentRule do
-  subject { Web::Middleware::Rules::UserAgentRule }
+describe Web::Middleware::Filters::UserAgentFilter do
+  subject { Web::Middleware::Filters::UserAgentFilter }
 
   let(:user_agent)  { 'Windows-RSS-Platform/1.0 (MSIE 7.0; Windows NT 5.1)' }
 
@@ -12,14 +12,14 @@ describe Web::Middleware::Rules::UserAgentRule do
   end
 
   it "should match requests using a String" do
-    rule = subject.new(user_agent)
+    filter = subject.new(user_agent)
 
-    rule.match?(@request).should == true
+    filter.match?(@request).should == true
   end
 
   it "should match requests using a Regexp" do
-    rule = subject.new(/(MSIE|Windows)/)
+    filter = subject.new(/(MSIE|Windows)/)
 
-    rule.match?(@request).should == true
+    filter.match?(@request).should == true
   end
 end

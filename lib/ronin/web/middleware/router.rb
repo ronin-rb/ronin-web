@@ -19,8 +19,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/web/middleware/rule'
 require 'ronin/web/middleware/base'
-require 'ronin/web/middleware/rules'
 
 module Ronin
   module Web
@@ -50,14 +50,6 @@ module Ronin
       #     end
       #
       class Router < Base
-
-        RULES = {
-          :campaign => Rules::CampaignRule,
-          :vhost => Rules::VHostRule,
-          :ip => Rules::IPRule,
-          :referer => Rules::RefererRule,
-          :user_agent => Rules::UserAgentRule
-        }
 
         # The routes of the router
         attr_reader :routes
@@ -116,8 +108,8 @@ module Ronin
         # @yieldparam [Rack::Request] request
         #   A routed request.
         #
-        # @return [Rule]
-        #   The new router rule.
+        # @return [#call]
+        #   The application that is being routed.
         #
         # @example Route requests going to an application.
         #   router.draw :ip => '210.18.0.0/16', :to => BannedApp
@@ -131,22 +123,12 @@ module Ronin
         #
         def draw(options={},&block)
           app = (options.delete(:to) || block)
-          rules = []
 
-          options.each do |name,value|
-            unless RULES.has_key?(name)
-              raise(ArgumentError,"unknown option #{name.inspect}",caller)
-            end
-
-            rules << RULES[name].new(value)
-          end
-
-          @routes[rules] = app
-          return rules
+          return @routes[Rule.new(options)] = app
         end
 
         #
-        # Filters requests based on the defined rules.
+        # Filters requests based on the defined routes.
         #
         # @param [Hash, Rack::Request] env
         #   An incoming request.
@@ -159,10 +141,8 @@ module Ronin
         def call(env)
           request = Rack::Request.new(env)
 
-          @routes.each do |rules,app|
-            if rules.all? { |rule| rule.match?(request) }
-              return app.call(env)
-            end
+          @routes.each do |rule,app|
+            return app.call(env) if rule.match?(request)
           end
 
           super(env)

@@ -19,46 +19,44 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ipaddr'
-
 module Ronin
   module Web
     module Middleware
-      module Rules
+      module Filters
         #
-        # A Rule to match requests based on their IP Address.
+        # A Filter to match requests based on the User Agent header.
         #
-        class IPRule
+        class UserAgentFilter
 
           #
-          # Creates a new IP rule.
+          # Creates a new User Agent filter.
           #
-          # @param [String, IPAddr] ip
-          #   The IP Address to match against.
+          # @param [String, Regexp] user_agent
+          #   The User Agent pattern to match against.
           #
           # @since 0.3.0
           #
-          def initialize(ip)
-            @ip = unless ip.kind_of?(IPAddr)
-                    IPAddr.new(ip.to_s)
-                  else
-                    ip
-                  end
+          def initialize(user_agent)
+            @user_agent = user_agent
           end
 
           #
-          # Matches the rule against the request.
+          # Matches the filter against the request.
           #
           # @param [Rack::Request] request
           #   The incoming request.
           #
           # @return [Boolean]
-          #   Specifies whether the rule matched the request.
+          #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
           #
           def match?(request)
-            @ip.include?(request.ip)
+            if @user_agent.kind_of?(Regexp)
+              !((request.user_agent =~ @user_agent).nil?)
+            else
+              request.user_agent.include?(@user_agent)
+            end
           end
 
         end

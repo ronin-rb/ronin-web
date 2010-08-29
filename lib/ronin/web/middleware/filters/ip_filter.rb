@@ -19,44 +19,46 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ipaddr'
+
 module Ronin
   module Web
     module Middleware
-      module Rules
+      module Filters
         #
-        # A Rule to match requests by their HTTP Host header.
+        # A Filter to match requests based on their IP Address.
         #
-        class VHostRule
+        class IPFilter
 
           #
-          # Creates a new vhost rule.
+          # Creates a new IP filter.
           #
-          # @param [String, Regexp] vhost
-          #   The virtual host pattern to match against.
+          # @param [String, IPAddr] ip
+          #   The IP Address to match against.
           #
           # @since 0.3.0
           #
-          def initialize(vhost)
-            @vhost = vhost
+          def initialize(ip)
+            @ip = unless ip.kind_of?(IPAddr)
+                    IPAddr.new(ip.to_s)
+                  else
+                    ip
+                  end
           end
 
           #
-          # Matches the rule against the request.
+          # Matches the filter against the request.
           #
           # @param [Rack::Request] request
           #   The incoming request.
           #
           # @return [Boolean]
-          #   Specifies whether the rule matched the request.
+          #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
           #
           def match?(request)
-            if @vhost.kind_of?(Regexp)
-              !((request.host =~ @vhost).nil?)
-            else
-              request.host == @vhost
-            end
+            @ip.include?(request.ip)
           end
 
         end
