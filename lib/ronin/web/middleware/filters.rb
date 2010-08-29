@@ -21,6 +21,7 @@
 
 require 'ronin/web/middleware/filters/ip_filter'
 require 'ronin/web/middleware/filters/campaign_filter'
+require 'ronin/web/middleware/filters/path_filter'
 require 'ronin/web/middleware/filters/vhost_filter'
 require 'ronin/web/middleware/filters/referer_filter'
 require 'ronin/web/middleware/filters/user_agent_filter'

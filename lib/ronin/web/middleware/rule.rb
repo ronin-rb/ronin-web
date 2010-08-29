@@ -31,9 +31,10 @@ module Ronin
 
         # Registered filters
         FILTERS = {
-          :campaign => Filters::CampaignFilter,
-          :vhost => Filters::VHostFilter,
           :ip => Filters::IPFilter,
+          :campaign => Filters::CampaignFilter,
+          :path => Filters::PathFilter,
+          :vhost => Filters::VHostFilter,
           :referer => Filters::RefererFilter,
           :user_agent => Filters::UserAgentFilter
         }
