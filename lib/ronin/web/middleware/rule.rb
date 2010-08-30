@@ -68,9 +68,6 @@ module Ronin
         # @yieldparam [Rack::Request]
         #   A request to filter.
         #
-        # @raise [RuntimeError]
-        #   An unknown filtering option was given.
-        #
         # @since 0.3.0
         #
         def initialize(options={},&block)
@@ -78,11 +75,9 @@ module Ronin
             @filters = []
 
             options.each do |name,value|
-              unless FILTERS.has_key?(name)
-                raise(ArgumentError,"unknown option #{name.inspect}",caller)
+              if FILTERS.has_key?(name)
+                @filters << FILTERS[name].new(value)
               end
-
-              @filters << FILTERS[name].new(value)
             end
           else
             @block = block
