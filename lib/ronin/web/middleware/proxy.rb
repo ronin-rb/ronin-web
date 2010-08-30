@@ -20,6 +20,7 @@
 #
 
 require 'ronin/web/middleware/base'
+require 'ronin/web/middleware/rule'
 require 'ronin/web/middleware/proxy_request'
 
 require 'ronin/network/http'
@@ -52,27 +53,6 @@ module Ronin
           'Transfer-Encoding'
         ]
 
-        # The host to proxy
-        attr_accessor :host
-
-        # The port(s) to proxy
-        attr_accessor :port
-
-        # The HTTP request method to proxy for
-        attr_accessor :request_method
-
-        # The request path to proxy for
-        attr_accessor :request_path
-
-        # The request query string to proxy for
-        attr_accessor :request_query
-
-        # The HTTP response Status Code(s) to proxy for
-        attr_accessor :response_status
-
-        # The response body pattern to proxy for
-        attr_accessor :response_body
-
         #
         # Creates a new {Proxy} middleware.
         #
@@ -82,32 +62,24 @@ module Ronin
         # @param [Hash] options
         #   Additional options.
         #
-        # @option options [String, Regexp] :host
-        #   The host to proxy.
+        # @option options [String] :campaign
+        #   The name of the campaign who's targetted hosts will be
+        #   filtered by.
         #
-        # @option options [Integer, Range] :port
-        #   The port(s) to proxy.
+        # @option options [String, Regexp] :vhost
+        #   The Virtual-Host to filter.
         #
-        # @option options [String] :request_method
-        #   The HTTP request method to proxy for.
+        # @option options [String, IPAddr] :ip
+        #   The IP address or IP range to filter.
         #
-        # @option options [String, Regexp] :request_path
-        #   The request paths to proxy for.
+        # @option options [String, Regexp] :referer
+        #   The Referer URL or pattern to filter.
         #
-        # @option options [String, Regexp] :request_query
-        #   The request query strings to proxy for.
+        # @option options [String, Regexp] :user_agent
+        #   The User-Agent string to filter.
         #
-        # @option options [Integer, Range] :response_status
-        #   The HTTP response Status Code(s) to proxy for.
-        #
-        # @option options [String, Regexp] :response_body
-        #   The response body patterns to proxy for.
-        #
-        # @option options [Proc] :requests_like
-        #   A proc that will determine whether or not to proxy a request.
-        #
-        # @option options [Proc] :responses_like
-        #   A proc that will determine whether or not to proxy a response.
+        # @option options [Proc] :when
+        #   Custom logic to filter requests by.
         #
         # @yield [proxy]
         #   If a block is given, it will be passed the new proxy middleware.
@@ -118,60 +90,9 @@ module Ronin
         # @since 0.3.0
         #
         def initialize(app,options={},&block)
-          @host = options[:host]
-          @port = options[:port]
-
-          @request_method = options[:request_method]
-          @request_path = options[:request_path]
-          @request_query = options[:request_query]
-
-          @response_status = options[:response_status]
-          @response_body = options[:response_body]
-
-          @requests_like_block = options[:requests_like]
-          @responses_like_block = options[:responses_like]
+          @rule = Rule.new(options)
 
           super(app,options,&block)
-        end
-
-        #
-        # Uses a given block to determine whether or not to manipulate
-        # requests.
-        #
-        # @yield [request]
-        #   The given block will be passed each request.
-        #
-        # @yieldparam [ProxyRequest] request
-        #   A request received by the middleware.
-        #
-        # @return [Proxy]
-        #   The proxy middleware.
-        #
-        # @since 0.3.0
-        #
-        def requests_like(&block)
-          @requests_like_block = block
-          return self
-        end
-
-        #
-        # Uses a given block to determine whether or not to manipulate
-        # responses.
-        #
-        # @yield [response]
-        #   The given block will be passed every proxied response.
-        #
-        # @yieldparam [Response] response
-        #   A response returned from a proxied request.
-        #
-        # @return [Proxy]
-        #   The proxy middleware.
-        #
-        # @since 0.3.0
-        #
-        def responses_like(&block)
-          @responses_like_block = block
-          return self
         end
 
         #
@@ -212,6 +133,35 @@ module Ronin
           @every_response_block = block
           return self
         end
+
+        #
+        # Receives incoming requests, proxies them, allowing manipulation
+        # of the requests and their responses.
+        #
+        # @param [Hash, Rack::Request] env
+        #   The request.
+        #
+        # @return [Array, Response]
+        #   The response.
+        #
+        # @since 0.3.0
+        #
+        def call(env)
+          request = ProxyRequest.new(env)
+
+          if @rule.match?(request)
+            @every_request_block.call(request) if @every_request_block
+          else
+            return super(env)
+          end
+
+          response = proxy(request)
+
+          @every_response_block.call(response) if @every_response_block
+          return response
+        end
+
+        protected
 
         #
         # Proxies a request.
@@ -260,96 +210,6 @@ module Ronin
             http_response.code,
             http_headers,
           )
-        end
-
-        #
-        # Receives incoming requests, proxies them, allowing manipulation
-        # of the requests and their responses.
-        #
-        # @param [Hash, Rack::Request] env
-        #   The request.
-        #
-        # @return [Array, Response]
-        #   The response.
-        #
-        # @since 0.3.0
-        #
-        def call(env)
-          request = ProxyRequest.new(env)
-          matched = true
-
-          if @host
-            matched &&= if @host.kind_of?(Regexp)
-                          request.host =~ @host
-                        else
-                          request.host == @host
-                        end
-          end
-
-          if @port
-            matched &&= if @port.kind_of?(Range)
-                          @port.include?(request.port)
-                        else
-                          request.port == @port
-                        end
-          end
-
-          if @request_method
-            matched &&= (request.request_method == @request_method)
-          end
-
-          if @request_path
-            matched &&= if @request_path.kind_of?(Regexp)
-                          request.path =~ @request_path
-                        else
-                          request.path[0,@request_path.length] == @request_path
-                        end
-          end
-
-          if @request_query
-            matched &&= if @request_query.kind_of?(Regexp)
-                          request.query_string =~ @request_query
-                        else
-                          request.query_string == @request_query
-                        end
-          end
-
-          if @requests_like_block
-            matched &&= @requests_like_block.call(request)
-          end
-
-          if matched
-            if @every_request_block
-              @every_request_block.call(request)
-            end
-          else
-            return super(env)
-          end
-
-          response = proxy(request)
-          matched = true
-
-          if @response_status
-            matched &&= if @response_status.kind_of?(Range)
-                          @response_status.include?(response.status)
-                        else
-                          response.status == @response_status
-                        end
-          end
-
-          if @response_body
-            matched &&= response.body.any? { |chunk| chunk.match(@response_body) }
-          end
-
-          if @responses_like_block
-            matched &&= @responses_like_block.call(response)
-          end
-
-          if (@every_response_block && matched)
-            @every_response_block.call(response)
-          end
-
-          return response
         end
 
       end
