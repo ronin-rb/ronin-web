@@ -46,7 +46,8 @@ module Ronin
         #   Additional filtering options for the rule.
         #
         # @option options [String] :campaign
-        #   The name of the campaign who's targetted hosts will be filtered by.
+        #   The name of the campaign who's targetted hosts will be
+        #   filtered by.
         #
         # @option options [String, Regexp] :vhost
         #   The Virtual-Host to filter.
