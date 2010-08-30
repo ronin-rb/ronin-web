@@ -99,6 +99,9 @@ module Ronin
         # @option options [String, Regexp] :user_agent
         #   The User-Agent string to route.
         #
+        # @option options [Proc] :when
+        #   Custom logic to route requests by.
+        #
         # @option options [#call] :to
         #   The application that will receive routed requests.
         #
@@ -122,9 +125,10 @@ module Ronin
         # @since 0.3.0
         #
         def draw(options={},&block)
+          rule_block = options.delete(:when)
           app = (options.delete(:to) || block)
 
-          return @routes[Rule.new(options)] = app
+          return @routes[Rule.new(options,&rule_block)] = app
         end
 
         #
