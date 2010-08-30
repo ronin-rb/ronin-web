@@ -68,7 +68,7 @@ module Ronin
         #
         def initialize(options={},&block)
           @filters = []
-          @block = options.delete(:when)
+          @when_block = options.delete(:when)
 
           options.each do |name,value|
             if FILTERS.has_key?(name)
@@ -89,7 +89,7 @@ module Ronin
         def match?(request)
           @filters.all? { |filter| 
             filter.match?(request)
-          } && (@block.nil? || @block.call(request))
+          } && (@when_block.nil? || @when_block.call(request))
         end
 
       end
