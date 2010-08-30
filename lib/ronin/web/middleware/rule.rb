@@ -61,26 +61,19 @@ module Ronin
         # @option options [String, Regexp] :user_agent
         #   The User-Agent string to filter.
         #
-        # @yield [request]
-        #   If a block is given, instead of options, it will be used
-        #   to filter requests.
-        #
-        # @yieldparam [Rack::Request]
-        #   A request to filter.
+        # @option options [Proc] :when
+        #   Custom logic to filter requests by.
         #
         # @since 0.3.0
         #
         def initialize(options={},&block)
-          unless options.empty?
-            @filters = []
+          @filters = []
+          @block = options.delete(:when)
 
-            options.each do |name,value|
-              if FILTERS.has_key?(name)
-                @filters << FILTERS[name].new(value)
-              end
+          options.each do |name,value|
+            if FILTERS.has_key?(name)
+              @filters << FILTERS[name].new(value)
             end
-          else
-            @block = block
           end
         end
 
@@ -94,13 +87,9 @@ module Ronin
         #   Specifies if the request matches all of the filters.
         #
         def match?(request)
-          if @filters
-            @filters.all? { |filter| filter.match?(request) }
-          elsif @block
-            @block.call(request)
-          else
-            false
-          end
+          @filters.all? { |filter| 
+            filter.match?(request)
+          } && (@block.nil? || @block.call(request))
         end
 
       end

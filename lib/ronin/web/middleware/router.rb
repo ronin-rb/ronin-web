@@ -125,10 +125,9 @@ module Ronin
         # @since 0.3.0
         #
         def draw(options={},&block)
-          rule_block = options.delete(:when)
           app = (options.delete(:to) || block)
 
-          return @routes[Rule.new(options,&rule_block)] = app
+          return @routes[Rule.new(options)] = app
         end
 
         #
