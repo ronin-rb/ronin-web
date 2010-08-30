@@ -89,7 +89,7 @@ module Ronin
         def match?(request)
           @filters.all? { |filter| 
             filter.match?(request)
-          } && (@when_block.nil? || @when_block.call(request))
+          } && (@when_block.nil? || (@when_block.call(request) ? true : false))
         end
 
       end
