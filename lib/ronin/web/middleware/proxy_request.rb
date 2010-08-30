@@ -57,6 +57,21 @@ module Ronin
         end
 
         #
+        # Changes the URI scheme of the request.
+        #
+        # @param [String] new_port
+        #   The new URI scheme for the request.
+        #
+        # @return [String]
+        #   The new URI scheme of the request.
+        #
+        # @since 0.3.0
+        #   
+        def scheme=(new_scheme)
+          @env['rack.url_scheme'] = new_scheme
+        end
+
+        #
         # Changes the HTTP Request Method of the request.
         #
         # @param [String] new_method
