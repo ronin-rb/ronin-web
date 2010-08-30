@@ -61,20 +61,31 @@ module Ronin
         # @option options [String, Regexp] :user_agent
         #   The User-Agent string to filter.
         #
+        # @yield [request]
+        #   If a block is given, instead of options, it will be used
+        #   to filter requests.
+        #
+        # @yieldparam [Rack::Request]
+        #   A request to filter.
+        #
         # @raise [RuntimeError]
         #   An unknown filtering option was given.
         #
         # @since 0.3.0
         #
-        def initialize(options={})
-          @filters = []
+        def initialize(options={},&block)
+          unless options.empty?
+            @filters = []
 
-          options.each do |name,value|
-            unless FILTERS.has_key?(name)
-              raise(ArgumentError,"unknown option #{name.inspect}",caller)
+            options.each do |name,value|
+              unless FILTERS.has_key?(name)
+                raise(ArgumentError,"unknown option #{name.inspect}",caller)
+              end
+
+              @filters << FILTERS[name].new(value)
             end
-
-            @filters << FILTERS[name].new(value)
+          else
+            @block = block
           end
         end
 
@@ -88,7 +99,13 @@ module Ronin
         #   Specifies if the request matches all of the filters.
         #
         def match?(request)
-          @filters.all? { |filter| filter.match?(request) }
+          if @filters
+            @filters.all? { |filter| filter.match?(request) }
+          elsif @block
+            @block.call(request)
+          else
+            false
+          end
         end
 
       end
