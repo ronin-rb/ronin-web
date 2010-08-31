@@ -119,6 +119,18 @@ module Ronin
         end
 
         #
+        # Determines if the request is an XML-HTTP Request.
+        #
+        # @return [Boolean]
+        #   Specifies whether the request is XML-HTTP.
+        #
+        # @since 0.3.0
+        #
+        def xhr?
+          @env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
+        end
+
+        #
         # Specifies that the request is a XML HTTP Request.
         #
         # @yield [request]
