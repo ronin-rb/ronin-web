@@ -174,6 +174,7 @@ module Ronin
         #
         def proxy(request)
           options = {
+            :ssl => (request.scheme == 'https'),
             :host => request.host,
             :port => request.port,
             :method => request.request_method,
