@@ -86,20 +86,7 @@ module Ronin
           @env['REQUEST_METHOD'] = new_method
         end
 
-        #
-        # Changes the HTTP Path the request is being sent to.
-        #
-        # @param [String] new_path
-        #   The new HTTP Path the request will be sent to.
-        #
-        # @return [String]
-        #   The new HTTP Path the request will be sent to.
-        #
-        # @since 0.3.0
-        #
-        def path=(new_path)
-          @env['PATH_INFO'] = new_path
-        end
+        alias path= path_info=
 
         #
         # Changes the HTTP Query String of the request.
