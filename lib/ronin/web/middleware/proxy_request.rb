@@ -121,6 +121,13 @@ module Ronin
         #
         # Specifies that the request is a XML HTTP Request.
         #
+        # @yield [request]
+        #   If a block is given, it will be passed the request
+        #   for further modification.
+        #
+        # @yieldparam [ProxyRequest] request
+        #   The proxy request.
+        #
         # @return [ProxyRequest]
         #   The request.
         #
@@ -128,6 +135,8 @@ module Ronin
         #
         def xhr!
           @env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+
+          yield self if block_given?
           return self
         end
 
