@@ -72,6 +72,21 @@ module Ronin
         end
 
         #
+        # Causes the request to be proxied over SSL.
+        #
+        # @return [ProxyRequest]
+        #   The proxy request.
+        #
+        # @since 0.3.0
+        #
+        def ssl!
+          self.port = 443
+          self.scheme = 'https'
+
+          return self
+        end
+
+        #
         # Changes the HTTP Request Method of the request.
         #
         # @param [String] new_method
