@@ -162,6 +162,21 @@ module Ronin
         end
 
         #
+        # Sets the HTTP User-Agent header of the request.
+        #
+        # @param [String] new_user_agent
+        #   The new User-Agent header to use.
+        #
+        # @return [String]
+        #   The new User-Agent header.
+        #
+        # @since 0.3.0
+        #
+        def user_agent=(new_user_agent)
+          @env['HTTP_USER_AGENT'] = new_user_agent
+        end
+
+        #
         # Changes the HTTP Referer header of the request.
         #
         # @param [String] new_referer
