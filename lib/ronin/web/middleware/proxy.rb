@@ -90,9 +90,40 @@ module Ronin
         # @since 0.3.0
         #
         def initialize(app,options={},&block)
-          @rule = Rule.new(options)
+          intercept(options)
 
           super(app,options,&block)
+        end
+
+        #
+        # Specifies which requests will be intercepted.
+        #
+        # @param [Hash] options
+        #   Additional options.
+        #
+        # @option options [String] :campaign
+        #   The name of the campaign who's targetted hosts will be
+        #   filtered by.
+        #
+        # @option options [String, Regexp] :vhost
+        #   The Virtual-Host to filter.
+        #
+        # @option options [String, IPAddr] :ip
+        #   The IP address or IP range to filter.
+        #
+        # @option options [String, Regexp] :referer
+        #   The Referer URL or pattern to filter.
+        #
+        # @option options [String, Regexp] :user_agent
+        #   The User-Agent string to filter.
+        #
+        # @option options [Proc] :when
+        #   Custom logic to filter requests by.
+        #
+        # @since 0.3.0
+        #
+        def intercept(options={})
+          @rule = Rule.new(options)
         end
 
         #
