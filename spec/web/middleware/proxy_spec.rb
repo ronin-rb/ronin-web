@@ -32,24 +32,30 @@ describe Web::Middleware::Proxy do
   end
 
   it "should proxy requests that match the proxies filters" do
-    get '/login'
+    pending "http://github.com/brynary/rack-test/issues#issue/16" do
+      get '/login'
 
-    last_response.should be_ok
-    last_response.body.should_not == 'unproxied login'
+      last_response.should be_ok
+      last_response.body.should_not == 'unproxied login'
+    end
   end
 
   it "should allow rewriting proxied requests" do
-    get '/login'
+    pending "http://github.com/brynary/rack-test/issues#issue/16" do
+      get '/login'
 
-    last_response.should be_ok
-    last_response.body.should include('Log in')
+      last_response.should be_ok
+      last_response.body.should include('Log in')
+    end
   end
 
   it "should allow rewriting proxied responses" do
-    get '/login'
+    pending "http://github.com/brynary/rack-test/issues#issue/16" do
+      get '/login'
 
-    last_response.should be_ok
-    last_response.body.should_not include('https:')
+      last_response.should be_ok
+      last_response.body.should_not include('https:')
+    end
   end
 
   it "should still route un-matched requests to the app" do
