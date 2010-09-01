@@ -20,6 +20,7 @@
 #
 
 require 'ronin/web/middleware/helpers'
+require 'ronin/ui/output/helpers'
 
 module Ronin
   module Web
@@ -27,6 +28,7 @@ module Ronin
       class Base
 
         include Helpers
+        include UI::Output::Helpers
 
         # The default status code to return
         DEFAULT_STATUS = 200

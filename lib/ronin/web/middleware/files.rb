@@ -120,7 +120,10 @@ module Ronin
                         path == pattern
                       end
 
-            return response_for(local_path) if matched
+            if matched
+              print_info "Returning file #{local_path.dump}"
+              return response_for(local_path)
+            end
           end
 
           super(env)

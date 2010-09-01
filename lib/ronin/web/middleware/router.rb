@@ -145,7 +145,10 @@ module Ronin
           request = Rack::Request.new(env)
 
           @routes.each do |rule,app|
-            return app.call(env) if rule.match?(request)
+            if rule.match?(request)
+              print_info "Routing #{request.uri}"
+              return app.call(env)
+            end
           end
 
           super(env)
