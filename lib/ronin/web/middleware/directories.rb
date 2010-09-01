@@ -142,15 +142,19 @@ module Ronin
             local_dir = @paths[remote_path]
             sub_path = path[remote_path.length..-1]
 
+            return_file = proc { |local_path|
+              if File.file?(local_path)
+                return response_for(local_path)
+              end
+            }
+
             if sub_path.empty?
               # attempt to find an index file in the directory
               Directories.index_names.each do |index|
-                local_path = File.join(local_dir,index)
-                return response_for(local_path) if File.file?(local_path)
+                return_file.call(File.join(local_dir,index))
               end
             else
-              local_path = File.join(local_dir,sub_path)
-              return response_for(local_path) if File.file?(local_path)
+              return_file.call(File.join(local_dir,sub_path))
             end
           end
 
