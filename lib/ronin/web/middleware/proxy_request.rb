@@ -19,12 +19,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'rack/request'
+require 'ronin/web/middleware/request'
 
 module Ronin
   module Web
     module Middleware
-      class ProxyRequest < Rack::Request
+      class ProxyRequest < Request
 
         #
         # Changes the HTTP Host header of the request.

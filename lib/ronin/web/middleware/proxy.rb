@@ -187,6 +187,9 @@ module Ronin
           end
 
           print_info "Proxying #{request.uri}"
+          request.headers.each do |name,value|
+            print_debug "  #{name}: #{value}"
+          end
 
           response = proxy(request)
 
@@ -219,22 +222,13 @@ module Ronin
             :method => request.request_method,
             :path => request.path_info,
             :query => request.query_string,
-            :content_type => request.content_type
+            :content_type => request.content_type,
+            :headers => request.headers
           }
 
           if request.form_data?
             options[:form_data] = request.POST
           end
-
-          headers = {}
-
-          request.env.each do |name,value|
-            if name =~ /^HTTP_/
-              headers[name.sub('HTTP_','').downcase.to_sym] = value
-            end
-          end
-
-          options[:headers] = headers
 
           http_response = Net.http_request(options)
           http_headers = {}
