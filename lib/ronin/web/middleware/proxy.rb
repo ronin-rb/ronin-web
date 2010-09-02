@@ -186,7 +186,7 @@ module Ronin
             return super(env)
           end
 
-          print_info "Proxying #{request.uri}"
+          print_info "Proxying #{request.url}"
           request.headers.each do |name,value|
             print_debug "  #{name}: #{value}"
           end
