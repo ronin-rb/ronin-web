@@ -142,7 +142,7 @@ module Ronin
         # @since 0.3.0
         #
         def call(env)
-          request = Rack::Request.new(env)
+          request = Request.new(env)
 
           @routes.each do |rule,app|
             if rule.match?(request)
