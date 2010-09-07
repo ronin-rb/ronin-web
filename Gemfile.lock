@@ -1,18 +1,10 @@
 GIT
-  remote: http://github.com/datamapper/dm-core.git
-  revision: cd3340c
-  specs:
-    dm-core (1.0.0)
-      addressable (~> 2.1)
-      extlib (~> 0.9.15)
-
-GIT
   remote: http://github.com/postmodern/dm-migrations.git
-  revision: a352ef2
+  revision: 4a154f3d0be9c0dace9e0d95c8a765f9e56c195a
   branch: runner
   specs:
-    dm-migrations (1.0.0)
-      dm-core (~> 1.0.0)
+    dm-migrations (1.0.1)
+      dm-core (~> 1.0.1)
 
 GIT
   remote: http://github.com/ronin-ruby/ronin-support.git
@@ -67,6 +59,9 @@ GEM
     dm-constraints (1.0.0)
       dm-core (~> 1.0.0)
       dm-migrations (~> 1.0.0)
+    dm-core (1.0.1)
+      addressable (~> 2.2)
+      extlib (~> 0.9.15)
     dm-do-adapter (1.0.0)
       data_objects (~> 0.10.1)
       dm-core (~> 1.0.0)
@@ -133,8 +128,7 @@ PLATFORMS
 
 DEPENDENCIES
   data_paths (~> 0.2.1)
-  dm-core (~> 1.0.0)!
-  dm-migrations (~> 1.0.0)!
+  dm-migrations (~> 1.0.1)!
   jeweler (~> 1.5.0.pre)
   mechanize (~> 1.0.0)
   nokogiri (~> 1.4.1)
