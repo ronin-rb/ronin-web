@@ -4,9 +4,6 @@ DATA_MAPPER = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.0.2'
 RONIN = 'http://github.com/ronin-ruby'
 
-# DataMapper dependencies
-gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git', :branch => 'runner'
-
 gem 'data_paths',	'~> 0.2.1'
 gem 'nokogiri',		'~> 1.4.1'
 gem 'mechanize',	'~> 1.0.0'
@@ -32,6 +29,9 @@ group(:doc) do
 end
 
 group(:test) do
+  # DataMapper dependencies
+  gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git', :branch => 'runner'
+
   gem 'rack-test',	'~> 0.5.4'
 end
 
