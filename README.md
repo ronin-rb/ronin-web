@@ -153,10 +153,13 @@ Serve files via a Web Server:
 
 ## Requirements
 
-* [mechanize](http://mechanize.rubyforge.org/) >= 1.0.0
-* [spidr](http://spidr.rubyforge.org/) >= 0.2.0
-* [sinatra](http://www.sinatrarb.com/) >= 0.9.4
-* [ronin](http://ronin.rubyforge.org/) >= 0.3.0
+* [nokogiri](http://github.com/tenderlove/nokogiri) ~> 1.4.1
+* [mechanize](http://github.com/tenderlove/mechanize) ~> 1.0.0
+* [data_paths](http://github.com/postmodern/data_paths) ~> 0.2.1
+* [spidr](http://github.com/postmodern/spidr/) ~> 0.2.0
+* [sinatra](http://github.com/sinatra/sinatra/) ~> 1.0
+* [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.1.0
+* [ronin](http://github.com/ronin-ruby/ronin) ~> 0.4.0
 
 ## Install
 
