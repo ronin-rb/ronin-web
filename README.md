@@ -1,6 +1,5 @@
 # Ronin Web
 
-* [ronin.rubyforge.org/docs/ronin-web](http://ronin.rubyforge.org/docs/ronin-web/)
 * [github.com/ronin-ruby/ronin-web](http://github.com/ronin-ruby/ronin-web/)
 * [github.com/ronin-ruby/ronin-web/issues](http://github.com/ronin-ruby/ronin-web/issues)
 * [groups.google.com/group/ronin-ruby](http://groups.google.com/group/ronin-ruby)
