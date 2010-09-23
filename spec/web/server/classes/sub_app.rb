@@ -2,11 +2,11 @@ require 'ronin/web/server/base'
 
 class SubApp < Ronin::Web::Server::Base
 
-  get '/hello' do
+  get '/tests/subapp/hello' do
     'SubApp greets you'
   end
 
-  get '/' do
+  get '/tests/subapp/' do
     'SubApp'
   end
 

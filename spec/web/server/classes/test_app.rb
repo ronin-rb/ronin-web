@@ -12,7 +12,7 @@ class TestApp < Ronin::Web::Server::Base
     'any tested'
   end
 
-  map '/tests/subapp', SubApp
+  map '/tests/subapp/', SubApp
 
   public_dir File.join(File.dirname(__FILE__),'public1')
   public_dir File.join(File.dirname(__FILE__),'public2')

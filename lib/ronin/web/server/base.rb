@@ -19,11 +19,11 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/web/server/helpers/hosts'
-require 'ronin/web/server/helpers/proxy'
+require 'ronin/web/middleware/helpers'
 require 'ronin/web/middleware/files'
 require 'ronin/web/middleware/directories'
-require 'ronin/web/middleware/helpers'
+require 'ronin/web/middleware/router'
+require 'ronin/web/middleware/proxy'
 require 'ronin/templates/erb'
 require 'ronin/ui/output'
 require 'ronin/extensions/meta'
@@ -222,35 +222,6 @@ module Ronin
         end
 
         #
-        # Routes all requests within a given directory into another
-        # web server.
-        #
-        # @param [String] dir
-        #   The directory that requests for will be routed from.
-        #
-        # @param [Base, #call] server
-        #   The web server to route requests to.
-        #
-        # @example
-        #   map '/subapp/', SubApp
-        #
-        # @since 0.2.0
-        #
-        def self.map(dir,server)
-          dir = File.join(dir,'')
-
-          before do
-            if dir == request.path_info[0,dir.length]
-              # remove the dir from the beginning of the path
-              # before passing it to the server
-              request.env['PATH_INFO'] = request.path_info[dir.length-1..-1]
-
-              halt(*server.call(request.env))
-            end
-          end
-        end
-
-        #
         # Hosts the contents of a file.
         #
         # @param [String] remote_path
@@ -272,7 +243,8 @@ module Ronin
         # Hosts the contents of files.
         #
         # @yield [files]
-        #   The given block will be passed the files middleware to configure.
+        #   The given block will be passed the files middleware to
+        #   configure.
         #
         # @yieldparam [Middleware::Files]
         #   The files middleware object.
@@ -346,50 +318,44 @@ module Ronin
         end
 
         #
-        # Routes requests with a specific Host header to another
+        # Routes all requests within a given directory into another
         # web server.
         #
-        # @param [String] name
-        #   The host-name to route requests for.
+        # @param [String, Regexp] dir
+        #   The directory that requests for will be routed from.
         #
-        # @param [Base, #call] server
-        #   The web server to route the requests to.
+        # @param [#call] server
+        #   The web server to route requests to.
         #
         # @example
-        #   host 'cdn.evil.com', EvilServer
+        #   map '/subapp/', SubApp
         #
-        # @since 0.3.0
+        # @since 0.2.0
         #
-        def self.vhost(name,server)
-          name = name.to_s
-
-          before do
-            if request.host == name
-              halt(*server.call(request.env))
-            end
+        def self.map(dir,server)
+          use Middleware::Router do |router|
+            router.draw :path => dir, :to => server
           end
         end
 
         #
-        # Routes requests with a matching Host header to another web
-        # server.
+        # Routes requests with a specific Host header to another
+        # web server.
         #
-        # @param [Regexp, String] pattern
-        #   The pattern to match Host headers of requests.
+        # @param [String, Regexp] name
+        #   The host-name to route requests for.
         #
-        # @param [Base, #call] server
-        #   The server to route the requests to.
+        # @param [#call] server
+        #   The web server to route the requests to.
         #
         # @example
-        #   hosts_like /^a[0-9]\./, FileProxy
+        #   vhost 'cdn.evil.com', EvilServer
         #
         # @since 0.3.0
         #
-        def self.vhosts_like(pattern,server)
-          before do
-            if request.host.match(pattern)
-              halt(*server.call(request.env))
-            end
+        def self.vhost(name,server)
+          use Middleware::Router do |router|
+            router.draw :vhost => name, :to => server
           end
         end
 
@@ -421,46 +387,7 @@ module Ronin
         # @since 0.2.0
         #
         def self.proxy(path,options={},&block)
-          any(path) do
-            proxy(options,&block)
-          end
-        end
-
-        #
-        # Proxies requests to a given path.
-        #
-        # @param [String] path
-        #   The path to proxy requests for.
-        #
-        # @param [Hash] options
-        #   Additional options.
-        # 
-        # @yield [(response), page]
-        #   If a block is given, it will be passed the optional
-        #   response of the proxied request and the page from the
-        #   proxied request.
-        #
-        # @yieldparam [Net::HTTP::Response] response
-        #   The response.
-        #
-        # @yieldparam [Nokogiri::HTML, Nokogiri::XML] page
-        #   The page from the response.
-        #
-        # @example
-        #   proxy_doc '/login*' do |response,body|
-        #     doc.search('form/@action').each do |action|
-        #       action.inner_text = action.inner_text.gsub(
-        #         /^https/, 'http'
-        #       )
-        #     end
-        #   end
-        #
-        # @since 0.2.0
-        #
-        def self.proxy_doc(path,options={},&block)
-          any(path) do
-            proxy_doc(options,&block)
-          end
+          use(Middleware::Proxy,options,&block)
         end
 
         protected
@@ -477,12 +404,8 @@ module Ronin
         enable :sessions
 
         helpers Middleware::Helpers
-        helpers Helpers::Hosts
-        helpers Helpers::Proxy
 
-        any '*' do
-          default_response
-        end
+        any('*') { default_response }
 
       end
     end

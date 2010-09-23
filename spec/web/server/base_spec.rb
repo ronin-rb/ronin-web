@@ -54,7 +54,7 @@ describe Web::Server::Base do
     last_response.body.should == 'SubApp'
   end
 
-  it "should modify the path_info as it maps paths to sub-apps" do
+  it "should not modify the path_info as it maps paths to sub-apps" do
     get '/tests/subapp/hello'
 
     last_response.should be_ok
