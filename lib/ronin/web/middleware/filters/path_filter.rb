@@ -54,7 +54,7 @@ module Ronin
           def match?(request)
             if @path.kind_of?(Regexp)
               !((request.path =~ @path).nil?)
-            elsif @path[0] == '/'
+            elsif @path[0,1] == '/'
               request.path[0,@path.length] == @path
             else
               request.path.include?(@path)
