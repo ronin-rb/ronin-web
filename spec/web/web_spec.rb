@@ -57,30 +57,6 @@ describe Web do
     Web.proxy.should_not be_enabled
   end
 
-  describe "proxy_url" do
-    before(:all) do
-      @uri = URI('http://www.example.com:9001')
-    end
-
-    it "should convert Network::HTTP::Proxy objects into a URI" do
-      Web.proxy_url(Network::HTTP::Proxy.new(
-        :host => 'www.example.com',
-        :port => 9001
-      )).should == @uri
-    end
-
-    it "should convert a Hash into a URI" do
-      Web.proxy_url(
-        :host => 'www.example.com', 
-        :port => 9001
-      ).should == @uri
-    end
-
-    it "should convert a String into a valid URI" do
-      Web.proxy_url("www.example.com:9001").should == @uri
-    end
-  end
-
   it "should provide User-Agent aliases" do
     Web.user_agent_aliases.should_not be_empty
   end

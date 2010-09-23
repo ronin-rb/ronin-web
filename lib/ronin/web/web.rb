@@ -146,41 +146,6 @@ module Ronin
     end
 
     #
-    # Creates a HTTP URI based on a Hash of proxy information.
-    #
-    # @param [Network::HTTP::Proxy, Hash, String] proxy_info
-    #   The proxy information.
-    #
-    # @return [URI::HTTP, nil]
-    #   The HTTP URI that represents the proxy. If the proxy is diabled,
-    #   `nil` will be returned.
-    #
-    # @example
-    #   Web.proxy_url
-    #   # => "http://www.example.com:8080"
-    #
-    # @example
-    #   Web.proxy_url({:host => 'www.example.com', :port => 8081})
-    #   # => "http://www.example.com:8081"
-    #
-    # @example
-    #   Web.proxy_url('www.example.com:9000')
-    #   # => "http://www.example.com:9000"
-    #
-    def Web.proxy_url(proxy_info=Web.proxy)
-      proxy = case proxy_info
-              when Network::HTTP::Proxy
-                proxy_info
-              when Hash
-                Network::HTTP::Proxy.new(proxy_info)
-              else
-                Network::HTTP::Proxy.parse(proxy_info)
-              end
-
-      return proxy.url
-    end
-
-    #
     # @return [Array]
     #   The supported Web User-Agent Aliases.
     #
