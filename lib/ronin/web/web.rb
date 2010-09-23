@@ -152,7 +152,10 @@ module Ronin
     #   # => "http://www.example.com:9000"
     #
     def Web.proxy_url(proxy_info=Web.proxy)
-      proxy = if proxy_info.kind_of?(Hash)
+      proxy = case proxy_info
+              when Network::HTTP::Proxy
+                proxy_info
+              when Hash
                 Network::HTTP::Proxy.new(proxy_info)
               else
                 Network::HTTP::Proxy.parse(proxy_info)
@@ -327,14 +330,17 @@ module Ronin
         agent.user_agent = Web.user_agent
       end
 
-      proxy = if options[:proxy].kind_of?(Hash)
+      proxy = case options[:proxy]
+              when Network::HTTP::Proxy
                 options[:proxy]
-              elsif options[:proxy].kind_of?(String)
+              when Hash
+                Network::HTTP::Proxy.new(options[:proxy])
+              when String
                 Network::HTTP::Proxy.parse(options[:proxy])
-              elsif options[:proxy].nil?
+              when nil
                 Web.proxy
               else
-                raise(RuntimeError,"the given :proxy option is neither a Proxy, Hash or String",caller)
+                raise(RuntimeError,":proxy option is neither a Ronin::Network::HTTP::Proxy, Hash or String",caller)
               end
 
       if proxy[:host]
