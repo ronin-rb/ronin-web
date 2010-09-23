@@ -19,7 +19,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/network/http'
+require 'ronin/network/http/proxy'
+require 'ronin/network/http/http'
 
 require 'uri/http'
 require 'nokogiri'
@@ -118,7 +119,7 @@ module Ronin
     end
 
     #
-    # Proxy information for Ronin::Web to use.
+    # Proxy information for {Web} to use.
     #
     # @return [Network::HTTP::Proxy]
     #   The Ronin Web proxy information.
@@ -126,7 +127,22 @@ module Ronin
     # @see Ronin::Network::HTTP.proxy
     #
     def Web.proxy
-      Network::HTTP.proxy
+      (@proxy ||= nil) || Network::HTTP.proxy
+    end
+
+    #
+    # Sets the proxy used by {Web}.
+    #
+    # @param [Network::HTTP::Proxy, URI::HTTP, Hash, String] new_proxy
+    #   The new proxy information to use.
+    #
+    # @return [Network::HTTP::Proxy]
+    #   The new proxy.
+    #
+    # @since 0.4.0
+    #
+    def Web.proxy=(new_proxy)
+      @proxy = Network::HTTP::Proxy.create(new_proxy)
     end
 
     #
