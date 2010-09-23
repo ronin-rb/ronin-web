@@ -269,7 +269,9 @@ module Ronin
     #
     def Web.open(url,options={})
       user_agent_alias = options.delete(:user_agent_alias)
-      proxy = (options.delete(:proxy) || Web.proxy)
+      proxy = Network::HTTP::Proxy.create(
+        options.delete(:proxy) || Web.proxy
+      )
       user = options.delete(:user)
       password = options.delete(:password)
       content_length_proc = options.delete(:content_length_proc)
@@ -282,7 +284,7 @@ module Ronin
       end
 
       if proxy[:host]
-        headers[:proxy] = Web.proxy_url(proxy)
+        headers[:proxy] = proxy.url
       end
 
       if user
@@ -348,21 +350,15 @@ module Ronin
         agent.user_agent = Web.user_agent
       end
 
-      proxy = case options[:proxy]
-              when Network::HTTP::Proxy
-                options[:proxy]
-              when Hash
-                Network::HTTP::Proxy.new(options[:proxy])
-              when String
-                Network::HTTP::Proxy.parse(options[:proxy])
-              when nil
-                Web.proxy
-              else
-                raise(RuntimeError,":proxy option is neither a Ronin::Network::HTTP::Proxy, Hash or String",caller)
-              end
+      proxy = Network::HTTP::Proxy.new(options[:proxy] || Web.proxy)
 
       if proxy[:host]
-        agent.set_proxy(proxy[:host],proxy[:port],proxy[:user],proxy[:password])
+        agent.set_proxy(
+          proxy[:host],
+          proxy[:port],
+          proxy[:user],
+          proxy[:password]
+        )
       end
 
       yield agent if block_given?
