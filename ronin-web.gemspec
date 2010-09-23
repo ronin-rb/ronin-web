@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Postmodern"]
-  s.date = %q{2010-09-13}
+  s.date = %q{2010-09-22}
   s.default_executable = %q{ronin-web}
   s.description = %q{Ronin Web is a Ruby library for Ronin that provides support for web scraping and spidering functionality.}
   s.email = %q{ronin-ruby@googlegroups.com}
@@ -98,19 +98,10 @@ Gem::Specification.new do |s|
     "spec/web/middleware/rule_spec.rb",
     "spec/web/proxy/base_spec.rb",
     "spec/web/server/base_spec.rb",
-    "spec/web/server/classes/files/dir/file.txt",
-    "spec/web/server/classes/files/dir/index.html",
-    "spec/web/server/classes/files/dir2/file2.txt",
-    "spec/web/server/classes/files/dir3/page.xml",
-    "spec/web/server/classes/files/file.txt",
-    "spec/web/server/classes/hosts_app.rb",
-    "spec/web/server/classes/proxy_app.rb",
     "spec/web/server/classes/public1/static1.txt",
     "spec/web/server/classes/public2/static2.txt",
     "spec/web/server/classes/sub_app.rb",
     "spec/web/server/classes/test_app.rb",
-    "spec/web/server/hosts_spec.rb",
-    "spec/web/server/proxy_spec.rb",
     "spec/web_spec.rb"
   ]
   s.has_rdoc = %q{yard}
@@ -139,12 +130,8 @@ Gem::Specification.new do |s|
     "spec/web/middleware/rule_spec.rb",
     "spec/web/proxy/base_spec.rb",
     "spec/web/server/base_spec.rb",
-    "spec/web/server/classes/hosts_app.rb",
-    "spec/web/server/classes/proxy_app.rb",
     "spec/web/server/classes/sub_app.rb",
     "spec/web/server/classes/test_app.rb",
-    "spec/web/server/hosts_spec.rb",
-    "spec/web/server/proxy_spec.rb",
     "spec/web_spec.rb"
   ]
 
