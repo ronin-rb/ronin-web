@@ -189,15 +189,17 @@ module Ronin
     end
 
     #
+    # The User-Agent string used by {Web}.
+    #
     # @return [String, nil]
     #   The Ronin Web User-Agent
     #
     def Web.user_agent
-      Network::HTTP.user_agent
+      (@user_agent ||= nil) || Network::HTTP.user_agent
     end
 
     #
-    # Sets the Ronin Web User-Agent.
+    # Sets the User-Agent string used by {Web}.
     #
     # @param [String] new_agent
     #   The User-Agent string to use.
@@ -206,7 +208,7 @@ module Ronin
     #   The new User-Agent string.
     #
     def Web.user_agent=(new_agent)
-      Network::HTTP.user_agent = new_agent
+      @user_agent = new_agent
     end
 
     #
@@ -219,7 +221,7 @@ module Ronin
     #   The new User-Agent string.
     #
     def Web.user_agent_alias=(name)
-      Network::HTTP.user_agent = Web.user_agent_aliases[name.to_s]
+      @user_agent = Web.user_agent_aliases[name.to_s]
     end
 
     #
