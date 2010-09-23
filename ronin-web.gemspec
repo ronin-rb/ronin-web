@@ -64,9 +64,6 @@ Gem::Specification.new do |s|
     "lib/ronin/web/server.rb",
     "lib/ronin/web/server/app.rb",
     "lib/ronin/web/server/base.rb",
-    "lib/ronin/web/server/helpers.rb",
-    "lib/ronin/web/server/helpers/hosts.rb",
-    "lib/ronin/web/server/helpers/proxy.rb",
     "lib/ronin/web/server/web.rb",
     "lib/ronin/web/spider.rb",
     "lib/ronin/web/version.rb",
@@ -102,7 +99,7 @@ Gem::Specification.new do |s|
     "spec/web/server/classes/public2/static2.txt",
     "spec/web/server/classes/sub_app.rb",
     "spec/web/server/classes/test_app.rb",
-    "spec/web_spec.rb"
+    "spec/web/web_spec.rb"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin-web}
@@ -132,7 +129,7 @@ Gem::Specification.new do |s|
     "spec/web/server/base_spec.rb",
     "spec/web/server/classes/sub_app.rb",
     "spec/web/server/classes/test_app.rb",
-    "spec/web_spec.rb"
+    "spec/web/web_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
