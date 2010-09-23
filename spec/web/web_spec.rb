@@ -102,51 +102,63 @@ describe Web do
   end
 
   describe "agent" do
-    after(:each) do
-      Web.user_agent = nil
-    end
-
     it "should provide Mechanize agents" do
       Web.agent.class.should == Mechanize
     end
 
-    it "should use the Ronin User-Agent string" do
-      Web.user_agent = 'test'
-      Web.agent.user_agent.should == 'test'
-    end
+    describe ":user_agent" do
+      before(:all) do
+        Web.user_agent = 'test'
+      end
 
-    it "should support using a custom User-Agent string" do
-      agent = Web.agent(:user_agent => 'test2')
+      it "should default to Web.user_agent" do
+        Web.agent.user_agent.should == 'test'
+      end
 
-      agent.user_agent.should == 'test2'
-    end
+      it "should support using a custom User-Agent string" do
+        agent = Web.agent(:user_agent => 'test2')
 
-    it "should support using a custom User-Agent alias" do
-      agent = Web.agent(:user_agent_alias => 'iPhone')
-      
-      agent.user_agent.should == "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3"
+        agent.user_agent.should == 'test2'
+      end
+
+      it "should support using a custom User-Agent alias" do
+        agent = Web.agent(:user_agent_alias => 'iPhone')
+
+        agent.user_agent.should == "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3"
+      end
+
+      after(:all) do
+        Web.user_agent = nil
+      end
     end
 
     describe ":proxy" do
-      it "should accept Proxy values" do
-        pending "Mechanize needs reader methods for the proxy settings"
-      end
+      let(:host) { '127.0.0.1' }
+      let(:port) { 8080 }
 
-      it "should accept Hash values" do
-      end
-
-      it "should accept String values" do
-        pending "Mechanize needs reader methods for the proxy settings"
+      before(:all) do
+        Web.proxy = {:host => 'www.example.com', :port => port}
       end
 
       it "should default to Web.proxy" do
-        pending "Mechanize needs reader methods for the proxy settings"
+        agent = Web.agent
+
+        agent.proxy_addr.should == Web.proxy.host
+        agent.proxy_port.should == Web.proxy.port
       end
 
-      it "should raise a RuntimeError exception for bad :proxy options" do
-        lambda {
-          Web.agent(:proxy => 42)
-        }.should raise_error(RuntimeError)
+      it "should support using custom proxies" do
+        agent = Web.agent(:proxy => Network::HTTP::Proxy.new(
+          :host => host,
+          :port => port
+        ))
+
+        agent.proxy_addr.should == host
+        agent.proxy_port.should == port
+      end
+
+      after(:all) do
+        Web.proxy = nil
       end
     end
   end
