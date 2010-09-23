@@ -20,6 +20,7 @@
 #
 
 require 'ronin/web/server/base'
+require 'ronin/web/middleware/proxy'
 
 module Ronin
   module Web
@@ -31,9 +32,7 @@ module Ronin
 
         set :port, DEFAULT_PORT
 
-        default do
-          proxy
-        end
+        use Middleware::Proxy
 
       end
     end
