@@ -12,6 +12,10 @@ gem 'sinatra',		'~> 1.0'
 gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
 gem 'ronin',		'~> 0.4.0', :git => "#{RONIN}/ronin.git"
 
+group(:edge) do
+  gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git', :branch => 'runner'
+end
+
 group(:development) do
   gem 'rake',		'~> 0.8.7'
   gem 'jeweler',	'~> 1.5.0.pre'
