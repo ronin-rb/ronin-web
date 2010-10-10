@@ -118,7 +118,7 @@ module Ronin
             end
           end
 
-          raise(StandardError,"unable to find any Rack handlers",caller)
+          raise(StandardError,"unable to find any Rack handlers")
         end
 
         #

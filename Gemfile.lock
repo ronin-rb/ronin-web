@@ -8,16 +8,17 @@ GIT
 
 GIT
   remote: http://github.com/ronin-ruby/ronin-support.git
-  revision: 1761850b4897063e1268a2f2e58d559850cf45e2
+  revision: 1fdb061e7027cf9f13d24c1d655a266fc0aa4204
   specs:
     ronin-support (0.1.0)
       chars (~> 0.1.2)
+      combinatorics (~> 0.2.0)
       data_paths (~> 0.2.1)
       uri-query_params (~> 0.4.0)
 
 GIT
   remote: http://github.com/ronin-ruby/ronin.git
-  revision: 7dc2492890d734f7558c1c9887174945e1d31a25
+  revision: 014a7b8d84f1136a16c0a54d243fe81010fc976c
   specs:
     ronin (0.4.0)
       activesupport (~> 3.0.0)
@@ -50,6 +51,7 @@ GEM
     addressable (2.2.1)
     chars (0.1.2)
       yard (>= 0.2.3.5)
+    combinatorics (0.2.0)
     contextify (0.1.6)
     data_objects (0.10.2)
       addressable (~> 2.1)
@@ -120,7 +122,7 @@ GEM
       rack (>= 1.0)
     spidr (0.2.7)
     stringex (1.1.0)
-    thor (0.14.2)
+    thor (0.14.3)
     tzinfo (0.3.23)
     uri-query_params (0.4.0)
     uuidtools (2.1.1)
