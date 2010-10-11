@@ -20,6 +20,7 @@
 #
 
 require 'ronin/campaign'
+require 'ronin/ip_address'
 
 module Ronin
   module Web
