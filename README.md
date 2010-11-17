@@ -153,6 +153,8 @@ Serve files via a Web Server:
 ## Requirements
 
 * [nokogiri](http://github.com/tenderlove/nokogiri) ~> 1.4.1
+  * [libxml2](http://xmlsoft.org/)
+  * [libxslt1](http://xmlsoft.org/XSLT/)
 * [mechanize](http://github.com/tenderlove/mechanize) ~> 1.0.0
 * [data_paths](http://github.com/postmodern/data_paths) ~> 0.2.1
 * [spidr](http://github.com/postmodern/spidr/) ~> 0.2.0
