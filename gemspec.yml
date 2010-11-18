@@ -15,7 +15,7 @@ dependencies:
   nokogiri: ~> 1.4.1
   mechanize: ~> 1.0.0
   spidr: ~> 0.2.0
-  sinatra: ~> 1.0
+  sinatra: ~> 1.1.0
   # Ronin dependencies:
   # ronin-support: ~> 0.1.0
   # ronin: ~> 1.0.0
