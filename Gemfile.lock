@@ -7,6 +7,12 @@ GIT
       dm-core (~> 1.0.2)
 
 GIT
+  remote: http://github.com/postmodern/rack.git
+  revision: a6d9149ff9bdcff86cd5d251fbd404b7fa5682af
+  specs:
+    rack (1.2.1)
+
+GIT
   remote: http://github.com/ronin-ruby/ronin-support.git
   revision: 6c89950e62383dbeffca9a2a5c698b1650d27503
   specs:
@@ -51,7 +57,7 @@ PATH
       data_paths (~> 0.2.1)
       mechanize (~> 1.0.0)
       nokogiri (~> 1.4.1)
-      sinatra (~> 1.0)
+      sinatra (~> 1.1.0)
       spidr (~> 0.2.0)
 
 GEM
@@ -114,8 +120,7 @@ GEM
     parameters (0.2.3)
     pullr (0.1.3)
       addressable (>= 2.1.1)
-    rack (1.2.1)
-    rack-test (0.5.4)
+    rack-test (0.5.6)
       rack (>= 1.0)
     rake (0.8.7)
     rdiscount (1.6.5)
@@ -152,13 +157,14 @@ DEPENDENCIES
   nokogiri (~> 1.4.1)
   ore-core (~> 0.1.0)
   ore-tasks (~> 0.2.0)
-  rack-test (~> 0.5.4)
+  rack (~> 1.2.1)!
+  rack-test (~> 0.5.6)
   rake (~> 0.8.7)
   rdiscount (~> 1.6.3)
   ronin (~> 1.0.0)!
   ronin-support (~> 0.1.0)!
   ronin-web!
   rspec (~> 2.0.0)
-  sinatra (~> 1.0)
+  sinatra (~> 1.1.0)
   spidr (~> 0.2.0)
   yard (~> 0.6.1)

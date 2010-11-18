@@ -6,6 +6,8 @@ RONIN = 'http://github.com/ronin-ruby'
 
 gemspec
 
+gem 'rack', '~> 1.2.1', :git => 'http://github.com/postmodern/rack.git'
+
 # DataMapper dependencies
 gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git', :branch => 'runner'
 
@@ -27,5 +29,5 @@ group :development do
   gem 'ore-tasks',	'~> 0.2.0'
 
   gem 'rspec',		'~> 2.0.0'
-  gem 'rack-test',	'~> 0.5.4'
+  gem 'rack-test',	'~> 0.5.6'
 end
