@@ -7,8 +7,8 @@ GIT
       dm-core (~> 1.0.2)
 
 GIT
-  remote: http://github.com/postmodern/rack.git
-  revision: a6d9149ff9bdcff86cd5d251fbd404b7fa5682af
+  remote: http://github.com/rack/rack.git
+  revision: 672396f0fdaa639981daaf7e6ff309c76f71b352
   specs:
     rack (1.2.1)
 

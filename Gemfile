@@ -9,7 +9,7 @@ gemspec
 # DataMapper dependencies
 gem 'dm-migrations',	DM_VERSION, :git => 'http://github.com/postmodern/dm-migrations.git', :branch => 'runner'
 
-gem 'rack',           '~> 1.2.1', :git => 'http://github.com/postmodern/rack.git'
+gem 'rack',           '~> 1.2.1', :git => 'http://github.com/rack/rack.git'
 
 # Ronin dependencies
 gem 'ronin-support',	'~> 0.1.0', :git => "#{RONIN}/ronin-support.git"
