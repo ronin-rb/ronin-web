@@ -161,7 +161,7 @@ Serve files via a Web Server:
 * [spidr](http://github.com/postmodern/spidr/) ~> 0.2.0
 * [sinatra](http://github.com/sinatra/sinatra/) ~> 1.0
 * [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.1.0
-* [ronin](http://github.com/ronin-ruby/ronin) ~> 0.4.0
+* [ronin](http://github.com/ronin-ruby/ronin) ~> 1.0.0
 
 ## Install
 

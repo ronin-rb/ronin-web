@@ -17,8 +17,8 @@ dependencies:
   spidr: ~> 0.2.0
   sinatra: ~> 1.1.0
   # Ronin dependencies:
-  # ronin-support: ~> 0.1.0
-  # ronin: ~> 1.0.0
+  ronin-support: ~> 0.1.0.rc1
+  ronin: ~> 1.0.0.rc1
 
 development_dependencies:
   bundler: ~> 1.0.0
