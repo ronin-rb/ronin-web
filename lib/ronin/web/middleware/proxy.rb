@@ -242,7 +242,7 @@ module Ronin
           return Response.new(
             (http_response.body || ''),
             http_response.code,
-            http_headers,
+            http_headers
           )
         end
 
