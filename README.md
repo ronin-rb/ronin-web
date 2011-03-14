@@ -153,13 +153,13 @@ Serve files via a Web Server:
 
 ## Requirements
 
-* [nokogiri](http://github.com/tenderlove/nokogiri) ~> 1.4.1
+* [nokogiri](http://github.com/tenderlove/nokogiri) ~> 1.4
   * [libxml2](http://xmlsoft.org/)
   * [libxslt1](http://xmlsoft.org/XSLT/)
-* [mechanize](http://github.com/tenderlove/mechanize) ~> 1.0.0
-* [data_paths](http://github.com/postmodern/data_paths) ~> 0.2.1
-* [spidr](http://github.com/postmodern/spidr/) ~> 0.2.0
-* [sinatra](http://github.com/sinatra/sinatra/) ~> 1.0
+* [mechanize](http://github.com/tenderlove/mechanize) ~> 1.0
+* [spidr](http://github.com/postmodern/spidr/) ~> 0.2
+* [sinatra](http://github.com/sinatra/sinatra/) ~> 1.1
+* [data_paths](http://github.com/postmodern/data_paths) ~> 0.2, >= 0.2.1
 * [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.1.0
 * [ronin](http://github.com/ronin-ruby/ronin) ~> 1.0.0
 

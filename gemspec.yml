@@ -11,11 +11,11 @@ homepage: http://github.com/ronin-ruby/ronin-web
 has_yard: true
 
 dependencies:
-  data_paths: ~> 0.2.1
-  nokogiri: ~> 1.4.1
-  mechanize: ~> 1.0.0
-  spidr: ~> 0.2.0
-  sinatra: ~> 1.1.0
+  nokogiri: ~> 1.4
+  mechanize: ~> 1.0
+  spidr: ~> 0.2
+  sinatra: ~> 1.1
+  data_paths: ~> 0.2, >= 0.2.1
   # Ronin dependencies:
   ronin-support: ~> 0.1.0.rc1
   ronin: ~> 1.0.0.rc1
