@@ -2,6 +2,9 @@ require 'spec_helper'
 require 'ronin/web/web'
 
 describe Web do
+ let(:url) { 'http://ronin-ruby.github.com/' }
+ let(:title) { 'Ronin' }
+
   it "should have a VERSION constant" do
     Web.const_defined?('VERSION').should == true
   end
@@ -72,9 +75,9 @@ describe Web do
   end
 
   it "should open URLs as temporary files" do
-    file = Web.open('http://www.example.com/')
+    file = Web.open(url)
     
-    file.read.should =~ /Example Web Page/
+    file.read.should include(title)
   end
 
   describe "agent" do
@@ -140,15 +143,15 @@ describe Web do
   end
 
   it "should be able to get Mechanize pages" do
-    page = Web.get('http://www.example.com/')
+    page = Web.get(url)
 
     page.class.should == Mechanize::Page
-    page.at('title').inner_text.should == 'Example Web Page'
+    page.at('title').inner_text.should include(title)
   end
 
   it "should be able to get the bodies of Mechanize pages" do
-    body = Web.get_body('http://www.example.com/')
+    body = Web.get_body(url)
 
-    body.should =~ /Example Web Page/
+    body.should include(title)
   end
 end
