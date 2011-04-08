@@ -4,6 +4,8 @@ DM_URI = 'http://github.com/datamapper'
 DM_VERSION = '~> 1.1.0'
 RONIN_URI = 'http://github.com/ronin-ruby'
 
+gem 'rack', '~> 1.2.0', :git => 'http://github.com/rack/rack.git'
+
 gemspec
 
 # Ronin dependencies
