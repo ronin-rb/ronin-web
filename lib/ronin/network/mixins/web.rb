@@ -19,33 +19,37 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/ui/output/helpers'
 require 'ronin/network/http/proxy'
 require 'ronin/web/web'
+require 'ronin/mixin'
+
+require 'parameters'
 
 module Ronin
   module Network
     module Mixins
       module Web
+ 
+        mixin UI::Output::Helpers, Parameters
 
-        # The Web Proxy host to connect to
-        parameter :web_proxy_host,
-                  :type => String,
-                  :description => 'Web Proxy host'
+        mixin do
+          # The Web Proxy host to connect to
+          parameter :web_proxy_host, :type => String,
+                                     :description => 'Web Proxy host'
 
-        # The Web Proxy port to connect to
-        parameter :web_proxy_port,
-                  :type => Integer,
-                  :description => 'Web Proxy port'
+          # The Web Proxy port to connect to
+          parameter :web_proxy_port, :type => Integer,
+                                     :description => 'Web Proxy port'
 
-        # The Web Proxy user to authenticate with
-        parameter :web_proxy_user,
-                  :type => String,
-                  :description => 'Web Proxy authentication user'
+          # The Web Proxy user to authenticate with
+          parameter :web_proxy_user, :type => String,
+                                     :description => 'Web Proxy authentication user'
 
-        # The Web Proxy password to authenticate with
-        parameter :web_proxy_password,
-                  :type => String,
-                  :description => 'Web Proxy authentication password'
+          # The Web Proxy password to authenticate with
+          parameter :web_proxy_password, :type => String,
+                                         :description => 'Web Proxy authentication password'
+        end
 
         protected
 
@@ -118,6 +122,7 @@ module Ronin
         #   The requested page.
         #
         def web_get(url,options={})
+          print_info "Requesting #{url}"
           page = web_agent(options).get(url)
 
           yield page if block_given?
@@ -150,12 +155,11 @@ module Ronin
         #   The requested body of the page.
         #
         def web_get_body(url,options={})
-          web_get(url,options) do |page|
-            body = page.body
+          page = web_get(url,options)
+          body = page.body
 
-            yield body if block_given?
-            return body
-          end
+          yield body if block_given?
+          return body
         end
 
         #
@@ -191,6 +195,7 @@ module Ronin
           query = {}
           query.merge!(options[:query]) if options[:query]
 
+          print_info "Posting #{url}"
           page = web_agent(options).post(url)
 
           yield page if block_given?
@@ -226,12 +231,11 @@ module Ronin
         #   The requested body of the page.
         #
         def web_post_body(url,options={})
-          web_post(url,options) do |page|
-            body = page.body
+          page = web_post(url,options)
+          body = page.body
 
-            yield body if block_given?
-            return body
-          end
+          yield body if block_given?
+          return body
         end
       end
     end
