@@ -55,7 +55,7 @@ module Nokogiri
       #   Specifies whether the node is equal, in identity or value, to
       #   another node.
       #
-      def similar?(other)
+      def ==(other)
         return false unless other
 
         (self.type == other.type) && (self.name == other.name)

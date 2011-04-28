@@ -14,7 +14,7 @@ module Nokogiri
       #   Specifies if the text node is similar, in indentity or value,
       #   to the other text node.
       #
-      def similar?(other)
+      def ==(other)
         super(other) && (self.content == other.content)
       end
 

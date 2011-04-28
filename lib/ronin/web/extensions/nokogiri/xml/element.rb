@@ -14,7 +14,7 @@ module Nokogiri
       #   Specifies whether the element is equal, in identity or value, to
       #   another element.
       #
-      def similar?(other)
+      def ==(other)
         return false unless super(other)
         return false unless attribute_nodes.length == other.attribute_nodes.length
 
@@ -25,7 +25,7 @@ module Nokogiri
           return false unless attr1.similar?(attr2)
         end
 
-        true
+        return true
       end
 
     end

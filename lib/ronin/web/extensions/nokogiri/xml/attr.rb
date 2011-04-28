@@ -14,7 +14,7 @@ module Nokogiri
       #   Specifies if the attribute is similar, in indentity or value,
       #   to the other attribute.
       #
-      def similar?(other)
+      def ==(other)
         super(other) && (self.value == other.value)
       end
 
