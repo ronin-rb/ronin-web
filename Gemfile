@@ -6,6 +6,8 @@ RONIN_URI = 'http://github.com/ronin-ruby'
 
 gemspec
 
+gem 'data_paths', '~> 0.3.0', :git => 'git://github.com/postmodern/data_paths.git'
+
 # Ronin dependencies
 gem 'ronin-support',	'~> 0.2', :git => "#{RONIN_URI}/ronin-support.git"
 gem 'ronin',		      '~> 1.1', :git => "#{RONIN_URI}/ronin.git"
