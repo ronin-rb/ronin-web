@@ -16,7 +16,7 @@ dependencies:
   nokogiri: ~> 1.4
   mechanize: ~> 1.0
   spidr: ~> 0.2
-  sinatra: ~> 1.1
+  sinatra: ~> 1.2
   # data_paths: ~> 0.3
   # Ronin dependencies:
   # ronin-support: ~> 0.2
