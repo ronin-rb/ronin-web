@@ -403,8 +403,6 @@ module Ronin
 
         enable :sessions
 
-        helpers Middleware::Helpers
-
         any('*') { default_response }
 
       end
