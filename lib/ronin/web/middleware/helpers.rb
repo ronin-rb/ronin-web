@@ -97,7 +97,7 @@ module Ronin
         #
         # @since 0.3.0
         #
-        def response(body=[],headers={},status=nil)
+        def response(body=[],headers={},status=200)
           response = Response.new(body,status,headers)
 
           yield(response) if block_given?
