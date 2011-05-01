@@ -123,7 +123,7 @@ module Ronin
         #
         # @since 0.3.0
         #
-        def response_for(path,headers={},status=nil)
+        def response_for(path,headers={},status=200)
           response(
             File.new(path),
             headers.merge('Content-Type' => mime_type_for(path)),
