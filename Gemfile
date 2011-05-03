@@ -17,7 +17,7 @@ gem 'ronin',		      '~> 1.1', :git => "#{RONIN_URI}/ronin.git"
 
 group :test do
   gem 'rack',         '~> 1.2', :git => 'http://github.com/rack/rack.git'
-  gem 'rack-test',    '~> 0.5.7'
+  gem 'rack-test',    '~> 0.6.0'
 end
 
 group :development do
