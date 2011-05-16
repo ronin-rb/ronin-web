@@ -18,8 +18,10 @@ dependencies:
   spidr: ~> 0.2
   sinatra: ~> 1.2
   # data_paths: ~> 0.3
+  data_paths: ~> 0.3.0.rc1
   # Ronin dependencies:
   # ronin-support: ~> 0.2
+  ronin-support: ~> 0.2.0.rc1
   # ronin: ~> 1.1
 
 development_dependencies:
