@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'ronin/spec/database'
 require 'ronin/web/middleware/filters/campaign_filter'
 
 describe Web::Middleware::Filters::CampaignFilter do
