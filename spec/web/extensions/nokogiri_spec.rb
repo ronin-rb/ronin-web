@@ -5,9 +5,9 @@ require 'nokogiri'
 
 describe Nokogiri::HTML do
   before(:all) do
-    @doc = Nokogiri::HTML(%{<html><head><title>test</title></head><body><p><b>This is a test</b> html <i>page</i>.</p></div></body></html>})
+    @doc = Nokogiri::HTML(%{<html><head><title>test</title></head><body><p><b>This is a test</b> html <i>page</i>.</p></body></html>})
 
-    @edited_doc = Nokogiri::HTML(%{<html><head><title>test</title></head><body><p><b>This is a test</b> html page.</p></div></body></html>})
+    @edited_doc = Nokogiri::HTML(%{<html><head><title>test</title></head><body><p><b>This is a test</b> html page.</p></body></html>})
   end
 
   it "should be able to test if two elements are equal" do

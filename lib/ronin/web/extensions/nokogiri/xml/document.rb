@@ -12,9 +12,11 @@ module Nokogiri
       #   Returns `0` if the document has no root element.
       #
       def total_children
-        return 0 unless root
-
-        1 + root.total_children
+        if root
+          1 + root.total_children
+        else
+          0
+        end
       end
 
     end

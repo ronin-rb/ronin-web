@@ -12,17 +12,10 @@ module Nokogiri
       #
       def total_children
         count = 0
-        first = self.child
 
-        return count unless first
+        traverse { |node| count += 1 }
 
-        while first
-          count += (1 + first.total_children)
-
-          first = first.next
-        end
-
-        count
+        return count - 1
       end
 
       #
@@ -34,18 +27,17 @@ module Nokogiri
       # @yieldparam [Nokogiri::XML::Text] node
       #   A text node.
       #
-      def traverse_text(&block)
-        block.call(self) if text?
+      # @return [Enumerator]
+      #   If no block is given, an Enumerator object will be returned.
+      #
+      def traverse_text
+        return enum_for(:traverse_text) unless block_given?
 
-        first = self.child
+        yield self if text?
 
-        while first
-          first.traverse_text(&block)
-
-          first = first.next
+        traverse do |node|
+          yield node if node.text?
         end
-
-        self
       end
 
       #
