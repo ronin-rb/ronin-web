@@ -1,3 +1,34 @@
+### 0.3.0 / 2011-05-27
+
+* Upgraded to the GPL-3 license.
+* Require nokogiri ~> 1.4.
+* Require mechanize ~> 1.0.
+* Require spidr ~> 0.2.
+* Require sinatra ~> 1.2.
+* Require data_paths ~> 0.3.
+* Require ronin-support ~> 0.2.
+* Require ronin ~> 1.1.
+* Added {Ronin::Web::Middleware::Base}.
+* Added {Ronin::Web::Middleware::Request}.
+* Added {Ronin::Web::Middleware::Response}.
+* Added {Ronin::Web::Middleware::Helpers}.
+* Added {Ronin::Web::Middleware::Files}.
+* Added {Ronin::Web::Middleware::Directories}.
+* Added {Ronin::Web::Middleware::Rule}.
+* Added {Ronin::Web::Middleware::Filters::CampaignFilter}.
+* Added {Ronin::Web::Middleware::Filters::IPFilter}.
+* Added {Ronin::Web::Middleware::Filters::PathFilter}.
+* Added {Ronin::Web::Middleware::Filters::RefererFilter}.
+* Added {Ronin::Web::Middleware::Filters::UserAgentFilter}.
+* Added {Ronin::Web::Middleware::Filters::VHostFilter}.
+* Added {Ronin::Web::Middleware::Router}.
+* Added {Ronin::Web::Middleware::Proxy}.
+* Renamed `Ronin::Helpers::Web` to {Ronin::Network::Mixins::Web}.
+* Renamed `Ronin::Web::Server::Proxy` to {Ronin::Web::Proxy}.
+* Switched from [Jeweler](https://github.com/technicalpickles/jeweler)
+  to [Ore](http://github.com/ruby-ore/ore) and [Bundler](http://gembundler.com).
+* Opted into [test.rubygems.org](http://test.rubygems.org/).
+
 ### 0.2.1 / 2009-10-18
 
 * Require spidr >= 0.2.0.
