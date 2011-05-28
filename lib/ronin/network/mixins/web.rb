@@ -55,8 +55,8 @@ module Ronin
         protected
 
         #
-        # Combines the proxy information set by the {#web_proxy_host},
-        # {#web_proxy_port}, {#web_proxy_user} and {#web_proxy_password}
+        # Combines the proxy information set by the `web_proxy_host`,
+        # `web_proxy_port`, `web_proxy_user` and `web_proxy_password`
         # parameters.
         #
         # @return [Network::HTTP::Proxy]
