@@ -38,13 +38,20 @@ install or update Overlays.
 
 ## Features
 
-* Web access (utilizing Mechanize and Nokogiri).
-* Integrates Spidr into Ronin::Web::Spider.
-* Provides a collection of useful Rack Middleware:
+* Web access (utilizing [Mechanize](http://rubydoc.info/gems/mechanize/frames)
+  and [Nokogiri](http://rubydoc.info/gems/nokogiri/frames).
+* Integrates [Spidr](http://github.com/postmodern/spidr#readme) into
+  {Ronin::Web::Spider}.
+* Provides a collection of useful [Rack](http://rack.rubyforge.org/)
+  Middleware:
   * {Ronin::Web::Middleware::Files}
-* Provides Ronin::Web::Server, a customizable Sinatra based Web Server that
-  supports path and host-name routing.
-* Provides Ronin::Web::Proxy, a configurable Sinatra based Web Proxy.
+  * {Ronin::Web::Middleware::Directories}
+  * {Ronin::Web::Middleware::Proxy}
+  * {Ronin::Web::Middleware::Router}
+* Provides {Ronin::Web::Server}, a [Sinatra](http://sinatrarb.com/) based
+  Web Server.
+* Provides {Ronin::Web::Proxy}, a [Sinatra](http://sinatrarb.com/) based
+  Web Proxy.
 
 ## Synopsis
 
@@ -62,7 +69,7 @@ Get only the body of the web-page:
 
     Web.get_body('http://www.rubyinside.com/')
 
-Get a Mechanize agent:
+Get a [Mechanize agent](http://rubydoc.info/gems/mechanize/1.0.0/Mechanize):
 
     agent = Web.agent
 
@@ -157,15 +164,15 @@ Serve files via a Web Server:
   * [libxml2](http://xmlsoft.org/)
   * [libxslt1](http://xmlsoft.org/XSLT/)
 * [mechanize](http://github.com/tenderlove/mechanize) ~> 1.0
-* [spidr](http://github.com/postmodern/spidr/) ~> 0.2
-* [sinatra](http://github.com/sinatra/sinatra/) ~> 1.1
+* [spidr](http://github.com/postmodern/spidr) ~> 0.2
+* [sinatra](http://github.com/sinatra/sinatra) ~> 1.1
 * [data_paths](http://github.com/postmodern/data_paths) ~> 0.3
 * [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.2
 * [ronin](http://github.com/ronin-ruby/ronin) ~> 1.1
 
 ## Install
 
-    $ sudo gem install ronin-web
+    $ gem install ronin-web
 
 ## License
 
