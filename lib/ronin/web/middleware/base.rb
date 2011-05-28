@@ -26,6 +26,9 @@ require 'ronin/ui/output/helpers'
 module Ronin
   module Web
     module Middleware
+      #
+      # Baase-class for all Ronin Web Middleware.
+      #
       class Base
 
         include Helpers

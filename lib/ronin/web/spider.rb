@@ -27,6 +27,10 @@ require 'spidr/agent'
 
 module Ronin
   module Web
+    #
+    # Extends [Spidr::Agent](http://rubydoc.info/gems/spidr/Agent) with
+    # [Ronin::UI::Output::Helpers](http://rubydoc.info/gems/ronin/Ronin/UI/Output/Helpers).
+    #
     class Spider < Spidr::Agent
 
       include UI::Output::Helpers

@@ -26,6 +26,11 @@ require 'ronin/web/middleware/proxy'
 module Ronin
   module Web
     module Proxy
+      #
+      # The base-class for all Ronin Web Proxies. Extends
+      # [Sinatra::Base](http://rubydoc.info/gems/sinatra/Sinatra/Base)
+      # with {Middleware::Proxy}.
+      #
       class Base < Server::Base
 
         # The default port to run the Web Proxy on

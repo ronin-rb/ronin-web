@@ -36,6 +36,11 @@ require 'sinatra'
 module Ronin
   module Web
     module Server
+      #
+      # The base-class for all Ronin Web Servers. Extends
+      # [Sinatra::Base](http://rubydoc.info/gems/sinatra/Sinatra/Base)
+      # with additional helper methods and Rack {Middleware}.
+      #
       class Base < Sinatra::Base
 
         include Templates::Erb
@@ -248,6 +253,8 @@ module Ronin
         # @example
         #   file '/robots.txt', '/path/to/my_robots.txt'
         #
+        # @see Middleware::Files
+        #
         # @since 0.3.0
         #
         # @api public
@@ -272,6 +279,8 @@ module Ronin
         #     files.map /\.exe$/, 'trojan.exe'
         #   end
         #
+        # @see Middleware::Files
+        #
         # @since 0.3.0
         #
         # @api public
@@ -291,6 +300,8 @@ module Ronin
         #
         # @example
         #   directory '/download/', '/tmp/files/'
+        #
+        # @see Middleware::Directories
         #
         # @since 0.2.0
         #
@@ -316,6 +327,8 @@ module Ronin
         #     dirs.map '/images', '/tmp/ronin_images'
         #     dirs.map '/pdfs', '/tmp/ronin_pdfs'
         #   end
+        #
+        # @see Middleware::Directories
         #
         # @since 0.3.0
         #
@@ -354,6 +367,8 @@ module Ronin
         #
         # @example
         #   map '/subapp/', SubApp
+        #
+        # @see Middleware::Router
         #
         # @since 0.2.0
         #
@@ -412,6 +427,8 @@ module Ronin
         #   proxy '/login.php' do |response,body|
         #     body.gsub(/https/,'http')
         #   end
+        #
+        # @see Middleware::Proxy
         #
         # @since 0.2.0
         #
