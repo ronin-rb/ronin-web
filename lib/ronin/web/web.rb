@@ -152,7 +152,7 @@ module Ronin
     # @return [Network::HTTP::Proxy]
     #   The new proxy.
     #
-    # @since 0.4.0
+    # @since 0.3.0
     #
     # @api public
     #
