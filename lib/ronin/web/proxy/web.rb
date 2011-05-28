@@ -30,6 +30,8 @@ module Ronin
     #
     # @see Server::Base.run!
     #
+    # @api public
+    #
     def Web.proxy_server(options={},&block)
       unless class_variable_defined?('@@ronin_web_proxy')
         @@ronin_web_proxy = Proxy::App

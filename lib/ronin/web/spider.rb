@@ -89,6 +89,8 @@ module Ronin
       #
       # @see http://spidr.rubyforge.org/docs/classes/Spidr/Agent.html
       #
+      # @api public
+      #
       def initialize(options={})
         options = {
           :proxy => Web.proxy,

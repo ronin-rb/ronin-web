@@ -37,6 +37,8 @@ module Ronin
           #
           # @since 0.3.0
           #
+          # @api private
+          #
           def initialize(path)
             @path = path
           end
@@ -51,6 +53,8 @@ module Ronin
           #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
+          #
+          # @api private
           #
           def match?(request)
             if @path.kind_of?(Regexp)

@@ -43,7 +43,10 @@ module Ronin
     # @yieldparam [Nokogiri::HTML::Document] doc
     #   The new HTML document object.
     #
-    # @return [Nokogiri::HTML::Document] The new HTML document object.
+    # @return [Nokogiri::HTML::Document]
+    #   The new HTML document object.
+    #
+    # @api public
     #
     def Web.html(body)
       doc = Nokogiri::HTML(body)
@@ -72,6 +75,8 @@ module Ronin
     #     }
     #   end
     #
+    # @api public
+    #
     def Web.build_html(&block)
       Nokogiri::HTML::Builder.new(&block)
     end
@@ -89,7 +94,10 @@ module Ronin
     # @yieldparam [Nokogiri::XML::Document] doc
     #   The new XML document object.
     #
-    # @return [Nokogiri::XML::Document] The new XML document object.
+    # @return [Nokogiri::XML::Document]
+    #   The new XML document object.
+    #
+    # @api public
     #
     def Web.xml(body)
       doc = Nokogiri::XML(body)
@@ -115,6 +123,8 @@ module Ronin
     #    }
     #  end
     #
+    # @api public
+    #
     def Web.build_xml(&block)
       Nokogiri::XML::Builder.new(&block)
     end
@@ -126,6 +136,8 @@ module Ronin
     #   The Ronin Web proxy information.
     #
     # @see Ronin::Network::HTTP.proxy
+    #
+    # @api public
     #
     def Web.proxy
       (@proxy ||= nil) || Network::HTTP.proxy
@@ -142,6 +154,8 @@ module Ronin
     #
     # @since 0.4.0
     #
+    # @api public
+    #
     def Web.proxy=(new_proxy)
       @proxy = Network::HTTP::Proxy.create(new_proxy)
     end
@@ -149,6 +163,8 @@ module Ronin
     #
     # @return [Array]
     #   The supported Web User-Agent Aliases.
+    #
+    # @api public
     #
     def Web.user_agent_aliases
       Mechanize::AGENT_ALIASES
@@ -159,6 +175,8 @@ module Ronin
     #
     # @return [String, nil]
     #   The Ronin Web User-Agent
+    #
+    # @api public
     #
     def Web.user_agent
       (@user_agent ||= nil) || Network::HTTP.user_agent
@@ -173,6 +191,8 @@ module Ronin
     # @return [String]
     #   The new User-Agent string.
     #
+    # @api public
+    #
     def Web.user_agent=(new_agent)
       @user_agent = new_agent
     end
@@ -185,6 +205,8 @@ module Ronin
     #
     # @return [String]
     #   The new User-Agent string.
+    #
+    # @api public
     #
     def Web.user_agent_alias=(name)
       @user_agent = Web.user_agent_aliases[name.to_s]
@@ -232,6 +254,8 @@ module Ronin
     #
     # @example Open a given URL, using a custom User-Agent string.
     #   Web.open('http://www.wired.com/', :user_agent => 'the future')
+    #
+    # @api public
     #
     def Web.open(url,options={})
       user_agent_alias = options.delete(:user_agent_alias)
@@ -305,6 +329,8 @@ module Ronin
     #
     # @see http://mechanize.rubyforge.org/mechanize/Mechanize.html
     #
+    # @api public
+    #
     def Web.agent(options={})
       agent = Mechanize.new
 
@@ -372,6 +398,8 @@ module Ronin
     #
     # @see http://mechanize.rubyforge.org/mechanize/Mechanize/Page.html
     #
+    # @api public
+    #
     def Web.get(url,options={})
       page = Web.agent(options).get(url)
 
@@ -415,6 +443,8 @@ module Ronin
     #     puts body
     #   end
     #
+    # @api public
+    #
     def Web.get_body(url,options={})
       body = Web.get(url,options).body
 
@@ -456,6 +486,8 @@ module Ronin
     # @example
     #   Web.post('http://www.rubyinside.com')
     #   # => Mechanize::Page
+    #
+    # @api public
     #
     def Web.post(url,options={})
       query = {}
@@ -506,6 +538,8 @@ module Ronin
     #   Web.post_body('http://www.rubyinside.com') do |body|
     #     puts body
     #   end
+    #
+    # @api public
     #
     def Web.post_body(url,options={})
       body = Web.post(url,options).body

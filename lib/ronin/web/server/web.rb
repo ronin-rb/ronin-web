@@ -47,7 +47,10 @@ module Ronin
     #   end
     #
     # @see Server::Base.run!
+    #
     # @since 0.2.0
+    #
+    # @api public
     #
     def Web.server(options={},&block)
       unless class_variable_defined?('@@ronin_web_server')

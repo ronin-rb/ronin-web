@@ -32,6 +32,8 @@ module Nokogiri
       # @return [Integer]
       #   The total number of children of the node.
       #
+      # @api public
+      #
       def total_children
         count = 0
 
@@ -52,6 +54,8 @@ module Nokogiri
       # @return [Enumerator]
       #   If no block is given, an Enumerator object will be returned.
       #
+      # @api public
+      #
       def traverse_text
         return enum_for(:traverse_text) unless block_given?
 
@@ -68,6 +72,8 @@ module Nokogiri
       # @return [Boolean]
       #   Specifies whether the node is equal, in identity or value, to
       #   another node.
+      #
+      # @api public
       #
       def ==(other)
         return false unless other

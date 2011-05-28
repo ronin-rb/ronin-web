@@ -44,6 +44,8 @@ module Ronin
           #
           # @since 0.3.0
           #
+          # @api private
+          #
           def initialize(name)
             @name = name.to_s
           end
@@ -58,6 +60,8 @@ module Ronin
           #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
+          #
+          # @api private
           #
           def match?(request)
             Campaign.count(

@@ -64,6 +64,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def initialize(app,options={},&block)
           @paths = {}
           @paths_order = []
@@ -85,6 +87,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def Directories.index_names
           @@directories_index_names ||= Set.new(INDEX_NAMES)
         end
@@ -101,6 +105,8 @@ module Ronin
         # @return [true]
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def map(remote_path,local_dir)
           @paths[remote_path] = local_dir
@@ -124,6 +130,8 @@ module Ronin
         #   The response.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def call(env)
           path = sanitize_path(env['PATH_INFO'])

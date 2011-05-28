@@ -90,6 +90,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def initialize(app,options={},&block)
           intercept(options)
 
@@ -123,6 +125,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def intercept(options={})
           @rule = Rule.new(options)
         end
@@ -141,6 +145,8 @@ module Ronin
         #   The proxy middleware.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def every_request(&block)
           @every_request_block = block
@@ -161,6 +167,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def every_response(&block)
           @every_response_block = block
           return self
@@ -177,6 +185,8 @@ module Ronin
         #   The response.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def call(env)
           request = ProxyRequest.new(env)
@@ -214,6 +224,8 @@ module Ronin
         #
         # @return [Response]
         #   The response from the request.
+        #
+        # @api private
         #
         def proxy(request)
           options = {

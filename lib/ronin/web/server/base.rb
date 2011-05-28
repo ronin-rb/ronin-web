@@ -59,6 +59,8 @@ module Ronin
         #
         # @since 0.2.0
         #
+        # @api public
+        #
         def Base.handler
           @@ronin_web_server_handler ||= nil
         end
@@ -74,6 +76,8 @@ module Ronin
         #
         # @since 0.2.0
         #
+        # @api public
+        #
         def Base.handler=(name)
           @@ronin_web_server_handler = name
         end
@@ -85,6 +89,8 @@ module Ronin
         #   The names of handler classes.
         #
         # @since 0.2.0
+        #
+        # @api public
         #
         def self.handlers
           handlers = self.server
@@ -107,6 +113,8 @@ module Ronin
         #   None of the handlers could be loaded.
         #
         # @since 0.2.0
+        #
+        # @api semipublic
         #
         def self.handler_class
           self.handlers.find do |name|
@@ -139,6 +147,8 @@ module Ronin
         #   in the foreground.
         #
         # @since 0.2.0
+        #
+        # @api public
         #
         def self.run!(options={})
           rack_options = {
@@ -188,6 +198,8 @@ module Ronin
         #
         # @since 0.2.0
         #
+        # @api public
+        #
         def self.any(path,options={},&block)
           get(path,options,&block)
           put(path,options,&block)
@@ -217,6 +229,8 @@ module Ronin
         #
         # @since 0.2.0
         #
+        # @api public
+        #
         def self.default(&block)
           class_def(:default_response,&block)
           return self
@@ -235,6 +249,8 @@ module Ronin
         #   file '/robots.txt', '/path/to/my_robots.txt'
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def self.file(remote_path,local_path)
           use Middleware::Files, :paths => {remote_path => local_path}
@@ -258,6 +274,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def self.files(&block)
           use(Middleware::Files,&block)
         end
@@ -275,6 +293,8 @@ module Ronin
         #   directory '/download/', '/tmp/files/'
         #
         # @since 0.2.0
+        #
+        # @api public
         #
         def self.directory(remote_path,local_path)
           use Middleware::Directories, :paths => {remote_path => local_path}
@@ -299,6 +319,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def self.directories(&block)
           use(Middleware::Directories,&block)
         end
@@ -313,6 +335,8 @@ module Ronin
         #   public_dir 'path/to/another/public'
         #
         # @since 0.2.0
+        #
+        # @api public
         #
         def self.public_dir(path)
           self.directory('/',path)
@@ -332,6 +356,8 @@ module Ronin
         #   map '/subapp/', SubApp
         #
         # @since 0.2.0
+        #
+        # @api public
         #
         def self.map(dir,server)
           use Middleware::Router do |router|
@@ -353,6 +379,8 @@ module Ronin
         #   vhost 'cdn.evil.com', EvilServer
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def self.vhost(name,server)
           use Middleware::Router do |router|
@@ -387,6 +415,8 @@ module Ronin
         #
         # @since 0.2.0
         #
+        # @api public
+        #
         def self.proxy(path,options={},&block)
           use(Middleware::Proxy,options,&block)
         end
@@ -397,6 +427,8 @@ module Ronin
         # Returns an HTTP 404 response with an empty body.
         #
         # @since 0.2.0
+        #
+        # @api semipublic
         #
         def default_response
           halt 404, ''

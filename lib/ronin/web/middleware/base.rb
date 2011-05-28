@@ -63,6 +63,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api semipublic
+        #
         def initialize(app,options={})
           @app = app
 
@@ -86,6 +88,8 @@ module Ronin
         #   The response.
         #
         # @since 0.3.0
+        #
+        # @api semipublic
         #
         def call(env)
           @app.call(env)
@@ -121,6 +125,8 @@ module Ronin
         #   response 'Hello'
         #
         # @since 0.3.0
+        #
+        # @api semipublic
         #
         def response(body=[],headers={},status=nil)
           status ||= @default_status

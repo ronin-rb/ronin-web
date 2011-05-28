@@ -37,6 +37,8 @@ module Ronin
           #
           # @since 0.3.0
           #
+          # @api private
+          #
           def initialize(user_agent)
             @user_agent = user_agent
           end
@@ -51,6 +53,8 @@ module Ronin
           #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
+          #
+          # @api private
           #
           def match?(request)
             if @user_agent.kind_of?(Regexp)

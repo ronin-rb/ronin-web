@@ -67,6 +67,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def initialize(options={},&block)
           @filters = []
           @when_block = options.delete(:when)
@@ -86,6 +88,8 @@ module Ronin
         #
         # @return [Boolean]
         #   Specifies if the request matches all of the filters.
+        #
+        # @api public
         #
         def match?(request)
           @filters.all? { |filter| 

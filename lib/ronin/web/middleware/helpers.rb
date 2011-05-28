@@ -48,6 +48,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api semipublic
+        #
         def sanitize_path(path)
           File.expand_path(unescape(path))
         end
@@ -62,6 +64,8 @@ module Ronin
         #   The MIME type for the path.
         #
         # @since 0.3.0
+        #
+        # @api semipublic
         #
         def mime_type_for(path)
           Rack::Mime.mime_type(File.extname(path))
@@ -98,6 +102,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api semipublic
+        #
         def response(body=[],headers={},status=200)
           response = Response.new(body,status,headers)
 
@@ -123,6 +129,8 @@ module Ronin
         # @see #response
         #
         # @since 0.3.0
+        #
+        # @api semipublic
         #
         def response_for(path,headers={},status=200)
           response(

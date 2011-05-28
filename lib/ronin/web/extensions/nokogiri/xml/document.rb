@@ -33,6 +33,8 @@ module Nokogiri
       #   The total number of children and sub-children of the document.
       #   Returns `0` if the document has no root element.
       #
+      # @api public
+      #
       def total_children
         if root
           1 + root.total_children

@@ -62,6 +62,8 @@ module Ronin
         # @return [Network::HTTP::Proxy]
         #   The current proxy information.
         #
+        # @api semipublic
+        #
         def web_proxy
           HTTP::Proxy.new(
             :host => @web_proxy_host,
@@ -85,6 +87,8 @@ module Ronin
         #
         # @return [Mechanize]
         #   The agent.
+        #
+        # @api semipublic
         #
         def web_agent(options={},&block)
           unless @web_agent
@@ -122,6 +126,8 @@ module Ronin
         # @return [Mechanize::Page]
         #   The requested page.
         #
+        # @api semipublic
+        #
         def web_get(url,options={})
           print_info "Requesting #{url}"
           page = web_agent(options).get(url)
@@ -154,6 +160,8 @@ module Ronin
         #
         # @return [String]
         #   The requested body of the page.
+        #
+        # @api semipublic
         #
         def web_get_body(url,options={})
           page = web_get(url,options)
@@ -191,6 +199,8 @@ module Ronin
         #
         # @return [Mechanize::Page]
         #   The requested page.
+        #
+        # @api semipublic
         #
         def web_post(url,options={})
           query = {}
@@ -230,6 +240,8 @@ module Ronin
         #
         # @return [String]
         #   The requested body of the page.
+        #
+        # @api semipublic
         #
         def web_post_body(url,options={})
           page = web_post(url,options)

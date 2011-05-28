@@ -37,6 +37,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def headers
           headers = {}
 

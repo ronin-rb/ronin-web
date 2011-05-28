@@ -39,6 +39,8 @@ module Ronin
           #
           # @since 0.3.0
           #
+          # @api private
+          #
           def initialize(ip)
             @ip = unless ip.kind_of?(IPAddr)
                     IPAddr.new(ip.to_s)
@@ -57,6 +59,8 @@ module Ronin
           #   Specifies whether the filter matched the request.
           #
           # @since 0.3.0
+          #
+          # @api private
           #
           def match?(request)
             @ip.include?(request.ip)

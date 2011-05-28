@@ -38,6 +38,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def host=(new_host)
           @env['HTTP_HOST'] = new_host
         end
@@ -53,6 +55,8 @@ module Ronin
         #
         # @since 0.3.0
         #   
+        # @api public
+        #
         def port=(new_port)
           @env['SERVER_PORT'] = new_port
         end
@@ -68,6 +72,8 @@ module Ronin
         #
         # @since 0.3.0
         #   
+        # @api public
+        #
         def scheme=(new_scheme)
           @env['rack.url_scheme'] = new_scheme
         end
@@ -79,6 +85,8 @@ module Ronin
         #   The proxy request.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def ssl!
           self.port = 443
@@ -98,6 +106,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def request_method=(new_method)
           @env['REQUEST_METHOD'] = new_method
         end
@@ -115,6 +125,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def query_string=(new_query)
           @env['QUERY_STRING'] = new_query
         end
@@ -126,6 +138,8 @@ module Ronin
         #   Specifies whether the request is XML-HTTP.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def xhr?
           @env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
@@ -146,6 +160,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def xhr!
           @env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
 
@@ -164,6 +180,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def content_type=(new_content_type)
           @env['CONTENT_TYPE'] = new_content_type
         end
@@ -178,6 +196,8 @@ module Ronin
         #   The new HTTP Accept-Encoding of the request.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def accept_encoding=(new_encoding)
           @env['HTTP_ACCEPT_ENCODING'] = new_encoding
@@ -194,6 +214,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def user_agent=(new_user_agent)
           @env['HTTP_USER_AGENT'] = new_user_agent
         end
@@ -208,6 +230,8 @@ module Ronin
         #   The new HTTP Referer of the request.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def referer=(new_referer)
           @env['HTTP_REFERER'] = new_referer
@@ -225,6 +249,8 @@ module Ronin
         #   The new body of the request.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def body=(new_body)
           @env['rack.input'] = new_body

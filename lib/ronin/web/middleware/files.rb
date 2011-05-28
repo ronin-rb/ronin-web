@@ -64,6 +64,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def initialize(app,options={},&block)
           @paths = {}
 
@@ -95,6 +97,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def map(remote_path,local_path)
           @paths[remote_path] = local_path
           return true
@@ -110,6 +114,8 @@ module Ronin
         #   The response.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def call(env)
           path = sanitize_path(env['PATH_INFO'])

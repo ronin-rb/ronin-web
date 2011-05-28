@@ -73,6 +73,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def initialize(app,options={},&block)
           @routes = {}
 
@@ -125,6 +127,8 @@ module Ronin
         #
         # @since 0.3.0
         #
+        # @api public
+        #
         def draw(options={},&block)
           app = (options.delete(:to) || block)
 
@@ -141,6 +145,8 @@ module Ronin
         #   A response.
         #
         # @since 0.3.0
+        #
+        # @api public
         #
         def call(env)
           request = Request.new(env)

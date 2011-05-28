@@ -36,6 +36,8 @@ module Nokogiri
       #   Specifies whether the element is equal, in identity or value, to
       #   another element.
       #
+      # @api public
+      #
       def ==(other)
         return false unless super(other)
         return false unless attribute_nodes.length == other.attribute_nodes.length
