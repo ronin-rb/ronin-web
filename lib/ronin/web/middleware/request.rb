@@ -42,7 +42,7 @@ module Ronin
         #
         # @api semipublic
         #
-        def address(env)
+        def address
           "#{env['REMOTE_ADDR']}:#{env['REMOTE_PORT']}"
         end
 
@@ -59,7 +59,7 @@ module Ronin
         def headers
           headers = {}
 
-          self.env.each do |name,value|
+          env.each do |name,value|
             if name =~ /^HTTP_/
               header_name = Network::HTTP.header_name(name.sub('HTTP_',''))
               headers[header_name] = value
