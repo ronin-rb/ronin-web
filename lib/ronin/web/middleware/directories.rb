@@ -153,7 +153,7 @@ module Ronin
 
             return_file = proc { |local_path|
               if File.file?(local_path)
-                print_info "Returning file #{local_path.dump}"
+                print_info "Returning file #{local_path.dump} for #{request.address}"
                 return response_for(local_path)
               end
             }

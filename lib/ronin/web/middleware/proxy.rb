@@ -197,7 +197,7 @@ module Ronin
             return super(env)
           end
 
-          print_info "Proxying #{request.url}"
+          print_info "Proxying #{request.url} for #{request.address}"
           request.headers.each do |name,value|
             print_debug "  #{name}: #{value}"
           end
@@ -206,7 +206,7 @@ module Ronin
 
           @every_response_block.call(response) if @every_response_block
 
-          print_info "Returning proxied response."
+          print_info "Returning proxied response for #{request.address}"
           response.headers.each do |name,value|
             print_debug "  #{name}: #{value}"
           end

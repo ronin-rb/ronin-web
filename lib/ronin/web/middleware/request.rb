@@ -30,6 +30,23 @@ module Ronin
       class Request < Rack::Request
 
         #
+        # Returns the remote IP address and port for the request.
+        #
+        # @param [Hash] env
+        #   The request env Hash.
+        #
+        # @return [String]
+        #   The IP address and port number.
+        #
+        # @since 0.3.0
+        #
+        # @api semipublic
+        #
+        def address(env)
+          "#{env['REMOTE_ADDR']}:#{env['REMOTE_PORT']}"
+        end
+
+        #
         # The HTTP Headers for the request.
         #
         # @return [Hash{String => String}]

@@ -153,7 +153,7 @@ module Ronin
 
           @routes.each do |rule,app|
             if rule.match?(request)
-              print_info "Routing #{request.url}"
+              print_info "Routing #{request.url} for #{request.address}"
               return app.call(env)
             end
           end

@@ -128,7 +128,7 @@ module Ronin
                       end
 
             if matched
-              print_info "Returning file #{local_path.dump}"
+              print_info "Returning file #{local_path.dump} for #{request.address}"
               return response_for(local_path)
             end
           end
