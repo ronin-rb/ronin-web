@@ -128,6 +128,8 @@ module Ronin
                       end
 
             if matched
+              request = Request.new(env)
+
               print_info "Returning file #{local_path.dump} for #{request.address}"
               return response_for(local_path)
             end
