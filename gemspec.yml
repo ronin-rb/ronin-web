@@ -16,7 +16,7 @@ dependencies:
   nokogiri: ~> 1.4
   mechanize: ~> 1.0
   spidr: ~> 0.2
-  rack: ~> 1.2
+  rack: ~> 1.3
   sinatra: ~> 1.2
   # data_paths: ~> 0.3
   data_paths: ~> 0.3.0.rc1

@@ -165,7 +165,7 @@ Serve files via a Web Server:
   * [libxslt1](http://xmlsoft.org/XSLT/)
 * [mechanize](http://github.com/tenderlove/mechanize) ~> 1.0
 * [spidr](http://github.com/postmodern/spidr) ~> 0.2
-* [rack](http://github.com/rack/rack) ~> 1.2
+* [rack](http://github.com/rack/rack) ~> 1.3
 * [sinatra](http://github.com/sinatra/sinatra) ~> 1.2
 * [data_paths](http://github.com/postmodern/data_paths) ~> 0.3
 * [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.2
