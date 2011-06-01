@@ -4,6 +4,7 @@
 * Require nokogiri ~> 1.4.
 * Require mechanize ~> 1.0.
 * Require spidr ~> 0.2.
+* Require rack ~> 1.3.
 * Require sinatra ~> 1.2.
 * Require data_paths ~> 0.3.
 * Require ronin-support ~> 0.2.
