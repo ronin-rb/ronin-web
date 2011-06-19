@@ -85,6 +85,9 @@ module Ronin
       # @option options [Array<String, Regexp, Proc>] :ignore_exts
       #   The patterns which match the URI path extensions to not visit.
       #
+      # @option options [Boolean] :verbose (true)
+      #   Specifies whether every URL will be printed.
+      #
       # @yield [spider]
       #   If a block is given, it will be passed the newly created spider.
       #
@@ -103,8 +106,10 @@ module Ronin
 
         super(options)
 
-        every_url do |url|
-          print_info("Spidering #{url}")
+        if options.fetch(:verbose,true)
+          every_url do |url|
+            print_info("Spidering #{url}")
+          end
         end
 
         yield self if block_given?
