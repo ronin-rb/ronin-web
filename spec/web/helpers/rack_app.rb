@@ -1,11 +1,4 @@
-begin
-  require 'rack/test'
-rescue Gem::LoadError => e
-  raise(e)
-rescue ::LoadError
-  STDERR.puts "Error: please install the rack-test gem in order to run the spec tests"
-  exit -1
-end
+require 'rack/test'
 
 module Helpers
   module Web
