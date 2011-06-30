@@ -345,9 +345,11 @@ module Ronin
     #
     # @see http://rubydoc.info/gems/mechanize/Mechanize
     #
+    # @since 0.3.0
+    #
     # @api public
     #
-    def Web.agent(options={})
+    def Web.new_agent(options={})
       agent = Mechanize.new
 
       if options[:user_agent_alias]
@@ -371,6 +373,24 @@ module Ronin
 
       yield agent if block_given?
       return agent
+    end
+
+    #
+    # A persistant Mechanize Agent.
+    #
+    # @return [Mechanize]
+    #   The persistant Mechanize Agent.
+    #
+    # @see new_agent
+    #
+    # @api public
+    #
+    def Web.agent(options={})
+      if options.empty?
+        @agent ||= new_agent(options)
+      else
+        @agent = new_agent(options)
+      end
     end
 
     #
