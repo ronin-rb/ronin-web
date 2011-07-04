@@ -2,6 +2,10 @@ require 'spec_helper'
 require 'ronin/web/user_agents'
 
 describe Web::UserAgents do
+  it "should list the categories of User-Agent strings" do
+    subject.categories.should_not be_empty
+  end
+
   describe "#[]" do
     context "with Symbol" do
       it "should select User-Agent strings by group name" do

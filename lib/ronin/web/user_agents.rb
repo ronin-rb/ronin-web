@@ -64,6 +64,18 @@ module Ronin
         @user_agents = Hash.new { |hash,key| hash[key] = Set[] }
       end
 
+      # 
+      # The categories of `User-Agent` strings.
+      #
+      # @return [Array<Symbol>]
+      #   The names of the categories.
+      #
+      # @api public
+      #
+      def categories
+        @user_agents.keys
+      end
+
       #
       # Iterates over each User-Agent in the set.
       #
