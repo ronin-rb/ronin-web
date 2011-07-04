@@ -80,9 +80,9 @@ describe Web do
     file.read.should include(title)
   end
 
-  describe "agent" do
+  describe "new_agent" do
     it "should provide Mechanize agents" do
-      Web.agent.class.should == Mechanize
+      Web.new_agent.class.should == Mechanize
     end
 
     describe ":user_agent" do
@@ -91,17 +91,17 @@ describe Web do
       end
 
       it "should default to Web.user_agent" do
-        Web.agent.user_agent.should == 'test'
+        Web.new_agent.user_agent.should == 'test'
       end
 
       it "should support using a custom User-Agent string" do
-        agent = Web.agent(:user_agent => 'test2')
+        agent = Web.new_agent(:user_agent => 'test2')
 
         agent.user_agent.should == 'test2'
       end
 
       it "should support using a custom User-Agent alias" do
-        agent = Web.agent(:user_agent_alias => 'iPhone')
+        agent = Web.new_agent(:user_agent_alias => 'iPhone')
 
         agent.user_agent.should == "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3"
       end
@@ -139,6 +139,12 @@ describe Web do
       after(:all) do
         Web.proxy = nil
       end
+    end
+  end
+
+  describe "agent" do
+    it "should be persistent" do
+      Web.agent.object_id.should == Web.agent.object_id
     end
   end
 
