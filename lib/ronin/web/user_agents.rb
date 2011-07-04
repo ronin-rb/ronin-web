@@ -27,6 +27,24 @@ require 'set'
 module Ronin
   module Web
     #
+    # Represents the set of `User-Agent` strings loaded from all
+    # `data/ronin/web/user_agents.yml` files.
+    #
+    # ## ronin/web/user_agents.yml
+    #
+    # The `user_agent.yml` files are essentially YAML files listing
+    # `User-Agent` strings grouped by category:
+    #
+    #     ---
+    #     :googlebot:
+    #       - "Googlebot/2.1 ( http://www.googlebot.com/bot.html)"
+    #       - "Googlebot-Image/1.0 ( http://www.googlebot.com/bot.html)"
+    #       - "Mediapartners-Google/2.1"
+    #       - "Google-Sitemaps/1.0"
+    #
+    # These files can be added to Ronin Repositories or to Ronin libraries,
+    # and will be loaded by the {UserAgents} objects. 
+    #
     # @since 0.3.0
     #
     class UserAgents
