@@ -229,7 +229,14 @@ module Ronin
     # @api public
     #
     def Web.user_agent=(value)
-      @user_agent = user_agents[value]
+      @user_agent = case value
+                    when String
+                      user_agents.fetch(value,value)
+                    when nil
+                      nil
+                    else
+                      user_agents.fetch(value)
+                    end
     end
 
     #
