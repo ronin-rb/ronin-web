@@ -73,6 +73,8 @@ module Ronin
       # @api public
       #
       def categories
+        reload!
+
         @user_agents.keys
       end
 
