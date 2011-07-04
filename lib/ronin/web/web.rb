@@ -20,7 +20,7 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/config'
+require 'ronin/web/user_agents'
 require 'ronin/network/http/proxy'
 require 'ronin/network/http/http'
 
@@ -170,33 +170,17 @@ module Ronin
     end
 
     #
-    # Loads all `User-Agent` strings.
+    # A set of common `User-Agent` strings.
     #
-    # @return [Hash{Symbol => Set<String>}]
-    #   The `User-Agent` strings grouped by category.
+    # @return [UserAgents]
+    #   The set of `User-Agent` strings.
     #
     # @since 0.3.0
     #
     # @api public
     #
     def Web.user_agents
-      user_agents = {}
-
-      Config.each_data_file(Config::USER_AGENTS_FILE) do |path|
-        data = YAML.load_file(path)
-
-        unless data.kind_of?(Hash)
-          warn "#{path.dump} did not contain a Hash"
-          next
-        end
-
-        data.each do |name,strings|
-          user_agents[name] ||= Set[]
-          user_agents.merge(strings)
-        end
-      end
-
-      return user_agents
+      @user_agents ||= UserAgents.new
     end
 
     #
@@ -229,18 +213,24 @@ module Ronin
     end
 
     #
-    # Sets the User-Agent string used by {Web}.
+    # Sets the `User-Agent` string used by {Web}.
     #
-    # @param [String] new_agent
+    # @param [String, Symbol, Regexp] value
     #   The User-Agent string to use.
     #
     # @return [String]
     #   The new User-Agent string.
     #
+    # @raise [RuntimeError]
+    #   Either no User-Agent group exists with the given `Symbol`,
+    #   or no User-Agent string matched the given `Regexp`.
+    #
     # @api public
     #
-    def Web.user_agent=(new_agent)
-      @user_agent = new_agent
+    def Web.user_agent=(value)
+      unless (@user_agent = user_agents[value])
+        raise("coult not find a User-Agent matching #{value.inspect}")
+      end
     end
 
     #
@@ -254,6 +244,10 @@ module Ronin
     #
     # @see user_agent_aliases
     #
+    # @deprecated
+    #   Will be replaced by calling {user_agent=} with a `Symbol`
+    #   and will be removed in 1.0.0.
+    #
     # @api public
     #
     def Web.user_agent_alias=(name)
@@ -266,11 +260,11 @@ module Ronin
     # @param [Hash] options
     #   Additional options.
     #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
     # @option options [String] :user_agent
     #   The User-Agent string to use.
+    #
+    # @option options [String] :user_agent_alias
+    #   The User-Agent Alias to use.
     #
     # @option options [Network::HTTP::Proxy, Hash, String] :proxy
     #   (Web.proxy)
@@ -348,11 +342,11 @@ module Ronin
     # @param [Hash] options
     #   Additional options.
     #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
     # @option options [String] :user_agent
     #   The User-Agent string to use.
+    #
+    # @option options [String] :user_agent_alias
+    #   The User-Agent Alias to use.
     #
     # @option options [Network::HTTP::Proxy, Hash, String] :proxy
     #   (Web.proxy)
@@ -436,11 +430,11 @@ module Ronin
     # @param [Hash] options
     #   Additional options.
     #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
     # @option options [String] :user_agent
     #   The User-Agent string to use.
+    #
+    # @option options [String] :user_agent_alias
+    #   The User-Agent Alias to use.
     #
     # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
     #   Proxy information.
@@ -487,11 +481,11 @@ module Ronin
     # @param [Hash] options
     #   Additional options.
     #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
     # @option options [String] :user_agent
     #   The User-Agent string to use.
+    #
+    # @option options [String] :user_agent_alias
+    #   The User-Agent Alias to use.
     #
     # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
     #   Proxy information.
@@ -536,11 +530,11 @@ module Ronin
     # @option options [Hash] :query
     #   Additional query parameters to post with.
     #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alia to use.
-    #
     # @option options [String] :user_agent
     #   The User-Agent string to use.
+    #
+    # @option options [String] :user_agent_alias
+    #   The User-Agent Alia to use.
     #
     # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
     #   Proxy information.
@@ -586,11 +580,11 @@ module Ronin
     # @option options [Hash] :query
     #   Additional query parameters to post with.
     #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
     # @option options [String] :user_agent
     #   The User-Agent string to use.
+    #
+    # @option options [String] :user_agent_alias
+    #   The User-Agent Alias to use.
     #
     # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
     #   Proxy information.

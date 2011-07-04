@@ -28,9 +28,6 @@ module Ronin
       include DataPaths
       extend DataPaths::Finders
 
-      # Relative path to the User-Agents file.
-      USER_AGENTS_FILE = File.join('ronin','web','user_agents.yml')
-
       register_data_path File.join(File.dirname(__FILE__),'..','..','..','data')
     end
   end
