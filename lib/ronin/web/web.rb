@@ -21,12 +21,12 @@
 #
 
 require 'ronin/web/user_agents'
+require 'ronin/web/mechanize'
 require 'ronin/network/http/proxy'
 require 'ronin/network/http/http'
 
 require 'uri/http'
 require 'nokogiri'
-require 'mechanize'
 require 'open-uri'
 
 module Ronin
@@ -343,87 +343,20 @@ module Ronin
     end
 
     #
-    # Creates a new Mechanize Agent.
-    #
-    # @param [Hash] options
-    #   Additional options.
-    #
-    # @option options [String] :user_agent
-    #   The User-Agent string to use.
-    #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
-    # @option options [Network::HTTP::Proxy, Hash, String] :proxy
-    #   (Web.proxy)
-    #   Proxy information.
-    #
-    # @yield [agent]
-    #   If a block is given, it will be passed the newly created Mechanize
-    #   agent.
-    #
-    # @yieldparam [Mechanize] agent
-    #   The new Mechanize agent.
-    #
-    # @return [Mechanize]
-    #   The new Mechanize agent.
-    #
-    # @example Create a new agent.
-    #   Web.agent
-    #
-    # @example Create a new agent, with a custom User-Agent alias.
-    #   Web.agent(:user_agent_alias => 'Linux Mozilla')
-    #
-    # @example Create a new agent, with a custom User-Agent string.
-    #   Web.agent(:user_agent => 'wooden pants')
-    #
-    # @see http://rubydoc.info/gems/mechanize/Mechanize
-    #
-    # @since 0.3.0
-    #
-    # @api public
-    #
-    def Web.new_agent(options={})
-      agent = Mechanize.new
-
-      if options[:user_agent_alias]
-        agent.user_agent_alias = options[:user_agent_alias]
-      elsif options[:user_agent]
-        agent.user_agent = options[:user_agent]
-      elsif Web.user_agent
-        agent.user_agent = Web.user_agent
-      end
-
-      proxy = Network::HTTP::Proxy.new(options[:proxy] || Web.proxy)
-
-      if proxy[:host]
-        agent.set_proxy(
-          proxy[:host],
-          proxy[:port],
-          proxy[:user],
-          proxy[:password]
-        )
-      end
-
-      yield agent if block_given?
-      return agent
-    end
-
-    #
     # A persistant Mechanize Agent.
     #
     # @return [Mechanize]
     #   The persistant Mechanize Agent.
     #
-    # @see new_agent
+    # @see Mechanize
     #
     # @api public
     #
     def Web.agent(options={})
       if options.empty?
-        @agent ||= new_agent(options)
+        @agent ||= Mechanize.new(options)
       else
-        @agent = new_agent(options)
+        @agent = Mechanize.new(options)
       end
     end
 
