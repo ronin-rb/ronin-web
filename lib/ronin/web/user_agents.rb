@@ -69,9 +69,13 @@ module Ronin
       end
 
       #
+      # Selects a `User-Agent` string from the set.
+      #
       # @param [Symbol, String, Regexp] key
+      #   The User-Agents group name, sub-string or Regexp to search for.
       #
       # @return [String, nil]
+      #   The matching `User-Agent` string.
       #
       # @api public
       #
@@ -80,12 +84,10 @@ module Ronin
 
         case key
         when Symbol
-          unless @user_agents.has_key?(key)
-            raise(ArgumentError,"unknown User-Agent group #{key}")
+          if @user_agents.has_key?(key)
+            strings = @user_agents[key]
+            return strings.entries[rand(strings.length)]
           end
-
-          strings = @user_agents[key]
-          return strings.entries[rand(strings.length)]
         when String
           @user_agents.each do |name,strings|
             strings.each do |string|
@@ -105,6 +107,32 @@ module Ronin
         else
           raise(TypeError,"key must be a Symbol, String or Regexp")
         end
+      end
+
+      #
+      # Fetches a `User-Agent` string from the set.
+      #
+      # @param [Symbol, String, Regexp] key
+      #   The User-Agents group name, sub-string or Regexp to search for.
+      #
+      # @param [String] default
+      #   The `User-Agent` string to default to if no match is found.
+      #
+      # @return [String]
+      #   The matching `User-Agent` string.
+      #
+      # @raise [ArgumentError]
+      #   No matching `User-Agent` string was found, and no default value
+      #   was given.
+      #
+      # @api public
+      #
+      def fetch(key,default=nil)
+        unless (string = (self[key] || default))
+          raise(ArgumentError,"no User-Agent strings match #{key.inspect}")
+        end
+
+        return string
       end
 
       protected
