@@ -20,6 +20,7 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+require 'ronin/web/config'
 require 'ronin/network/http/proxy'
 require 'ronin/network/http/http'
 
@@ -169,10 +170,43 @@ module Ronin
     end
 
     #
+    # Loads all `User-Agent` strings.
+    #
+    # @return [Hash{Symbol => Set<String>}]
+    #   The `User-Agent` strings grouped by category.
+    #
+    # @since 0.3.0
+    #
+    # @api public
+    #
+    def Web.user_agents
+      user_agents = {}
+
+      Config.each_data_file(Config::USER_AGENTS_FILE) do |path|
+        data = YAML.load_file(path)
+
+        unless data.kind_of?(Hash)
+          warn "#{path.dump} did not contain a Hash"
+          next
+        end
+
+        data.each do |name,strings|
+          user_agents[name] ||= Set[]
+          user_agents.merge(strings)
+        end
+      end
+
+      return user_agents
+    end
+
+    #
     # @return [Array]
     #   The supported Web User-Agent Aliases.
     #
     # @see http://rubydoc.info/gems/mechanize/Mechanize#AGENT_ALIASES-constant
+    #
+    # @deprecated
+    #   Will be replaced by {user_agents} in 1.0.0.
     #
     # @api public
     #
