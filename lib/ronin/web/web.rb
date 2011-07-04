@@ -215,8 +215,9 @@ module Ronin
     #
     # Sets the `User-Agent` string used by {Web}.
     #
-    # @param [String, Symbol, Regexp] value
+    # @param [String, Symbol, Regexp, nil] value
     #   The User-Agent string to use.
+    #   Setting {user_agent} to `nil` will disable the `User-Agent` string.
     #
     # @return [String]
     #   The new User-Agent string.
@@ -228,9 +229,7 @@ module Ronin
     # @api public
     #
     def Web.user_agent=(value)
-      unless (@user_agent = user_agents[value])
-        raise("coult not find a User-Agent matching #{value.inspect}")
-      end
+      @user_agent = user_agents[value]
     end
 
     #
