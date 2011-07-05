@@ -31,8 +31,10 @@ module Ronin
   module Network
     module Mixins
       module Web
+        include Mixin
  
-        mixin UI::Output::Helpers, Parameters
+        mixin UI::Output::Helpers,
+              Parameters
 
         mixin do
           # The Web Proxy host to connect to
