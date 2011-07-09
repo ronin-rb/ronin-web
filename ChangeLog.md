@@ -9,6 +9,8 @@
 * Require data_paths ~> 0.3.
 * Require ronin-support ~> 0.2.
 * Require ronin ~> 1.1.
+* Added {Ronin::Web::UserAgents}.
+* Added {Ronin::Web::Mechanize}.
 * Added {Ronin::Web::Middleware::Base}.
 * Added {Ronin::Web::Middleware::Request}.
 * Added {Ronin::Web::Middleware::Response}.
@@ -26,6 +28,7 @@
 * Added {Ronin::Web::Middleware::Proxy}.
 * Renamed `Ronin::Helpers::Web` to {Ronin::Network::Mixins::Web}.
 * Renamed `Ronin::Web::Server::Proxy` to {Ronin::Web::Proxy}.
+* Made {Ronin::Web.agent} persistent.
 * Switched from [Jeweler](https://github.com/technicalpickles/jeweler)
   to [Ore](http://github.com/ruby-ore/ore) and [Bundler](http://gembundler.com).
 * Opted into [test.rubygems.org](http://test.rubygems.org/).
