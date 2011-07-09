@@ -38,6 +38,7 @@ install or update Overlays.
 
 ## Features
 
+* Provides popular [User Agent strings](https://github.com/ronin-ruby/ronin-web/blob/master/data/ronin/web/user_agents.yml).
 * Web access (utilizing [Mechanize](http://rubydoc.info/gems/mechanize/frames)
   and [Nokogiri](http://rubydoc.info/gems/nokogiri/frames).
 * Integrates [Spidr](http://github.com/postmodern/spidr#readme) into
