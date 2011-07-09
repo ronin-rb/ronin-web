@@ -23,6 +23,6 @@
 module Ronin
   module Web
     # Ronin Web Version
-    VERSION = '0.3.0.pre2'
+    VERSION = '0.3.0.rc1'
   end
 end
