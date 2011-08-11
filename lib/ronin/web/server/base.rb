@@ -260,14 +260,14 @@ module Ronin
         # @api public
         #
         def self.file(remote_path,local_path)
-          use Middleware::Files, :paths => {remote_path => local_path}
+          use Middleware::Files, {remote_path => local_path}
         end
 
         #
         # Hosts the contents of files.
         #
-        # @param [Hash] options
-        #   Additional options for the Files middleware.
+        # @param [Hash] paths
+        #   The mapping of remote paths to local paths.
         #
         # @yield [files]
         #   The given block will be passed the files middleware to
@@ -275,6 +275,9 @@ module Ronin
         #
         # @yieldparam [Middleware::Files]
         #   The files middleware object.
+        #
+        # @example
+        #   files '/foo.txt' => 'foo.txt'
         #
         # @example
         #   files do |files|
@@ -288,8 +291,8 @@ module Ronin
         #
         # @api public
         #
-        def self.files(options={},&block)
-          use(Middleware::Files,options,&block)
+        def self.files(paths={},&block)
+          use(Middleware::Files,paths,&block)
         end
 
         #
@@ -311,14 +314,14 @@ module Ronin
         # @api public
         #
         def self.directory(remote_path,local_path)
-          use Middleware::Directories, :paths => {remote_path => local_path}
+          use Middleware::Directories, {remote_path => local_path}
         end
 
         #
         # Hosts the contents of directories.
         #
-        # @param [Hash] options
-        #   Additional options for the Directories middleware.
+        # @param [Hash{String,Regexp => String}] paths
+        #   The mapping of remote paths to local directories.
         #
         # @yield [dirs]
         #   The given block will be passed the directories middleware to
@@ -326,6 +329,9 @@ module Ronin
         #
         # @yieldparam [Middleware::Directories]
         #   The directories middleware object.
+        #
+        # @example
+        #   directories '/downloads' => '/tmp/ronin_downloads'
         #
         # @example
         #   directories do |dirs|
@@ -340,8 +346,8 @@ module Ronin
         #
         # @api public
         #
-        def self.directories(options={},&block)
-          use(Middleware::Directories,options,&block)
+        def self.directories(paths={},&block)
+          use(Middleware::Directories,paths,&block)
         end
 
         #

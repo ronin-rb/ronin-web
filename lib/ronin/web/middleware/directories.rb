@@ -49,10 +49,7 @@ module Ronin
         # @param [#call] app
         #   The application the middleware sits in front of.
         #
-        # @param [Hash] options
-        #   Additional options.
-        #
-        # @option options [Hash{String => String}] :paths
+        # @param [Hash{String,Regexp => String}] paths
         #   The mapping of remote paths to local directories.
         #
         # @yield [directories]
@@ -66,14 +63,12 @@ module Ronin
         #
         # @api public
         #
-        def initialize(app,options={},&block)
+        def initialize(app,paths={},&block)
           @paths = {}
           @paths_order = []
 
-          if options.has_key?(:paths)
-            options[:paths].each do |remote_path,local_dir|
-              map(remote_path,local_dir)
-            end
+          paths.each do |remote_path,local_dir|
+            map(remote_path,local_dir)
           end
 
           super(app,&block)

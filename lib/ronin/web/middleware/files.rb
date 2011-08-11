@@ -44,16 +44,7 @@ module Ronin
         # @param [#call] app
         #   The application the middleware sits in front of.
         #
-        # @param [Hash] options
-        #   Additional options.
-        #
-        # @option options [Integer] :status (200)
-        #   The status code to return.
-        #
-        # @option options [Hash] :headers
-        #   The headers to return.
-        #
-        # @option options [Hash] :paths
+        # @param [Hash{String,Regexp => String}] paths
         #   The mapping of remote paths to local paths.
         #
         # @yield [files]
@@ -66,13 +57,11 @@ module Ronin
         #
         # @api public
         #
-        def initialize(app,options={},&block)
+        def initialize(app,paths={},&block)
           @paths = {}
 
-          if options.has_key?(:paths)
-            options[:paths].each do |remote_path,local_path|
-              map(remote_path,local_path)
-            end
+          paths.each do |remote_path,local_path|
+            map(remote_path,local_path)
           end
 
           super(app,&block)
