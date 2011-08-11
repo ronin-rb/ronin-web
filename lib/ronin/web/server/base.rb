@@ -266,6 +266,9 @@ module Ronin
         #
         # Hosts the contents of files.
         #
+        # @param [Hash] options
+        #   Additional options for the Files middleware.
+        #
         # @yield [files]
         #   The given block will be passed the files middleware to
         #   configure.
@@ -285,8 +288,8 @@ module Ronin
         #
         # @api public
         #
-        def self.files(&block)
-          use(Middleware::Files,&block)
+        def self.files(options={},&block)
+          use(Middleware::Files,options,&block)
         end
 
         #
@@ -314,6 +317,9 @@ module Ronin
         #
         # Hosts the contents of directories.
         #
+        # @param [Hash] options
+        #   Additional options for the Directories middleware.
+        #
         # @yield [dirs]
         #   The given block will be passed the directories middleware to
         #   configure.
@@ -334,8 +340,8 @@ module Ronin
         #
         # @api public
         #
-        def self.directories(&block)
-          use(Middleware::Directories,&block)
+        def self.directories(options={},&block)
+          use(Middleware::Directories,options,&block)
         end
 
         #
