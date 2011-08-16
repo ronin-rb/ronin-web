@@ -226,6 +226,24 @@ module Ronin
     #   Either no User-Agent group exists with the given `Symbol`,
     #   or no User-Agent string matched the given `Regexp`.
     #
+    # @example Sets the default User-Agent
+    #   Web.user_agent = 'SearchBot 2000'
+    #   # => "SearchBot 2000"
+    #
+    # @example Select a random User-Agent with the matching sub-string
+    #   Web.user_agent = 'Chrome'
+    #   # => "Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13"
+    #
+    # @example Select a random User-Agent matching the Regexp
+    #   Web.user_agent = /(MSIE|Windows)/
+    #   # => "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.1)"
+    #
+    # @example Select a random User-Agent from a category
+    #   Web.user_agent = :googlebot
+    #   # => "Googlebot-Image/1.0 ( http://www.googlebot.com/bot.html)"
+    #
+    # @see Web.user_agents
+    #
     # @api public
     #
     def Web.user_agent=(value)
