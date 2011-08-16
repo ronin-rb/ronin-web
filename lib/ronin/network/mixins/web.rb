@@ -22,7 +22,7 @@
 
 require 'ronin/ui/output/helpers'
 require 'ronin/network/http/proxy'
-require 'ronin/web/web'
+require 'ronin/web/mechanize'
 require 'ronin/mixin'
 
 require 'parameters'
@@ -96,14 +96,10 @@ module Ronin
         # @api semipublic
         #
         def web_agent(options={},&block)
-          unless @web_agent
-            options[:proxy] ||= web_proxy
-            options[:user_agent] ||= @web_user_agent
-
-            @web_agent = Ronin::Web.agent(options,&block)
-          end
-
-          return @web_agent
+          @web_agent ||= Web::Mechanize.new({
+            :proxy => web_proxy,
+            :user_agent => @web_user_agent
+          }.merge(options),&block)
         end
 
         #
