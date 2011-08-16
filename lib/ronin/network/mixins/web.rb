@@ -30,6 +30,9 @@ require 'parameters'
 module Ronin
   module Network
     module Mixins
+      #
+      # Network helper methods that use {Web::Mechanize}.
+      #
       module Web
         include Mixin
  

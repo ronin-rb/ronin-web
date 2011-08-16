@@ -27,6 +27,11 @@ require 'rack'
 module Ronin
   module Web
     module Middleware
+      #
+      # Convenience class that represents requests.
+      #
+      # @see http://rubydoc.info/gems/rack/Rack/Request
+      #
       class Request < Rack::Request
 
         #

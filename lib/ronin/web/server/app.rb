@@ -25,6 +25,9 @@ require 'ronin/web/server/base'
 module Ronin
   module Web
     module Server
+      #
+      # The main Web Server class used by {Web.server}.
+      #
       class App < Base
       end
     end

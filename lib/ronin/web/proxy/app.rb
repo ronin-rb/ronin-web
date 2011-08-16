@@ -25,6 +25,9 @@ require 'ronin/web/proxy/base'
 module Ronin
   module Web
     module Proxy
+      #
+      # The main Proxy Class used by {Web.proxy}.
+      #
       class App < Base
       end
     end

@@ -25,6 +25,9 @@ require 'ronin/web/middleware/request'
 module Ronin
   module Web
     module Middleware
+      #
+      # Convenience class that represents proxied requests.
+      #
       class ProxyRequest < Request
 
         #

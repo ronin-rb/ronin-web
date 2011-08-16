@@ -25,6 +25,11 @@ require 'rack'
 module Ronin
   module Web
     module Middleware
+      #
+      # Convenience class that represents responses.
+      #
+      # @see http://rubydoc.info/gems/rack/Rack/Response
+      #
       class Response < Rack::Response
 
       end
