@@ -2,30 +2,13 @@ require 'spec_helper'
 require 'ronin/web/middleware/directories'
 
 require 'web/helpers/rack_app'
-require 'web/helpers/root'
+require 'web/middleware/apps/directories_app'
 
 describe Web::Middleware::Directories do
   include Helpers::Web::RackApp
 
   before(:all) do
-    self.app = Class.new(Sinatra::Base) do
-      extend Helpers::Web::Root
-
-      use Ronin::Web::Middleware::Directories do |dirs|
-        dirs.map '/test', root_path('test1')
-        dirs.map '/test/sub', root_path('test2')
-        dirs.map '/test/overriden', root_path('test3')
-        dirs.map '/', root_path
-      end
-
-      get '/test/overriden/*' do
-        'should not receive this'
-      end
-
-      get '/test/other' do
-        'other'
-      end
-    end
+    self.app = DirectoriesApp
   end
 
   describe "index_names" do

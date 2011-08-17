@@ -2,41 +2,13 @@ require 'spec_helper'
 require 'ronin/web/middleware/router'
 
 require 'web/helpers/rack_app'
+require 'web/middleware/apps/router_app'
 
 describe Web::Middleware::Router do
   include Helpers::Web::RackApp
 
   before(:all) do
-    self.app = Class.new(Sinatra::Base) do
-      FakeApp = Class.new(Sinatra::Base) do
-
-        get '/test/1' do
-          'fake'
-        end
-
-        get '/test/2' do
-          'fake'
-        end
-
-      end
-
-      use Ronin::Web::Middleware::Router do |router|
-        router.draw :referer => /google\.com/, :to => FakeApp
-
-        router.draw :user_agent => /MSIE/,
-                    :referer => /myspace\.com/,
-                    :to => FakeApp
-      end
-
-      get '/test/1' do
-        'real'
-      end
-
-      get '/test/2' do
-        'real'
-      end
-
-    end
+    self.app = RouterApp
   end
 
   it "should route matched requests to other apps" do
