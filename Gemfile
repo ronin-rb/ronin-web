@@ -6,6 +6,8 @@ RONIN_URI = 'http://github.com/ronin-ruby'
 
 gemspec
 
+gem 'jruby-openssl', :platform => :jruby
+
 # gem 'rack',         '~> 1.2', :git => 'http://github.com/rack/rack.git'
 # gem 'sinatra',      '~> 1.2', :git => 'http://github.com/sinatra/sinatra.git'
 
