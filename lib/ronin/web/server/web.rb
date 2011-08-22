@@ -58,8 +58,7 @@ module Ronin
         @@ronin_web_server.run!(options.merge(:background => true))
       end
 
-      @@ronin_web_server.class_eval(&block)
-
+      @@ronin_web_server.class_eval(&block) if block
       return @@ronin_web_server
     end
   end
