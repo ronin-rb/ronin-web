@@ -72,6 +72,11 @@ module Ronin
           end
 
           super(app,&block)
+
+          # sort paths by number of sub-directories
+          @paths_order = @paths.keys.sort_by do |path|
+            -(path.split('/').length)
+          end
         end
 
         #
@@ -105,12 +110,6 @@ module Ronin
         #
         def map(remote_path,local_dir)
           @paths[remote_path] = local_dir
-          
-          # sort paths by number of sub-directories
-          @paths_order = @paths.keys.sort_by do |path|
-            -(path.split('/').length)
-          end
-
           return true
         end
 
