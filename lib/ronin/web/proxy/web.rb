@@ -38,8 +38,7 @@ module Ronin
         @@ronin_web_proxy.run!(options.merge(:background => true))
       end
 
-      @@ronin_web_proxy.class_eval(&block)
-
+      @@ronin_web_proxy.class_eval(&block) if block
       return @@ronin_web_proxy
     end
   end
