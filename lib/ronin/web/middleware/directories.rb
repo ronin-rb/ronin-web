@@ -139,7 +139,7 @@ module Ronin
                           if remote_path == '/'
                             true
                           elsif path.start_with?(remote_path)
-                            (path[remote_path.length] == '/') ||
+                            (path[remote_path.length,1] == '/') ||
                             (path.length == remote_path.length)
                           end
                         end
