@@ -11,14 +11,6 @@ describe Web::Middleware::Directories do
     self.app = DirectoriesApp
   end
 
-  describe "index_names" do
-    subject { Web::Middleware::Directories.index_names }
-
-    it { should include('index.html') }
-    it { should include('index.xhtml') }
-    it { should include('index.htm') }
-  end
-
   it "should map remote directories to local directories" do
     get '/test/test1.txt'
 

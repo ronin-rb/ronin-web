@@ -37,9 +37,6 @@ module Ronin
       #
       class Directories < Base
 
-        # The predefined index file names
-        INDEX_NAMES = %w[index.html index.xhtml index.htm]
-
         # The mapping of remote paths to local directories 
         attr_reader :paths
 
@@ -77,20 +74,6 @@ module Ronin
           @paths_order = @paths.keys.sort_by do |path|
             -(path.split('/').length)
           end
-        end
-
-        #
-        # The names of index files.
-        #
-        # @return [Set]
-        #   The set of index file names.
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def Directories.index_names
-          @@directories_index_names ||= Set.new(INDEX_NAMES)
         end
 
         #
@@ -143,11 +126,8 @@ module Ronin
             sub_path = path[remote_path.length..-1]
 
             local_path = if sub_path.empty?
-                           # attempt to find an index file in the directory
-                           Directories.index_names.each do |index|
-                             index = File.join(local_dir,index)
-                             break index if File.file?(index)
-                           end
+                           # attempt to find the index file
+                           Dir.glob(File.join(local_dir,'index.*')).first
                          else
                            File.join(local_dir,sub_path)
                          end
