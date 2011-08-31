@@ -152,7 +152,7 @@ Serve files via a Web Server:
 
     Web.server do
       file '/opensearch.xml', '/tmp/test.xml'
-      directory '/download/', '/tmp/download/'
+      directory '/downloads/', '/tmp/downloads/'
     end
 
     Web.server.get '/test' do
