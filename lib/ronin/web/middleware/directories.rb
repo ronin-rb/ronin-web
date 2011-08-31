@@ -109,6 +109,9 @@ module Ronin
         # @api public
         #
         def map(remote_path,local_dir)
+          # ensure that the paths end in '/'
+          local_dir += '/' unless local_dir.end_with?('/')
+
           @paths[remote_path] = local_dir
           return true
         end
@@ -130,39 +133,30 @@ module Ronin
         def call(env)
           path = sanitize_path(env['PATH_INFO'])
 
-          p @paths_order
-
-          # finds the remote directory that the paths starts with or is
-          # equal to.
+          # finds the remote directory that the path starts with
           remote_path = @paths_order.find do |remote_path|
-                          if remote_path == '/'
-                            true
-                          elsif path.start_with?(remote_path)
-                            (path[remote_path.length,1] == '/') ||
-                            (path.length == remote_path.length)
-                          end
+                          path.start_with?(remote_path)
                         end
 
           if remote_path
             local_dir = @paths[remote_path]
             sub_path = path[remote_path.length..-1]
 
-            return_file = proc { |local_path|
-              if File.file?(local_path)
-                request = Request.new(env)
+            local_path = if sub_path.empty?
+                           # attempt to find an index file in the directory
+                           Directories.index_names.each do |index|
+                             index = File.join(local_dir,index)
+                             break index if File.file?(index)
+                           end
+                         else
+                           File.join(local_dir,sub_path)
+                         end
 
-                print_info "Returning file #{local_path.dump} for #{request.address}"
-                return response_for(local_path)
-              end
-            }
+            if (local_path && File.file?(local_path))
+              request = Request.new(env)
 
-            if sub_path.empty?
-              # attempt to find an index file in the directory
-              Directories.index_names.each do |index|
-                return_file.call(File.join(local_dir,index))
-              end
-            else
-              return_file.call(File.join(local_dir,sub_path))
+              print_info "Returning file #{local_path.dump} for #{request.address}"
+              return response_for(local_path)
             end
           end
 
