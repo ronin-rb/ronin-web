@@ -12,8 +12,8 @@ gem 'jruby-openssl', :platform => :jruby
 # gem 'sinatra',      '~> 1.2', :git => 'http://github.com/sinatra/sinatra.git'
 
 # Ronin dependencies
-# gem 'ronin-support',	'~> 0.2', :git => "#{RONIN_URI}/ronin-support.git"
-# gem 'ronin',		      '~> 1.1', :git => "#{RONIN_URI}/ronin.git"
+# gem 'ronin-support',	'~> 0.4', :git => "#{RONIN_URI}/ronin-support.git"
+# gem 'ronin',		      '~> 1.4', :git => "#{RONIN_URI}/ronin.git"
 
 group :test do
   gem 'rack-test',    '~> 0.6.0'

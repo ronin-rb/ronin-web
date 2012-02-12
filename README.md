@@ -169,8 +169,8 @@ Serve files via a Web Server:
 * [rack](http://github.com/rack/rack) ~> 1.3
 * [sinatra](http://github.com/sinatra/sinatra) ~> 1.2
 * [data_paths](http://github.com/postmodern/data_paths) ~> 0.3
-* [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.3
-* [ronin](http://github.com/ronin-ruby/ronin) ~> 1.3
+* [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.4
+* [ronin](http://github.com/ronin-ruby/ronin) ~> 1.4
 
 ## Install
 
