@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-DM_URI = 'http://github.com/datamapper'
-DM_VERSION = '~> 1.1.0'
-RONIN_URI = 'http://github.com/ronin-ruby'
+DM_URI     = 'http://github.com/datamapper'
+DM_VERSION = '~> 1.2'
+RONIN_URI  = 'http://github.com/ronin-ruby'
 
 gemspec
 
-gem 'jruby-openssl', :platform => :jruby
+platforms :jruby do
+  gem 'jruby-openssl', '~> 0.7'
+end
 
 # gem 'rack',         '~> 1.2', :git => 'http://github.com/rack/rack.git'
 # gem 'sinatra',      '~> 1.2', :git => 'http://github.com/sinatra/sinatra.git'
@@ -16,7 +18,7 @@ gem 'jruby-openssl', :platform => :jruby
 # gem 'ronin',		      '~> 1.4', :git => "#{RONIN_URI}/ronin.git"
 
 group :test do
-  gem 'rack-test',    '~> 0.6.0'
+  gem 'rack-test',    '~> 0.6'
 end
 
 group :development do
