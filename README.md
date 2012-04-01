@@ -1,7 +1,7 @@
 # Ronin Web
 
-* [Source](http://github.com/ronin-ruby/ronin-web)
-* [Issues](http://github.com/ronin-ruby/ronin-web/issues)
+* [Source](https://github.com/ronin-ruby/ronin-web)
+* [Issues](https://github.com/ronin-ruby/ronin-web/issues)
 * [Documentation](http://rubydoc.info/github/ronin-ruby/ronin-web/frames)
 * [Mailing List](http://groups.google.com/group/ronin-ruby)
 * [irc.freenode.net #ronin](http://webchat.freenode.net/?channels=ronin&uio=Mj10cnVldd)
@@ -41,7 +41,7 @@ install or update Overlays.
 * Provides popular [User Agent strings](https://github.com/ronin-ruby/ronin-web/blob/master/data/ronin/web/user_agents.yml).
 * Web access (utilizing [Mechanize](http://rubydoc.info/gems/mechanize/frames)
   and [Nokogiri](http://rubydoc.info/gems/nokogiri/frames).
-* Integrates [Spidr](http://github.com/postmodern/spidr#readme) into
+* Integrates [Spidr](https://github.com/postmodern/spidr#readme) into
   {Ronin::Web::Spider}.
 * Provides a collection of useful [Rack](http://rack.rubyforge.org/)
   Middleware:
@@ -161,16 +161,16 @@ Serve files via a Web Server:
 
 ## Requirements
 
-* [nokogiri](http://github.com/tenderlove/nokogiri) ~> 1.4
+* [nokogiri](https://github.com/tenderlove/nokogiri) ~> 1.4
   * [libxml2](http://xmlsoft.org/)
   * [libxslt1](http://xmlsoft.org/XSLT/)
-* [mechanize](http://github.com/tenderlove/mechanize) ~> 2.0
-* [spidr](http://github.com/postmodern/spidr) ~> 0.2
-* [rack](http://github.com/rack/rack) ~> 1.3
-* [sinatra](http://github.com/sinatra/sinatra) ~> 1.2
-* [data_paths](http://github.com/postmodern/data_paths) ~> 0.3
-* [ronin-support](http://github.com/ronin-ruby/ronin-support) ~> 0.4
-* [ronin](http://github.com/ronin-ruby/ronin) ~> 1.4
+* [mechanize](https://github.com/tenderlove/mechanize) ~> 2.0
+* [spidr](https://github.com/postmodern/spidr) ~> 0.2
+* [rack](https://github.com/rack/rack) ~> 1.3
+* [sinatra](https://github.com/sinatra/sinatra) ~> 1.2
+* [data_paths](https://github.com/postmodern/data_paths) ~> 0.3
+* [ronin-support](https://github.com/ronin-ruby/ronin-support) ~> 0.4
+* [ronin](https://github.com/ronin-ruby/ronin) ~> 1.4
 
 ## Install
 
