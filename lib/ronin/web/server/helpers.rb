@@ -25,12 +25,14 @@ require 'ronin/web/middleware/files'
 require 'ronin/web/middleware/directories'
 require 'ronin/web/middleware/router'
 require 'ronin/web/middleware/proxy'
-require 'ronin/templates/erb'
 require 'ronin/ui/output/helpers'
+require 'ronin/templates/erb'
 require 'ronin/extensions/meta'
+require 'ronin/target'
 
 require 'rack/utils'
 require 'sinatra/base'
+require 'ipaddr'
 
 module Ronin
   module Web
@@ -314,6 +316,65 @@ module Ronin
           #
           def proxy(path,options={},&block)
             use(Middleware::Proxy,options,&block)
+          end
+
+          protected
+
+          #
+          # Condition to match the IP Address that sent the request.
+          #
+          # @param [IPAddr, String] ip
+          #   The IP address or range of addresses to match against.
+          #
+          # @since 1.0.0
+          #
+          # @api semipublic
+          #
+          def ip_address(ip)
+            ip = IPAddr.new(ip.to_s) unless ip.kind_of?(IPAddr)
+
+            condition { ip.include?(request.ip) }
+          end
+
+          #
+          # Condition to match the `Referer` header of the request.
+          #
+          # @param [Regexp, String] pattern
+          #   Regular expression or exact Referer to match against.
+          #
+          # @since 1.0.0
+          #
+          # @api semipublic
+          #
+          def referer(pattern)
+            condition do
+              case pattern
+              when Regexp
+                request.referer =~ pattern
+              else
+                request.referer == pattern
+              end
+            end
+          end
+
+          #
+          # Condition to match requests sent by an IP Address targeted by a
+          # Campaign.
+          #
+          # @param [String] name
+          #   The name of the Campaign to match IP Addresses against.
+          #
+          # @since 1.0.0
+          #
+          # @api semipublic
+          #
+          def campaign(name)
+            condition do
+              Target.first(
+                'campaign.name'   => name,
+                'address.address' => request.ip
+              )
+            end
           end
         end
 
