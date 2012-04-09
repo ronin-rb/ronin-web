@@ -54,85 +54,6 @@ module Ronin
         not_found { default_response }
 
         #
-        # The default Rack Handler to run all web servers with.
-        #
-        # @return [String]
-        #   The class name of the Rack Handler to use.
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def Base.handler
-          @@ronin_web_server_handler ||= nil
-        end
-
-        #
-        # Sets the default Rack Handler to run all web servers with.
-        #
-        # @param [String] name
-        #   The name of the handler.
-        #
-        # @return [String]
-        #   The name of the new handler.
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def Base.handler=(name)
-          @@ronin_web_server_handler = name
-        end
-
-        #
-        # The list of Rack Handlers to attempt to use with the web server.
-        #
-        # @return [Array]
-        #   The names of handler classes.
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.handlers
-          handlers = self.server
-
-          if Base.handler
-            handlers = [Base.handler] + handlers
-          end
-
-          return handlers
-        end
-
-        #
-        # Attempts to load the desired Rack Handler to run the web server
-        # with.
-        #
-        # @return [Rack::Handler]
-        #   The handler class to use to run the web server.
-        #
-        # @raise [StandardError]
-        #   None of the handlers could be loaded.
-        #
-        # @since 0.2.0
-        #
-        # @api semipublic
-        #
-        def self.handler_class
-          self.handlers.find do |name|
-            begin
-              return Rack::Handler.get(name)
-            rescue Gem::LoadError => e
-              raise(e)
-            rescue NameError, ::LoadError
-              next
-            end
-          end
-
-          raise(StandardError,"unable to find any Rack handlers")
-        end
-
-        #
         # Run the web server using the Rack Handler returned by
         # {handler_class}.
         #
@@ -153,35 +74,54 @@ module Ronin
         # @api public
         #
         def self.run!(options={})
-          rack_options = {
-            :Host => (options[:host] || self.host),
-            :Port => (options[:port] || self.port)
-          }
+          set(options)
 
-          runner = lambda { |handler,server,options|
-            print_info "Starting Web Server on #{options[:Host]}:#{options[:Port]}"
-            print_debug "Using Web Server handler #{handler}"
+          handler      = detect_rack_handler
+          handler_name = handler.name.gsub(/.*::/, '')
 
-            handler.run(server,options) do |server|
-              trap(:INT) do
-                # Use thins' hard #stop! if available,
-                # otherwise just #stop
-                server.respond_to?(:stop!) ? server.stop! : server.stop
+          runner = lambda { |handler,server|
+            print_info "Starting Web Server on #{bind}:#{port}"
+            print_debug "Using Web Server handler #{handler_name}"
+
+            begin
+              handler.run(server,:Host => bind, :Port => port) do |server|
+                trap(:INT)  { quit!(server,handler_name) }
+                trap(:TERM) { quit!(server,handler_name) }
+
+                set :running, true
               end
-
-              set :running, true
+            rescue Errno::EADDRINUSE => e
+              print_error "Address is already in use: #{bind}:#{port}"
             end
           }
 
-          handler = self.handler_class
-
           if options[:background]
-            Thread.new(handler,self,rack_options,&runner)
+            Thread.new(handler,self,&runner)
           else
-            runner.call(handler,self,rack_options)
+            runner.call(handler,self)
           end
 
           return self
+        end
+
+        #
+        # Stops the web server.
+        #
+        # @param [#call] server
+        #   The Rack Handler server.
+        #
+        # @param [String] handler_name
+        #   The name of the handler.
+        #
+        # @since 1.0.0
+        #
+        # @api semipublic
+        #
+        def self.quit!(server,handler_name)
+          # Use thins' hard #stop! if available, otherwise just #stop
+          server.respond_to?(:stop!) ? server.stop! : server.stop
+
+          print_info "Stopping Web Server on #{bind}:#{port}"
         end
 
         #
