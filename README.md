@@ -167,7 +167,7 @@ Serve files via a Web Server:
 * [mechanize](https://github.com/tenderlove/mechanize) ~> 2.0
 * [spidr](https://github.com/postmodern/spidr) ~> 0.2
 * [rack](https://github.com/rack/rack) ~> 1.3
-* [sinatra](https://github.com/sinatra/sinatra) ~> 1.2
+* [sinatra](https://github.com/sinatra/sinatra) ~> 1.3
 * [data_paths](https://github.com/postmodern/data_paths) ~> 0.3
 * [ronin-support](https://github.com/ronin-ruby/ronin-support) ~> 0.4
 * [ronin](https://github.com/ronin-ruby/ronin) ~> 1.4
