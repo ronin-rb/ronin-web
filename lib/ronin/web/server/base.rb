@@ -46,8 +46,12 @@ module Ronin
         # Default port to run the Web Server on
         DEFAULT_PORT = 8000
 
+        enable :sessions
+
         set :host, DEFAULT_HOST
         set :port, DEFAULT_PORT
+
+        not_found { default_response }
 
         #
         # The default Rack Handler to run all web servers with.
@@ -178,6 +182,17 @@ module Ronin
           end
 
           return self
+        end
+
+        #
+        # Returns an HTTP 404 response with an empty body.
+        #
+        # @since 0.2.0
+        #
+        # @api semipublic
+        #
+        def default_response
+          [404, {'Content-Type' => 'text/html'}, ['']]
         end
 
       end
