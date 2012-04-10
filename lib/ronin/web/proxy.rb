@@ -20,6 +20,5 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/proxy/base'
-require 'ronin/web/proxy/app'
+require 'ronin/web/proxy/proxy'
 require 'ronin/web/proxy/web'

@@ -20,25 +20,15 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/server/base'
-require 'ronin/web/middleware/proxy'
+require 'ronin/web/server/response'
 
 module Ronin
   module Web
-    module Proxy
+    class Proxy
       #
-      # The base-class for all Ronin Web Proxies. Extends
-      # [Sinatra::Base](http://rubydoc.info/gems/sinatra/Sinatra/Base)
-      # with {Middleware::Proxy}.
+      # Convenience class that represents proxied responses.
       #
-      class Base < Server::Base
-
-        # The default port to run the Web Proxy on
-        DEFAULT_PORT = 8080
-
-        set :port, DEFAULT_PORT
-
-        use Middleware::Proxy
+      class Response < Server::Response
 
       end
     end
