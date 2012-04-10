@@ -24,7 +24,7 @@ require 'rack'
 
 module Ronin
   module Web
-    module Middleware
+    module Server
       #
       # Convenience class that represents responses.
       #

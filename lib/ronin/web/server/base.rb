@@ -20,6 +20,8 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+require 'ronin/web/server/request'
+require 'ronin/web/server/response'
 require 'ronin/web/server/helpers'
 require 'ronin/ui/output'
 
@@ -50,6 +52,11 @@ module Ronin
 
         set :host, DEFAULT_HOST
         set :port, DEFAULT_PORT
+
+        before do
+          @request  = Request.new(@env)
+          @response = Response.new
+        end
 
         not_found { default_response }
 
