@@ -22,8 +22,10 @@
 
 require 'ronin/web/proxy/request'
 require 'ronin/web/proxy/response'
-
 require 'ronin/network/http'
+require 'ronin/ui/output/helpers'
+
+require 'rack/server'
 require 'set'
 
 module Ronin
@@ -52,6 +54,16 @@ module Ronin
     class Proxy
 
       include Ronin::Network::HTTP
+      include Ronin::UI::Output::Helpers
+
+      # Default host the Proxy will bind to
+      DEFAULT_HOST = '0.0.0.0'
+
+      # Default port the Proxy will listen on
+      DEFAULT_PORT = 8080
+
+      # Default server the Proxy will run on
+      DEFAULT_SERVER = 'webrick'
 
       # Blacklisted HTTP response Headers.
       HEADERS_BLACKLIST = Set[
@@ -108,6 +120,67 @@ module Ronin
       def on_response(&block)
         @on_response_block = block
         return self
+      end
+
+      #
+      # Runs the proxy as a standalone Web Server.
+      #
+      # @param [Hash] options
+      #   Additional options.
+      #
+      # @option options [String] :host (DEFAULT_HOST)
+      #   The host to bind to.
+      #
+      # @option options [Integer] :port (DEFAULT_PORT)
+      #   The port to listen on.
+      #
+      # @option options [String] :server (DEFAULT_SERVER)
+      #   The Web Server to run on.
+      #
+      # @option options [Boolean] :daemonize (false)
+      #   Specifies whether to demonize the server.
+      #
+      def run!(options={})
+        host = (options.delete(:host)   || self.class.host)
+        port = (options.delete(:port)   || self.class.port)
+
+        rack_options = options.merge(
+          :app  => self,
+          :Host => host,
+          :Port => port
+        )
+
+        server = Rack::Server.new(rack_options)
+
+        server.start do |handler|
+          trap(:INT)  { quit!(server,handler) }
+          trap(:TERM) { quit!(server,handler) }
+
+          print_info "Starting Proxy on #{host}:#{port} ..."
+        end
+
+        return self
+      end
+
+      #
+      # Stops the proxy.
+      #
+      # @param [Rack::Server] server
+      #   The Rack Handler server.
+      #
+      # @param [#stop!, #stop] handler
+      #   The Rack Handler.
+      #
+      # @api private
+      #
+      def quit!(server,handler)
+        host = server.options[:Host]
+        port = server.options[:Port]
+
+        # Use thins' hard #stop! if available, otherwise just #stop
+        handler.respond_to?(:stop!) ? handler.stop! : handler.stop
+
+        print_info "Stopping Web Proxy on #{host}:#{port}"
       end
 
       #
