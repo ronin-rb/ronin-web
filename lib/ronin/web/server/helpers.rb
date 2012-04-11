@@ -53,6 +53,9 @@ module Ronin
           # @param [String] path
           #   The URL pattern to handle requests for.
           #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
+          #
           # @yield []
           #   The block that will handle the request.
           #
@@ -65,12 +68,12 @@ module Ronin
           #
           # @api public
           #
-          def any(path,options={},&block)
-            get(path,options,&block)
-            post(path,options,&block)
-            put(path,options,&block)
-            patch(path,options,&block)
-            delete(path,options,&block)
+          def any(path,conditions={},&block)
+            get(path,conditions,&block)
+            post(path,conditions,&block)
+            put(path,conditions,&block)
+            patch(path,conditions,&block)
+            delete(path,conditions,&block)
           end
 
           #
@@ -111,6 +114,9 @@ module Ronin
           # @param [String] local_path
           #   The path to the local file.
           #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
+          #
           # @example
           #   file '/robots.txt', '/path/to/my_robots.txt'
           #
@@ -118,8 +124,8 @@ module Ronin
           #
           # @api public
           #
-          def file(remote_path,local_path)
-            get(remote_path) { send_file(local_path) }
+          def file(remote_path,local_path,conditions={})
+            get(remote_path,conditions) { send_file(local_path) }
           end
 
           #
@@ -127,6 +133,9 @@ module Ronin
           #
           # @param [Hash{String,Regexp => String}] paths
           #   The mapping of remote paths to local paths.
+          #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
           #
           # @example
           #   files '/foo.txt' => 'foo.txt'
@@ -143,7 +152,7 @@ module Ronin
           #
           # @api public
           #
-          def files(paths={})
+          def files(paths,conditions={})
             paths.each do |remote_path,local_path|
               file(remote_path,local_path)
             end
@@ -158,6 +167,9 @@ module Ronin
           # @param [String] local_path
           #   The path to the local directory.
           #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
+          #
           # @example
           #   directory '/download/', '/tmp/files/'
           #
@@ -165,10 +177,10 @@ module Ronin
           #
           # @api public
           #
-          def directory(remote_path,local_path)
+          def directory(remote_path,local_path,conditions={})
             dir = Rack::File.new(local_path)
 
-            get("#{remote_path}/*") do |sub_path|
+            get("#{remote_path}/*",conditions) do |sub_path|
               dir.call(env.merge('PATH_INFO' => sub_path))
             end
           end
@@ -179,6 +191,9 @@ module Ronin
           # @param [Hash{String => String}] paths
           #   The mapping of remote paths to local directories.
           #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
+          #
           # @example
           #   directories '/downloads' => '/tmp/ronin_downloads'
           #
@@ -188,7 +203,7 @@ module Ronin
           #
           # @api public
           #
-          def directories(paths={},&block)
+          def directories(paths,conditions={},&block)
             paths.each do |remote_path,local_path|
               directory(remote_path,local_path)
             end
@@ -200,6 +215,9 @@ module Ronin
           # @param [String] path
           #   The path to a directory to serve static content from.
           #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
+          #
           # @example
           #   public_dir 'path/to/another/public'
           #
@@ -207,8 +225,8 @@ module Ronin
           #
           # @api public
           #
-          def public_dir(path)
-            directory('/',path)
+          def public_dir(path,conditions={})
+            directory('/',path,conditions)
           end
 
           #
@@ -221,6 +239,9 @@ module Ronin
           # @param [#call] server
           #   The web server to route requests to.
           #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
+          #
           # @example
           #   route '/subapp/', SubApp
           #
@@ -228,8 +249,8 @@ module Ronin
           #
           # @api public
           #
-          def route(dir,server)
-            any("#{dir}/?*") do |sub_path|
+          def route(dir,server,conditions={})
+            any("#{dir}/?*",conditions) do |sub_path|
               server.call(env.merge('PATH_INFO' => sub_path))
             end
           end
@@ -239,6 +260,9 @@ module Ronin
           #
           # @param [String] path
           #   The path to proxy requests for.
+          #
+          # @param [Hash{Symbol => Object}] conditions
+          #   Additional routing conditions.
           #
           # @yield [proxy]
           #   The block will be passed the new proxy instance.
@@ -259,10 +283,10 @@ module Ronin
           #
           # @api public
           #
-          def proxy(path='*',&block)
+          def proxy(path='*',conditions={},&block)
             proxy = Proxy.new(&block)
 
-            any(path) { proxy.call(env) }
+            any(path,conditions) { proxy.call(env) }
           end
 
           protected
