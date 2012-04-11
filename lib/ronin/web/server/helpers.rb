@@ -244,13 +244,13 @@ module Ronin
           #   Additional routing conditions.
           #
           # @example
-          #   route '/subapp/', SubApp
+          #   map '/subapp/', SubApp
           #
           # @since 1.0.0
           #
           # @api public
           #
-          def route(dir,server,conditions={})
+          def map(dir,server,conditions={})
             any("#{dir}/?*",conditions) do |sub_path|
               server.call(env.merge('PATH_INFO' => "/#{sub_path}"))
             end
