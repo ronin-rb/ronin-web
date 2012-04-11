@@ -74,6 +74,7 @@ module Ronin
             put(path,conditions,&block)
             patch(path,conditions,&block)
             delete(path,conditions,&block)
+            options(path,conditions,&block)
           end
 
           #
