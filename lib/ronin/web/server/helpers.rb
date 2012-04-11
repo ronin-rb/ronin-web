@@ -251,7 +251,7 @@ module Ronin
           #
           def route(dir,server,conditions={})
             any("#{dir}/?*",conditions) do |sub_path|
-              server.call(env.merge('PATH_INFO' => sub_path))
+              server.call(env.merge('PATH_INFO' => "/#{sub_path}"))
             end
           end
 
