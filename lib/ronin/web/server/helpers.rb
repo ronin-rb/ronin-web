@@ -227,7 +227,7 @@ module Ronin
           # @api public
           #
           def public_dir(path,conditions={})
-            directory('/',path,conditions)
+            directory('',path,conditions)
           end
 
           #
