@@ -67,8 +67,9 @@ module Ronin
           #
           def any(path,options={},&block)
             get(path,options,&block)
-            put(path,options,&block)
             post(path,options,&block)
+            put(path,options,&block)
+            patch(path,options,&block)
             delete(path,options,&block)
           end
 
