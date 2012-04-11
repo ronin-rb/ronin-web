@@ -24,7 +24,7 @@ require 'ronin/web/server/request'
 
 module Ronin
   module Web
-    module Proxy
+    class Proxy
       #
       # Convenience class that represents proxied requests.
       #
