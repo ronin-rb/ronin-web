@@ -20,26 +20,29 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/proxy/app'
+require 'ronin/web/proxy/proxy'
 
 module Ronin
   module Web
     #
-    # Returns the Ronin Web Proxy. When called for the first time
-    # the proxy will be started in the background.
+    # Creates a new Proxy server and runs it.
     #
-    # @see Server::Base.run!
+    # @param [Hash] options
+    #   Additional options for running the proxy.
+    #
+    # @yield [proxy]
+    #   The block will be passed the new proxy server.
+    #
+    # @yieldparam [Proxy] proxy
+    #   The new proxy instance to be configured.
+    #
+    # @see Proxy#initialize
+    # @see Proxy#run!
     #
     # @api public
     #
     def Web.proxy_server(options={},&block)
-      unless class_variable_defined?('@@ronin_web_proxy')
-        @@ronin_web_proxy = Proxy::App
-        @@ronin_web_proxy.run!(options.merge(:background => true))
-      end
-
-      @@ronin_web_proxy.class_eval(&block) if block
-      return @@ronin_web_proxy
+      Proxy.new(&block).run!(options)
     end
   end
 end
