@@ -155,7 +155,7 @@ module Ronin
           #
           def files(paths,conditions={})
             paths.each do |remote_path,local_path|
-              file(remote_path,local_path)
+              file(remote_path,local_path,conditions)
             end
           end
 
@@ -206,7 +206,7 @@ module Ronin
           #
           def directories(paths,conditions={},&block)
             paths.each do |remote_path,local_path|
-              directory(remote_path,local_path)
+              directory(remote_path,local_path,conditions)
             end
           end
 
