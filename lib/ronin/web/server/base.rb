@@ -72,6 +72,9 @@ module Ronin
         # @option options [Integer] :port
         #   The port the server will bind to.
         #
+        # @option options [String] :server
+        #   The Web Server to run on.
+        #
         # @option options [Boolean] :background (false)
         #   Specifies wether the server will run in the background or run
         #   in the foreground.
