@@ -9,3 +9,4 @@ Gemfile.lock
 *.log
 *.swp
 *~
+vendor/ruby
