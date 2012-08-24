@@ -22,7 +22,6 @@
 
 require 'ronin/web/proxy'
 require 'ronin/ui/output/helpers'
-require 'ronin/templates/erb'
 require 'ronin/extensions/meta'
 require 'ronin/target'
 
@@ -39,7 +38,6 @@ module Ronin
 
         include Rack::Utils
         include Sinatra::Helpers
-        include Templates::Erb
         include UI::Output::Helpers
 
         def self.included(base)
