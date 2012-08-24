@@ -22,7 +22,6 @@
 
 require 'ronin/web/proxy'
 require 'ronin/ui/output/helpers'
-require 'ronin/extensions/meta'
 
 require 'sinatra/base'
 require 'rack/utils'
@@ -132,7 +131,7 @@ module Ronin
           # @api public
           #
           def default(&block)
-            class_def(:default_response,&block)
+            not_found(&block)
             return self
           end
 

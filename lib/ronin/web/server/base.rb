@@ -24,7 +24,6 @@ require 'ronin/web/server/request'
 require 'ronin/web/server/response'
 require 'ronin/web/server/helpers'
 require 'ronin/web/server/conditions'
-require 'ronin/ui/output'
 
 require 'thread'
 require 'rack'
@@ -42,7 +41,6 @@ module Ronin
 
         include Server::Helpers
         include Server::Conditions
-        extend UI::Output::Helpers
 
         # Default interface to run the Web Server on
         DEFAULT_HOST = '0.0.0.0'
@@ -60,7 +58,7 @@ module Ronin
           @response = Response.new
         end
 
-        not_found { default_response }
+        not_found { [404, {'Content-Type' => 'text/html'}, ['']] }
 
         #
         # Run the web server using the Rack Handler returned by
@@ -134,17 +132,6 @@ module Ronin
           server.respond_to?(:stop!) ? server.stop! : server.stop
 
           print_info "Stopping Web Server on #{bind}:#{port}"
-        end
-
-        #
-        # Returns an HTTP 404 response with an empty body.
-        #
-        # @since 0.2.0
-        #
-        # @api semipublic
-        #
-        def default_response
-          [404, {'Content-Type' => 'text/html'}, ['']]
         end
 
       end
