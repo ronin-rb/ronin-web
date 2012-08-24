@@ -27,6 +27,11 @@ require 'ipaddr'
 module Ronin
   module Web
     module Server
+      #
+      # @api semipublic
+      #
+      # @since 1.0.0
+      #
       module Conditions
         def self.included(base)
           base.extend ClassMethods
@@ -41,10 +46,6 @@ module Ronin
           # @param [IPAddr, String] ip
           #   The IP address or range of addresses to match against.
           #
-          # @since 1.0.0
-          #
-          # @api semipublic
-          #
           def ip_address(ip)
             ip = IPAddr.new(ip.to_s) unless ip.kind_of?(IPAddr)
 
@@ -56,10 +57,6 @@ module Ronin
           #
           # @param [Regexp, String] pattern
           #   Regular expression or exact Referer to match against.
-          #
-          # @since 1.0.0
-          #
-          # @api semipublic
           #
           def referer(pattern)
             condition do
@@ -78,10 +75,6 @@ module Ronin
           #
           # @param [String] name
           #   The name of the Campaign to match IP Addresses against.
-          #
-          # @since 1.0.0
-          #
-          # @api semipublic
           #
           def campaign(name)
             condition do
