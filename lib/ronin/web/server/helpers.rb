@@ -76,6 +76,8 @@ module Ronin
         end
 
         module ClassMethods
+          include UI::Output::Helpers
+
           #
           # Route any type of request for a given URL pattern.
           #
