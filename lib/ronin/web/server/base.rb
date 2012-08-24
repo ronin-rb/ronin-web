@@ -23,6 +23,7 @@
 require 'ronin/web/server/request'
 require 'ronin/web/server/response'
 require 'ronin/web/server/helpers'
+require 'ronin/web/server/conditions'
 require 'ronin/ui/output'
 
 require 'thread'
@@ -40,6 +41,7 @@ module Ronin
       class Base < Sinatra::Base
 
         include Server::Helpers
+        include Server::Conditions
         extend UI::Output::Helpers
 
         # Default interface to run the Web Server on
