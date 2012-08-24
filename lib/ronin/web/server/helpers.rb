@@ -42,6 +42,40 @@ module Ronin
           base.extend ClassMethods
         end
 
+        alias h escape_html
+        alias file send_file
+
+        #
+        # Returns the MIME type for a path.
+        #
+        # @param [String] path
+        #   The path to determine the MIME type for.
+        #
+        # @return [String]
+        #   The MIME type for the path.
+        #
+        # @since 0.3.0
+        #
+        # @api public
+        #
+        def mime_type_for(path)
+          mime_type(File.extname(path))
+        end
+
+        #
+        # Sets the `Content-Type` for the file.
+        #
+        # @param [String] path
+        #   The path to determine the `Content-Type` for.
+        #
+        # @since 0.3.0
+        #
+        # @api public
+        #
+        def content_type_for(path)
+          content_type mime_type_for(path)
+        end
+
         module ClassMethods
           #
           # Route any type of request for a given URL pattern.
@@ -286,41 +320,6 @@ module Ronin
             any(path,conditions) { proxy.call(env) }
           end
         end
-
-        #
-        # Returns the MIME type for a path.
-        #
-        # @param [String] path
-        #   The path to determine the MIME type for.
-        #
-        # @return [String]
-        #   The MIME type for the path.
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def mime_type_for(path)
-          mime_type(File.extname(path))
-        end
-
-        #
-        # Sets the `Content-Type` for the file.
-        #
-        # @param [String] path
-        #   The path to determine the `Content-Type` for.
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def content_type_for(path)
-          content_type mime_type_for(path)
-        end
-
-        alias h escape_html
-        alias file send_file
-
       end
     end
   end
