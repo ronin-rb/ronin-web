@@ -20,9 +20,19 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/middleware/filters/ip_filter'
-require 'ronin/web/middleware/filters/campaign_filter'
-require 'ronin/web/middleware/filters/path_filter'
-require 'ronin/web/middleware/filters/vhost_filter'
-require 'ronin/web/middleware/filters/referer_filter'
-require 'ronin/web/middleware/filters/user_agent_filter'
+require 'rack'
+
+module Ronin
+  module Web
+    module Server
+      #
+      # Convenience class that represents responses.
+      #
+      # @see http://rubydoc.info/gems/rack/Rack/Response
+      #
+      class Response < Rack::Response
+
+      end
+    end
+  end
+end

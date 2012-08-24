@@ -20,18 +20,14 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/middleware/helpers'
-require 'ronin/web/middleware/files'
-require 'ronin/web/middleware/directories'
-require 'ronin/web/middleware/router'
-require 'ronin/web/middleware/proxy'
-require 'ronin/templates/erb'
-require 'ronin/ui/output'
-require 'ronin/extensions/meta'
+require 'ronin/web/server/request'
+require 'ronin/web/server/response'
+require 'ronin/web/server/helpers'
+require 'ronin/web/server/conditions'
 
 require 'thread'
 require 'rack'
-require 'sinatra'
+require 'sinatra/base'
 
 module Ronin
   module Web
@@ -43,9 +39,8 @@ module Ronin
       #
       class Base < Sinatra::Base
 
-        include Templates::Erb
-        include UI::Output::Helpers
-        extend UI::Output::Helpers
+        include Server::Helpers
+        include Server::Conditions
 
         # Default interface to run the Web Server on
         DEFAULT_HOST = '0.0.0.0'
@@ -53,87 +48,17 @@ module Ronin
         # Default port to run the Web Server on
         DEFAULT_PORT = 8000
 
+        enable :sessions
+
         set :host, DEFAULT_HOST
         set :port, DEFAULT_PORT
 
-        #
-        # The default Rack Handler to run all web servers with.
-        #
-        # @return [String]
-        #   The class name of the Rack Handler to use.
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def Base.handler
-          @@ronin_web_server_handler ||= nil
+        before do
+          @request  = Request.new(@env)
+          @response = Response.new
         end
 
-        #
-        # Sets the default Rack Handler to run all web servers with.
-        #
-        # @param [String] name
-        #   The name of the handler.
-        #
-        # @return [String]
-        #   The name of the new handler.
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def Base.handler=(name)
-          @@ronin_web_server_handler = name
-        end
-
-        #
-        # The list of Rack Handlers to attempt to use with the web server.
-        #
-        # @return [Array]
-        #   The names of handler classes.
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.handlers
-          handlers = self.server
-
-          if Base.handler
-            handlers = [Base.handler] + handlers
-          end
-
-          return handlers
-        end
-
-        #
-        # Attempts to load the desired Rack Handler to run the web server
-        # with.
-        #
-        # @return [Rack::Handler]
-        #   The handler class to use to run the web server.
-        #
-        # @raise [StandardError]
-        #   None of the handlers could be loaded.
-        #
-        # @since 0.2.0
-        #
-        # @api semipublic
-        #
-        def self.handler_class
-          self.handlers.find do |name|
-            begin
-              return Rack::Handler.get(name)
-            rescue Gem::LoadError => e
-              raise(e)
-            rescue NameError, ::LoadError
-              next
-            end
-          end
-
-          raise(StandardError,"unable to find any Rack handlers")
-        end
+        not_found { [404, {'Content-Type' => 'text/html'}, ['']] }
 
         #
         # Run the web server using the Rack Handler returned by
@@ -147,6 +72,9 @@ module Ronin
         # @option options [Integer] :port
         #   The port the server will bind to.
         #
+        # @option options [String] :server
+        #   The Web Server to run on.
+        #
         # @option options [Boolean] :background (false)
         #   Specifies wether the server will run in the background or run
         #   in the foreground.
@@ -156,316 +84,55 @@ module Ronin
         # @api public
         #
         def self.run!(options={})
-          rack_options = {
-            :Host => (options[:host] || self.host),
-            :Port => (options[:port] || self.port)
-          }
+          set(options)
 
-          runner = lambda { |handler,server,options|
-            print_info "Starting Web Server on #{options[:Host]}:#{options[:Port]}"
-            print_debug "Using Web Server handler #{handler}"
+          handler      = detect_rack_handler
+          handler_name = handler.name.gsub(/.*::/, '')
 
-            handler.run(server,options) do |server|
-              trap(:INT) do
-                # Use thins' hard #stop! if available,
-                # otherwise just #stop
-                server.respond_to?(:stop!) ? server.stop! : server.stop
+          runner = lambda { |handler,server|
+            print_info "Starting Web Server on #{bind}:#{port}"
+            print_debug "Using Web Server handler #{handler_name}"
+
+            begin
+              handler.run(server,:Host => bind, :Port => port) do |server|
+                trap(:INT)  { quit!(server,handler_name) }
+                trap(:TERM) { quit!(server,handler_name) }
+
+                set :running, true
               end
-
-              set :running, true
+            rescue Errno::EADDRINUSE => e
+              print_error "Address is already in use: #{bind}:#{port}"
             end
           }
 
-          handler = self.handler_class
-
           if options[:background]
-            Thread.new(handler,self,rack_options,&runner)
+            Thread.new(handler,self,&runner)
           else
-            runner.call(handler,self,rack_options)
+            runner.call(handler,self)
           end
 
           return self
         end
 
         #
-        # Route any type of request for a given URL pattern.
-        #
-        # @param [String] path
-        #   The URL pattern to handle requests for.
-        #
-        # @yield []
-        #   The block that will handle the request.
-        #
-        # @example
-        #   any '/submit' do
-        #     puts request.inspect
-        #   end
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.any(path,options={},&block)
-          get(path,options,&block)
-          put(path,options,&block)
-          post(path,options,&block)
-          delete(path,options,&block)
-        end
-
-        #
-        # Sets the default route.
-        #
-        # @yield []
-        #   The block that will handle all other requests.
-        #
-        # @example
-        #   default do
-        #     status 200
-        #     content_type :html
-        #     
-        #     %{
-        #     <html>
-        #       <body>
-        #         <center><h1>YOU LOSE THE GAME</h1></center>
-        #       </body>
-        #     </html>
-        #     }
-        #   end
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.default(&block)
-          class_def(:default_response,&block)
-          return self
-        end
-
-        #
-        # Hosts the contents of a file.
-        #
-        # @param [String] remote_path
-        #   The path the web server will host the file at.
-        #
-        # @param [String] local_path
-        #   The path to the local file.
-        #
-        # @example
-        #   file '/robots.txt', '/path/to/my_robots.txt'
-        #
-        # @see Middleware::Files
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def self.file(remote_path,local_path)
-          use Middleware::Files, {remote_path => local_path}
-        end
-
-        #
-        # Hosts the contents of files.
-        #
-        # @param [Hash] paths
-        #   The mapping of remote paths to local paths.
-        #
-        # @yield [files]
-        #   The given block will be passed the files middleware to
-        #   configure.
-        #
-        # @yieldparam [Middleware::Files]
-        #   The files middleware object.
-        #
-        # @example
-        #   files '/foo.txt' => 'foo.txt'
-        #
-        # @example
-        #   files do |files|
-        #     files.map '/foo.txt', 'foo.txt'
-        #     files.map /\.exe$/, 'trojan.exe'
-        #   end
-        #
-        # @see Middleware::Files
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def self.files(paths={},&block)
-          use(Middleware::Files,paths,&block)
-        end
-
-        #
-        # Hosts the contents of the directory.
-        #
-        # @param [String] remote_path
-        #   The path the web server will host the directory at.
-        #
-        # @param [String] local_path
-        #   The path to the local directory.
-        #
-        # @example
-        #   directory '/download/', '/tmp/files/'
-        #
-        # @see Middleware::Directories
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.directory(remote_path,local_path)
-          use Middleware::Directories, {remote_path => local_path}
-        end
-
-        #
-        # Hosts the contents of directories.
-        #
-        # @param [Hash{String,Regexp => String}] paths
-        #   The mapping of remote paths to local directories.
-        #
-        # @yield [dirs]
-        #   The given block will be passed the directories middleware to
-        #   configure.
-        #
-        # @yieldparam [Middleware::Directories]
-        #   The directories middleware object.
-        #
-        # @example
-        #   directories '/downloads' => '/tmp/ronin_downloads'
-        #
-        # @example
-        #   directories do |dirs|
-        #     dirs.map '/downloads', '/tmp/ronin_downloads'
-        #     dirs.map '/images', '/tmp/ronin_images'
-        #     dirs.map '/pdfs', '/tmp/ronin_pdfs'
-        #   end
-        #
-        # @see Middleware::Directories
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def self.directories(paths={},&block)
-          use(Middleware::Directories,paths,&block)
-        end
-
-        #
-        # Hosts the static contents within a given directory.
-        #
-        # @param [String] path
-        #   The path to a directory to serve static content from.
-        #
-        # @example
-        #   public_dir 'path/to/another/public'
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.public_dir(path)
-          self.directory('/',path)
-        end
-
-        #
-        # Routes all requests within a given directory into another
-        # web server.
-        #
-        # @param [String, Regexp] dir
-        #   The directory that requests for will be routed from.
+        # Stops the web server.
         #
         # @param [#call] server
-        #   The web server to route requests to.
+        #   The Rack Handler server.
         #
-        # @example
-        #   map '/subapp/', SubApp
+        # @param [String] handler_name
+        #   The name of the handler.
         #
-        # @see Middleware::Router
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.map(dir,server)
-          use Middleware::Router do |router|
-            router.draw :path => dir, :to => server
-          end
-        end
-
-        #
-        # Routes requests with a specific Host header to another
-        # web server.
-        #
-        # @param [String, Regexp] name
-        #   The host-name to route requests for.
-        #
-        # @param [#call] server
-        #   The web server to route the requests to.
-        #
-        # @example
-        #   vhost 'cdn.evil.com', EvilServer
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def self.vhost(name,server)
-          use Middleware::Router do |router|
-            router.draw :vhost => name, :to => server
-          end
-        end
-
-        #
-        # Proxies requests to a given path.
-        #
-        # @param [String] path
-        #   The path to proxy requests for.
-        #
-        # @param [Hash] options
-        #   Additional options.
-        # 
-        # @yield [(response), body]
-        #   If a block is given, it will be passed the optional
-        #   response of the proxied request and the body received
-        #   from the proxied request.
-        #
-        # @yieldparam [Net::HTTP::Response] response
-        #   The response.
-        #
-        # @yieldparam [String] body
-        #   The body from the response.
-        #
-        # @example
-        #   proxy '/login.php' do |response,body|
-        #     body.gsub(/https/,'http')
-        #   end
-        #
-        # @see Middleware::Proxy
-        #
-        # @since 0.2.0
-        #
-        # @api public
-        #
-        def self.proxy(path,options={},&block)
-          use(Middleware::Proxy,options,&block)
-        end
-
-        protected
-
-        #
-        # Returns an HTTP 404 response with an empty body.
-        #
-        # @since 0.2.0
+        # @since 1.0.0
         #
         # @api semipublic
         #
-        def default_response
-          halt 404, ''
+        def self.quit!(server,handler_name)
+          # Use thins' hard #stop! if available, otherwise just #stop
+          server.respond_to?(:stop!) ? server.stop! : server.stop
+
+          print_info "Stopping Web Server on #{bind}:#{port}"
         end
-
-        enable :sessions
-
-        any('*') { default_response }
 
       end
     end

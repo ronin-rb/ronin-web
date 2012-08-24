@@ -20,15 +20,15 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/middleware/request'
+require 'ronin/web/server/request'
 
 module Ronin
   module Web
-    module Middleware
+    class Proxy
       #
       # Convenience class that represents proxied requests.
       #
-      class ProxyRequest < Request
+      class Request < Server::Request
 
         #
         # Changes the HTTP Host header of the request.
@@ -115,8 +115,6 @@ module Ronin
           @env['REQUEST_METHOD'] = new_method
         end
 
-        alias path= path_info=
-
         #
         # Changes the HTTP Query String of the request.
         #
@@ -132,20 +130,6 @@ module Ronin
         #
         def query_string=(new_query)
           @env['QUERY_STRING'] = new_query
-        end
-
-        #
-        # Determines if the request is an XML-HTTP Request.
-        #
-        # @return [Boolean]
-        #   Specifies whether the request is XML-HTTP.
-        #
-        # @since 0.3.0
-        #
-        # @api public
-        #
-        def xhr?
-          @env['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'
         end
 
         #

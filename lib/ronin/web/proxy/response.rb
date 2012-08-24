@@ -20,17 +20,15 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'rack'
+require 'ronin/web/server/response'
 
 module Ronin
   module Web
-    module Middleware
+    class Proxy
       #
-      # Convenience class that represents responses.
+      # Convenience class that represents proxied responses.
       #
-      # @see http://rubydoc.info/gems/rack/Rack/Response
-      #
-      class Response < Rack::Response
+      class Response < Server::Response
 
       end
     end
