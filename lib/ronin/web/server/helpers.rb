@@ -286,13 +286,13 @@ module Ronin
 
           #
           # Routes all requests within a given directory into another
-          # web server.
+          # Rack application.
           #
           # @param [String] dir
           #   The directory that requests for will be routed from.
           #
           # @param [#call] server
-          #   The web server to route requests to.
+          #   The Rack application to route requests to.
           #
           # @param [Hash{Symbol => Object}] conditions
           #   Additional routing conditions.
