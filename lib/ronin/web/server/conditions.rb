@@ -60,8 +60,12 @@ module Ronin
           #
           def host(pattern)
             case host
-            when Regexp then condition { request.host =~ pattern }
-            else             condition { request.host == pattern.to_s }
+            when Regexp
+              condition { request.host =~ pattern }
+            else
+              pattern = pattern.to_s
+
+              condition { request.host == pattern }
             end
           end
 
@@ -73,8 +77,12 @@ module Ronin
           #
           def referer(pattern)
             case pattern
-            when Regexp then condition { request.referer =~ pattern }
-            else             condition { request.referer == pattern.to_s }
+            when Regexp
+              condition { request.referer =~ pattern }
+            else
+              pattern = pattern.to_s
+
+              condition { request.referer == pattern }
             end
           end
 
