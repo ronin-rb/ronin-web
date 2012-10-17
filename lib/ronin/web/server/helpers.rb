@@ -262,6 +262,29 @@ module Ronin
           end
 
           #
+          # Routes all requests for a given virtual host to another
+          # Rack application.
+          #
+          # @param [Regexp, String] host
+          #   The host name to match against.
+          #
+          # @param [#call] server
+          #   The Rack application to route the requests to.
+          #
+          # @param [Hash] conditions
+          #   Additional routing conditions.
+          #
+          # @since 0.2.0
+          #
+          # @api public
+          #
+          def host(host,server,conditions={})
+            any('*',conditions.merge(:host => host)) do
+              server.call(env)
+            end
+          end
+
+          #
           # Routes all requests within a given directory into another
           # web server.
           #
