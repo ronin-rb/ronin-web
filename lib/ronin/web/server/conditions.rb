@@ -53,6 +53,19 @@ module Ronin
           end
 
           #
+          # Condition for matching the `Host` header.
+          #
+          # @param [Regexp, String] pattern
+          #   The host to match against.
+          #
+          def host(pattern)
+            case host
+            when Regexp then condition { request.host =~ pattern }
+            else             condition { request.host == pattern.to_s }
+            end
+          end
+
+          #
           # Condition to match the `Referer` header of the request.
           #
           # @param [Regexp, String] pattern
