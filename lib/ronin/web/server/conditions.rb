@@ -72,13 +72,9 @@ module Ronin
           #   Regular expression or exact Referer to match against.
           #
           def referer(pattern)
-            condition do
-              case pattern
-              when Regexp
-                request.referer =~ pattern
-              else
-                request.referer == pattern
-              end
+            case pattern
+            when Regexp then condition { request.referer =~ pattern }
+            else             condition { request.referer == pattern.to_s }
             end
           end
 
