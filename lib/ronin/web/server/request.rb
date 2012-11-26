@@ -22,7 +22,7 @@
 
 require 'ronin/network/http/http'
 
-require 'rack'
+require 'sinatra/base'
 
 module Ronin
   module Web
@@ -32,7 +32,7 @@ module Ronin
       #
       # @see http://rubydoc.info/gems/rack/Rack/Request
       #
-      class Request < Rack::Request
+      class Request < Sinatra::Request
 
         #
         # Returns the remote IP address and port for the request.
