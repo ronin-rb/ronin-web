@@ -20,7 +20,7 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'rack'
+require 'sinatra/base'
 
 module Ronin
   module Web
@@ -30,7 +30,7 @@ module Ronin
       #
       # @see http://rubydoc.info/gems/rack/Rack/Response
       #
-      class Response < Rack::Response
+      class Response < Sinatra::Response
 
       end
     end
