@@ -19,7 +19,7 @@ end
 require 'rake'
 
 require 'rubygems/tasks'
-Gem::Tasks.new(:sign => {:checksum => true, :pgp => true}) do |tasks|
+Gem::Tasks.new(sign: {checksum: true, pgp: true}) do |tasks|
   tasks.scm.tag.format  = 'v%s'
   tasks.console.command = 'ripl'
   tasks.console.options = %w[
@@ -31,7 +31,7 @@ end
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
-task :test => :spec
+task :test    => :spec
 task :default => :spec
 
 require 'yard'
