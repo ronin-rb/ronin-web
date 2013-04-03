@@ -38,20 +38,20 @@ install or update Overlays.
 
 ## Features
 
-* HTML/XML parsing/building (using [Nokogiri](http://rubydoc.info/gems/nokogiri/frames)).
-* Automated Web Browsing (using [Mechanize](http://rubydoc.info/gems/mechanize/frames))
-* Provides popular [User Agent strings](https://github.com/ronin-ruby/ronin-web/blob/master/data/ronin/web/user_agents.yml).
-* Integrates [Spidr](https://github.com/postmodern/spidr#readme) into
+* HTML/XML parsing/building (using [Nokogiri][1]).
+* Automated Web Browsing (using [Mechanize][2])
+* Provides popular [User Agent strings][3].
+* Integrates [Spidr][spidr] into
   {Ronin::Web::Spider}.
-* Provides a collection of useful [Rack](http://rack.rubyforge.org/)
+* Provides a collection of useful [Rack][rack]
   Middleware:
   * {Ronin::Web::Middleware::Files}
   * {Ronin::Web::Middleware::Directories}
   * {Ronin::Web::Middleware::Proxy}
   * {Ronin::Web::Middleware::Router}
-* Provides {Ronin::Web::Server}, a [Sinatra](http://sinatrarb.com/) based
+* Provides {Ronin::Web::Server}, a [Sinatra][sinatra] based
   Web Server.
-* Provides {Ronin::Web::Proxy}, a [Sinatra](http://sinatrarb.com/) based
+* Provides {Ronin::Web::Proxy}, a [Sinatra][sinatra] based
   Web Proxy.
 
 ## Synopsis
@@ -70,7 +70,7 @@ Get only the body of the web-page:
 
     Web.get_body('http://www.rubyinside.com/')
 
-Get a [Mechanize agent](http://rubydoc.info/gems/mechanize/1.0.0/Mechanize):
+Get a [Mechanize agent][4]:
 
     agent = Web.agent
 
@@ -162,16 +162,16 @@ Serve files via a Web Server:
 ## Requirements
 
 * [Ruby] >= 1.9.1
-* [nokogiri](https://github.com/tenderlove/nokogiri) ~> 1.4
-  * [libxml2](http://xmlsoft.org/)
-  * [libxslt1](http://xmlsoft.org/XSLT/)
-* [mechanize](https://github.com/tenderlove/mechanize) ~> 2.0
-* [spidr](https://github.com/postmodern/spidr) ~> 0.2
-* [rack](https://github.com/rack/rack) ~> 1.3
-* [sinatra](https://github.com/sinatra/sinatra) ~> 1.3
-* [data_paths](https://github.com/postmodern/data_paths) ~> 0.3
-* [ronin-support](https://github.com/ronin-ruby/ronin-support) ~> 0.4
-* [ronin](https://github.com/ronin-ruby/ronin) ~> 1.4
+* [nokogiri] ~> 1.4
+  * [libxml2]
+  * [libxslt1]
+* [mechanize] ~> 2.0
+* [spidr] ~> 0.2
+* [rack] ~> 1.3
+* [sinatra] ~> 1.3
+* [data\_paths] ~> 0.3
+* [ronin-support] ~> 0.4
+* [ronin] ~> 1.4
 
 ## Install
 
@@ -199,4 +199,19 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 
+[1]: http://rubydoc.info/gems/nokogiri/frames
+[2]: http://rubydoc.info/gems/mechanize/frames
+[3]: https://github.com/ronin-ruby/ronin-web/blob/master/data/ronin/web/user_agents.yml
+[4]: http://rubydoc.info/gems/mechanize/1.0.0/Mechanize
+
 [Ruby]: http://www.ruby-lang.org
+[nokogiri]: https://github.com/tenderlove/nokogiri
+[libxml2]: http://xmlsoft.org/
+[libxslt]: http://xmlsoft.org/XSLT/
+[mechanize]: https://github.com/tenderlove/mechanize
+[spidr]: https://github.com/postmodern/spidr
+[rack]: https://github.com/rack/rack
+[sinatra]: https://github.com/sinatra/sinatra
+[data_paths]: https://github.com/postmodern/data_paths
+[ronin-support]: https://github.com/ronin-ruby/ronin-support
+[ronin]: https://github.com/ronin-ruby/ronin
