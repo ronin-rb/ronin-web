@@ -71,8 +71,8 @@ module Ronin
     #   Web.build_html do
     #     html {
     #       body {
-    #         div(:style => 'display:none;') {
-    #           object(:classid => 'blabla')
+    #         div(style: 'display:none;') {
+    #           object(classid: 'blabla')
     #         }
     #       }
     #     }
@@ -124,7 +124,7 @@ module Ronin
     #
     # @example
     #  Web.build_xml do
-    #    post(:id => 2) {
+    #    post(id: 2) {
     #      title { text('some example') }
     #      body { text('this is one contrived example.') }
     #    }
@@ -316,10 +316,10 @@ module Ronin
     #
     # @example Open a given URL, using a custom User-Agent alias.
     #   Web.open('http://tenderlovemaking.com/',
-    #     :user_agent_alias => 'Linux Mozilla')
+    #     user_agent_alias: 'Linux Mozilla')
     #
     # @example Open a given URL, using a custom User-Agent string.
-    #   Web.open('http://www.wired.com/', :user_agent => 'the future')
+    #   Web.open('http://www.wired.com/', user_agent: 'the future')
     #
     # @see http://rubydoc.info/stdlib/open-uri/frames
     #

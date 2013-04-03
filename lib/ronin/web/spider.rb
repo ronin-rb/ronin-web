@@ -100,8 +100,8 @@ module Ronin
       #
       def initialize(options={})
         options = {
-          :proxy => Web.proxy,
-          :user_agent => Web.user_agent
+          proxy:      Web.proxy,
+          user_agent: Web.user_agent
         }.merge(options)
 
         super(options)

@@ -55,7 +55,7 @@ module Ronin
     def Web.server(options={},&block)
       unless class_variable_defined?('@@ronin_web_server')
         @@ronin_web_server = Server::App
-        @@ronin_web_server.run!(options.merge(:background => true))
+        @@ronin_web_server.run!(options.merge(background: true))
       end
 
       @@ronin_web_server.class_eval(&block) if block

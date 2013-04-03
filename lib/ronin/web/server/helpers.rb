@@ -279,7 +279,7 @@ module Ronin
           # @api public
           #
           def host(host,server,conditions={})
-            any('*',conditions.merge(:host => host)) do
+            any('*',conditions.merge(host: host)) do
               server.call(env)
             end
           end

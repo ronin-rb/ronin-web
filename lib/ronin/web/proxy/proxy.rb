@@ -145,9 +145,9 @@ module Ronin
         port = (options.delete(:port)   || self.class.port)
 
         rack_options = options.merge(
-          :app  => self,
-          :Host => host,
-          :Port => port
+          app:  self,
+          Host: host,
+          Port: port
         )
 
         server = Rack::Server.new(rack_options)
@@ -241,14 +241,14 @@ module Ronin
       #
       def proxy(request)
         options = {
-          :ssl          => (request.scheme == 'https'),
-          :host         => request.host,
-          :port         => request.port,
-          :method       => request.request_method,
-          :path         => request.path_info,
-          :query        => request.query_string,
-          :content_type => request.content_type,
-          :headers      => request.headers
+          ssl:          (request.scheme == 'https'),
+          host:         request.host,
+          port:         request.port,
+          method:       request.request_method,
+          path:         request.path_info,
+          query:        request.query_string,
+          content_type: request.content_type,
+          headers:      request.headers
         }
 
         if request.form_data?

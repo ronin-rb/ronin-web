@@ -45,7 +45,7 @@ describe Web do
   it "should be able to build XML documents" do
     doc = Web.build_xml do
       root {
-        stuff(:name => 'bla') { text("hello") }
+        stuff(name: 'bla') { text("hello") }
       }
     end
 

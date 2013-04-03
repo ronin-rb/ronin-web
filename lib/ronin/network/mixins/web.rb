@@ -41,20 +41,20 @@ module Ronin
 
         mixin do
           # The Web Proxy host to connect to
-          parameter :web_proxy_host, :type => String,
-                                     :description => 'Web Proxy host'
+          parameter :web_proxy_host, type:        String,
+                                     description: 'Web Proxy host'
 
           # The Web Proxy port to connect to
-          parameter :web_proxy_port, :type => Integer,
-                                     :description => 'Web Proxy port'
+          parameter :web_proxy_port, type:        Integer,
+                                     description: 'Web Proxy port'
 
           # The Web Proxy user to authenticate with
-          parameter :web_proxy_user, :type => String,
-                                     :description => 'Web Proxy authentication user'
+          parameter :web_proxy_user, type:        String,
+                                     description: 'Web Proxy authentication user'
 
           # The Web Proxy password to authenticate with
-          parameter :web_proxy_password, :type => String,
-                                         :description => 'Web Proxy authentication password'
+          parameter :web_proxy_password, type:        String,
+                                         description: 'Web Proxy authentication password'
         end
 
         protected
@@ -71,10 +71,10 @@ module Ronin
         #
         def web_proxy
           HTTP::Proxy.new(
-            :host => @web_proxy_host,
-            :port => @web_proxy_port,
-            :user => @web_proxy_user,
-            :password => @web_proxy_password
+            host: @web_proxy_host,
+            port: @web_proxy_port,
+            user: @web_proxy_user,
+            password: @web_proxy_password
           )
         end
 

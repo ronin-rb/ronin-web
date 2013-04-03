@@ -94,7 +94,7 @@ module Ronin
             print_debug "Using Web Server handler #{handler_name}"
 
             begin
-              handler.run(server,:Host => bind, :Port => port) do |server|
+              handler.run(server,Host: bind, Port: port) do |server|
                 trap(:INT)  { quit!(server,handler_name) }
                 trap(:TERM) { quit!(server,handler_name) }
 
