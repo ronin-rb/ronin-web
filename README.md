@@ -161,6 +161,7 @@ Serve files via a Web Server:
 
 ## Requirements
 
+* [Ruby] >= 1.9.1
 * [nokogiri](https://github.com/tenderlove/nokogiri) ~> 1.4
   * [libxml2](http://xmlsoft.org/)
   * [libxslt1](http://xmlsoft.org/XSLT/)
@@ -197,3 +198,5 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
+
+[Ruby]: http://www.ruby-lang.org
