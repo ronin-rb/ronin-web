@@ -10,12 +10,12 @@ platforms :jruby do
   gem 'jruby-openssl', '~> 0.7'
 end
 
-# gem 'rack',         '~> 1.2', :git => 'http://github.com/rack/rack.git'
-# gem 'sinatra',      '~> 1.2', :git => 'http://github.com/sinatra/sinatra.git'
+# gem 'rack',         '~> 1.2', git: 'http://github.com/rack/rack.git'
+# gem 'sinatra',      '~> 1.2', git: 'http://github.com/sinatra/sinatra.git'
 
 # Ronin dependencies
-# gem 'ronin-support',	'~> 0.4', :git => "#{RONIN_URI}/ronin-support.git"
-# gem 'ronin',		      '~> 1.4', :git => "#{RONIN_URI}/ronin.git"
+# gem 'ronin-support',	'~> 0.4', git: "#{RONIN_URI}/ronin-support.git"
+# gem 'ronin',		      '~> 1.4', git: "#{RONIN_URI}/ronin.git"
 
 group :test do
   gem 'rack-test',    '~> 0.6'
@@ -48,5 +48,5 @@ adapters = (ENV['ADAPTER'] || ENV['ADAPTERS']).to_s
 adapters = Set.new(adapters.to_s.tr(',',' ').split)
 
 (DM_ADAPTERS & adapters).each do |adapter|
-  gem "dm-#{adapter}-adapter", DM_VERSION #, :git => "#{DM_URI}/dm-#{adapter}-adapter.git"
+  gem "dm-#{adapter}-adapter", DM_VERSION #, git: "#{DM_URI}/dm-#{adapter}-adapter.git"
 end
