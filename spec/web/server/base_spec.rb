@@ -11,10 +11,6 @@ describe Web::Server::Base do
     self.app = TestApp
   end
 
-  it "should find a suitable Rack::Handler for the web server" do
-    TestApp.handler_class.should_not be_nil
-  end
-
   it "should still bind blocks to paths" do
     get '/tests/get'
 

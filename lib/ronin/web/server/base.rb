@@ -61,8 +61,7 @@ module Ronin
         not_found { [404, {'Content-Type' => 'text/html'}, ['']] }
 
         #
-        # Run the web server using the Rack Handler returned by
-        # {handler_class}.
+        # Run the web server.
         #
         # @param [Hash] options Additional options.
         #
