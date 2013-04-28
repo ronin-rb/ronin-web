@@ -371,7 +371,7 @@ module Ronin
     # @api public
     #
     def Web.agent
-      @agent ||= Mechanize.new(options) do |agent|
+      @agent ||= Mechanize.new do |agent|
         agent.user_agent = Web.user_agent
 
         Web.proxy.tap do |proxy|
@@ -417,7 +417,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.get(url,parameters={},headers={})
+    def Web.get(url,parameters={},headers={},&block)
       Web.agent.get(url,parameters,nil,headers,&block)
     end
 
@@ -492,7 +492,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.post(url,query={},headers={})
+    def Web.post(url,query={},headers={},&block)
       Web.agent.post(url,query,headers={},&block)
     end
 
