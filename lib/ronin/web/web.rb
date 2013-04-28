@@ -386,17 +386,11 @@ module Ronin
     # @param [URI::Generic, String] url
     #   The URL to request.
     #
-    # @param [Hash] options
-    #   Additional options.
+    # @param [Array, Hash] parameters
+    #   Additional parameters for the GET request.
     #
-    # @option options [String] :user_agent
-    #   The User-Agent string to use.
-    #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
-    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
-    #   Proxy information.
+    # param [Hash] headers
+    #   Additional headers for the GET request.
     #
     # @yield [page]
     #   If a block is given, it will be passed the page for the requested
@@ -423,11 +417,8 @@ module Ronin
     #
     # @api public
     #
-    def Web.get(url,options={})
-      page = Web.agent.get(url)
-
-      yield page if block_given?
-      return page
+    def Web.get(url,parameters={},headers={})
+      Web.agent.get(url,parameters,nil,headers,&block)
     end
 
     #
@@ -437,17 +428,11 @@ module Ronin
     # @param [URI::Generic, String] url
     #   The URL to request.
     #
-    # @param [Hash] options
-    #   Additional options.
+    # @param [Array, Hash] parameters
+    #   Additional parameters for the GET request.
     #
-    # @option options [String] :user_agent
-    #   The User-Agent string to use.
-    #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
-    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
-    #   Proxy information.
+    # param [Hash] headers
+    #   Additional headers for the GET request.
     #
     # @yield [body]
     #   If a block is given, it will be passed the body of the page.
@@ -470,8 +455,8 @@ module Ronin
     #
     # @api public
     #
-    def Web.get_body(url,options={})
-      body = Web.get(url,options).body
+    def Web.get_body(url,parameters={},headers={})
+      body = Web.get(url,parameters,headers).body
 
       yield body if block_given?
       return body
@@ -483,20 +468,11 @@ module Ronin
     # @param [URI::Generic, String] url
     #   The URL to request.
     #
-    # @param [Hash] options
-    #   Additional options.
+    # @param [Hash] query
+    #   Additional query parameters for the POST request.
     #
-    # @option options [Hash] :query
-    #   Additional query parameters to post with.
-    #
-    # @option options [String] :user_agent
-    #   The User-Agent string to use.
-    #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alia to use.
-    #
-    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
-    #   Proxy information.
+    # @param [Hash] headers
+    #   Additional headers for the POST request.
     #
     # @yield [page]
     #   If a block is given, it will be passed the page for the requested
@@ -516,14 +492,8 @@ module Ronin
     #
     # @api public
     #
-    def Web.post(url,options={})
-      query = {}
-      query.merge!(options[:query]) if options[:query]
-
-      page = Web.agent.post(url,query)
-
-      yield page if block_given?
-      return page
+    def Web.post(url,query={},headers={})
+      Web.agent.post(url,query,headers={},&block)
     end
 
     #
@@ -533,20 +503,11 @@ module Ronin
     # @param [URI::Generic, String] url
     #   The URL to request.
     #
-    # @param [Hash] options
-    #   Additional options.
+    # @param [Hash] query
+    #   Additional query parameters for the POST request.
     #
-    # @option options [Hash] :query
-    #   Additional query parameters to post with.
-    #
-    # @option options [String] :user_agent
-    #   The User-Agent string to use.
-    #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
-    #
-    # @option options [Network::HTTP::Proxy, Hash] :proxy (Web.proxy)
-    #   Proxy information.
+    # @param [Hash] headers
+    #   Additional headers for the POST request.
     #
     # @yield [body]
     #   If a block is given, it will be passed the body of the page.
@@ -570,8 +531,8 @@ module Ronin
     #
     # @api public
     #
-    def Web.post_body(url,options={})
-      body = Web.post(url,options).body
+    def Web.post_body(url,query={},headers={})
+      body = Web.post(url,query,headers).body
 
       yield body if block_given?
       return body
