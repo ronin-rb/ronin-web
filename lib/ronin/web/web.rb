@@ -371,7 +371,13 @@ module Ronin
     # @api public
     #
     def Web.agent
-      @agent ||= Mechanize.new(options)
+      @agent ||= Mechanize.new(options) do |agent|
+        agent.user_agent = Web.user_agent
+
+        Web.proxy.tap do |proxy|
+          agent.set_proxy(proxy.host,proxy.port,proxy.user,proxy.password)
+        end
+      end
     end
 
     #
