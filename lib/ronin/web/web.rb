@@ -370,12 +370,8 @@ module Ronin
     #
     # @api public
     #
-    def Web.agent(options={})
-      if options.empty?
-        @agent ||= Mechanize.new(options)
-      else
-        @agent = Mechanize.new(options)
-      end
+    def Web.agent
+      @agent ||= Mechanize.new(options)
     end
 
     #
@@ -422,7 +418,7 @@ module Ronin
     # @api public
     #
     def Web.get(url,options={})
-      page = Web.agent(options).get(url)
+      page = Web.agent.get(url)
 
       yield page if block_given?
       return page
@@ -518,7 +514,7 @@ module Ronin
       query = {}
       query.merge!(options[:query]) if options[:query]
 
-      page = Web.agent(options).post(url,query)
+      page = Web.agent.post(url,query)
 
       yield page if block_given?
       return page
