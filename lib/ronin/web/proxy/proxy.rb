@@ -253,7 +253,7 @@ module Ronin
       def call!(env)
         request = Request.new(env)
 
-        @every_request_block.call(request) if @every_request_block
+        @on_request_block.call(request) if @on_request_block
 
         print_debug "Proxying #{request.url} for #{request.address}"
         request.headers.each do |name,value|
@@ -262,7 +262,7 @@ module Ronin
 
         response = proxy(request)
 
-        @every_response_block.call(response) if @every_response_block
+        @on_response_block.call(response) if @on_response_block
 
         print_debug "Returning proxied response for #{request.address}"
         response.headers.each do |name,value|
