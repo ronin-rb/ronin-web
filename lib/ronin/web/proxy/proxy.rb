@@ -152,8 +152,11 @@ module Ronin
       #
       # Uses the given block to intercept proxied responses.
       #
-      # @yield [response]
+      # @yield [(request), response]
       #   The given block will receive every proxied response.
+      #
+      # @yieldparam [Request] request
+      #   A proxied request.
       #
       # @yieldparam [Response] response
       #   A proxied response.
@@ -262,7 +265,12 @@ module Ronin
 
         response = proxy(request)
 
-        @on_response_block.call(response) if @on_response_block
+        if @on_response_block
+          case @on_response_block.arity
+          when 1 then @on_response_block.call(response)
+          else        @on_response_block.call(request,response)
+          end
+        end
 
         print_debug "Returning proxied response for #{request.address}"
         response.headers.each do |name,value|
