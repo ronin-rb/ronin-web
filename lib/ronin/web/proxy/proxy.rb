@@ -84,6 +84,52 @@ module Ronin
       end
 
       #
+      # The default host to bind to.
+      #
+      # @return [String]
+      #   The host name.
+      #
+      def self.host
+        @host ||= DEFAULT_HOST
+      end
+
+      #
+      # Sets the default host.
+      #
+      # @param [String] new_host
+      #   The new host name.
+      #
+      # @return [String]
+      #   The new host name.
+      #
+      def self.host=(new_host)
+        @host = new_host
+      end
+
+      #
+      # The default port to listen on.
+      #
+      # @return [Integer]
+      #   The default port number.
+      #
+      def self.port
+        @port ||= DEFAULT_PORT
+      end
+
+      #
+      # Sets the default port to listen on.
+      #
+      # @param [Integer] new_port
+      #   The new port number.
+      #
+      # @return [Integer]
+      #   The new port number.
+      #
+      def self.port=(new_port)
+        @port = new_port
+      end
+
+      #
       # Uses the given block to intercept incoming requests.
       #
       # @yield [request]
