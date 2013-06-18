@@ -177,6 +177,13 @@ Serve files via a Web Server:
 
     $ gem install ronin-web
 
+### Edge
+
+    $ git clone git://github.com/ronin-ruby/ronin-web.git
+    $ cd ronin-web/
+    $ bundle install
+    $ ./bin/ronin-web
+
 ## License
 
 Ronin Web - A Ruby library for Ronin that provides support for web
