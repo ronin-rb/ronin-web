@@ -72,25 +72,16 @@ module Ronin
         #
         # Provides a persistent Mechanize agent.
         #
-        # @param [Hash] options
-        #   Additional options for initializing the agent.
-        #
-        # @option options [Hash] :proxy (web_proxy)
-        #   Proxy information.
-        #
-        # @option options [String] :user_agent (web_user_agent)
-        #   User-Agent string to use.
-        #
         # @return [Mechanize]
         #   The agent.
         #
         # @api semipublic
         #
-        def web_agent(options={},&block)
-          @web_agent ||= Web::Mechanize.new({
-            proxy:       web_proxy,
-            user_agent:  @web_user_agent
-          }.merge(options),&block)
+        def web_agent(&block)
+          @web_agent ||= Web::Mechanize.new(
+            proxy:      web_proxy,
+            user_agent: @web_user_agent
+          ),&block)
         end
 
         #
@@ -121,7 +112,7 @@ module Ronin
           print_info "Requesting #{url}"
           headers.each { |name,value| print_debug "  #{name}: #{value}" }
 
-          return web_agent(options).get(url,parameters,headers,&block)
+          return web_agent.get(url,parameters,headers,&block)
         end
 
         #
@@ -185,7 +176,7 @@ module Ronin
           print_info "Posting #{url}"
           headers.each { |name,value| print_debug "  #{name}: #{value}" }
 
-          return web_agent(options).post(url,parameters,headers,&block)
+          return web_agent.post(url,parameters,headers,&block)
         end
 
         #
