@@ -20,12 +20,10 @@
 # along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-require 'ronin/ui/output/helpers'
+require 'ronin/network/mixins/mixin'
 require 'ronin/network/http/proxy'
+require 'ronin/ui/output/helpers'
 require 'ronin/web/mechanize'
-require 'ronin/mixin'
-
-require 'parameters'
 
 module Ronin
   module Network
@@ -36,30 +34,25 @@ module Ronin
       module Web
         include Mixin
  
-        mixin UI::Output::Helpers,
-              Parameters
+        # The Web Proxy host to connect to
+        parameter :web_proxy_host, type:        String,
+                                   description: 'Web Proxy host'
 
-        mixin do
-          # The Web Proxy host to connect to
-          parameter :web_proxy_host, type:        String,
-                                     description: 'Web Proxy host'
+        # The Web Proxy port to connect to
+        parameter :web_proxy_port, type:        Integer,
+                                   description: 'Web Proxy port'
 
-          # The Web Proxy port to connect to
-          parameter :web_proxy_port, type:        Integer,
-                                     description: 'Web Proxy port'
+        # The Web Proxy user to authenticate with
+        parameter :web_proxy_user, type:        String,
+                                   description: 'Web Proxy authentication user'
 
-          # The Web Proxy user to authenticate with
-          parameter :web_proxy_user, type:        String,
-                                     description: 'Web Proxy authentication user'
-
-          # The Web Proxy password to authenticate with
-          parameter :web_proxy_password, type:        String,
-                                         description: 'Web Proxy authentication password'
-        end
+        # The Web Proxy password to authenticate with
+        parameter :web_proxy_password, type:        String,
+                                       description: 'Web Proxy authentication password'
 
         #
-        # Combines the proxy information set by the `web_proxy_host`,
-        # `web_proxy_port`, `web_proxy_user` and `web_proxy_password`
+        # Combines the proxy information set by the {#web_proxy_host},
+        # {#web_proxy_port}, {#web_proxy_user} and {#web_proxy_password}
         # parameters.
         #
         # @return [Network::HTTP::Proxy]
