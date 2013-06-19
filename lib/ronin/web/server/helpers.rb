@@ -31,6 +31,40 @@ require 'rack/directory'
 module Ronin
   module Web
     module Server
+      #
+      # Provides Sinatra routing and helper methods.
+      #
+      # ## Routing Methods
+      #
+      # * {Helpers::ClassMethods#any any}: registers a route that responds to
+      #   `GET`, `POST`, `PUT`, `PATCH`, `DELETE` and `OPTIONS` requests.
+      # * {Helpers::ClassMethods#default default}: registers the default route.
+      # * {Helpers::ClassMethods#file file}: mounts a file at the given path.
+      #   a given file.
+      # * {Helpers::ClassMethods#files files}: monts multiple files.
+      #   given paths.
+      # * {Helpers::ClassMethods#directory directory}: mounts a directory at
+      #   the given path.
+      # * {Helpers::ClassMethods#directories directories}: mounts multiple
+      #   directories.
+      # * {Helpers::ClassMethods#public_dir public_dir}: mounts a directory
+      #   at the root.
+      # * {Helpers::ClassMethods#host host}: mounts a Rack app for the given
+      #   vhost.
+      # * {Helpers::ClassMethods#map map}: mounts a Rack app at the given
+      #   path.
+      # * {Helpers::ClassMethods#proxy proxy}: mounts a {Proxy} at an optional
+      #   path.
+      #
+      # ## Helper Methods
+      #
+      # * {Helpers#h h}: escapes HTML entities.
+      # * {Helpers#file file}: sends a file.
+      # * {Helpers#mime_type_for mime_type_for}: returns the MIME type for the
+      #   file.
+      # * {Helpers#content_type_for content_type_for}: sets the `Content-Type`
+      #   for the file.
+      #
       module Helpers
 
         include Rack::Utils
