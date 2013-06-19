@@ -148,8 +148,8 @@ module Ronin
         #
         # @api semipublic
         #
-        def web_get_body(url,options={})
-          page = web_get(url,options)
+        def web_get_body(url,parameters={},headers={})
+          page = web_get(url,parameters,headers)
           body = page.body
 
           yield body if block_given?
@@ -163,17 +163,11 @@ module Ronin
         # @param [URI::Generic, String] url
         #   The URL to post to.
         #
-        # @param [Hash] options
-        #   Additional options to initialize the agent with.
+        # @param [Array, Hash] parameters
+        #   Additional parameters for the POST request.
         #
-        # @option options [Hash] :query
-        #   Additional query parameters to post with.
-        #
-        # @option options [Hash] :proxy (web_proxy)
-        #   Proxy information.
-        #
-        # @option options [String] :user_agent (web_user_agent)
-        #   User-Agent string to use.
+        # param [Hash] headers
+        #   Additional headers for the POST request.
         #
         # @yield [page]
         #   If a block is given, it will be passed the page for the
@@ -201,17 +195,11 @@ module Ronin
         # @param [URI::Generic, String] url
         #   The URL to post to.
         #
-        # @param [Hash] options
-        #   Additional options to initialize the agent with.
+        # @param [Array, Hash] parameters
+        #   Additional parameters for the POST request.
         #
-        # @option options [Hash] :query
-        #   Additional query parameters to post with.
-        #
-        # @option options [Hash] :proxy (web_proxy)
-        #   Proxy information.
-        #
-        # @option options [String] :user_agent (web_user_agent)
-        #   User-Agent string to use.
+        # param [Hash] headers
+        #   Additional headers for the POST request.
         #
         # @yield [body]
         #   If a block is given, it will be passed the body of the page.
@@ -224,8 +212,8 @@ module Ronin
         #
         # @api semipublic
         #
-        def web_post_body(url,options={})
-          page = web_post(url,options)
+        def web_post_body(url,parameters={},headers={})
+          page = web_post(url,parameters,headers)
           body = page.body
 
           yield body if block_given?
