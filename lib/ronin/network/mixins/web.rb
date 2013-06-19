@@ -50,6 +50,14 @@ module Ronin
         parameter :web_proxy_password, type:        String,
                                        description: 'Web Proxy authentication password'
 
+        # The Web User-Agent String
+        parameter :web_user_agent, type:        String,
+                                   description: 'User Agent String'
+
+        # The Web User-Agent alias
+        parameter :web_user_agent_alias, type:        String,
+                                         description: 'User Agent String'
+
         #
         # Combines the proxy information set by the {#web_proxy_host},
         # {#web_proxy_port}, {#web_proxy_user} and {#web_proxy_password}
@@ -79,8 +87,9 @@ module Ronin
         #
         def web_agent(&block)
           @web_agent ||= Web::Mechanize.new(
-            proxy:      web_proxy,
-            user_agent: @web_user_agent
+            proxy:            web_proxy,
+            user_agent:       @web_user_agent,
+            user_agent_alias: @web_user_agent_alias
           ),&block)
         end
 
