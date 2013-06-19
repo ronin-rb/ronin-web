@@ -108,14 +108,11 @@ module Ronin
         # @param [URI::Generic, String] url
         #   The URL to request.
         #
-        # @param [Hash] options
-        #   Additional options to initialize the agent with.
+        # @param [Array, Hash] parameters
+        #   Additional parameters for the GET request.
         #
-        # @option options [Hash] :proxy (web_proxy)
-        #   Proxy information.
-        #
-        # @option options [String] :user_agent (web_user_agent)
-        #   User-Agent string to use.
+        # param [Hash] headers
+        #   Additional headers for the GET request.
         #
         # @yield [page]
         #   If a block is given, it will be passed the page for the
@@ -129,12 +126,11 @@ module Ronin
         #
         # @api semipublic
         #
-        def web_get(url,options={})
+        def web_get(url,parameters={},headers={},&block)
           print_info "Requesting #{url}"
-          page = web_agent(options).get(url)
+          headers.each { |name,value| print_debug "  #{name}: #{value}" }
 
-          yield page if block_given?
-          return page
+          return web_agent(options).get(url,parameters,headers,&block)
         end
 
         #
@@ -144,14 +140,11 @@ module Ronin
         # @param [URI::Generic, String] url
         #   The URL to request.
         #
-        # @param [Hash] options
-        #   Additional options to initialize the agent with.
+        # @param [Array, Hash] parameters
+        #   Additional parameters for the GET request.
         #
-        # @option options [Hash] :proxy (web_proxy)
-        #   Proxy information.
-        #
-        # @option options [String] :user_agent (web_user_agent)
-        #   User-Agent string to use.
+        # param [Hash] headers
+        #   Additional headers for the GET request.
         #
         # @yield [body]
         #   If a block is given, it will be passed the body of the page.
@@ -203,15 +196,11 @@ module Ronin
         #
         # @api semipublic
         #
-        def web_post(url,options={})
-          query = {}
-          query.merge!(options[:query]) if options[:query]
-
+        def web_post(url,parameters={},headers={},&block)
           print_info "Posting #{url}"
-          page = web_agent(options).post(url)
+          headers.each { |name,value| print_debug "  #{name}: #{value}" }
 
-          yield page if block_given?
-          return page
+          return web_agent(options).post(url,parameters,headers,&block)
         end
 
         #
