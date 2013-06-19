@@ -87,11 +87,11 @@ module Ronin
         # @api semipublic
         #
         def web_agent(&block)
-          @web_agent ||= Web::Mechanize.new(
+          @web_agent ||= Web::Mechanize.new({
             proxy:            web_proxy,
             user_agent:       @web_user_agent,
             user_agent_alias: @web_user_agent_alias
-          ),&block)
+          },&block)
         end
 
         #
