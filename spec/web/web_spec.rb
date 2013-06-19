@@ -90,7 +90,7 @@ describe Web do
     after { Web.user_agent = nil }
   end
 
-  describe "#open" do
+  describe "#open", :network do
     it "should open URLs as temporary files" do
       file = Web.open(url)
 
@@ -104,7 +104,7 @@ describe Web do
     end
   end
 
-  describe "get" do
+  describe "get", :network do
     it "should be able to get Mechanize pages" do
       page = Web.get(url)
 
@@ -113,7 +113,7 @@ describe Web do
     end
   end
 
-  describe "get_body" do
+  describe "get_body", :network do
     it "should be able to get the bodies of Mechanize pages" do
       body = Web.get_body(url)
 

@@ -34,5 +34,11 @@ RSpec::Core::RakeTask.new
 task :test    => :spec
 task :default => :spec
 
+namespace :spec do
+  RSpec::Core::RakeTask.new(:network) do |t|
+    t.rspec_opts = '--tag network'
+  end
+end
+
 require 'yard'
 YARD::Rake::YardocTask.new
