@@ -18,16 +18,8 @@ scraping and spidering functionality.
 * Provides popular [User Agent strings][3].
 * Integrates [Spidr][spidr] into
   {Ronin::Web::Spider}.
-* Provides a collection of useful [Rack][rack]
-  Middleware:
-  * {Ronin::Web::Middleware::Files}
-  * {Ronin::Web::Middleware::Directories}
-  * {Ronin::Web::Middleware::Proxy}
-  * {Ronin::Web::Middleware::Router}
-* Provides {Ronin::Web::Server}, a [Sinatra][sinatra] based
-  Web Server.
-* Provides {Ronin::Web::Proxy}, a [Sinatra][sinatra] based
-  Web Proxy.
+* Provides {Ronin::Web::Server}, a [Sinatra][sinatra] based Web Server.
+* Provides {Ronin::Web::Proxy}, a [Sinatra][sinatra] based Web Proxy.
 
 ## Synopsis
 
