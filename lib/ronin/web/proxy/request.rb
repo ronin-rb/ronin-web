@@ -28,6 +28,8 @@ module Ronin
       #
       # Convenience class that represents proxied requests.
       #
+      # @since 0.3.0
+      #
       class Request < Server::Request
 
         #
@@ -38,8 +40,6 @@ module Ronin
         #
         # @return [String]
         #   The new HTTP Host header.
-        #
-        # @since 0.3.0
         #
         # @api public
         #
@@ -56,8 +56,6 @@ module Ronin
         # @return [Integer]
         #   The new port the request will be sent to.
         #
-        # @since 0.3.0
-        #   
         # @api public
         #
         def port=(new_port)
@@ -73,8 +71,6 @@ module Ronin
         # @return [String]
         #   The new URI scheme of the request.
         #
-        # @since 0.3.0
-        #   
         # @api public
         #
         def scheme=(new_scheme)
@@ -86,8 +82,6 @@ module Ronin
         #
         # @return [ProxyRequest]
         #   The proxy request.
-        #
-        # @since 0.3.0
         #
         # @api public
         #
@@ -107,8 +101,6 @@ module Ronin
         # @return [String]
         #   The new HTTP Request Method.
         #
-        # @since 0.3.0
-        #
         # @api public
         #
         def request_method=(new_method)
@@ -123,8 +115,6 @@ module Ronin
         #
         # @return [String]
         #   The new HTTP Query String of the request.
-        #
-        # @since 0.3.0
         #
         # @api public
         #
@@ -145,8 +135,6 @@ module Ronin
         # @return [ProxyRequest]
         #   The request.
         #
-        # @since 0.3.0
-        #
         # @api public
         #
         def xhr!
@@ -165,8 +153,6 @@ module Ronin
         # @return [String]
         #   The new HTTP Content-Type of the request.
         #
-        # @since 0.3.0
-        #
         # @api public
         #
         def content_type=(new_content_type)
@@ -181,8 +167,6 @@ module Ronin
         #
         # @return [String]
         #   The new HTTP Accept-Encoding of the request.
-        #
-        # @since 0.3.0
         #
         # @api public
         #
@@ -199,8 +183,6 @@ module Ronin
         # @return [String]
         #   The new User-Agent header.
         #
-        # @since 0.3.0
-        #
         # @api public
         #
         def user_agent=(new_user_agent)
@@ -215,8 +197,6 @@ module Ronin
         #
         # @return [String]
         #   The new HTTP Referer of the request.
-        #
-        # @since 0.3.0
         #
         # @api public
         #
@@ -234,8 +214,6 @@ module Ronin
         #
         # @return [String]
         #   The new body of the request.
-        #
-        # @since 0.3.0
         #
         # @api public
         #
