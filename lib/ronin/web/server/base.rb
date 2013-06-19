@@ -48,8 +48,6 @@ module Ronin
         # Default port to run the Web Server on
         DEFAULT_PORT = 8000
 
-        enable :sessions
-
         set :host, DEFAULT_HOST
         set :port, DEFAULT_PORT
 
