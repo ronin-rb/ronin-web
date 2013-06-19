@@ -28,3 +28,4 @@ dependencies:
 development_dependencies:
   bundler: ~> 1.0
   yard: ~> 0.7
+  yard-parameters: ~> 0.1
