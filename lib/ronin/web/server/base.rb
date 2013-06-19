@@ -38,6 +38,48 @@ module Ronin
       # with additional {Helpers helper methods} and Sinatra
       # {Conditions conditions}.
       #
+      # ## Routing Methods
+      #
+      # * {Helpers::ClassMethods#any any}: registers a route that responds to
+      #   `GET`, `POST`, `PUT`, `PATCH`, `DELETE` and `OPTIONS` requests.
+      # * {Helpers::ClassMethods#default default}: registers the default route.
+      # * {Helpers::ClassMethods#file file}: mounts a file at the given path.
+      #   a given file.
+      # * {Helpers::ClassMethods#files files}: monts multiple files.
+      #   given paths.
+      # * {Helpers::ClassMethods#directory directory}: mounts a directory at
+      #   the given path.
+      # * {Helpers::ClassMethods#directories directories}: mounts multiple
+      #   directories.
+      # * {Helpers::ClassMethods#public_dir public_dir}: mounts a directory
+      #   at the root.
+      # * {Helpers::ClassMethods#host host}: mounts a Rack app for the given
+      #   vhost.
+      # * {Helpers::ClassMethods#map map}: mounts a Rack app at the given
+      #   path.
+      # * {Helpers::ClassMethods#proxy proxy}: mounts a {Proxy} at an optional
+      #   path.
+      #
+      # ## Helper Methods
+      #
+      # * {Helpers#h h}: escapes HTML entities.
+      # * {Helpers#file file}: sends a file.
+      # * {Helpers#mime_type_for mime_type_for}: returns the MIME type for the
+      #   file.
+      # * {Helpers#content_type_for content_type_for}: sets the `Content-Type`
+      #   for the file.
+      #
+      # ## Routing Conditions
+      #
+      # * {Conditions::ClassMethods#ip_address ip_address}: filters requests
+      #   based on their IP address.
+      # * {Conditions::ClassMethods#host host}: filters requests based on the
+      #   `Host` header.
+      # * {Conditions::ClassMethods#referer referer}: filters requests based on
+      #   the `Referer` header.
+      # * {Conditions::ClassMethods#campaign campaign}: filters requests based
+      #   on whether their IP address is targeted by a Campaign.
+      #
       class Base < Sinatra::Base
 
         include Server::Helpers

@@ -30,15 +30,6 @@ module Ronin
       #
       # Defines Sinatra routing conditions.
       #
-      # * {Conditions::ClassMethods#ip_address ip_address}: filters requests
-      #   based on their IP address.
-      # * {Conditions::ClassMethods#host host}: filters requests based on the
-      #   `Host` header.
-      # * {Conditions::ClassMethods#referer referer}: filters requests based on
-      #   the `Referer` header.
-      # * {Conditions::ClassMethods#campaign campaign}: filters requests based
-      #   on whether their IP address is targeted by a Campaign.
-      #
       # @api semipublic
       #
       # @since 0.3.0
