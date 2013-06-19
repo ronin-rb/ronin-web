@@ -57,8 +57,6 @@ module Ronin
                                          description: 'Web Proxy authentication password'
         end
 
-        protected
-
         #
         # Combines the proxy information set by the `web_proxy_host`,
         # `web_proxy_port`, `web_proxy_user` and `web_proxy_password`
