@@ -97,8 +97,8 @@ module Ronin
         #
         def web_agent(options={},&block)
           @web_agent ||= Web::Mechanize.new({
-            :proxy => web_proxy,
-            :user_agent => @web_user_agent
+            proxy:       web_proxy,
+            user_agent:  @web_user_agent
           }.merge(options),&block)
         end
 
