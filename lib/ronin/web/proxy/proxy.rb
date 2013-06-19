@@ -47,7 +47,7 @@ module Ronin
     #       end
     #     end
     #
-    # @since 1.0.0
+    # @since 0.3.0
     #
     # @api semipublic
     #

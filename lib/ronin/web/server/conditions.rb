@@ -30,7 +30,7 @@ module Ronin
       #
       # @api semipublic
       #
-      # @since 1.0.0
+      # @since 0.3.0
       #
       module Conditions
         def self.included(base)

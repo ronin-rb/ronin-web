@@ -304,7 +304,7 @@ module Ronin
           # @example
           #   map '/subapp/', SubApp
           #
-          # @since 1.0.0
+          # @since 0.3.0
           #
           # @api public
           #
