@@ -97,6 +97,8 @@ module Ronin
             end
           end
 
+          alias referrer referer
+
           #
           # Condition to match requests sent by an IP Address targeted by a
           # Campaign.
