@@ -71,9 +71,9 @@ module Ronin
         #
         def web_proxy
           HTTP::Proxy.new(
-            host: @web_proxy_host,
-            port: @web_proxy_port,
-            user: @web_proxy_user,
+            host:     @web_proxy_host,
+            port:     @web_proxy_port,
+            user:     @web_proxy_user,
             password: @web_proxy_password
           )
         end
