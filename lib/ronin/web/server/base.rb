@@ -35,7 +35,8 @@ module Ronin
       #
       # The base-class for all Ronin Web Servers. Extends
       # [Sinatra::Base](http://rubydoc.info/gems/sinatra/Sinatra/Base)
-      # with additional helper methods and Rack {Middleware}.
+      # with additional {Helpers helper methods} and Sinatra
+      # {Conditions conditions}.
       #
       class Base < Sinatra::Base
 
