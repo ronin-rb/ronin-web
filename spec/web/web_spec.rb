@@ -86,6 +86,8 @@ describe Web do
 
       Web.user_agent.should == "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6"
     end
+
+    after { Web.user_agent = nil }
   end
 
   describe "#open" do
