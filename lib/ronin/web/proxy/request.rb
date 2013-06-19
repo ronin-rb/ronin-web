@@ -78,18 +78,26 @@ module Ronin
         end
 
         #
-        # Causes the request to be proxied over SSL.
+        # Toggles whether the request to be proxied over SSL.
         #
-        # @return [ProxyRequest]
-        #   The proxy request.
+        # @param [Boolean] ssl
+        #   Specifies whether to enable or disable SSL.
+        #
+        # @return [Boolean]
+        #   Whether SSL is enabled or disabled.
         #
         # @api public
         #
-        def ssl!
-          self.port = 443
-          self.scheme = 'https'
+        def ssl=(ssl)
+          if ssl
+            self.port   = 443
+            self.scheme = 'https'
+          else
+            self.port   = 80
+            self.scheme = 'http'
+          end
 
-          return self
+          return ssl
         end
 
         #
@@ -123,25 +131,22 @@ module Ronin
         end
 
         #
-        # Specifies that the request is a XML HTTP Request.
+        # Toggles whether the request is a XML HTTP Request.
         #
-        # @yield [request]
-        #   If a block is given, it will be passed the request
-        #   for further modification.
+        # @param [Boolean] xhr
+        #   Specifies whether the request is an XML HTTP Request.
         #
-        # @yieldparam [ProxyRequest] request
-        #   The proxy request.
-        #
-        # @return [ProxyRequest]
-        #   The request.
+        # @return [Boolean]
+        #   Specifies whether the request is an XML HTTP Request.
         #
         # @api public
         #
-        def xhr!
-          @env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+        def xhr=(xhr)
+          if xhr then @env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+          else        @env.delete('HTTP_X_REQUESTED_WITH')
+          end
 
-          yield self if block_given?
-          return self
+          return xhr
         end
 
         #
