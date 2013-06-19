@@ -22,6 +22,7 @@
 
 require 'ronin/web/server/request'
 require 'ronin/web/server/response'
+require 'ronin/web/server/routing'
 require 'ronin/web/server/helpers'
 require 'ronin/web/server/conditions'
 
@@ -35,8 +36,8 @@ module Ronin
       #
       # The base-class for all Ronin Web Servers. Extends
       # [Sinatra::Base](http://rubydoc.info/gems/sinatra/Sinatra/Base)
-      # with additional {Helpers helper methods} and Sinatra
-      # {Conditions conditions}.
+      # with additional {Routing routing methods}, {Helpers helper methods} and
+      # Sinatra {Conditions conditions}.
       #
       # ## Routing Methods
       #
@@ -82,6 +83,7 @@ module Ronin
       #
       class Base < Sinatra::Base
 
+        include Server::Routing
         include Server::Helpers
         include Server::Conditions
 
