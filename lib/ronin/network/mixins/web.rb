@@ -52,7 +52,7 @@ module Ronin
 
         # The Web User-Agent String
         parameter :web_user_agent, type:        String,
-                                   default:     Ronin::Web.user_agent,
+                                   default:     proc { Ronin::Web.user_agent },
                                    description: 'User Agent String'
 
         # The Web User-Agent alias
