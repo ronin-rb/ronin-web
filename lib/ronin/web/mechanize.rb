@@ -28,7 +28,7 @@ require 'mechanize'
 module Ronin
   module Web
     #
-    # Conveniance class based on Mechanize.
+    # Convenience class based on Mechanize.
     #
     # @see http://rubydoc.info/gems/mechanize/Mechanize
     #

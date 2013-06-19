@@ -79,7 +79,7 @@ module Ronin
         end
 
         #
-        # Provides a persistant Mechanize agent.
+        # Provides a persistent Mechanize agent.
         #
         # @param [Hash] options
         #   Additional options for initializing the agent.

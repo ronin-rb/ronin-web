@@ -31,7 +31,7 @@ require 'set'
 module Ronin
   module Web
     #
-    # A Rack middleware for proxying requests.
+    # A Rack application for proxying requests.
     #
     #     server.route '/forum/', Proxy.new do |proxy|
     #       proxy.on_request do |request|
@@ -71,13 +71,13 @@ module Ronin
       ]
 
       #
-      # Creates a new {Proxy} middleware.
+      # Creates a new {Proxy} application.
       #
       # @yield [proxy]
-      #   If a block is given, it will be passed the new proxy middleware.
+      #   If a block is given, it will be passed the new proxy.
       #
       # @yieldparam [Proxy] proxy
-      #   The new proxy middleware object.
+      #   The new proxy object.
       #
       def initialize
         yield self if block_given?
@@ -140,7 +140,7 @@ module Ronin
       #   A proxied request.
       #
       # @return [Proxy]
-      #   The proxy middleware.
+      #   The proxy app.
       #
       # @api public
       #
@@ -162,7 +162,7 @@ module Ronin
       #   A proxied response.
       #
       # @return [Proxy]
-      #   The proxy middleware.
+      #   The proxy app.
       #
       # @api public
       #

@@ -33,7 +33,7 @@ module Nokogiri
       #   The other attribute.
       #
       # @return [Boolean]
-      #   Specifies if the attribute is similar, in indentity or value,
+      #   Specifies if the attribute is similar, in identity or value,
       #   to the other attribute.
       #
       # @api public

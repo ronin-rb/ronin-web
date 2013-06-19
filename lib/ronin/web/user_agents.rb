@@ -88,7 +88,7 @@ module Ronin
       #   A User-Agent string within the set.
       #
       # @return [Enumerator]
-      #   If no block is given, an Enmerator will be returned.
+      #   If no block is given, an Enumerator will be returned.
       #
       # @api public
       #

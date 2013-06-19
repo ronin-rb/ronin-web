@@ -361,10 +361,10 @@ module Ronin
     end
 
     #
-    # A persistant Mechanize Agent.
+    # A persistent Mechanize Agent.
     #
     # @return [Mechanize]
-    #   The persistant Mechanize Agent.
+    #   The persistent Mechanize Agent.
     #
     # @see Mechanize
     #

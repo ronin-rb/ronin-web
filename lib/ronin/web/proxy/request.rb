@@ -190,13 +190,13 @@ module Ronin
         end
 
         #
-        # Changes the HTTP Referer header of the request.
+        # Changes the HTTP `Referer` header of the request.
         #
         # @param [String] new_referer
-        #   The new HTTP Referer for the request.
+        #   The new HTTP `Referer` header for the request.
         #
         # @return [String]
-        #   The new HTTP Referer of the request.
+        #   The new HTTP `Referer` header of the request.
         #
         # @api public
         #

@@ -33,7 +33,7 @@ module Nokogiri
       #   The other text node.
       #
       # @return [Boolean]
-      #   Specifies if the text node is similar, in indentity or value,
+      #   Specifies if the text node is similar, in identity or value,
       #   to the other text node.
       #
       # @api public

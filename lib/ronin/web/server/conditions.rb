@@ -73,7 +73,7 @@ module Ronin
           # Condition to match the `Referer` header of the request.
           #
           # @param [Regexp, String] pattern
-          #   Regular expression or exact Referer to match against.
+          #   Regular expression or exact `Referer` header to match against.
           #
           def referer(pattern)
             case pattern
