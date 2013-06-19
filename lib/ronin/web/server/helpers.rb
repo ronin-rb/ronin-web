@@ -213,7 +213,7 @@ module Ronin
             dir = Rack::File.new(local_path)
 
             get("#{remote_path}/*",conditions) do |sub_path|
-              dir.call(env.merge('PATH_INFO' => sub_path))
+              dir.call(env.merge('PATH_INFO' => "/#{sub_path}"))
             end
           end
 
