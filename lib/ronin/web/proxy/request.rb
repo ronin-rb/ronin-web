@@ -65,7 +65,7 @@ module Ronin
         #
         # Changes the URI scheme of the request.
         #
-        # @param [String] new_port
+        # @param [String] new_scheme
         #   The new URI scheme for the request.
         #
         # @return [String]
