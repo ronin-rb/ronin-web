@@ -26,6 +26,6 @@ dependencies:
   ronin: ~> 1.4
 
 development_dependencies:
-  bundler: ~> 1.0
+  bundler: ~> 2.0
   yard: ~> 0.7
   yard-parameters: ~> 0.1
