@@ -6,7 +6,7 @@ describe Web do
  let(:title) { 'Ronin' }
 
   it "should have a VERSION constant" do
-    Web.const_defined?('VERSION').should == true
+    expect(Web.const_defined?('VERSION')).to eq(true)
   end
 
   describe "html" do
@@ -17,7 +17,7 @@ describe Web do
         </html>
       })
 
-      doc.at('body').inner_text.should == "Hello"
+      expect(doc.at('body').inner_text).to eq("Hello")
     end
   end
 
@@ -31,7 +31,7 @@ describe Web do
         }
       end
 
-      doc.to_html.should include("<html><body><div>hello</div></body></html>")
+      expect(doc.to_html).to include("<html><body><div>hello</div></body></html>")
     end
   end
 
@@ -44,7 +44,7 @@ describe Web do
         </root>
       })
 
-      doc.at('stuff').inner_text.should == "Hello"
+      expect(doc.at('stuff').inner_text).to eq("Hello")
     end
   end
 
@@ -56,35 +56,35 @@ describe Web do
         }
       end
 
-      doc.to_xml.should include("<root>\n  <stuff name=\"bla\">hello</stuff>\n</root>")
+      expect(doc.to_xml).to include("<root>\n  <stuff name=\"bla\">hello</stuff>\n</root>")
     end
   end
 
   describe "proxy" do
     it "should have a default proxy" do
-      Web.proxy.should_not be_nil
+      expect(Web.proxy).not_to be_nil
     end
 
     it "should disable the proxy by default" do
-      Web.proxy.should_not be_enabled
+      expect(Web.proxy).not_to be_enabled
     end
   end
 
   describe "user_agent_aliases" do
     it "should provide User-Agent aliases" do
-      Web.user_agent_aliases.should_not be_empty
+      expect(Web.user_agent_aliases).not_to be_empty
     end
   end
 
   describe "#user_agent" do
     it "should provide a default User-Agent" do
-      Web.user_agent.should be_nil
+      expect(Web.user_agent).to be_nil
     end
 
     it "should allow setting of the User-Agent string using an alias" do
       Web.user_agent_alias = 'Mac FireFox'
 
-      Web.user_agent.should == "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6"
+      expect(Web.user_agent).to eq("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6")
     end
 
     after { Web.user_agent = nil }
@@ -94,13 +94,13 @@ describe Web do
     it "should open URLs as temporary files" do
       file = Web.open(url)
 
-      file.read.should include(title)
+      expect(file.read).to include(title)
     end
   end
 
   describe "agent" do
     it "should be persistent" do
-      Web.agent.object_id.should == Web.agent.object_id
+      expect(Web.agent.object_id).to eq(Web.agent.object_id)
     end
   end
 
@@ -108,8 +108,8 @@ describe Web do
     it "should be able to get Mechanize pages" do
       page = Web.get(url)
 
-      page.class.should == Mechanize::Page
-      page.at('title').inner_text.should include(title)
+      expect(page.class).to eq(Mechanize::Page)
+      expect(page.at('title').inner_text).to include(title)
     end
   end
 
@@ -117,7 +117,7 @@ describe Web do
     it "should be able to get the bodies of Mechanize pages" do
       body = Web.get_body(url)
 
-      body.should include(title)
+      expect(body).to include(title)
     end
   end
 end

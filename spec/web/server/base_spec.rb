@@ -14,22 +14,22 @@ describe Web::Server::Base do
   it "should still bind blocks to paths" do
     get '/tests/get'
 
-    last_response.should be_ok
-    last_response.body.should == 'block tested'
+    expect(last_response).to be_ok
+    expect(last_response.body).to eq('block tested')
   end
 
   it "should bind a block to a path for all request types" do
     post '/tests/any'
 
-    last_response.should be_ok
-    last_response.body.should == 'any tested'
+    expect(last_response).to be_ok
+    expect(last_response.body).to eq('any tested')
   end
 
   it "should have a default response" do
     get '/totally/non/existant/path'
 
-    last_response.should_not be_ok
-    last_response.body.should be_empty
+    expect(last_response).not_to be_ok
+    expect(last_response.body).to be_empty
   end
 
   it "should allow for defining custom responses" do
@@ -39,35 +39,35 @@ describe Web::Server::Base do
 
     get '/whats/here'
 
-    last_response.should_not be_ok
-    last_response.body.should == 'nothing to see here'
+    expect(last_response).not_to be_ok
+    expect(last_response.body).to eq('nothing to see here')
   end
 
   it "should map paths to sub-apps" do
     get '/tests/subapp/'
 
-    last_response.should be_ok
-    last_response.body.should == 'SubApp'
+    expect(last_response).to be_ok
+    expect(last_response.body).to eq('SubApp')
   end
 
   it "should not modify the path_info as it maps paths to sub-apps" do
     get '/tests/subapp/hello'
 
-    last_response.should be_ok
-    last_response.body.should == 'SubApp greets you'
+    expect(last_response).to be_ok
+    expect(last_response.body).to eq('SubApp greets you')
   end
 
   it "should host static content from public directories" do
     get '/static1.txt'
 
-    last_response.should be_ok
-    last_response.body.should == "Static file1.\n"
+    expect(last_response).to be_ok
+    expect(last_response.body).to eq("Static file1.\n")
   end
 
   it "should host static content from multiple public directories" do
     get '/static2.txt'
 
-    last_response.should be_ok
-    last_response.body.should == "Static file2.\n"
+    expect(last_response).to be_ok
+    expect(last_response.body).to eq("Static file2.\n")
   end
 end

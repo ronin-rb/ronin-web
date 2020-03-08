@@ -9,19 +9,19 @@ describe Web::Mechanize do
       end
 
       it "should default to Web.user_agent" do
-        described_class.new.user_agent.should == 'test'
+        expect(described_class.new.user_agent).to eq('test')
       end
 
       it "should support using a custom User-Agent string" do
         agent = described_class.new(user_agent: 'test2')
 
-        agent.user_agent.should == 'test2'
+        expect(agent.user_agent).to eq('test2')
       end
 
       it "should support using a custom User-Agent alias" do
         agent = described_class.new(user_agent_alias: 'iPhone')
 
-        agent.user_agent.should == "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3"
+        expect(agent.user_agent).to eq("Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3")
       end
 
       after(:all) do
@@ -43,15 +43,15 @@ describe Web::Mechanize do
       it "should default to Web.proxy" do
         agent = described_class.new
 
-        agent.proxy_addr.should == Web.proxy.host
-        agent.proxy_port.should == Web.proxy.port
+        expect(agent.proxy_addr).to eq(Web.proxy.host)
+        expect(agent.proxy_port).to eq(Web.proxy.port)
       end
 
       it "should support using custom proxies" do
         agent = described_class.new(proxy: proxy)
 
-        agent.proxy_addr.should == host
-        agent.proxy_port.should == port
+        expect(agent.proxy_addr).to eq(host)
+        expect(agent.proxy_port).to eq(port)
       end
 
       after(:all) do

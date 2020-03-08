@@ -14,14 +14,14 @@ describe Nokogiri::HTML do
     elem1 = @doc.at('b')
     elem2 = @edited_doc.at('b')
 
-    elem1.should == elem2
+    expect(elem1).to eq(elem2)
   end
 
   it "should be able to test if two elements are not equal" do
     elem1 = @doc.at('p').children.last
     elem2 = @edited_doc.at('b')
 
-    elem1.should_not == elem2
+    expect(elem1).not_to eq(elem2)
   end
 
   it "should be able to traverse over every text node" do
@@ -29,10 +29,10 @@ describe Nokogiri::HTML do
 
     @doc.traverse_text { |node| text << node.content }
 
-    text.should == ['test', 'This is a test', ' html ', 'page', '.']
+    expect(text).to eq(['test', 'This is a test', ' html ', 'page', '.'])
   end
 
   it "should provide a count of all sub-children" do
-    @doc.total_children.should == 12
+    expect(@doc.total_children).to eq(12)
   end
 end
