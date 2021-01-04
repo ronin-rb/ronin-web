@@ -3,60 +3,67 @@ require 'ronin/web/mechanize'
 
 describe Web::Mechanize do
   describe "#initialize" do
-    describe ":user_agent" do
-      before do
-        Web.user_agent = 'test'
+    context "when Web.user_agent is set" do
+      let(:user_agent) { 'test' }
+
+      before { Web.user_agent = user_agent }
+
+      it "should set #user_agent to Web.user_agent" do
+        expect(subject.user_agent).to eq(user_agent)
       end
 
-      it "should default to Web.user_agent" do
-        expect(described_class.new.user_agent).to eq('test')
-      end
+      after { Web.user_agent = nil }
+    end
 
-      it "should support using a custom User-Agent string" do
-        agent = described_class.new(user_agent: 'test2')
+    context "when the :user_agent option is given" do
+      let(:user_agent) { 'test2' }
 
-        expect(agent.user_agent).to eq('test2')
-      end
+      subject { described_class.new(user_agent: user_agent) }
 
-      it "should support using a custom User-Agent alias" do
-        agent = described_class.new(user_agent_alias: 'iPhone')
-
-        expect(agent.user_agent).to eq("Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1C28 Safari/419.3")
-      end
-
-      after(:all) do
-        Web.user_agent = nil
+      it "should set #user_agent to the custom User-Agent string" do
+        expect(subject.user_agent).to eq(user_agent)
       end
     end
 
-    describe ":proxy" do
-      let(:host) { '127.0.0.1' }
-      let(:port) { 8080 }
-      let(:proxy) {
-        Network::HTTP::Proxy.new(host: host, port: port)
-      }
+    context "when the :user_agent_alias option is given" do
+      let(:user_agent_alias) { 'iPhone' }
+      let(:expected_user_agent) do
+        Mechanize::AGENT_ALIASES.fetch(user_agent_alias)
+      end
 
+      subject { described_class.new(user_agent_alias: user_agent_alias) }
+
+      it "should set #user_agent to the custom User-Agent alias" do
+        expect(subject.user_agent).to eq(expected_user_agent)
+      end
+    end
+
+    let(:host) { '127.0.0.1' }
+    let(:port) { 8080 }
+    let(:proxy) do
+      Network::HTTP::Proxy.new(host: host, port: port)
+    end
+
+    context "when Web.proxy is set" do
       before do
         Web.proxy = {host: 'www.example.com', port: port}
       end
 
-      it "should default to Web.proxy" do
-        agent = described_class.new
+      it "should set #proxy_addr and #proxy_port to Web.proxy" do
+        expect(subject.proxy_addr).to eq(Web.proxy.host)
+        expect(subject.proxy_port).to eq(Web.proxy.port)
+      end
+    end
 
-        expect(agent.proxy_addr).to eq(Web.proxy.host)
-        expect(agent.proxy_port).to eq(Web.proxy.port)
+    context "when the :proxy option is given" do
+      subject { described_class.new(proxy: proxy) }
+
+      it "should set #proxy_addr and #proxy_port to the custom proxy" do
+        expect(subject.proxy_addr).to eq(host)
+        expect(subject.proxy_port).to eq(port)
       end
 
-      it "should support using custom proxies" do
-        agent = described_class.new(proxy: proxy)
-
-        expect(agent.proxy_addr).to eq(host)
-        expect(agent.proxy_port).to eq(port)
-      end
-
-      after(:all) do
-        Web.proxy = nil
-      end
+      after { Web.proxy = nil }
     end
   end
 end
