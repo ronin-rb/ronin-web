@@ -27,7 +27,7 @@ group :development do
   gem 'rubygems-tasks', '~> 0.1'
   gem 'rspec',          '~> 3.0'
 
-  gem 'kramdown',       '~> 0.12'
+  gem 'kramdown',       '~> 2.0'
 end
 
 #
