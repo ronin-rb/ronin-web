@@ -128,6 +128,6 @@
 [rack]: https://github.com/rack/rack
 [sinatra]: https://github.com/sinatra/sinatra
 [data_paths]: https://github.com/postmodern/data_paths
-[ronin-support]: https://github.com/ronin-ruby/ronin-support
-[ronin]: https://github.com/ronin-ruby/ronin
-[ronin-scanners]: https://github.com/ronin-ruby/ronin-scanners
+[ronin-support]: https://github.com/ronin-rb/ronin-support
+[ronin]: https://github.com/ronin-rb/ronin
+[ronin-scanners]: https://github.com/ronin-rb/ronin-scanners

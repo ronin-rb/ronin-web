@@ -1,10 +1,10 @@
 # Ronin Web
 
-* [Source](https://github.com/ronin-ruby/ronin-web)
-* [Issues](https://github.com/ronin-ruby/ronin-web/issues)
-* [Documentation](http://rubydoc.info/github/ronin-ruby/ronin-web/frames)
-* [Mailing List](https://groups.google.com/group/ronin-ruby)
-* [irc.freenode.net #ronin](http://ronin-ruby.github.com/irc/)
+* [Source](https://github.com/ronin-rb/ronin-web)
+* [Issues](https://github.com/ronin-rb/ronin-web/issues)
+* [Documentation](http://rubydoc.info/github/ronin-rb/ronin-web/frames)
+* [Mailing List](https://groups.google.com/group/ronin-rb)
+* [irc.freenode.net #ronin](http://ronin-rb.github.com/irc/)
 
 ## Description
 
@@ -146,7 +146,7 @@ Serve files via a Web Server:
 
 ### Edge
 
-    $ git clone git://github.com/ronin-ruby/ronin-web.git
+    $ git clone git://github.com/ronin-rb/ronin-web.git
     $ cd ronin-web/
     $ bundle install
     $ ./bin/ronin-web
@@ -175,10 +175,10 @@ along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 
 [1]: http://rubydoc.info/gems/nokogiri/frames
 [2]: http://rubydoc.info/gems/mechanize/frames
-[3]: https://github.com/ronin-ruby/ronin-web/blob/master/data/ronin/web/user_agents.yml
+[3]: https://github.com/ronin-rb/ronin-web/blob/master/data/ronin/web/user_agents.yml
 [4]: http://rubydoc.info/gems/mechanize/1.0.0/Mechanize
 
-[Ronin]: http://ronin-ruby.github.com/
+[Ronin]: http://ronin-rb.github.com/
 [Ruby]: http://www.ruby-lang.org
 [nokogiri]: https://github.com/tenderlove/nokogiri
 [libxml2]: http://xmlsoft.org/
@@ -188,5 +188,5 @@ along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 [rack]: https://github.com/rack/rack
 [sinatra]: https://github.com/sinatra/sinatra
 [data_paths]: https://github.com/postmodern/data_paths
-[ronin-support]: https://github.com/ronin-ruby/ronin-support
-[ronin]: https://github.com/ronin-ruby/ronin
+[ronin-support]: https://github.com/ronin-rb/ronin-support
+[ronin]: https://github.com/ronin-rb/ronin
