@@ -171,7 +171,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
+along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 
 [1]: http://rubydoc.info/gems/nokogiri/frames
 [2]: http://rubydoc.info/gems/mechanize/frames
@@ -179,7 +179,7 @@ along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 [4]: http://rubydoc.info/gems/mechanize/1.0.0/Mechanize
 
 [Ronin]: https://ronin-rb.dev
-[Ruby]: http://www.ruby-lang.org
+[Ruby]: https://www.ruby-lang.org
 [nokogiri]: https://github.com/tenderlove/nokogiri
 [libxml2]: http://xmlsoft.org/
 [libxslt]: http://xmlsoft.org/XSLT/
