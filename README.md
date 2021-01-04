@@ -3,7 +3,10 @@
 * [Source](https://github.com/ronin-rb/ronin-web)
 * [Issues](https://github.com/ronin-rb/ronin-web/issues)
 * [Documentation](https://ronin-rb.dev/docs/ronin-web/frames)
-* [IRC](https://ronin-rb.dev/irc/)
+* [Slack](https://ronin-rb.slack.com) |
+  [Discord](https://discord.gg/F5Ap9B2N) |
+  [Twitter](https://twitter.com/ronin_rb) |
+  [IRC](https://ronin-rb.dev/irc/)
 
 ## Description
 
