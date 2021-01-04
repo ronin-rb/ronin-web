@@ -143,12 +143,16 @@ Serve files via a Web Server:
 
     $ gem install ronin-web
 
-### Edge
+## Development
 
-    $ git clone git://github.com/ronin-rb/ronin-web.git
-    $ cd ronin-web/
-    $ bundle install
-    $ ./bin/ronin-web
+1. [Fork It!](https://github.com/ronin-rb/ronin-web/fork)
+2. Clone It!
+3. `cd ronin-web`
+4. `bundle install`
+5. `git checkout -b my_feature`
+6. Code It!
+7. `bundle exec rake spec`
+8. `git push origin my_feature`
 
 ## License
 
