@@ -17,6 +17,11 @@ end
 # gem 'ronin-support',	'~> 0.4', git: "#{RONIN_URI}/ronin-support.git"
 # gem 'ronin',		      '~> 1.4', git: "#{RONIN_URI}/ronin.git"
 
+# XXX: dep in webrick for mechanize for Ruby 3.0
+platform :ruby do
+  gem 'webrick' if RUBY_VERSION >= '3.0'
+end
+
 group :test do
   gem 'rack-test',    '~> 0.6'
 end
