@@ -4,7 +4,7 @@ require 'ronin/web/mechanize'
 describe Web::Mechanize do
   describe "#initialize" do
     describe ":user_agent" do
-      before(:all) do
+      before do
         Web.user_agent = 'test'
       end
 
@@ -36,7 +36,7 @@ describe Web::Mechanize do
         Network::HTTP::Proxy.new(host: host, port: port)
       }
 
-      before(:all) do
+      before do
         Web.proxy = {host: 'www.example.com', port: port}
       end
 
