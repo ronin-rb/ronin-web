@@ -6,8 +6,6 @@
 * [Mailing List](https://groups.google.com/group/ronin-ruby)
 * [irc.freenode.net #ronin](http://ronin-ruby.github.com/irc/)
 
-[![Build Status](https://secure.travis-ci.org/ronin-ruby/ronin-web.png?branch=master)](https://travis-ci.org/ronin-ruby/ronin-web)
-
 ## Description
 
 {Ronin::Web} is a Ruby library for [Ronin] that provides support for web
