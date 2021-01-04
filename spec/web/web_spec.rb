@@ -76,18 +76,27 @@ describe Web do
     end
   end
 
-  describe "#user_agent" do
-    it "should provide a default User-Agent" do
+  describe "user_agent" do
+    it "should be nil by default" do
       expect(Web.user_agent).to be_nil
     end
+  end
 
-    it "should allow setting of the User-Agent string using an alias" do
-      Web.user_agent_alias = 'Mac FireFox'
+  describe "user_agent_alias=" do
+    context "when given an User-Agent alias" do
+      let(:user_agent_alias) { 'Mac Firefox' }
+      let(:expected_user_agent) do
+        Mechanize::AGENT_ALIASES.fetch(user_agent_alias)
+      end
 
-      expect(Web.user_agent).to eq("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6")
+      before { Web.user_agent_alias = user_agent_alias }
+
+      it "should set Web.user_agent based on the given User-Agent alias" do
+        expect(Web.user_agent).to eq(expected_user_agent)
+      end
+
+      after { Web.user_agent = nil }
     end
-
-    after { Web.user_agent = nil }
   end
 
   describe "#open", :network do
