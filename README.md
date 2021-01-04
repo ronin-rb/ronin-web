@@ -2,7 +2,7 @@
 
 * [Source](https://github.com/ronin-rb/ronin-web)
 * [Issues](https://github.com/ronin-rb/ronin-web/issues)
-* [Documentation](http://rubydoc.info/github/ronin-rb/ronin-web/frames)
+* [Documentation](https://ronin-rb.dev/docs/ronin-web/frames)
 * [irc.freenode.net #ronin](https://ronin-rb.dev/irc/)
 
 ## Description
