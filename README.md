@@ -178,7 +178,7 @@ along with Ronin.  If not, see <http://www.gnu.org/licenses/>.
 [3]: https://github.com/ronin-rb/ronin-web/blob/master/data/ronin/web/user_agents.yml
 [4]: http://rubydoc.info/gems/mechanize/1.0.0/Mechanize
 
-[Ronin]: http://ronin-rb.github.com/
+[Ronin]: https://ronin-rb.dev
 [Ruby]: http://www.ruby-lang.org
 [nokogiri]: https://github.com/tenderlove/nokogiri
 [libxml2]: http://xmlsoft.org/

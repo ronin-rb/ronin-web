@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ronin/web/web'
 
 describe Web do
- let(:url) { 'http://ronin-ruby.github.com/' }
+ let(:url) { 'https://ronin-rb.dev/' }
  let(:title) { 'Ronin' }
 
   it "should have a VERSION constant" do
