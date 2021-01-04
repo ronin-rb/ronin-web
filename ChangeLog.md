@@ -22,6 +22,7 @@
   * Added {Ronin::Web::Server::Helpers::ClassMethods#directories}.
 * Renamed `Ronin::Helpers::Web` to {Ronin::Network::Mixins::Web}.
 * Renamed `Ronin::Web::Server::Proxy` to {Ronin::Web::Proxy}.
+* Moved `Ronin::Scanners::Web` into [ronin-scanners].
 * Made {Ronin::Web.agent} persistent.
 * Switched from [Jeweler](https://github.com/technicalpickles/jeweler)
   [rubygems-tasks](http://github.com/postmodern/rubygems-tasks) and to
@@ -129,3 +130,4 @@
 [data_paths]: https://github.com/postmodern/data_paths
 [ronin-support]: https://github.com/ronin-ruby/ronin-support
 [ronin]: https://github.com/ronin-ruby/ronin
+[ronin-scanners]: https://github.com/ronin-ruby/ronin-scanners
