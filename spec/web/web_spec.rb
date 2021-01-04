@@ -9,7 +9,7 @@ describe Web do
     expect(Web.const_defined?('VERSION')).to eq(true)
   end
 
-  describe "html" do
+  describe ".html" do
     it "should be able to parse HTML" do
       doc = Web.html(%{
         <html>
@@ -21,7 +21,7 @@ describe Web do
     end
   end
 
-  describe "build_html" do
+  describe ".build_html" do
     it "should be able to build HTML documents" do
       doc = Web.build_html do
         html {
@@ -35,7 +35,7 @@ describe Web do
     end
   end
 
-  describe "html" do
+  describe ".html" do
     it "should be able to parse XML" do
       doc = Web.html(%{
         <?xml version="1.0"?>
@@ -48,7 +48,7 @@ describe Web do
     end
   end
 
-  describe "build_xml" do
+  describe ".build_xml" do
     it "should be able to build XML documents" do
       doc = Web.build_xml do
         root {
@@ -60,7 +60,7 @@ describe Web do
     end
   end
 
-  describe "proxy" do
+  describe ".proxy" do
     it "should have a default proxy" do
       expect(Web.proxy).not_to be_nil
     end
@@ -70,19 +70,19 @@ describe Web do
     end
   end
 
-  describe "user_agent_aliases" do
+  describe ".user_agent_aliases" do
     it "should provide User-Agent aliases" do
       expect(Web.user_agent_aliases).not_to be_empty
     end
   end
 
-  describe "user_agent" do
+  describe ".user_agent" do
     it "should be nil by default" do
       expect(Web.user_agent).to be_nil
     end
   end
 
-  describe "user_agent_alias=" do
+  describe ".user_agent_alias=" do
     context "when given an User-Agent alias" do
       let(:user_agent_alias) { 'Mac Firefox' }
       let(:expected_user_agent) do
@@ -99,7 +99,7 @@ describe Web do
     end
   end
 
-  describe "#open", :network do
+  describe ".open", :network do
     it "should open URLs as temporary files" do
       file = Web.open(url)
 
@@ -107,13 +107,13 @@ describe Web do
     end
   end
 
-  describe "agent" do
+  describe ".agent" do
     it "should be persistent" do
       expect(Web.agent.object_id).to eq(Web.agent.object_id)
     end
   end
 
-  describe "get", :network do
+  describe ".get", :network do
     it "should be able to get Mechanize pages" do
       page = Web.get(url)
 
@@ -122,7 +122,7 @@ describe Web do
     end
   end
 
-  describe "get_body", :network do
+  describe ".get_body", :network do
     it "should be able to get the bodies of Mechanize pages" do
       body = Web.get_body(url)
 
