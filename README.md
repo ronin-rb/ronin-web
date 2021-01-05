@@ -1,4 +1,4 @@
-# Ronin Web
+# ronin-web
 
 * [Source](https://github.com/ronin-rb/ronin-web)
 * [Issues](https://github.com/ronin-rb/ronin-web/issues)
