@@ -1,6 +1,7 @@
 # ronin-web
 
 [![CI](https://github.com/ronin-rb/ronin-web/actions/workflows/ruby.yml/badge.svg)](https://github.com/ronin-rb/ronin-web/actions/workflows/ruby.yml)
+[![Code Climate](https://codeclimate.com/github/ronin-rb/ronin-web.svg)](https://codeclimate.com/github/ronin-rb/ronin-web)
 
 * [Source](https://github.com/ronin-rb/ronin-web)
 * [Issues](https://github.com/ronin-rb/ronin-web/issues)
