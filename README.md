@@ -12,8 +12,8 @@
 
 ## Description
 
-{Ronin::Web} is a Ruby library for [Ronin] that provides support for web
-scraping and spidering functionality.
+{Ronin::Web} is a Ruby library for [Ronin][ronin-rb] that provides support for
+web scraping and spidering functionality.
 
 ## Features
 
@@ -186,15 +186,16 @@ along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 [3]: https://github.com/ronin-rb/ronin-web/blob/master/data/ronin/web/user_agents.yml
 [4]: http://rubydoc.info/gems/mechanize/1.0.0/Mechanize
 
-[Ronin]: https://ronin-rb.dev
+[ronin-rb]: https://ronin-rb.dev
 [Ruby]: https://www.ruby-lang.org
-[nokogiri]: https://github.com/tenderlove/nokogiri
+
+[nokogiri]: https://github.com/sparklemotion/nokogiri#readme
 [libxml2]: http://xmlsoft.org/
 [libxslt]: http://xmlsoft.org/XSLT/
-[mechanize]: https://github.com/tenderlove/mechanize
-[spidr]: https://github.com/postmodern/spidr
-[rack]: https://github.com/rack/rack
-[sinatra]: https://github.com/sinatra/sinatra
-[data_paths]: https://github.com/postmodern/data_paths
-[ronin-support]: https://github.com/ronin-rb/ronin-support
-[ronin]: https://github.com/ronin-rb/ronin
+[mechanize]: https://github.com/tenderlove/mechanize#readme
+[spidr]: https://github.com/postmodern/spidr#readme
+[rack]: https://github.com/rack/rack#readme
+[sinatra]: https://github.com/sinatra/sinatra#readme
+[data_paths]: https://github.com/postmodern/data_paths#readme
+[ronin-support]: https://github.com/ronin-rb/ronin-support#readme
+[ronin]: https://github.com/ronin-rb/ronin#readme
