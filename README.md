@@ -12,8 +12,11 @@
 
 ## Description
 
-{Ronin::Web} is a Ruby library for [Ronin][ronin-rb] that provides support for
-web scraping and spidering functionality.
+ronin-web is a Ruby library that provides support for web scraping and
+spidering functionality.
+
+ronin-web is part of the [ronin-rb] project, a [Ruby] toolkit for security
+research and development.
 
 ## Features
 
