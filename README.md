@@ -112,7 +112,6 @@ Build a XML document:
 * [nokogiri-ext] ~> 0.1
 * [nokogiri-diff] ~> 0.2
 * [mechanize] ~> 2.0
-* [data\_paths] ~> 0.3
 * [ronin-support] ~> 0.4
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
@@ -167,7 +166,6 @@ along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 [libxml2]: http://xmlsoft.org/
 [libxslt]: http://xmlsoft.org/XSLT/
 [mechanize]: https://github.com/tenderlove/mechanize#readme
-[data_paths]: https://github.com/postmodern/data_paths#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
 [ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme

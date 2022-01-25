@@ -20,15 +20,9 @@
 # along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'data_paths'
-
 module Ronin
   module Web
     module Config
-      include DataPaths
-      extend DataPaths::Finders
-
-      register_data_path File.join(File.dirname(__FILE__),'..','..','..','data')
     end
   end
 end

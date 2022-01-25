@@ -20,7 +20,6 @@ dependencies:
   nokogiri-ext: ~> 0.1
   nokogiri-diff: ~> 0.2
   mechanize: ~> 2.0
-  data_paths: ~> 0.3
   # Ronin dependencies:
   ronin-support: ~> 0.4
   ronin-web-server: ~> 0.1
