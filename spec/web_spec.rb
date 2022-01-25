@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'ronin/web/web'
+require 'ronin/web'
 
 describe Ronin::Web do
  let(:url) { 'https://ronin-rb.dev/' }

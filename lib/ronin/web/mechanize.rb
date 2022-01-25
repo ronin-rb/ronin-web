@@ -20,7 +20,7 @@
 # along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/web'
+require 'ronin/web'
 require 'ronin/network/http/proxy'
 
 require 'mechanize'
