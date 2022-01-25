@@ -116,7 +116,6 @@ Build a XML document:
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
 * [ronin-web-user_agents] ~> 0.1
-* [ronin] ~> 1.4
 
 ## Install
 
