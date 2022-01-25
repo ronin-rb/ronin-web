@@ -25,8 +25,6 @@ research and development.
 * Provides popular [User Agent strings][3].
 * Integrates [Spidr][spidr] into
   {Ronin::Web::Spider}.
-* Provides {Ronin::Web::Server}, a [Sinatra][sinatra] based Web Server.
-* Provides {Ronin::Web::Proxy}, a [Sinatra][sinatra] based Web Proxy.
 
 ## Synopsis
 
@@ -120,19 +118,6 @@ Spider a web site:
       end
     end
 
-Serve files via a Web Server:
-
-    require 'ronin/web/server'
-
-    Web.server do
-      file '/opensearch.xml', '/tmp/test.xml'
-      directory '/downloads/', '/tmp/downloads/'
-    end
-
-    Web.server.get '/test' do
-      'Test 1 2 1 2'
-    end
-
 ## Requirements
 
 * [Ruby] >= 1.9.1
@@ -141,10 +126,9 @@ Serve files via a Web Server:
   * [libxslt1]
 * [mechanize] ~> 2.0
 * [spidr] ~> 0.2
-* [rack] ~> 1.3
-* [sinatra] ~> 1.3
 * [data\_paths] ~> 0.3
 * [ronin-support] ~> 0.4
+* [ronin-web-server] ~> 0.1
 * [ronin] ~> 1.4
 
 ## Install
@@ -197,8 +181,7 @@ along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 [libxslt]: http://xmlsoft.org/XSLT/
 [mechanize]: https://github.com/tenderlove/mechanize#readme
 [spidr]: https://github.com/postmodern/spidr#readme
-[rack]: https://github.com/rack/rack#readme
-[sinatra]: https://github.com/sinatra/sinatra#readme
 [data_paths]: https://github.com/postmodern/data_paths#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
+[ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
 [ronin]: https://github.com/ronin-rb/ronin#readme

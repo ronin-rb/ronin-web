@@ -15,6 +15,8 @@ end
 
 # Ronin dependencies
 # gem 'ronin-support',	'~> 0.4', git: "#{RONIN_URI}/ronin-support.git"
+gem 'ronin-web-server',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-server.git",
+                                  branch: 'main'
 # gem 'ronin',		      '~> 1.4', git: "#{RONIN_URI}/ronin.git"
 
 # XXX: dep in webrick for mechanize for Ruby 3.0
