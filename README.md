@@ -157,7 +157,6 @@ along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 
 [1]: http://rubydoc.info/gems/nokogiri/frames
 [2]: http://rubydoc.info/gems/mechanize/frames
-[3]: https://github.com/ronin-rb/ronin-web/blob/master/data/ronin/web/user_agents.yml
 [4]: http://rubydoc.info/gems/mechanize/1.0.0/Mechanize
 
 [ronin-rb]: https://ronin-rb.dev
