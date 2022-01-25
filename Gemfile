@@ -33,10 +33,11 @@ gem 'ronin-web-user_agents',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-user_agents.
 
 group :development do
   gem 'rake'
-
   gem 'rubygems-tasks', '~> 0.1'
+
   gem 'rspec',          '~> 3.0'
   gem 'rack-test',      '~> 0.6'
 
   gem 'kramdown',       '~> 2.0'
+  gem 'yard',           '~> 0.9'
 end
