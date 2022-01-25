@@ -25,8 +25,3 @@ require 'ronin/web/spider'
 require 'ronin/web/server'
 require 'ronin/web/proxy'
 require 'ronin/web/version'
-require 'ronin/config'
-
-module Ronin
-  Config.load :web
-end
