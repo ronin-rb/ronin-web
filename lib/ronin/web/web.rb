@@ -356,7 +356,7 @@ module Ronin
         headers[:progress_proc] = progress_proc
       end
 
-      return Kernel.open(url,headers)
+      return URI.open(url,headers)
     end
 
     #
