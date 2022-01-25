@@ -23,6 +23,7 @@ dependencies:
   ronin-support: ~> 0.4
   ronin-web-server: ~> 0.1
   ronin-web-spider: ~> 0.1
+  ronin-web-user_agents: ~> 0.1
   ronin: ~> 1.4
 
 development_dependencies:

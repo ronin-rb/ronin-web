@@ -22,7 +22,6 @@ research and development.
 
 * HTML/XML parsing/building (using [Nokogiri][1]).
 * Automated Web Browsing (using [Mechanize][2])
-* Provides popular [User Agent strings][3].
 
 ## Synopsis
 
@@ -115,6 +114,7 @@ Build a XML document:
 * [ronin-support] ~> 0.4
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
+* [ronin-web-user_agents] ~> 0.1
 * [ronin] ~> 1.4
 
 ## Install
@@ -170,4 +170,5 @@ along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
 [ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
+[ronin-web-user_agents]: https://github.com/ronin-rb/ronin-web-user_agents#readme
 [ronin]: https://github.com/ronin-rb/ronin#readme
