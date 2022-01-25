@@ -27,81 +27,96 @@ research and development.
 
 Start the Ronin console with Ronin Web preloaded:
 
-    $ ronin-web
+```shell
+$ ronin-web
+```
 
 ## Examples
 
 Get a web-page:
 
-    Web.get('http://www.rubyinside.com/')
+```ruby
+Web.get('http://www.rubyinside.com/')
+```
 
 Get only the body of the web-page:
 
-    Web.get_body('http://www.rubyinside.com/')
+```ruby
+Web.get_body('http://www.rubyinside.com/')
+```
 
 Get a [Mechanize agent][Mechanize]:
 
-    agent = Web.agent
+```ruby
+agent = Web.agent
+```
 
 Parse HTML:
 
-    Web.html(open('some_file.html'))
-    # => <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-    # <html>
-    #   <head>
-    #     <script type="text/javascript" src="redirect.js"></script>
-    #   </head>
-    # </html>
+```ruby
+Web.html(open('some_file.html'))
+# => <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+# <html>
+#   <head>
+#     <script type="text/javascript" src="redirect.js"></script>
+#   </head>
+# </html>
+```
 
 Build a HTML document:
 
-    doc = Web.build_html do
-      html {
-        head {
-          script(:type => 'text/javascript', :src => 'redirect.js')
-        }
-      }
-    end
-    
-    puts doc.to_html
-    # <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-    # <html><head><script src="redirect.js" type="text/javascript"></script></head></html>
+```ruby
+doc = Web.build_html do
+  html {
+    head {
+      script(:type => 'text/javascript', :src => 'redirect.js')
+    }
+  }
+end
+
+puts doc.to_html
+# <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+# <html><head><script src="redirect.js" type="text/javascript"></script></head></html>
+```
 
 Parse XML:
 
-    Web.xml(some_text)
-    # => <?xml version="1.0"?>
-    # <users>
-    #   <user>
-    #     <name>admin</name>
-    #     <password>0mni</password>
-    #   </user>
-    # </users>
-
+```ruby
+Web.xml(some_text)
+# => <?xml version="1.0"?>
+# <users>
+#   <user>
+#     <name>admin</name>
+#     <password>0mni</password>
+#   </user>
+# </users>
+```
 
 Build a XML document:
 
-    doc = Web.build_xml do
-      playlist {
-        mp3 {
-          file { text('02 THE WAIT.mp3') }
-          artist { text('Evil Nine') }
-          track { text('The Wait feat David Autokratz') }
-          duration { text('1000000000') }
-        }
-      }
-    end
-    
-    puts doc.to_xml
-    # <?xml version="1.0"?>
-    # <playlist>
-    #   <mp3>
-    #     <file>02 THE WAIT.mp3</file>
-    #     <artist>Evil Nine</artist>
-    #     <track>The Wait feat David Autokratz</track>
-    #     <duration>1000000000</duration>
-    #   </mp3>
-    # </playlist>
+```ruby
+doc = Web.build_xml do
+  playlist {
+    mp3 {
+      file { text('02 THE WAIT.mp3') }
+      artist { text('Evil Nine') }
+      track { text('The Wait feat David Autokratz') }
+      duration { text('1000000000') }
+    }
+  }
+end
+
+puts doc.to_xml
+# <?xml version="1.0"?>
+# <playlist>
+#   <mp3>
+#     <file>02 THE WAIT.mp3</file>
+#     <artist>Evil Nine</artist>
+#     <track>The Wait feat David Autokratz</track>
+#     <duration>1000000000</duration>
+#   </mp3>
+# </playlist>
+```
 
 ## Requirements
 
@@ -119,7 +134,9 @@ Build a XML document:
 
 ## Install
 
-    $ gem install ronin-web
+```shell
+$ gem install ronin-web
+```
 
 ## Development
 
