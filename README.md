@@ -12,8 +12,7 @@
 
 ## Description
 
-ronin-web is a Ruby library that provides support for web scraping and
-spidering functionality.
+ronin-web is a collection of useful web helper methods and commands.
 
 ronin-web is part of the [ronin-rb] project, a [Ruby] toolkit for security
 research and development.
@@ -151,8 +150,7 @@ $ gem install ronin-web
 
 ## License
 
-ronin-web - A Ruby library for Ronin that provides support for web
-scraping and spidering functionality.
+ronin-web - A collection of useful web helper methods and commands.
 
 Copyright (c) 2006-2021 Hal Brodigan (postmodern.mod3 at gmail.com)
 

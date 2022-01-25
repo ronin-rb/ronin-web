@@ -1,6 +1,5 @@
 #
-# ronin-web - A Ruby library for Ronin that provides support for web
-# scraping and spidering functionality.
+# ronin-web - A collection of useful web helper methods and commands.
 #
 # Copyright (c) 2006-2021 Hal Brodigan (postmodern.mod3 at gmail.com)
 #
