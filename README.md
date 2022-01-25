@@ -110,6 +110,7 @@ Build a XML document:
   * [libxml2]
   * [libxslt1]
 * [nokogiri-ext] ~> 0.1
+* [nokogiri-diff] ~> 0.2
 * [mechanize] ~> 2.0
 * [data\_paths] ~> 0.3
 * [ronin-support] ~> 0.4
@@ -164,6 +165,7 @@ along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 
 [nokogiri]: https://github.com/sparklemotion/nokogiri#readme
 [nokogiri-ext]: https://github.com/postmodern/nokogiri-ext#readme
+[nokogiri-diff]: https://github.com/postmodern/nokogiri-diff#readme
 [libxml2]: http://xmlsoft.org/
 [libxslt]: http://xmlsoft.org/XSLT/
 [mechanize]: https://github.com/tenderlove/mechanize#readme
