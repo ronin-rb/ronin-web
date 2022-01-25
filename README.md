@@ -105,7 +105,7 @@ Build a XML document:
 
 ## Requirements
 
-* [Ruby] >= 1.9.1
+* [Ruby] >= 2.7.0
 * [nokogiri] ~> 1.4
   * [libxml2]
   * [libxslt1]
