@@ -4,6 +4,11 @@ RONIN_URI  = 'https://github.com/ronin-rb'
 
 gemspec
 
+# XXX: dep in webrick for mechanize for Ruby 3.0
+platform :ruby do
+  gem 'webrick' if RUBY_VERSION >= '3.0'
+end
+
 platforms :jruby do
   gem 'jruby-openssl', '~> 0.7'
 end
@@ -25,11 +30,6 @@ gem 'ronin-web-user_agents',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-user_agents.
                                         branch: 'main'
 
 # gem 'ronin',		      '~> 1.4', git: "#{RONIN_URI}/ronin.git"
-
-# XXX: dep in webrick for mechanize for Ruby 3.0
-platform :ruby do
-  gem 'webrick' if RUBY_VERSION >= '3.0'
-end
 
 group :test do
   gem 'rack-test',    '~> 0.6'
