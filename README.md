@@ -23,8 +23,6 @@ research and development.
 * HTML/XML parsing/building (using [Nokogiri][1]).
 * Automated Web Browsing (using [Mechanize][2])
 * Provides popular [User Agent strings][3].
-* Integrates [Spidr][spidr] into
-  {Ronin::Web::Spider}.
 
 ## Synopsis
 
@@ -106,18 +104,6 @@ Build a XML document:
     #   </mp3>
     # </playlist>
 
-Spider a web site:
-
-    Web::Spider.host('www.example.com') do |spider|
-      spider.every_url do |url|
-        # ...
-      end
-
-      spider.every_page do |page|
-        # ...
-      end
-    end
-
 ## Requirements
 
 * [Ruby] >= 1.9.1
@@ -125,10 +111,10 @@ Spider a web site:
   * [libxml2]
   * [libxslt1]
 * [mechanize] ~> 2.0
-* [spidr] ~> 0.2
 * [data\_paths] ~> 0.3
 * [ronin-support] ~> 0.4
 * [ronin-web-server] ~> 0.1
+* [ronin-web-spider] ~> 0.1
 * [ronin] ~> 1.4
 
 ## Install
@@ -180,8 +166,8 @@ along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 [libxml2]: http://xmlsoft.org/
 [libxslt]: http://xmlsoft.org/XSLT/
 [mechanize]: https://github.com/tenderlove/mechanize#readme
-[spidr]: https://github.com/postmodern/spidr#readme
 [data_paths]: https://github.com/postmodern/data_paths#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
+[ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
 [ronin]: https://github.com/ronin-rb/ronin#readme

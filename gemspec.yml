@@ -18,11 +18,11 @@ required_ruby_version: ">= 1.9.1"
 dependencies:
   nokogiri: ~> 1.4
   mechanize: ~> 2.0
-  spidr: ~> 0.2
   data_paths: ~> 0.3
   # Ronin dependencies:
   ronin-support: ~> 0.4
   ronin-web-server: ~> 0.1
+  ronin-web-spider: ~> 0.1
   ronin: ~> 1.4
 
 development_dependencies:
