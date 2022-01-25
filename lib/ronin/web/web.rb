@@ -53,7 +53,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.html(body)
+    def self.html(body)
       doc = Nokogiri::HTML(body)
 
       yield doc if block_given?
@@ -84,7 +84,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.build_html(&block)
+    def self.build_html(&block)
       Nokogiri::HTML::Builder.new(&block)
     end
 
@@ -108,7 +108,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.xml(body)
+    def self.xml(body)
       doc = Nokogiri::XML(body)
 
       yield doc if block_given?
@@ -136,7 +136,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.build_xml(&block)
+    def self.build_xml(&block)
       Nokogiri::XML::Builder.new(&block)
     end
 
@@ -150,7 +150,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.proxy
+    def self.proxy
       (@proxy ||= nil) || Network::HTTP.proxy
     end
 
@@ -167,7 +167,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.proxy=(new_proxy)
+    def self.proxy=(new_proxy)
       @proxy = Network::HTTP::Proxy.create(new_proxy)
     end
 
@@ -181,7 +181,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.user_agents
+    def self.user_agents
       @user_agents ||= UserAgents.new
     end
 
@@ -196,7 +196,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.user_agent_aliases
+    def self.user_agent_aliases
       Mechanize::AGENT_ALIASES
     end
 
@@ -210,7 +210,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.user_agent
+    def self.user_agent
       (@user_agent ||= nil) || Network::HTTP.user_agent
     end
 
@@ -248,7 +248,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.user_agent=(value)
+    def self.user_agent=(value)
       @user_agent = case value
                     when String then user_agents.fetch(value,value)
                     when nil    then nil
@@ -273,7 +273,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.user_agent_alias=(name)
+    def self.user_agent_alias=(name)
       @user_agent = Web.user_agent_aliases[name.to_s]
     end
 
@@ -324,7 +324,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.open(url,options={})
+    def self.open(url,options={})
       user_agent_alias = options.delete(:user_agent_alias)
       proxy = Network::HTTP::Proxy.create(
         options.delete(:proxy) || Web.proxy
@@ -369,7 +369,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.agent
+    def self.agent
       @agent ||= Mechanize.new do |agent|
         agent.user_agent = Web.user_agent
 
@@ -416,7 +416,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.get(url,parameters={},headers={},&block)
+    def self.get(url,parameters={},headers={},&block)
       Web.agent.get(url,parameters,nil,headers,&block)
     end
 
@@ -454,7 +454,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.get_body(url,parameters={},headers={})
+    def self.get_body(url,parameters={},headers={})
       body = Web.get(url,parameters,headers).body
 
       yield body if block_given?
@@ -491,7 +491,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.post(url,query={},headers={},&block)
+    def self.post(url,query={},headers={},&block)
       Web.agent.post(url,query,headers={},&block)
     end
 
@@ -530,7 +530,7 @@ module Ronin
     #
     # @api public
     #
-    def Web.post_body(url,query={},headers={})
+    def self.post_body(url,query={},headers={})
       body = Web.post(url,query,headers).body
 
       yield body if block_given?
