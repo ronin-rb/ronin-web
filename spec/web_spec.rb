@@ -1,17 +1,17 @@
 require 'spec_helper'
 require 'ronin/web/web'
 
-describe Web do
+describe Ronin::Web do
  let(:url) { 'https://ronin-rb.dev/' }
  let(:title) { 'Ronin' }
 
   it "should have a VERSION constant" do
-    expect(Web.const_defined?('VERSION')).to eq(true)
+    expect(subject.const_defined?('VERSION')).to eq(true)
   end
 
   describe ".html" do
     it "should be able to parse HTML" do
-      doc = Web.html(%{
+      doc = subject.html(%{
         <html>
           <body>Hello</body>
         </html>
@@ -23,7 +23,7 @@ describe Web do
 
   describe ".build_html" do
     it "should be able to build HTML documents" do
-      doc = Web.build_html do
+      doc = subject.build_html do
         html {
           body {
             div { text("hello") }
@@ -37,7 +37,7 @@ describe Web do
 
   describe ".html" do
     it "should be able to parse XML" do
-      doc = Web.html(%{
+      doc = subject.html(%{
         <?xml version="1.0"?>
         <root>
           <stuff>Hello</stuff>
@@ -50,7 +50,7 @@ describe Web do
 
   describe ".build_xml" do
     it "should be able to build XML documents" do
-      doc = Web.build_xml do
+      doc = subject.build_xml do
         root {
           stuff(name: 'bla') { text("hello") }
         }
@@ -62,23 +62,23 @@ describe Web do
 
   describe ".proxy" do
     it "should have a default proxy" do
-      expect(Web.proxy).not_to be_nil
+      expect(subject.proxy).not_to be_nil
     end
 
     it "should disable the proxy by default" do
-      expect(Web.proxy).not_to be_enabled
+      expect(subject.proxy).not_to be_enabled
     end
   end
 
   describe ".user_agent_aliases" do
     it "should provide User-Agent aliases" do
-      expect(Web.user_agent_aliases).not_to be_empty
+      expect(subject.user_agent_aliases).not_to be_empty
     end
   end
 
   describe ".user_agent" do
     it "should be nil by default" do
-      expect(Web.user_agent).to be_nil
+      expect(subject.user_agent).to be_nil
     end
   end
 
@@ -89,19 +89,19 @@ describe Web do
         Mechanize::AGENT_ALIASES.fetch(user_agent_alias)
       end
 
-      before { Web.user_agent_alias = user_agent_alias }
+      before { subject.user_agent_alias = user_agent_alias }
 
-      it "should set Web.user_agent based on the given User-Agent alias" do
-        expect(Web.user_agent).to eq(expected_user_agent)
+      it "should set subject.user_agent based on the given User-Agent alias" do
+        expect(subject.user_agent).to eq(expected_user_agent)
       end
 
-      after { Web.user_agent = nil }
+      after { subject.user_agent = nil }
     end
   end
 
   describe ".open", :network do
     it "should open URLs as temporary files" do
-      file = Web.open(url)
+      file = subject.open(url)
 
       expect(file.read).to include(title)
     end
@@ -109,13 +109,13 @@ describe Web do
 
   describe ".agent" do
     it "should be persistent" do
-      expect(Web.agent.object_id).to eq(Web.agent.object_id)
+      expect(subject.agent.object_id).to eq(subject.agent.object_id)
     end
   end
 
   describe ".get", :network do
     it "should be able to get Mechanize pages" do
-      page = Web.get(url)
+      page = subject.get(url)
 
       expect(page.class).to eq(Mechanize::Page)
       expect(page.at('title').inner_text).to include(title)
@@ -124,7 +124,7 @@ describe Web do
 
   describe ".get_body", :network do
     it "should be able to get the bodies of Mechanize pages" do
-      body = Web.get_body(url)
+      body = subject.get_body(url)
 
       expect(body).to include(title)
     end
