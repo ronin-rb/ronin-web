@@ -20,7 +20,6 @@
 # along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/extensions'
 require 'ronin/web/web'
 require 'ronin/web/spider'
 require 'ronin/web/server'
