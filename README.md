@@ -20,8 +20,8 @@ research and development.
 
 ## Features
 
-* HTML/XML parsing/building (using [Nokogiri][1]).
-* Automated Web Browsing (using [Mechanize][2])
+* HTML/XML parsing/building (using [Nokogiri][Nokogiri]).
+* Automated Web Browsing (using [Mechanize][Mechanize])
 
 ## Synopsis
 
@@ -39,7 +39,7 @@ Get only the body of the web-page:
 
     Web.get_body('http://www.rubyinside.com/')
 
-Get a [Mechanize agent][4]:
+Get a [Mechanize agent][Mechanize]:
 
     agent = Web.agent
 
@@ -155,9 +155,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Ronin.  If not, see <https://www.gnu.org/licenses/>.
 
-[1]: http://rubydoc.info/gems/nokogiri/frames
-[2]: http://rubydoc.info/gems/mechanize/frames
-[4]: http://rubydoc.info/gems/mechanize/1.0.0/Mechanize
+[Nokogiri]: http://rubydoc.info/gems/nokogiri/frames
+[Mechanize]: http://rubydoc.info/gems/mechanize/frames
 
 [ronin-rb]: https://ronin-rb.dev
 [Ruby]: https://www.ruby-lang.org
