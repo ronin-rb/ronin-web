@@ -17,6 +17,7 @@ required_ruby_version: ">= 1.9.1"
 
 dependencies:
   nokogiri: ~> 1.4
+  nokogiri-ext: ~> 0.1
   mechanize: ~> 2.0
   data_paths: ~> 0.3
   # Ronin dependencies:
