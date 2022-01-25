@@ -274,7 +274,7 @@ module Ronin
     # @api public
     #
     def self.user_agent_alias=(name)
-      @user_agent = Web.user_agent_aliases[name.to_s]
+      @user_agent = user_agent_aliases[name.to_s]
     end
 
     #
@@ -327,7 +327,7 @@ module Ronin
     def self.open(url,options={})
       user_agent_alias = options.delete(:user_agent_alias)
       proxy = Network::HTTP::Proxy.create(
-        options.delete(:proxy) || Web.proxy
+        options.delete(:proxy) || proxy
       )
       user = options.delete(:user)
       password = options.delete(:password)
@@ -337,7 +337,7 @@ module Ronin
       headers = Network::HTTP.headers(options)
 
       if user_agent_alias
-        headers['User-Agent'] = Web.user_agent_aliases[user_agent_alias]
+        headers['User-Agent'] = user_agent_aliases[user_agent_alias]
       end
 
       if proxy[:host]
@@ -371,9 +371,9 @@ module Ronin
     #
     def self.agent
       @agent ||= Mechanize.new do |agent|
-        agent.user_agent = Web.user_agent
+        agent.user_agent = user_agent
 
-        Web.proxy.tap do |proxy|
+        proxy.tap do |proxy|
           agent.set_proxy(proxy.host,proxy.port,proxy.user,proxy.password)
         end
       end
@@ -417,7 +417,7 @@ module Ronin
     # @api public
     #
     def self.get(url,parameters={},headers={},&block)
-      Web.agent.get(url,parameters,nil,headers,&block)
+      agent.get(url,parameters,nil,headers,&block)
     end
 
     #
@@ -455,7 +455,7 @@ module Ronin
     # @api public
     #
     def self.get_body(url,parameters={},headers={})
-      body = Web.get(url,parameters,headers).body
+      body = get(url,parameters,headers).body
 
       yield body if block_given?
       return body
@@ -492,7 +492,7 @@ module Ronin
     # @api public
     #
     def self.post(url,query={},headers={},&block)
-      Web.agent.post(url,query,headers={},&block)
+      agent.post(url,query,headers={},&block)
     end
 
     #
@@ -531,7 +531,7 @@ module Ronin
     # @api public
     #
     def self.post_body(url,query={},headers={})
-      body = Web.post(url,query,headers).body
+      body = post(url,query,headers).body
 
       yield body if block_given?
       return body
