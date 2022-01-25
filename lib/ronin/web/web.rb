@@ -27,6 +27,8 @@ require 'ronin/network/http/http'
 
 require 'uri/http'
 require 'nokogiri'
+require 'nokogiri/ext'
+require 'nokogiri/diff'
 require 'open-uri'
 
 module Ronin
