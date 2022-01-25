@@ -130,6 +130,7 @@ puts doc.to_xml
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
 * [ronin-web-user_agents] ~> 0.1
+* [ronin-core] ~> 0.1
 
 ## Install
 

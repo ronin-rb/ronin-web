@@ -29,6 +29,9 @@ gem 'ronin-web-spider',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-spider.git",
 gem 'ronin-web-user_agents',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-user_agents.git",
                                         branch: 'main'
 
+gem 'ronin-core',	'~> 0.1', git: "#{RONIN_URI}/ronin-core.git",
+                            branch: 'main'
+
 group :development do
   gem 'rake'
   gem 'rubygems-tasks', '~> 0.1'
