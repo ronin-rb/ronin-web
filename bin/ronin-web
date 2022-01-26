@@ -15,8 +15,5 @@ if File.directory?(File.join(root,'.git'))
   end
 end
 
-require 'ronin/ui/console'
-require 'ronin/ui/cli/commands/console'
-
-Ronin::UI::Console.auto_load << 'ronin/web'
-Ronin::UI::CLI::Commands::Console.start
+require 'ronin/web/cli'
+Ronin::Web::CLI.start
