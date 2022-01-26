@@ -41,4 +41,6 @@ group :development do
 
   gem 'kramdown',       '~> 2.0'
   gem 'yard',           '~> 0.9'
+
+  gem 'kramdown-man',   '~> 0.1'
 end

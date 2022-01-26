@@ -42,3 +42,6 @@ end
 
 require 'yard'
 YARD::Rake::YardocTask.new
+
+require 'kramdown/man/task'
+Kramdown::Man::Task.new
