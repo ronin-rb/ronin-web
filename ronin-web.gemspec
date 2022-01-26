@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
 
   gem.files = `git ls-files`.split($/)
   gem.files = glob[gemspec['files']] if gemspec['files']
+  gem.files += Array(gemspec['generated_files'])
 
   gem.executables = gemspec.fetch('executables') do
     glob['bin/*'].map { |path| File.basename(path) }

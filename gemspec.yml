@@ -15,6 +15,13 @@ has_yard: true
 
 required_ruby_version: ">= 2.7.0"
 
+generated_files:
+  - man/ronin-web.1
+  - man/ronin-web-diff.1
+  - man/ronin-web-server.1
+  - man/ronin-web-spider.1
+  - man/ronin-web-proxy.1
+
 dependencies:
   nokogiri: ~> 1.4
   nokogiri-ext: ~> 0.1
