@@ -21,7 +21,7 @@
 
 require 'ronin/web/spider'
 require 'ronin/web/server'
-require 'ronin/web/proxy'
+require 'ronin/web/server/proxy'
 require 'ronin/web/user_agents'
 require 'ronin/web/mechanize'
 require 'ronin/web/version'
