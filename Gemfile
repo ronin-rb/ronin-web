@@ -13,8 +13,8 @@ platforms :jruby do
   gem 'jruby-openssl', '~> 0.7'
 end
 
-gem 'nokogiri-ext', '~> 0.1', github: 'postmodern/nokogiri-ext',
-                              branch: 'main'
+# gem 'nokogiri-ext', '~> 0.1', github: 'postmodern/nokogiri-ext',
+#                               branch: 'main'
 # gem 'rack',         '~> 1.2', git: 'https://github.com/rack/rack.git'
 # gem 'sinatra',      '~> 1.2', git: 'https://github.com/sinatra/sinatra.git'
 
