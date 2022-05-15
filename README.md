@@ -126,7 +126,7 @@ puts doc.to_xml
 * [nokogiri-ext] ~> 0.1
 * [nokogiri-diff] ~> 0.2
 * [mechanize] ~> 2.0
-* [ronin-support] ~> 0.4
+* [ronin-support] ~> 1.0
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
 * [ronin-web-user_agents] ~> 0.1
