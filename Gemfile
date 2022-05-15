@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-RONIN_URI  = 'https://github.com/ronin-rb'
-
 gemspec
 
 # XXX: dep in webrick for mechanize for Ruby 3.0
@@ -15,22 +13,19 @@ end
 
 # gem 'nokogiri-ext', '~> 0.1', github: 'postmodern/nokogiri-ext',
 #                               branch: 'main'
-# gem 'rack',         '~> 1.2', git: 'https://github.com/rack/rack.git'
-# gem 'sinatra',      '~> 1.2', git: 'https://github.com/sinatra/sinatra.git'
+# gem 'rack',         '~> 1.2', github: 'rack/rack'
+# gem 'sinatra',      '~> 1.2', github: 'sinatra/sinatra'
 
 # Ronin dependencies
-# gem 'ronin-support',	'~> 0.4', git: "#{RONIN_URI}/ronin-support.git"
-gem 'ronin-web-server',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-server.git",
-                                  branch: 'main'
-
-gem 'ronin-web-spider',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-spider.git",
-                                  branch: 'main'
-
-gem 'ronin-web-user_agents',	'~> 0.1', git: "#{RONIN_URI}/ronin-web-user_agents.git",
-                                        branch: 'main'
-
-gem 'ronin-core',	'~> 0.1', git: "#{RONIN_URI}/ronin-core.git",
-                            branch: 'main'
+# gem 'ronin-support',	'~> 0.4', github: "ronin-rb/ronin-support"
+gem 'ronin-web-server',	     '~> 0.1', github: "ronin-rb/ronin-web-server",
+                                       branch: 'main'
+gem 'ronin-web-spider',	     '~> 0.1', github: "ronin-rb/ronin-web-spider",
+                                       branch: 'main'
+gem 'ronin-web-user_agents', '~> 0.1', github: "ronin-rb/ronin-web-user_agents",
+                                       branch: 'main'
+gem 'ronin-core',	           '~> 0.1', github: "ronin-rb/ronin-core",
+                                       branch: 'main'
 
 group :development do
   gem 'rake'
