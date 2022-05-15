@@ -119,7 +119,7 @@ puts doc.to_xml
 
 ## Requirements
 
-* [Ruby] >= 2.7.0
+* [Ruby] >= 3.0.0
 * [nokogiri] ~> 1.4
   * [libxml2]
   * [libxslt1]
