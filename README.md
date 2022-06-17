@@ -126,6 +126,7 @@ puts doc.to_xml
 * [nokogiri-ext] ~> 0.1
 * [nokogiri-diff] ~> 0.2
 * [mechanize] ~> 2.0
+* [open_namespace] ~> 0.4
 * [ronin-support] ~> 1.0
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
@@ -182,6 +183,7 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [libxml2]: http://xmlsoft.org/
 [libxslt]: http://xmlsoft.org/XSLT/
 [mechanize]: https://github.com/tenderlove/mechanize#readme
+[open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
 [ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
