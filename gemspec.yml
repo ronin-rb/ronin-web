@@ -18,6 +18,7 @@ required_ruby_version: ">= 3.0.0"
 generated_files:
   - man/ronin-web.1
   - man/ronin-web-diff.1
+  - man/ronin-web-html.1
   - man/ronin-web-server.1
   - man/ronin-web-spider.1
   - man/ronin-web-proxy.1
