@@ -24,6 +24,13 @@ require 'command_kit/commands/auto_load'
 
 module Ronin
   module Web
+    #
+    # The `ronin-web` command-line interface (CLI).
+    #
+    # @api private
+    #
+    # @since 1.0.0
+    #
     class CLI
 
       include CommandKit::Commands
