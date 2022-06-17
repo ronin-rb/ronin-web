@@ -21,21 +21,23 @@
 
 require 'ronin/web/spider'
 require 'ronin/web/server'
-require 'ronin/web/server/proxy'
+require 'ronin/web/proxy'
 require 'ronin/web/user_agents'
 require 'ronin/web/mechanize'
 require 'ronin/web/version'
-require 'ronin/network/http/proxy'
-require 'ronin/network/http/http'
+require 'ronin/network/http'
 
 require 'uri/http'
 require 'nokogiri'
 require 'nokogiri/ext'
 require 'nokogiri/diff'
 require 'open-uri'
+require 'open_namespace'
 
 module Ronin
   module Web
+    include OpenNamespace
+
     #
     # Parses the body of a document into a HTML document object.
     #
@@ -146,24 +148,24 @@ module Ronin
     #
     # Proxy information for {Web} to use.
     #
-    # @return [Network::HTTP::Proxy]
-    #   The Ronin Web proxy information.
+    # @return [URI::HTTP, String, nil]
+    #   The default proxy information.
     #
     # @see http://rubydoc.info/gems/ronin-support/Ronin/Network/HTTP#proxy-class_method
     #
     # @api public
     #
     def self.proxy
-      (@proxy ||= nil) || Network::HTTP.proxy
+      @proxy || Network::HTTP.proxy
     end
 
     #
     # Sets the proxy used by {Web}.
     #
-    # @param [Network::HTTP::Proxy, URI::HTTP, Hash, String] new_proxy
+    # @param [URI::HTTP, String, nil] new_proxy
     #   The new proxy information to use.
     #
-    # @return [Network::HTTP::Proxy]
+    # @return [URI::HTTP, String, nil]
     #   The new proxy.
     #
     # @since 0.3.0
@@ -171,50 +173,21 @@ module Ronin
     # @api public
     #
     def self.proxy=(new_proxy)
-      @proxy = Network::HTTP::Proxy.create(new_proxy)
-    end
-
-    #
-    # A set of common `User-Agent` strings.
-    #
-    # @return [UserAgents]
-    #   The set of `User-Agent` strings.
-    #
-    # @since 0.3.0
-    #
-    # @api public
-    #
-    def self.user_agents
-      @user_agents ||= UserAgents.new
-    end
-
-    #
-    # @return [Array]
-    #   The supported Web User-Agent Aliases.
-    #
-    # @see http://rubydoc.info/gems/mechanize/Mechanize#AGENT_ALIASES-constant
-    #
-    # @deprecated
-    #   Will be replaced by {user_agents} in 1.0.0.
-    #
-    # @api public
-    #
-    def self.user_agent_aliases
-      Mechanize::AGENT_ALIASES
+      @proxy = new_proxy
     end
 
     #
     # The User-Agent string used by {Web}.
     #
     # @return [String, nil]
-    #   The Ronin Web User-Agent
+    #   The default `User-Agent` string that `ronin-web` will use.
     #
     # @see http://rubydoc.info/gems/ronin-support/Ronin/Network/HTTP#user_agent-class_method
     #
     # @api public
     #
     def self.user_agent
-      (@user_agent ||= nil) || Network::HTTP.user_agent
+      @user_agent || Network::HTTP.user_agent
     end
 
     #
@@ -257,27 +230,6 @@ module Ronin
                     when nil    then nil
                     else             user_agents.fetch(value)
                     end
-    end
-
-    #
-    # Sets the Ronin Web User-Agent.
-    #
-    # @param [String] name
-    #   The User-Agent alias to use.
-    #
-    # @return [String]
-    #   The new User-Agent string.
-    #
-    # @see user_agent_aliases
-    #
-    # @deprecated
-    #   Will be replaced by calling {user_agent=} with a `Symbol`
-    #   and will be removed in 1.0.0.
-    #
-    # @api public
-    #
-    def self.user_agent_alias=(name)
-      @user_agent = user_agent_aliases[name.to_s]
     end
 
     #
