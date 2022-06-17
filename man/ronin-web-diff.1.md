@@ -2,23 +2,24 @@
 
 ## SYNOPSIS
 
-`ronin-web-diff` [*options*] *PAGE1* *PAGE2*
+`ronin-web-diff` [*options*] {*URL* \| *FILE*} {*URL* \| *FILE*}
 
 ## DESCRIPTION
 
-Diffs two separate webpages.
-
-## OPTIONS
+Diffs two separate webpages and prints the HTML nodes which change changed.
 
 ## ARGUMENTS
 
-*PAGE1*
-  The first web page URL or file.
+*URL*
+  A `https://` or `http://` URL of the web page to diff.
 
-*PAGE2*
-  The second web page URL or file.
+*FILE*
+  A path to the local HTML file to diff.
 
-## EXAMPLES
+## OPTIONS
+
+`-h`, `--help`
+  Print help information
 
 ## AUTHOR
 
@@ -26,4 +27,4 @@ Postmodern <postmodern.mod3@gmail.com>
 
 ## SEE ALSO
 
-ronin-web-server(1) ronin-web-spider(1) ronin-web-proxy(1) ronin-web-diff(1)
+ronin-web-html(1)

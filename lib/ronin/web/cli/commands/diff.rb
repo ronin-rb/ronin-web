@@ -20,18 +20,85 @@
 #
 
 require 'ronin/web/cli/command'
+require 'ronin/support/network/http'
+
+require 'command_kit/terminal'
+require 'nokogiri/diff'
 
 module Ronin
   module Web
     class CLI
       module Commands
+        #
+        # Diffs two web pages.
+        #
+        # ## Usage
+        #
+        #    ronin-web diff [options] {URL | FILE} {URL | FILE}
+        #
+        # ## Arguments
+        #
+        #     URL | FILE                       The original URL or file
+        #     URL | FILE                       The modified URL or file
+        #
+        # ## Options
+        #
+        #     -h, --help                       Print help information
+        # 
         class Diff < Command
+
+          include CommandKit::Terminal
+
+          usage '[options] {URL | FILE} {URL | FILE}'
+
+          argument :page1, required: true,
+                           usage:    'URL | FILE',
+                           desc:     'The original URL or file'
+
+          argument :page2, required: true,
+                           usage:    'URL | FILE',
+                           desc:     'The modified URL or file'
 
           description 'Diffs two web pges'
 
           man_page 'ronin-web-diff.1'
 
+          #
+          # Runs the `ronin-web diff` command.
+          #
+          # @param [String] page1
+          #   The URL or file path of the original page.
+          #
+          # @param [String] page2
+          #   The URL or file path of the modified page.
+          #
           def run(page1,page2)
+            doc1 = Nokogiri::HTML(read(page1))
+            doc2 = Nokogiri::HTML(read(page2))
+
+            doc1.diff(doc2) do |change,node|
+              unless change == ' '
+                puts "#{change} #{node}"
+              end
+            end
+          end
+
+          #
+          # Reads a web page.
+          #
+          # @param [String] source
+          #   The URL or file path of the web page.
+          #
+          # @return [String, File]
+          #   The contents of the web page.
+          #
+          def read(source)
+            if source.start_with?('https://') ||
+               source.start_with?('http://')
+              Support::Network::HTTP.get_body(source)
+            else
+              File.new(source)
+            end
           end
 
         end
