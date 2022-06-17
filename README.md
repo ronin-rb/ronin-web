@@ -129,6 +129,7 @@ puts doc.to_xml
 * [open_namespace] ~> 0.4
 * [ronin-support] ~> 1.0
 * [ronin-web-server] ~> 0.1
+* [ronin-web-proxy] ~> 0.1
 * [ronin-web-spider] ~> 0.1
 * [ronin-web-user_agents] ~> 0.1
 * [ronin-core] ~> 0.1
@@ -186,6 +187,7 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
+[ronin-web-proxy]: https://github.com/ronin-rb/ronin-web-proxy#readme
 [ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
 [ronin-web-user_agents]: https://github.com/ronin-rb/ronin-web-user_agents#readme
 [ronin]: https://github.com/ronin-rb/ronin#readme
