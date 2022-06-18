@@ -80,9 +80,7 @@ module Ronin
                               desc: 'Sets up Basic-Authentication' do |str|
                                 auth_user, auth_password = str.split(':',2)
 
-                                App.use(Rack::Auth::Basic, "Restricted Area") do |username,password|
-                                  username == auth_user && password == auth_password
-                                end
+                                App.basic_auth(auth_user,auth_password)
                               end
 
           option :dir, short: '-d',
@@ -120,11 +118,9 @@ module Ronin
                               usage: '/PATH:URL'
                             },
                             desc: 'Registers a 302 Found redirect at the given PATH' do |str|
-                              route_path, url = str.split(':',2)
+                              route, url = str.split(':',2)
 
-                              App.get(route_path) do
-                                redirect url
-                              end
+                              App.redirect(route,url)
                             end
 
           description 'Starts a web server'
