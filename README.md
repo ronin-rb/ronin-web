@@ -129,7 +129,6 @@ puts doc.to_xml
 * [open_namespace] ~> 0.4
 * [ronin-support] ~> 1.0
 * [ronin-web-server] ~> 0.1
-* [ronin-web-proxy] ~> 0.1
 * [ronin-web-spider] ~> 0.1
 * [ronin-web-user_agents] ~> 0.1
 * [ronin-core] ~> 0.1
