@@ -21,7 +21,7 @@
 
 require 'ronin/web/cli/command'
 require 'ronin/core/cli/logging'
-require 'ronin/web/proxy'
+require 'ronin/web/server/reverse_proxy'
 
 module Ronin
   module Web
@@ -32,7 +32,7 @@ module Ronin
         #
         # ## Usage
         #
-        #     ronin-web proxy [options] [--host HOST] [--port PORT]
+        #     ronin-web reverse-proxy [options] [--host HOST] [--port PORT]
         #
         # ## Options
         #
@@ -50,6 +50,8 @@ module Ronin
         class Proxy < Command
 
           include Core::CLI::Logging
+
+          command_name 'reverse-proxy'
 
           usage '[options] [--host HOST] [--port PORT]'
 
@@ -90,10 +92,10 @@ module Ronin
 
           description 'Starts a HTTP proxy server'
 
-          man_page 'ronin-web-proxy.1'
+          man_page 'ronin-web-reverse-proxy.1'
 
           #
-          # Initializes the `proxy` command.
+          # Initializes the `reverse-proxy` command.
           #
           # @param [Hash{Symbol => Object}] kwargs
           #   Additional keyword arguments.
@@ -106,10 +108,10 @@ module Ronin
           end
 
           #
-          # Runs the `ronin-web proxy` command.
+          # Runs the `ronin-web reverse-proxy` command.
           #
           def run
-            proxy = Ronin::Web::Proxy.new do |proxy|
+            proxy = Ronin::Web::Server::ReverseProxy.new do |proxy|
               proxy.on_request do |request|
                 puts "[#{request.ip} -> #{request.host_with_port}] #{request.request_method} #{request.url}"
 
