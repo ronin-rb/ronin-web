@@ -127,6 +127,9 @@ module Ronin
 
           man_page 'ronin-web-server.1'
 
+          #
+          # Runs the `ronin-web server` command.
+          #
           def run
             if options[:root]
               App.public_dir = options[:root]
