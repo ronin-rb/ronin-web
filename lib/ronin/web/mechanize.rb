@@ -19,8 +19,7 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web'
-require 'ronin/network/http/proxy'
+require 'ronin/web/config'
 
 require 'mechanize'
 
@@ -36,17 +35,17 @@ module Ronin
       #
       # Creates a new [Mechanize](http://mechanize.rubyforge.org/) Agent.
       #
-      # @param [Hash] options
-      #   Additional options.
-      #
-      # @option options [String] :user_agent
-      #   The User-Agent string to use.
-      #
-      # @option options [String] :user_agent_alias
-      #   The User-Agent Alias to use.
-      #
-      # @option options [Network::HTTP::Proxy, Hash, String] :proxy (Web.proxy)
+      # @param [Network::HTTP::Proxy, Hash, String] proxy
       #   Proxy information.
+      #
+      # @param [String, :random, :chrome, :chrome_linux, :chrome_macos,
+      #         :chrome_windows, :chrome_iphone, :chrome_ipad,
+      #         :chrome_android, :firefox, :firefox_linux, :firefox_macos,
+      #         :firefox_windows, :firefox_iphone, :firefox_ipad,
+      #         :firefox_android, :safari, :safari_macos, :safari_iphone,
+      #         :safari_ipad, :edge, :linux, :macos, :windows, :iphone,
+      #         :ipad, :android, nil] user_agent
+      #   The `User-Agent` string to use.
       #
       # @yield [agent]
       #   If a block is given, it will be passed the newly created Mechanize
@@ -55,26 +54,22 @@ module Ronin
       # @yieldparam [Mechanize] agent
       #   The new Mechanize agent.
       #
-      def initialize(options={})
+      def initialize(proxy: Web.proxy, user_agent: Web.user_agent)
         super()
 
-        if options[:user_agent_alias]
-          self.user_agent_alias = options[:user_agent_alias]
-        elsif options[:user_agent]
-          self.user_agent = options[:user_agent]
-        elsif Web.user_agent
-          self.user_agent = Web.user_agent
+        if proxy
+          proxy = URI(proxy)
+
+          set_proxy(proxy.host,proxy.port,proxy.user,proxy.password)
         end
 
-        proxy = Network::HTTP::Proxy.new(options[:proxy] || Web.proxy)
-
-        if proxy[:host]
-          set_proxy(
-            proxy[:host],
-            proxy[:port],
-            proxy[:user],
-            proxy[:password]
-          )
+        if user_agent
+          self.user_agent = case user_agent
+                            when Symbol
+                              Support::Network::HTTP::UserAgents[user_agent]
+                            else
+                              user_agent
+                            end
         end
 
         yield self if block_given?

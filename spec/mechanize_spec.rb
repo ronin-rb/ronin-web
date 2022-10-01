@@ -16,43 +16,43 @@ describe Ronin::Web::Mechanize do
     end
 
     context "when the :user_agent option is given" do
-      let(:user_agent) { 'test2' }
+      context "and it's a String" do
+        let(:user_agent) { 'test2' }
 
-      subject { described_class.new(user_agent: user_agent) }
+        subject { described_class.new(user_agent: user_agent) }
 
-      it "should set #user_agent to the custom User-Agent string" do
-        expect(subject.user_agent).to eq(user_agent)
+        it "should set #user_agent to the custom User-Agent string" do
+          expect(subject.user_agent).to eq(user_agent)
+        end
+      end
+
+      context "and it's a Symbol" do
+        let(:user_agent) { :chrome_linux }
+        let(:expected_user_agent) do
+          Ronin::Support::Network::HTTP::UserAgents[user_agent]
+        end
+
+        subject { described_class.new(user_agent: user_agent) }
+
+        it "should set #user_agent to the custom User-Agent alias" do
+          expect(subject.user_agent).to eq(expected_user_agent)
+        end
       end
     end
 
-    context "when the :user_agent_alias option is given" do
-      let(:user_agent_alias) { 'iPhone' }
-      let(:expected_user_agent) do
-        ::Mechanize::AGENT_ALIASES.fetch(user_agent_alias)
-      end
-
-      subject { described_class.new(user_agent_alias: user_agent_alias) }
-
-      it "should set #user_agent to the custom User-Agent alias" do
-        expect(subject.user_agent).to eq(expected_user_agent)
-      end
-    end
-
-    let(:host) { '127.0.0.1' }
-    let(:port) { 8080 }
-    let(:proxy) do
-      Ronin::Network::HTTP::Proxy.new(host: host, port: port)
-    end
+    let(:host)  { '127.0.0.1' }
+    let(:port)  { 8080 }
+    let(:proxy) { URI::HTTP.build(host: host, port: port) }
 
     context "when Web.proxy is set" do
-      before do
-        Ronin::Web.proxy = {host: 'www.example.com', port: port}
-      end
+      before { Ronin::Web.proxy = proxy }
 
       it "should set #proxy_addr and #proxy_port to Web.proxy" do
         expect(subject.proxy_addr).to eq(Ronin::Web.proxy.host)
         expect(subject.proxy_port).to eq(Ronin::Web.proxy.port)
       end
+
+      after { Ronin::Web.proxy = nil }
     end
 
     context "when the :proxy option is given" do
@@ -62,8 +62,6 @@ describe Ronin::Web::Mechanize do
         expect(subject.proxy_addr).to eq(host)
         expect(subject.proxy_port).to eq(port)
       end
-
-      after { Ronin::Web.proxy = nil }
     end
   end
 end
