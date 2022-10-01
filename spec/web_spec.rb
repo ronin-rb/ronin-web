@@ -35,9 +35,9 @@ describe Ronin::Web do
     end
   end
 
-  describe ".html" do
+  describe ".xml" do
     it "should be able to parse XML" do
-      doc = subject.html(%{
+      doc = subject.xml(%{
         <?xml version="1.0"?>
         <root>
           <stuff>Hello</stuff>
