@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ronin/web'
 
 describe Ronin::Web do
- let(:url) { 'https://ronin-rb.dev/' }
+ let(:url)   { 'https://ronin-rb.dev/' }
  let(:title) { 'Ronin' }
 
   it "should have a VERSION constant" do
@@ -60,45 +60,6 @@ describe Ronin::Web do
     end
   end
 
-  describe ".proxy" do
-    it "should have a default proxy" do
-      expect(subject.proxy).not_to be_nil
-    end
-
-    it "should disable the proxy by default" do
-      expect(subject.proxy).not_to be_enabled
-    end
-  end
-
-  describe ".user_agent_aliases" do
-    it "should provide User-Agent aliases" do
-      expect(subject.user_agent_aliases).not_to be_empty
-    end
-  end
-
-  describe ".user_agent" do
-    it "should be nil by default" do
-      expect(subject.user_agent).to be_nil
-    end
-  end
-
-  describe ".user_agent_alias=" do
-    context "when given an User-Agent alias" do
-      let(:user_agent_alias) { 'Mac Firefox' }
-      let(:expected_user_agent) do
-        Mechanize::AGENT_ALIASES.fetch(user_agent_alias)
-      end
-
-      before { subject.user_agent_alias = user_agent_alias }
-
-      it "should set subject.user_agent based on the given User-Agent alias" do
-        expect(subject.user_agent).to eq(expected_user_agent)
-      end
-
-      after { subject.user_agent = nil }
-    end
-  end
-
   describe ".open", :network do
     it "should open URLs as temporary files" do
       file = subject.open(url)
@@ -108,8 +69,12 @@ describe Ronin::Web do
   end
 
   describe ".agent" do
-    it "should be persistent" do
-      expect(subject.agent.object_id).to eq(subject.agent.object_id)
+    it "must return a #{described_class}::Mechanize object" do
+      expect(subject.agent).to be_kind_of(described_class::Mechanize)
+    end
+
+    it "must return the same object each time" do
+      expect(subject.agent).to be(subject.agent)
     end
   end
 

@@ -19,18 +19,20 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+require 'ronin/web/html'
+require 'ronin/web/xml'
 require 'ronin/web/spider'
 require 'ronin/web/server'
 require 'ronin/web/user_agents'
 require 'ronin/web/mechanize'
 require 'ronin/web/version'
-require 'ronin/network/http'
+require 'ronin/support/network/http'
 
-require 'uri/http'
+require 'uri'
+require 'open-uri'
 require 'nokogiri'
 require 'nokogiri/ext'
 require 'nokogiri/diff'
-require 'open-uri'
 require 'open_namespace'
 
 module Ronin
@@ -57,11 +59,8 @@ module Ronin
     #
     # @api public
     #
-    def self.html(body)
-      doc = Nokogiri::HTML(body)
-
-      yield doc if block_given?
-      return doc
+    def self.html(body,&block)
+      HTML.parse(body,&block)
     end
 
     #
@@ -89,7 +88,7 @@ module Ronin
     # @api public
     #
     def self.build_html(&block)
-      Nokogiri::HTML::Builder.new(&block)
+      HTML.build(&block)
     end
 
     #
@@ -112,11 +111,8 @@ module Ronin
     #
     # @api public
     #
-    def self.xml(body)
-      doc = Nokogiri::XML(body)
-
-      yield doc if block_given?
-      return doc
+    def self.xml(body,&block)
+      XML.parse(body,&block)
     end
 
     #
@@ -141,123 +137,44 @@ module Ronin
     # @api public
     #
     def self.build_xml(&block)
-      Nokogiri::XML::Builder.new(&block)
-    end
-
-    #
-    # Proxy information for {Web} to use.
-    #
-    # @return [URI::HTTP, String, nil]
-    #   The default proxy information.
-    #
-    # @see http://rubydoc.info/gems/ronin-support/Ronin/Network/HTTP#proxy-class_method
-    #
-    # @api public
-    #
-    def self.proxy
-      @proxy || Network::HTTP.proxy
-    end
-
-    #
-    # Sets the proxy used by {Web}.
-    #
-    # @param [URI::HTTP, String, nil] new_proxy
-    #   The new proxy information to use.
-    #
-    # @return [URI::HTTP, String, nil]
-    #   The new proxy.
-    #
-    # @since 0.3.0
-    #
-    # @api public
-    #
-    def self.proxy=(new_proxy)
-      @proxy = new_proxy
-    end
-
-    #
-    # The User-Agent string used by {Web}.
-    #
-    # @return [String, nil]
-    #   The default `User-Agent` string that `ronin-web` will use.
-    #
-    # @see http://rubydoc.info/gems/ronin-support/Ronin/Network/HTTP#user_agent-class_method
-    #
-    # @api public
-    #
-    def self.user_agent
-      @user_agent || Network::HTTP.user_agent
-    end
-
-    #
-    # Sets the `User-Agent` string used by {Web}.
-    #
-    # @param [String, Symbol, Regexp, nil] value
-    #   The User-Agent string to use.
-    #   Setting {user_agent} to `nil` will disable the `User-Agent` string.
-    #
-    # @return [String]
-    #   The new User-Agent string.
-    #
-    # @raise [RuntimeError]
-    #   Either no User-Agent group exists with the given `Symbol`,
-    #   or no User-Agent string matched the given `Regexp`.
-    #
-    # @example Sets the default User-Agent
-    #   Web.user_agent = 'SearchBot 2000'
-    #   # => "SearchBot 2000"
-    #
-    # @example Select a random User-Agent with the matching sub-string
-    #   Web.user_agent = 'Chrome'
-    #   # => "Mozilla/5.0 (Linux; U; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13"
-    #
-    # @example Select a random User-Agent matching the Regexp
-    #   Web.user_agent = /(MSIE|Windows)/
-    #   # => "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.1)"
-    #
-    # @example Select a random User-Agent from a category
-    #   Web.user_agent = :googlebot
-    #   # => "Googlebot-Image/1.0 ( http://www.googlebot.com/bot.html)"
-    #
-    # @see Web.user_agents
-    #
-    # @api public
-    #
-    def self.user_agent=(value)
-      @user_agent = case value
-                    when String then user_agents.fetch(value,value)
-                    when nil    then nil
-                    else             user_agents.fetch(value)
-                    end
+      XML.build(&block)
     end
 
     #
     # Opens a URL as a temporary file.
     #
-    # @param [Hash] options
-    #   Additional options.
+    # @param [String, :random, :chrome, :chrome_linux, :chrome_macos,
+    #         :chrome_windows, :chrome_iphone, :chrome_ipad,
+    #         :chrome_android, :firefox, :firefox_linux, :firefox_macos,
+    #         :firefox_windows, :firefox_iphone, :firefox_ipad,
+    #         :firefox_android, :safari, :safari_macos, :safari_iphone,
+    #         :safari_ipad, :edge, :linux, :macos, :windows, :iphone,
+    #         :ipad, :android, nil] user_agent
+    #   The `User-Agent` string to use.
     #
-    # @option options [String] :user_agent
-    #   The User-Agent string to use.
+    # @param [String, URI::HTTP, nil] proxy
+    #   The proxy URI to use.
     #
-    # @option options [String] :user_agent_alias
-    #   The User-Agent Alias to use.
+    # @param [String, URI::HTTP, nil] referer
+    #   The optional `Referer` header to send.
     #
-    # @option options [Network::HTTP::Proxy, Hash, String] :proxy
-    #   (Web.proxy)
-    #   Proxy information.
+    # @param [String, Ronin::Support::Network::HTTP::Cookie, nil] cookie
+    #   The optional `Cookie` header to send.
     #
-    # @option options [String] :user
+    # @param [Hash{Symbol => Object}] kwargs
+    #   Additional keyword arguments.
+    #
+    # @option kwargs [String] :user
     #   The HTTP Basic Authentication user name.
     #
-    # @option options [String] :password
+    # @option kwargs [String] :password
     #   The HTTP Basic Authentication password.
     #
-    # @option options [Proc] :content_length_proc
+    # @option kwargs [Proc] :content_length_proc
     #   A callback which will be passed the content-length of the HTTP
     #   response.
     #
-    # @option options [Proc] :progress_proc
+    # @option kwargs [Proc] :progress_proc
     #   A callback which will be passed the size of each fragment, once
     #   received from the server.
     #
@@ -265,52 +182,41 @@ module Ronin
     #   The contents of the URL.
     #
     # @example Open a given URL.
-    #   Web.open('http://rubyflow.com/')
+    #   Web.open('https://www.example.com/')
     #
-    # @example Open a given URL, using a custom User-Agent alias.
-    #   Web.open('http://tenderlovemaking.com/',
-    #     user_agent_alias: 'Linux Mozilla')
+    # @example Open a given URL, using a built-in User-Agent:
+    #   Web.open('https://www.example.com/', user_agent: :linux)
+    #
+    # @example Open a given URL, using a custom User-Agent string:
+    #   Web.open('https://www.example.com/', user_agent: '...')
     #
     # @example Open a given URL, using a custom User-Agent string.
-    #   Web.open('http://www.wired.com/', user_agent: 'the future')
+    #   Web.open('https://www.example.com/', user_agent: 'the future')
     #
-    # @see http://rubydoc.info/stdlib/open-uri/frames
+    # @see http://rubydoc.info/stdlib/open-uri
     #
     # @api public
     #
-    def self.open(url,options={})
-      user_agent_alias = options.delete(:user_agent_alias)
-      proxy = Network::HTTP::Proxy.create(
-        options.delete(:proxy) || proxy
-      )
-      user = options.delete(:user)
-      password = options.delete(:password)
-      content_length_proc = options.delete(:content_length_proc)
-      progress_proc = options.delete(:progress_proc)
+    def self.open(url, proxy:      Web.proxy,
+                       user_agent: Web.user_agent,
+                       referer:    nil,
+                       cookie:     nil,
+                       **kwargs)
+      headers = {}
 
-      headers = Network::HTTP.headers(options)
-
-      if user_agent_alias
-        headers['User-Agent'] = user_agent_aliases[user_agent_alias]
+      if user_agent
+        headers['User-Agent'] = case user_agent
+                                when Symbol
+                                  Support::Network::HTTP::UserAgents[user_agent]
+                                else
+                                  user_agent
+                                end
       end
 
-      if proxy[:host]
-        headers[:proxy] = proxy.url
-      end
+      headers['Referer'] = referer if referer
+      headers['Cookie']  = cookie  if cookie
 
-      if user
-        headers[:http_basic_authentication] = [user, password]
-      end
-
-      if content_length_proc
-        headers[:content_length_proc] = content_length_proc
-      end
-
-      if progress_proc
-        headers[:progress_proc] = progress_proc
-      end
-
-      return URI.open(url,headers)
+      return URI.open(url, headers, proxy: proxy, **kwargs)
     end
 
     #
@@ -324,13 +230,7 @@ module Ronin
     # @api public
     #
     def self.agent
-      @agent ||= Mechanize.new do |agent|
-        agent.user_agent = user_agent
-
-        proxy.tap do |proxy|
-          agent.set_proxy(proxy.host,proxy.port,proxy.user,proxy.password)
-        end
-      end
+      @agent ||= Mechanize.new
     end
 
     #
