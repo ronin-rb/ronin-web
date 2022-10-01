@@ -23,6 +23,11 @@ require 'nokogiri'
 
 module Ronin
   module Web
+    #
+    # HTML helper methods.
+    #
+    # @since 1.0.0
+    #
     module HTML
       #
       # Parses the body of a document into a HTML document object.

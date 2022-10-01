@@ -23,6 +23,11 @@ require 'nokogiri'
 
 module Ronin
   module Web
+    #
+    # XML helper methods.
+    #
+    # @since 1.0.0
+    #
     module XML
       #
       # Parses the body of a document into a HTML document object.
