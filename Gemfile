@@ -44,4 +44,6 @@ group :development do
   gem' yard-spellcheck', require: false
 
   gem 'kramdown-man',    '~> 0.1'
+
+  gem 'dead_end',        require: false
 end
