@@ -33,14 +33,15 @@ gem 'ronin-core',	           '~> 0.1', github: "ronin-rb/ronin-core",
 
 group :development do
   gem 'rake'
-  gem 'rubygems-tasks', '~> 0.1'
+  gem 'rubygems-tasks',  '~> 0.1'
 
-  gem 'rspec',          '~> 3.0'
-  gem 'rack-test',      '~> 0.6'
+  gem 'rspec',           '~> 3.0'
+  gem 'rack-test',       '~> 0.6'
 
-  gem 'kramdown',       '~> 2.0'
-  gem 'redcarpet',      platform: :mri
-  gem 'yard',           '~> 0.9'
+  gem 'kramdown',        '~> 2.0'
+  gem 'redcarpet',       platform: :mri
+  gem 'yard',            '~> 0.9'
+  gem' yard-spellcheck', require: false
 
-  gem 'kramdown-man',   '~> 0.1'
+  gem 'kramdown-man',    '~> 0.1'
 end
