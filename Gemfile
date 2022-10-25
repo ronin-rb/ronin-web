@@ -46,4 +46,5 @@ group :development do
   gem 'kramdown-man',    '~> 0.1'
 
   gem 'dead_end',        require: false
+  gem 'sord',            require: false
 end
