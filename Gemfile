@@ -19,6 +19,9 @@ end
 # gem 'command_kit', '~> 0.4', github: 'postmodern/command_kit.rb',
 #                              branch: '0.4.0'
 
+gem 'spidr', '~> 0.7', github: 'postmodern/spidr',
+                       branch: '0.7.0'
+
 # Ronin dependencies
 gem 'ronin-support',	       '~> 1.0', github: "ronin-rb/ronin-support",
                                        branch: '1.0.0'
