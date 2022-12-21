@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'ronin/web/server'
+
+class App < Ronin::Web::Server::Base
+<%- if (@host || @port) -%>
+
+  <%- if @host -%>
+  set :host, <%= @host.inspect %>
+  <%- end -%>
+  <%- if @port -%>
+  set :port, <%= @port.inspect %>
+  <%- end -%>
+<%- end -%>
+
+  get '/' do
+    "hello world"
+  end
+
+end
+
+App.run! if __FILE__ == $0
