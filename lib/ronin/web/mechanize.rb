@@ -19,7 +19,7 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/config'
+require 'ronin/support/network/http'
 
 require 'mechanize'
 
@@ -54,7 +54,8 @@ module Ronin
       # @yieldparam [Mechanize] agent
       #   The new Mechanize agent.
       #
-      def initialize(proxy: Web.proxy, user_agent: Web.user_agent)
+      def initialize(proxy:      Support::Network::HTTP.proxy,
+                     user_agent: Support::Network::HTTP.user_agent)
         super()
 
         if proxy
