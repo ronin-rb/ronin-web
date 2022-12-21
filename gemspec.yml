@@ -21,6 +21,7 @@ generated_files:
   - man/ronin-web-html.1
   - man/ronin-web-irb.1
   - man/ronin-web-new.1
+  - man/ronin-web-new-nokogiri.1
   - man/ronin-web-server.1
   - man/ronin-web-spider.1
   - man/ronin-web-reverse-proxy.1

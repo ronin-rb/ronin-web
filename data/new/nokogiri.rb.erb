@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+require 'open-uri'
+
+<%- if @url -%>
+doc = Nokogiri::HTML(URI.open(<%= @url -%>))
+<%- else -%>
+doc = Nokogiri::HTML(URI.open(ARGV[0]))
+<%- end -%>
+
+puts doc.search('//a[@href]')
