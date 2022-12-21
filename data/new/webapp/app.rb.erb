@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'ronin/web/server'
+$LOAD_PATH.unshift(File.join(__dir__,'lib'))
+
+class App < Ronin::Web::Server::Base
+
+  get '/' do
+    "hello world"
+  end
+
+end
+
+App.run! if __FILE__ == $0
