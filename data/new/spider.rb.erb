@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'ronin/web/spider'
+
+Ronin::Web::Spider.<%= entry_point_method -%>(<%= entry_point_argument -%>) do |agent|
+  <%- unless @callbacks.empty? -%>
+  <%-   @callbacks.each_with_index do |(method,arguments,yield_arg),index| -%>
+  <%-     unless arguments.empty? -%>
+  agent.<%= method -%>(<%= arguments.map(&:inspect).join(', ') -%>) do |<%= yield_arg -%>|
+    # ...
+  end
+  <%-       else -%>
+  agent.<%= method -%> do |<%= yield_arg -%>|
+    # ...
+  end
+  <%-     end -%>
+  <%-     unless index == (@callbacks.length-1) -%>
+
+  <%-     end -%>
+  <%-   end -%>
+  <%- else -%>
+  agent.ever_page do |page|
+    puts page.url
+  end
+  <%- end -%>
+end
