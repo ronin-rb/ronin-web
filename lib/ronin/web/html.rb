@@ -30,8 +30,8 @@ module Ronin
       #
       # Parses the body of a document into a HTML document object.
       #
-      # @param [String, IO] body
-      #   The body of the document to parse.
+      # @param [String, IO] html
+      #   The HTML to parse.
       #
       # @yield [doc]
       #   If a block is given, it will be passed the newly created document
@@ -54,7 +54,7 @@ module Ronin
       end
 
       #
-      # Creates a new Nokogiri::HTML::Builder.
+      # Creates a new `Nokogiri::HTML::Builder`.
       #
       # @yield []
       #   The block that will be used to construct the HTML document.

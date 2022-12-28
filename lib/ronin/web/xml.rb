@@ -30,37 +30,37 @@ module Ronin
       #
       # Parses the body of a document into a HTML document object.
       #
-      # @param [String, IO] body
-      #   The body of the document to parse.
+      # @param [String, IO] xml
+      #   The XML to parse.
       #
       # @yield [doc]
       #   If a block is given, it will be passed the newly created document
       #   object.
       #
-      # @yieldparam [Nokogiri::HTML::Document] doc
+      # @yieldparam [Nokogiri::XML::Document] doc
+      #   The new XML document object.
+      #
+      # @return [Nokogiri::XML::Document]
       #   The new HTML document object.
       #
-      # @return [Nokogiri::HTML::Document]
-      #   The new HTML document object.
-      #
-      # @see http://rubydoc.info/gems/nokogiri/Nokogiri/HTML/Document
+      # @see http://rubydoc.info/gems/nokogiri/Nokogiri/XML/Document
       #
       # @api public
       #
-      def self.parse(html)
-        doc = Nokogiri::XML.parse(html)
+      def self.parse(xml)
+        doc = Nokogiri::XML.parse(xml)
         yield doc if block_given?
         return doc
       end
 
       #
-      # Creates a new Nokogiri::HTML::Builder.
+      # Creates a new `Nokogiri::XML::Builder`.
       #
       # @yield []
-      #   The block that will be used to construct the HTML document.
+      #   The block that will be used to construct the XML document.
       #
-      # @return [Nokogiri::HTML::Builder]
-      #   The new HTML builder object.
+      # @return [Nokogiri::XML::Builder]
+      #   The new XML builder object.
       #
       # @example
       #   HTML.build do
@@ -73,7 +73,7 @@ module Ronin
       #     }
       #   end
       #
-      # @see http://rubydoc.info/gems/nokogiri/Nokogiri/HTML/Builder
+      # @see http://rubydoc.info/gems/nokogiri/Nokogiri/XML/Builder
       #
       # @api public
       #
