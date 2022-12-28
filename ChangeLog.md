@@ -10,20 +10,20 @@
 * Require [data\_paths] ~> 0.3.
 * Require [ronin-support] ~> 0.2.
 * Require [ronin] ~> 1.1.
-* Added {Ronin::Web.proxy=}.
-* Added {Ronin::Web.user_agents}.
-* Added {Ronin::Web::UserAgents}.
-* Refactored {Ronin::Web::Server}:
-  * Added {Ronin::Web::Server::Base}.
-  * Added {Ronin::Web::Server::Conditions}.
-  * Added {Ronin::Web::Server::Helpers#mime_type_for}.
-  * Added {Ronin::Web::Server::Helpers#content_type_for}.
-  * Added {Ronin::Web::Server::Helpers::ClassMethods#files}.
-  * Added {Ronin::Web::Server::Helpers::ClassMethods#directories}.
-* Renamed `Ronin::Helpers::Web` to {Ronin::Network::Mixins::Web}.
-* Renamed `Ronin::Web::Server::Proxy` to {Ronin::Web::Proxy}.
+* Added `Ronin::Web.proxy=`.
+* Added `Ronin::Web.user_agents`.
+* Added `Ronin::Web::UserAgents`.
+* Refactored `Ronin::Web::Server`:
+  * Added `Ronin::Web::Server::Base`.
+  * Added `Ronin::Web::Server::Conditions`.
+  * Added `Ronin::Web::Server::Helpers#mime_type_for`.
+  * Added `Ronin::Web::Server::Helpers#content_type_for`.
+  * Added `Ronin::Web::Server::Helpers::ClassMethods#files`.
+  * Added `Ronin::Web::Server::Helpers::ClassMethods#directories`.
+* Renamed `Ronin::Helpers::Web` to `Ronin::Network::Mixins::Web`.
+* Renamed `Ronin::Web::Server::Proxy` to `Ronin::Web::Proxy`.
 * Moved `Ronin::Scanners::Web` into [ronin-scanners].
-* Made {Ronin::Web.agent} persistent.
+* Made `Ronin::Web.agent` persistent.
 * Switched from [Jeweler](https://github.com/technicalpickles/jeweler)
   [rubygems-tasks](http://github.com/postmodern/rubygems-tasks) and to
   [Bundler](http://gembundler.com).
@@ -45,16 +45,16 @@
 * Require test-unit >= 1.2.3.
 * Require rack-test >= 0.4.1.
 * Require yard >= 0.2.3.5.
-* Added {Ronin::Web::Server::Base}.
+* Added `Ronin::Web::Server::Base`.
 * Added `Ronin::Web::Server::Files`.
 * Added `Ronin::Web::Server::Hosts`.
 * Added `Ronin::Web::Server::Proxy`.
-* Added {Ronin::Web::Server::Helpers}.
+* Added `Ronin::Web::Server::Helpers`.
 * Added `Ronin::Web::Server::Helpers::Files`.
 * Added `Ronin::Web::Server::Helpers::Hosts`.
 * Added `Ronin::Web::Server::Helpers::Proxy`.
-* Added {Ronin::Web::Server::App}.
-* Added {Ronin::Web.server}.
+* Added `Ronin::Web::Server::App`.
+* Added `Ronin::Web.server`.
 * Removed `Ronin::Web::Fingerprint`.
 * Renamed Ronin::Sessions::Web to Ronin::Network::Helpers::Web.
 * Moved to YARD based documentation.
@@ -69,12 +69,12 @@
 * Require [rack] >= 1.0.0.
 * Require [ronin] >= 0.2.4.
 * Added `Ronin::Web::Fingerprint`.
-* Added {Ronin::Web.build_html}.
-* Added {Ronin::Web.build_xml}.
-* Allow {Ronin::Web.html} to accept a block.
-* Allow {Ronin::Web.xml} to accept a block.
+* Added `Ronin::Web.build_html`.
+* Added `Ronin::Web.build_xml`.
+* Allow `Ronin::Web.html` to accept a block.
+* Allow `Ronin::Web.xml` to accept a block.
 * Allow `Ronin::Web::Server#return_file` to accept a content_type option.
-* Make sure {Ronin::Web::Server} is thread safe.
+* Make sure `Ronin::Web::Server` is thread safe.
 * Blocks passed to Server.new will not be instance_evaled.
 * Removed `Ronin::Web::Spider#default_options`.
 * Removed `Ronin::web::Server.run`.
@@ -82,13 +82,13 @@
 
 ### 0.1.2 / 2009-03-28
 
-* Added {Ronin::Web::Proxy}.
-* Added diagnostic messages to {Ronin::Web::Spider}.
-* Fixed Rack 0.9.1 compatibility bugs in {Ronin::Web::Server}.
+* Added `Ronin::Web::Proxy`.
+* Added diagnostic messages to `Ronin::Web::Spider`.
+* Fixed Rack 0.9.1 compatibility bugs in `Ronin::Web::Server`.
   * Server#response now uses `Rack::Response`.
-  * {Ronin::Web::Server} now uses a `Rack::Request` object instead of the
+  * `Ronin::Web::Server` now uses a `Rack::Request` object instead of the
     standard env Hash.
-* Updated specs for {Ronin::Web::Server}.
+* Updated specs for `Ronin::Web::Server`.
 
 ### 0.1.1 / 2009-02-23
 
@@ -96,7 +96,7 @@
   console with `ronin/web` preloaded.
 * Require [nokogiri] >= 1.2.0.
 * Require [ronin] >= 0.2.1.
-* Updated {Ronin::Web::Server}:
+* Updated `Ronin::Web::Server`:
   * Properly catch load errors when attempting to load Mongrel.
   * Renamed Server#mount to `Ronin::Web::Server#directory`.
 * Removed the last reference to Hpricot.
@@ -106,12 +106,12 @@
 ### 0.1.0 / 2009-01-22
 
 * Initial release.
-  * Provides {Ronin::Web.html} and {Ronin::Web.xml} methods, which use
+  * Provides `Ronin::Web.html` and `Ronin::Web.xml` methods, which use
     `Nokogiri::HTML` and `Nokogiri::XML` respectively, to parse HTML and XML
     content.
   * Supports custom Proxy and User-Agent strings, through
     the Web.proxy and Web.user_agent methods respectively.
-  * Provides {Ronin::Web.agent}, {Ronin::Web.get} and {Ronin::Web.post} methods
+  * Provides `Ronin::Web.agent`, `Ronin::Web.get` and `Ronin::Web.post` methods
     which access [WWW::Mechanize][mechanize].
   * Integrates [Spidr::Agent][spidr] into [Ronin::Web::Spider].
   * Provides Web::Server, a customizable Rack web server that supports path
