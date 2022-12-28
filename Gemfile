@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 gemspec
 
-# XXX: dep in webrick for mechanize for Ruby 3.0
-platform :ruby do
-  gem 'webrick' if RUBY_VERSION >= '3.0'
+if RUBY_VERSION >= '3.0'
+  # XXX: dep in webrick for mechanize for Ruby 3.0
+  gem 'webrick', platform: :ruby
 end
 
 platforms :jruby do
