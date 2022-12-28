@@ -24,10 +24,25 @@ research and development.
 
 ## Synopsis
 
-Start the Ronin console with Ronin Web preloaded:
+```
+Usage: ronin-web [options] [COMMAND [ARGS...]]
 
-```shell
-$ ronin-web
+Options:
+    -h, --help                       Print help information
+
+Arguments:
+    [COMMAND]                        The command name to run
+    [ARGS ...]                       Additional arguments for the command
+
+Commands:
+    diff
+    help
+    html
+    irb
+    new
+    reverse-proxy
+    server
+    spider
 ```
 
 ## Examples
