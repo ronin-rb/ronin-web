@@ -19,8 +19,8 @@ research and development.
 
 ## Features
 
-* HTML/XML parsing/building (using [Nokogiri][Nokogiri]).
-* Automated Web Browsing (using [Mechanize][Mechanize])
+* HTML/XML parsing/building (using [Nokogiri][nokogiri]).
+* Automated Web Browsing (using [Mechanize][mechanize])
 
 ## Synopsis
 
@@ -59,7 +59,7 @@ Get only the body of the web-page:
 Web.get_body('http://www.rubyinside.com/')
 ```
 
-Get a [Mechanize agent][Mechanize]:
+Get a [Mechanize agent][mechanize]:
 
 ```ruby
 agent = Web.agent
@@ -184,18 +184,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 
-[Nokogiri]: http://rubydoc.info/gems/nokogiri/frames
-[Mechanize]: http://rubydoc.info/gems/mechanize/frames
-
 [ronin-rb]: https://ronin-rb.dev
 [Ruby]: https://www.ruby-lang.org
 
-[nokogiri]: https://github.com/sparklemotion/nokogiri#readme
+[nokogiri]: https://nokogiri.org/
 [nokogiri-ext]: https://github.com/postmodern/nokogiri-ext#readme
 [nokogiri-diff]: https://github.com/postmodern/nokogiri-diff#readme
 [libxml2]: http://xmlsoft.org/
 [libxslt1]: http://xmlsoft.org/XSLT/
-[mechanize]: https://github.com/tenderlove/mechanize#readme
+[mechanize]: https://github.com/sparklemotion/mechanize#readme
 [open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
 [ronin-core]: https://github.com/ronin-rb/ronin-core#readme
