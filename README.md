@@ -194,7 +194,7 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [nokogiri-ext]: https://github.com/postmodern/nokogiri-ext#readme
 [nokogiri-diff]: https://github.com/postmodern/nokogiri-diff#readme
 [libxml2]: http://xmlsoft.org/
-[libxslt]: http://xmlsoft.org/XSLT/
+[libxslt1]: http://xmlsoft.org/XSLT/
 [mechanize]: https://github.com/tenderlove/mechanize#readme
 [open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
