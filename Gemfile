@@ -39,6 +39,7 @@ group :development do
   gem 'rubygems-tasks',  '~> 0.1'
 
   gem 'rspec',           '~> 3.0'
+  gem 'simplecov',       '~> 0.20'
   gem 'rack-test',       '~> 0.6'
 
   gem 'kramdown',        '~> 2.0'
