@@ -12,7 +12,8 @@
 
 ## Description
 
-ronin-web is a collection of useful web helper methods and commands.
+ronin-web is a collection of useful Web-related libraries, classes, and
+CLI commands.
 
 ronin-web is part of the [ronin-rb] project, a [Ruby] toolkit for security
 research and development.
@@ -20,7 +21,17 @@ research and development.
 ## Features
 
 * HTML/XML parsing/building (using [Nokogiri][nokogiri]).
-* Automated Web Browsing (using [Mechanize][mechanize])
+  * Also provides additional extensions to [Nokogiri][nokogiri] using
+    [nokogiri-ext].
+* Supports diffing HTML/XML documents using [nokogiri-diff].
+* Automated Web Browsing using [Mechanize][mechanize].
+* Supports random `User-Agent` generation using [ronin-web-user_agents].
+* Provides an easy to use [Sinatra][sintra] based web server using
+  [ronin-web-server].
+* Provides an easy to use web spider using [ronin-web-spider].
+* Provides a CLI for common web related tasks.
+* Has 98% documentation coverage.
+* Has 89% test coverage.
 
 ## Synopsis
 
