@@ -68,7 +68,7 @@ agent = Web.agent
 Parse HTML:
 
 ```ruby
-Web.html(open('some_file.html'))
+HTML.parse(open('some_file.html'))
 # => <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 # <html>
 #   <head>
@@ -80,7 +80,7 @@ Web.html(open('some_file.html'))
 Build a HTML document:
 
 ```ruby
-doc = Web.build_html do
+doc = HTML.build do
   html {
     head {
       script(:type => 'text/javascript', :src => 'redirect.js')
@@ -96,7 +96,7 @@ puts doc.to_html
 Parse XML:
 
 ```ruby
-Web.xml(some_text)
+XML.parse(some_text)
 # => <?xml version="1.0"?>
 # <users>
 #   <user>
@@ -109,7 +109,7 @@ Web.xml(some_text)
 Build a XML document:
 
 ```ruby
-doc = Web.build_xml do
+doc = XML.build do
   playlist {
     mp3 {
       file { text('02 THE WAIT.mp3') }
