@@ -198,6 +198,7 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [mechanize]: https://github.com/tenderlove/mechanize#readme
 [open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
+[ronin-core]: https://github.com/ronin-rb/ronin-core#readme
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
 [ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
 [ronin-web-user_agents]: https://github.com/ronin-rb/ronin-web-user_agents#readme
