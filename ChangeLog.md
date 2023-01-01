@@ -1,3 +1,39 @@
+### 1.0.0 / 2023-XX-XX
+
+* Added [nokogiri-ext] ~> 0.1 as a dependency.
+* Added [nokogiri-diff] ~> 0.1 as a dependency.
+* Added [ronin-web-server] ~> 0.1 as a dependency.
+* Added [ronin-web-spider] ~> 0.1 as a dependency.
+* Added [ronin-web-user_agents] ~> 0.1 as a dependency.
+* Added [ronin-core] ~> 0.1 as a dependency.
+* Extracted `nokogiri` core-exts into [nokogiri-ext].
+* Extracted `Ronin::Web::Server` out into [ronin-web-server].
+* Extracted `Ronin::Web::Proxy` as `Ronin::Web::Server::ReverseProxy`
+  in [ronin-web-server].
+* Extracted `Ronin::Web::Spider` out into [ronin-web-spider].
+* Extracted `Ronin::Web::UserAgents` out into [ronin-web-user_agents].
+* Added a `ronin-web` CLI:
+  * Added the `ronin-web diff` command.
+  * Added the `ronin-web html` command.
+  * Added the `ronin-web irb` command.
+  * Added the `ronin-web new` command.
+  * Added the `ronin-web new nokogiri` command.
+  * Added the `ronin-web new server` command.
+  * Added the `ronin-web new spider` command.
+  * Added the `ronin-web new webapp` command.
+  * Added the `ronin-web reverse-proxy` command.
+  * Added the `ronin-web server` command.
+  * Added the `ronin-web spider` command.
+* Added {Ronin::Web::HTML}.
+* Added {Ronin::Web::XML}.
+
+[nokogiri-ext]: https://github.com/postmodern/nokogiri-ext#readme
+[nokogiri-diff]: https://github.com/postmodern/nokogiri-diff#readme
+[ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
+[ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
+[ronin-web-user_agents]: https://github.com/ronin-rb/ronin-web-user_agents#readme
+[ronin-core]: https://github.com/ronin-rb/ronin-core#readme
+
 ### 0.3.0 / 2013-06-18
 
 * Upgraded to the GPL-3 license.
