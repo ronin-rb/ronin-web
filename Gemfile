@@ -30,8 +30,8 @@ end
 #                                        branch: 'main'
 # gem 'ronin-web-user_agents', '~> 0.1', github: "ronin-rb/ronin-web-user_agents",
 #                                        branch: 'main'
-gem 'ronin-core',	           '~> 0.1', github: "ronin-rb/ronin-core",
-                                       branch: 'main'
+# gem 'ronin-core',	           '~> 0.1', github: "ronin-rb/ronin-core",
+#                                        branch: 'main'
 
 group :development do
   gem 'rake'
