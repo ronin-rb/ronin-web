@@ -26,8 +26,8 @@ end
 #                                        branch: 'main'
 # gem 'ronin-web-server',	     '~> 0.1', github: "ronin-rb/ronin-web-server",
 #                                        branch: 'main'
-gem 'ronin-web-spider',	     '~> 0.1', github: "ronin-rb/ronin-web-spider",
-                                       branch: 'main'
+# gem 'ronin-web-spider',	     '~> 0.1', github: "ronin-rb/ronin-web-spider",
+#                                        branch: 'main'
 gem 'ronin-web-user_agents', '~> 0.1', github: "ronin-rb/ronin-web-user_agents",
                                        branch: 'main'
 gem 'ronin-core',	           '~> 0.1', github: "ronin-rb/ronin-core",
