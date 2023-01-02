@@ -12,8 +12,8 @@
 
 ## Description
 
-ronin-web is a collection of useful Web-related libraries, classes, and
-CLI commands.
+ronin-web is a Ruby library that provides common web security commands and
+additional libraries.
 
 ronin-web is part of the [ronin-rb] project, a [Ruby] toolkit for security
 research and development.

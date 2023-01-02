@@ -1,11 +1,8 @@
 name: ronin-web
-summary:
-  A Ruby library that provides support for web scraping and
-  spidering functionality.
-
+summary: A collection of common web security commands and libraries.
 description:
-  ronin-web is a Ruby library that provides support for web scraping and
-  spidering functionality.
+  ronin-web is a Ruby library that provides common web security commands and
+  additional libraries.
 
 license: GPL-3.0
 authors: Postmodern
