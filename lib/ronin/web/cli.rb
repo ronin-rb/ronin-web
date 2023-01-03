@@ -17,8 +17,11 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+require 'ronin/web/version'
+
 require 'command_kit/commands'
 require 'command_kit/commands/auto_load'
+require 'command_kit/options/version'
 
 module Ronin
   module Web
@@ -36,8 +39,10 @@ module Ronin
         dir:       "#{__dir__}/cli/commands",
         namespace: "#{self}::Commands"
       )
+      include CommandKit::Options::Version
 
       command_name 'ronin-web'
+      version Ronin::Web::VERSION
 
     end
   end
