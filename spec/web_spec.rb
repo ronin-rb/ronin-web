@@ -2,8 +2,7 @@ require 'spec_helper'
 require 'ronin/web'
 
 describe Ronin::Web do
- let(:url)   { 'https://ronin-rb.dev/' }
- let(:title) { 'Ronin' }
+  let(:url) { 'https://example.com/' }
 
   it "should have a VERSION constant" do
     expect(subject.const_defined?('VERSION')).to eq(true)
@@ -61,10 +60,11 @@ describe Ronin::Web do
   end
 
   describe ".open", :network do
-    it "should open URLs as temporary files" do
+    it "must open URLs as temporary files" do
       file = subject.open(url)
 
-      expect(file.read).to include(title)
+      expect(file).to be_kind_of(StringIO)
+      expect(file.read).to include("Example Domain")
     end
   end
 
@@ -83,7 +83,7 @@ describe Ronin::Web do
       page = subject.get(url)
 
       expect(page.class).to eq(Mechanize::Page)
-      expect(page.at('title').inner_text).to include(title)
+      expect(page.uri).to eq(URI(url))
     end
   end
 
@@ -91,7 +91,7 @@ describe Ronin::Web do
     it "should be able to get the bodies of Mechanize pages" do
       body = subject.get_body(url)
 
-      expect(body).to include(title)
+      expect(body).to include("Example Domain")
     end
   end
 end

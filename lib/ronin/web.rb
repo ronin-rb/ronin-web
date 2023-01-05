@@ -200,10 +200,10 @@ module Ronin
                        referer:    nil,
                        cookie:     nil,
                        **kwargs)
-      headers = {}
+      options = {proxy: proxy, **kwargs}
 
       if user_agent
-        headers['User-Agent'] = case user_agent
+        options['User-Agent'] = case user_agent
                                 when Symbol
                                   Support::Network::HTTP::UserAgents[user_agent]
                                 else
@@ -211,10 +211,10 @@ module Ronin
                                 end
       end
 
-      headers['Referer'] = referer if referer
-      headers['Cookie']  = cookie  if cookie
+      options['Referer'] = referer if referer
+      options['Cookie']  = cookie  if cookie
 
-      return URI.open(url, headers, proxy: proxy, **kwargs)
+      return URI.open(url,options)
     end
 
     #
