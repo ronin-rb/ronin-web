@@ -195,8 +195,8 @@ module Ronin
     #
     # @api public
     #
-    def self.open(url, proxy:      Web.proxy,
-                       user_agent: Web.user_agent,
+    def self.open(url, proxy:      Support::Network::HTTP.proxy,
+                       user_agent: Support::Network::HTTP.user_agent,
                        referer:    nil,
                        cookie:     nil,
                        **kwargs)
