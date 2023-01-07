@@ -12,6 +12,13 @@ has_yard: true
 
 required_ruby_version: ">= 3.0.0"
 
+metadata:
+  documentation_uri: https://ronin-rb.dev/docs/ronin-web
+  source_code_uri:   https://github.com/ronin-rb/ronin-web
+  bug_tracker_uri:   https://github.com/ronin-rb/ronin-web/issues
+  changelog_uri:     https://github.com/ronin-rb/ronin-web/blob/main/ChangeLog.md
+  rubygems_mfa_required: 'true'
+
 generated_files:
   - man/ronin-web.1
   - man/ronin-web-diff.1
