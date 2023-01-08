@@ -19,7 +19,7 @@ Ronin::Web::Spider.<%= entry_point_method -%>(<%= entry_point_argument -%>) do |
   <%-     end -%>
   <%-   end -%>
   <%- else -%>
-  agent.ever_page do |page|
+  agent.every_page do |page|
     puts page.url
   end
   <%- end -%>
