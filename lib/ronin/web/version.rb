@@ -20,6 +20,6 @@
 module Ronin
   module Web
     # ronin-web Version
-    VERSION = '1.0.0.beta1'
+    VERSION = '1.0.0.beta2'
   end
 end
