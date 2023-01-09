@@ -26,7 +26,7 @@ research and development.
 * Supports diffing HTML/XML documents using [nokogiri-diff].
 * Automated Web Browsing using [Mechanize][mechanize].
 * Supports random `User-Agent` generation using [ronin-web-user_agents].
-* Provides an easy to use [Sinatra][sintra] based web server using
+* Provides an easy to use [Sinatra][sinatra] based web server using
   [ronin-web-server].
 * Provides an easy to use web spider using [ronin-web-spider].
 * Provides a CLI for common web related tasks.
@@ -211,3 +211,4 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
 [ronin-web-user_agents]: https://github.com/ronin-rb/ronin-web-user_agents#readme
 [ronin]: https://github.com/ronin-rb/ronin#readme
+[sinatra]: https://sinatrarb.com/
