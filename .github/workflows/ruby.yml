@@ -21,10 +21,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - name: Install libsqlite3
-        run: |
-          sudo apt update -y && \
-          sudo apt install -y --no-install-recommends --no-install-suggests libsqlite3-dev libxml2-dev libxslt1-dev
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
       - name: Run tests
