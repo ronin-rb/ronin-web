@@ -147,8 +147,6 @@ puts doc.to_xml
 
 * [Ruby] >= 3.0.0
 * [nokogiri] ~> 1.4
-  * [libxml2]
-  * [libxslt1]
 * [nokogiri-ext] ~> 0.1
 * [nokogiri-diff] ~> 0.2
 * [mechanize] ~> 2.0
@@ -201,8 +199,6 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [nokogiri]: https://nokogiri.org/
 [nokogiri-ext]: https://github.com/postmodern/nokogiri-ext#readme
 [nokogiri-diff]: https://github.com/postmodern/nokogiri-diff#readme
-[libxml2]: http://xmlsoft.org/
-[libxslt1]: http://xmlsoft.org/XSLT/
 [mechanize]: https://github.com/sparklemotion/mechanize#readme
 [open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
