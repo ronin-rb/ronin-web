@@ -49,7 +49,7 @@ module Ronin
         #     -P, --proxy PROXY                Sets the proxy to use.
         #     -H, --header NAME: VALUE         Sets a default header
         #         --host-header NAME=VALUE     Sets a default header
-        #     -u chrome_linux|chrome_macos|chrome_windows|chrome_iphone|chrome_ipad|chrome_android|firefox_linux|firefox_macos|firefox_windows|firefox_iphone|firefox_ipad|firefox_android|safari_macos|safari_iphone|safari_ipad|edge,
+        #     -u chrome-linux|chrome-macos|chrome-windows|chrome-iphone|chrome-ipad|chrome-android|firefox-linux|firefox-macos|firefox-windows|firefox-iphone|firefox-ipad|firefox-android|safari-macos|safari-iphone|safari-ipad|edge,
         #         --user-agent                 The User-Agent to use
         #     -U, --user-agent-string STRING   The User-Agent string to use
         #     -R, --referer URL                Sets the Referer URL
@@ -183,7 +183,11 @@ module Ronin
 
           option :user_agent, short: '-u',
                               value: {
-                                type: Support::Network::HTTP::UserAgents::ALIASES.keys
+                                type: Hash[
+                                  Support::Network::HTTP::UserAgents::ALIASES.keys.map { |key|
+                                    [key.to_s.tr('_','-'), key]
+                                  }
+                                ]
                               },
                               desc: 'The User-Agent to use' do |name|
                                 @user_agent = name

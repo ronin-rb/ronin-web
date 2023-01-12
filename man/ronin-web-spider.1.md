@@ -34,7 +34,7 @@ Spiders a website.
 `--host-header` *NAME*=*VALUE*
   Sets a default header.
 
-`-u`, `--user-agent` chrome_linux|chrome_macos|chrome_windows|chrome_iphone|chrome_ipad|chrome_android|firefox_linux|firefox_macos|firefox_windows|firefox_iphone|firefox_ipad|firefox_android|safari_macos|safari_iphone|safari_ipad|edge
+`-u`, `--user-agent` chrome-linux|chrome-macos|chrome-windows|chrome-iphone|chrome-ipad|chrome-android|firefox-linux|firefox-macos|firefox-windows|firefox-iphone|firefox-ipad|firefox-android|safari-macos|safari-iphone|safari-ipad|edge
   The `User-Agent` to use.
 
 `-U`, `--user-agent-string` *STRING*
