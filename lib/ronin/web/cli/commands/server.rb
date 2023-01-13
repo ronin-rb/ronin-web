@@ -144,7 +144,13 @@ module Ronin
             end
 
             log_info "Starting web server listening on #{App.host}:#{App.port} ..."
-            App.run!
+            begin
+              App.run!
+            rescue Errno::EADDRINUSE => error
+              log_error(error.message)
+              exit(1)
+            end
+
             log_info "Shutting down ..."
           end
 
