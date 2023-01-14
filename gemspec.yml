@@ -41,7 +41,7 @@ dependencies:
   open_namespace: ~> 0.4
   # Ronin dependencies:
   ronin-support: ~> 1.0.0.beta2
-  ronin-web-server: ~> 0.1.0.beta2
+  ronin-web-server: ~> 0.1.0.beta3
   ronin-web-spider: ~> 0.1.0.beta2
   ronin-web-user_agents: ~> 0.1.0.beta1
   ronin-core: ~> 0.1.0.beta1
