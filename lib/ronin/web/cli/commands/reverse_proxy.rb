@@ -142,7 +142,14 @@ module Ronin
             end
 
             log_info "Starting proxy server on #{options[:host]}:#{options[:port]} ..."
-            proxy.run!(host: options[:host], port: options[:port])
+
+            begin
+              proxy.run!(host: options[:host], port: options[:port])
+            rescue Errno::EADDRINUSE => error
+              log_error(error.message)
+              exit(1)
+            end
+
             log_info "shutting down ..."
           end
 
