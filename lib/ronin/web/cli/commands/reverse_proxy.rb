@@ -45,7 +45,7 @@ module Ronin
         #
         # @api private
         #
-        class Proxy < Command
+        class ReverseProxy < Command
 
           include Core::CLI::Logging
 
