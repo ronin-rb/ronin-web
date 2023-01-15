@@ -572,41 +572,7 @@ module Ronin
                 print_verbose "failed to request #{url}"
               end
 
-              if options[:print_hosts]
-                agent.every_host do |host|
-                  print_verbose "spidering new host #{host}"
-                end
-              end
-
-              if options[:print_certs]
-                agent.every_cert do |cert|
-                  print_verbose "encountered new certificate for #{cert.subject.common_name}"
-                end
-              end
-
-              if options[:print_js_strings]
-                agent.every_js_string do |string|
-                  print_content string
-                end
-              end
-
-              if options[:print_html_comments]
-                agent.every_html_comment do |comment|
-                  print_content comment
-                end
-              end
-
-              if options[:print_js_comments]
-                agent.every_js_comment do |comment|
-                  print_content comment
-                end
-              end
-
-              if options[:print_comments]
-                agent.every_comment do |comment|
-                  print_content comment
-                end
-              end
+              define_printing_callbacks(agent)
 
               if history_file
                 agent.every_page do |page|
@@ -651,6 +617,50 @@ module Ronin
           ensure
             if options[:history]
               history_file.close
+            end
+          end
+
+          #
+          # Defines callbacks that print information.
+          #
+          # @param [Ronin::Web::Spider::Agent] agent
+          #   The newly created agent.
+          #
+          def define_printing_callbacks(agent)
+            if options[:print_hosts]
+              agent.every_host do |host|
+                print_verbose "spidering new host #{host}"
+              end
+            end
+
+            if options[:print_certs]
+              agent.every_cert do |cert|
+                print_verbose "encountered new certificate for #{cert.subject.common_name}"
+              end
+            end
+
+            if options[:print_js_strings]
+              agent.every_js_string do |string|
+                print_content string
+              end
+            end
+
+            if options[:print_html_comments]
+              agent.every_html_comment do |comment|
+                print_content comment
+              end
+            end
+
+            if options[:print_js_comments]
+              agent.every_js_comment do |comment|
+                print_content comment
+              end
+            end
+
+            if options[:print_comments]
+              agent.every_comment do |comment|
+                print_content comment
+              end
             end
           end
 
