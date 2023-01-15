@@ -83,6 +83,7 @@ module Ronin
         #         --print-status               Print the status codes for each URL
         #         --print-headers              Print response headers for each URL
         #         --print-header NAME          Prints a specific header
+        #         --history FILE               The history file
         #         --archive DIR                Archive every visited page to the DIR
         #         --git-archive DIR            Archive every visited page to the git repository
         #     -X, --xpath XPATH                Evaluates the XPath on each HTML page
@@ -400,6 +401,12 @@ module Ronin
                                 },
                                 desc: 'Prints a specific header'
 
+          option :history, value: {
+                             type: String,
+                             usage: 'FILE'
+                           },
+                           desc: 'The history file'
+
           option :archive, value: {
                              type: String,
                              usage: 'DIR'
@@ -552,6 +559,10 @@ module Ronin
                         Web::Spider::GitArchive.open(options[:git_archive])
                       end
 
+            history_file = if options[:history]
+                             File.open(options[:history],'w')
+                           end
+
             agent = new_agent do |agent|
               agent.every_page do |page|
                 print_page(page)
@@ -597,6 +608,13 @@ module Ronin
                 end
               end
 
+              if history_file
+                agent.every_page do |page|
+                  history_file.puts(page.url)
+                  history_file.flush
+                end
+              end
+
               if archive
                 agent.every_ok_page do |page|
                   archive.write(page.url,page.body)
@@ -629,6 +647,10 @@ module Ronin
                 puts cert
                 puts
               end
+            end
+          ensure
+            if options[:history]
+              history_file.close
             end
           end
 

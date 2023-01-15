@@ -133,6 +133,9 @@ Spiders a website.
 `--print-header` *NAME*
   Prints a specific header.
 
+`--history` *FILE*
+  Sets the history file to write every visited URL to.
+
 `--archive` *DIR*
   Archive every visited page to the *DIR*.
 
