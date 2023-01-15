@@ -391,7 +391,7 @@ module Ronin
                         },
                         desc: 'Spiders the website, starting at the URL'
 
-          option :print_verbose, desc: 'Print the status codes for each URL'
+          option :print_stauts, desc: 'Print the status codes for each URL'
 
           option :print_headers, desc: 'Print response headers for each URL'
 
@@ -749,7 +749,7 @@ module Ronin
           # @param [Spidr::Page] page
           #   A spidered page.
           #
-          def print_verbose(page)
+          def print_status(page)
             if page.code < 300
               print "#{colors.bright_green(page.code)} "
             elsif page.code < 400
@@ -786,7 +786,7 @@ module Ronin
           #   A spidered page.
           #
           def print_page(page)
-            print_verbose(page) if options[:print_verbose]
+            print_status(page) if options[:print_status]
             print_url(page)
 
             if options[:print_headers]
