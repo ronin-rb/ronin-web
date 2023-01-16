@@ -16,7 +16,7 @@ Generates a new `ronin-web-server` based webapp.
 ## OPTIONS
 
 `--port` *PORT*
-  The port the webpp will listen on by default. Defaults to `3000`.
+  The port the webapp will listen on by default. Defaults to `3000`.
 
 `--ruby-version` *VERSION*
   The desired ruby version for the project Defaults to the current ruby version.
