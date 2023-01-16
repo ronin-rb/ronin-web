@@ -240,7 +240,7 @@ module Ronin
     # @param [Array, Hash] parameters
     #   Additional parameters for the GET request.
     #
-    # param [Hash] headers
+    # @param [Hash] headers
     #   Additional headers for the GET request.
     #
     # @yield [page]
@@ -282,7 +282,7 @@ module Ronin
     # @param [Array, Hash] parameters
     #   Additional parameters for the GET request.
     #
-    # param [Hash] headers
+    # @param [Hash] headers
     #   Additional headers for the GET request.
     #
     # @yield [body]
