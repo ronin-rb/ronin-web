@@ -49,6 +49,6 @@ group :development do
   gem 'kramdown-man',    '~> 0.1'
 
   gem 'dead_end',        require: false
-  gem 'sord',            require: false
-  gem 'stackprof',       require: false
+  gem 'sord',            require: false, platform: :mri
+  gem 'stackprof',       require: false, platform: :mri
 end
