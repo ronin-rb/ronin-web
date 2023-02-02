@@ -1,4 +1,4 @@
-### 1.0.0 / 2023-XX-XX
+### 1.0.0 / 2023-02-01
 
 * Added [nokogiri-ext] ~> 0.1 as a dependency.
 * Added [nokogiri-diff] ~> 0.1 as a dependency.
