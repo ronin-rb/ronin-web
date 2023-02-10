@@ -3,6 +3,10 @@ require 'ronin/web/mechanize'
 
 describe Ronin::Web::Mechanize do
   describe "#initialize" do
+    it "must disable SSL verification by default" do
+      expect(subject.verify_mode).to eq(OpenSSL::SSL::VERIFY_NONE)
+    end
+
     context "when Ronin::Support::Network::HTTP.user_agent is set" do
       let(:user_agent) { 'test' }
 

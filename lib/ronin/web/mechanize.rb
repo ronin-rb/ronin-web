@@ -56,6 +56,8 @@ module Ronin
                      user_agent: Support::Network::HTTP.user_agent)
         super()
 
+        self.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
         if proxy
           proxy = URI(proxy)
 
