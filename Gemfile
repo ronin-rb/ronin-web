@@ -16,21 +16,21 @@ end
 # gem 'rack',         '~> 1.2', github: 'rack/rack'
 # gem 'sinatra',      '~> 1.2', github: 'sinatra/sinatra'
 
-# gem 'command_kit', '~> 0.4', github: 'postmodern/command_kit.rb',
-#                              branch: '0.4.0'
+# gem 'command_kit',  '~> 0.4', github: 'postmodern/command_kit.rb',
+#                               branch: '0.4.0'
 
 # gem 'spidr', '~> 0.7', github: 'postmodern/spidr'
 
 # Ronin dependencies
-# gem 'ronin-support',	       '~> 1.0', github: "ronin-rb/ronin-support",
+# gem 'ronin-support',         '~> 1.0', github: "ronin-rb/ronin-support",
 #                                        branch: 'main'
-# gem 'ronin-web-server',	     '~> 0.1', github: "ronin-rb/ronin-web-server",
+# gem 'ronin-web-server',      '~> 0.1', github: "ronin-rb/ronin-web-server",
 #                                        branch: 'main'
-# gem 'ronin-web-spider',	     '~> 0.1', github: "ronin-rb/ronin-web-spider",
+# gem 'ronin-web-spider',      '~> 0.1', github: "ronin-rb/ronin-web-spider",
 #                                        branch: 'main'
 # gem 'ronin-web-user_agents', '~> 0.1', github: "ronin-rb/ronin-web-user_agents",
 #                                        branch: 'main'
-# gem 'ronin-core',	           '~> 0.1', github: "ronin-rb/ronin-core",
+# gem 'ronin-core',	       '~> 0.1', github: "ronin-rb/ronin-core",
 #                                        branch: 'main'
 
 group :development do
