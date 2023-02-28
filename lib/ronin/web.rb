@@ -344,7 +344,7 @@ module Ronin
     # @api public
     #
     def self.post(url,query={},headers={},&block)
-      agent.post(url,query,headers={},&block)
+      agent.post(url,query,headers,&block)
     end
 
     #
