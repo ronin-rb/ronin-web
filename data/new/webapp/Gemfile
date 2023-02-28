@@ -2,5 +2,5 @@ source 'https://rubygems.org'
 
 gem 'puma', '~> 6.0'
 
-# gem 'ronin-support', '~> 1.0' #, github: 'ronin-rb/ronin-support'
-gem 'ronin-web-server', '~> 0.1' #, github: 'ronin-rb/ronin-web-server'
+# gem 'ronin-support', '~> 1.0' # , github: 'ronin-rb/ronin-support'
+gem 'ronin-web-server', '~> 0.1' # , github: 'ronin-rb/ronin-web-server'

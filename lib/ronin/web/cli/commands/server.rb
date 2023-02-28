@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-web - A collection of useful web helper methods and commands.
 #
@@ -42,7 +43,7 @@ module Ronin
         #    -r, --root DIR                   Root directory to serve
         #    -R, --redirect /PATH:URL         Registers a 302 Found redirect at the given PATH
         #    -h, --help                       Print help information
-        # 
+        #
         class Server < Command
 
           include Core::CLI::Logging

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-web - A collection of useful web helper methods and commands.
 #

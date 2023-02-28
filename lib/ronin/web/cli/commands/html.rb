@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-web - A collection of useful web helper methods and commands.
 #
@@ -56,7 +57,7 @@ module Ronin
         class Html < Command
 
           usage '[options] {URL | FILE} [XPATH | CSS-path]'
-          
+
           option :xpath, short: '-X',
                          value: {type: String, usage: 'XPATH'},
                          desc:  'XPath query' do |xpath|
@@ -136,7 +137,7 @@ module Ronin
           def run(source,query=@query)
             unless query
               print_error "must specify --xpath, --css-path, or an XPath/CSS-path argument"
-              exit -1
+              exit(-1)
             end
 
             doc   = Nokogiri::HTML(read(source))

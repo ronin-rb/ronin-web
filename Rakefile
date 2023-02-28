@@ -1,4 +1,4 @@
-require 'rubygems'
+# frozen_string_literal: true
 
 begin
   require 'bundler'

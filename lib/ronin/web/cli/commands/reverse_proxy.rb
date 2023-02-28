@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-web - A collection of useful web helper methods and commands.
 #
@@ -181,19 +182,19 @@ module Ronin
           # @return [(Regexp, String), (String, String)]
           #
           def parse_rewrite_rule(value)
-            if (index = value.rindex('/:'))
+            if    (index = value.rindex('/:'))
               regexp  = Regexp.new(value[1...index])
-              replace = value[index+2..]
+              replace = value[(index + 2)..]
 
               return [regexp, replace]
             elsif (index = value.rindex(':'))
               string  = value[0...index]
-              replace = value[(index+1)..]
+              replace = value[(index + 1)..]
 
               return [string, replace]
             end
           end
-          
+
           #
           # Rewrites a request or response body.
           #

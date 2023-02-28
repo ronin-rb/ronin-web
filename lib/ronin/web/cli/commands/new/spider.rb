@@ -104,10 +104,9 @@ module Ronin
                               required: false
                             },
                             desc: 'Spiders a domain' do |value|
-                            @entry_point_method   = :domain
-                            @entry_point_argument = value
-                          end
-
+                              @entry_point_method   = :domain
+                              @entry_point_argument = value
+                            end
 
             option :site, equals: true,
                           value: {

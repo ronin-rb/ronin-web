@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-web - A collection of useful web helper methods and commands.
 #
@@ -119,18 +120,18 @@ module Ronin
                                 desc: 'Sets the read timeout'
 
           option :ssl_timeout, value: {
-                                  type: Integer,
-                                  usage: 'SECS',
-                                  default: Spidr.ssl_timeout
-                                },
-                                desc: 'Sets the SSL connection timeout'
+                                 type: Integer,
+                                 usage: 'SECS',
+                                 default: Spidr.ssl_timeout
+                               },
+                               desc: 'Sets the SSL connection timeout'
 
           option :continue_timeout, value: {
-                                  type: Integer,
-                                  usage: 'SECS',
-                                  default: Spidr.continue_timeout
-                                },
-                                desc: 'Sets the continue timeout'
+                                      type:    Integer,
+                                      usage:   'SECS',
+                                      default: Spidr.continue_timeout
+                                    },
+                                    desc: 'Sets the continue timeout'
 
           option :keep_alive_timeout, value: {
                                         type:    Integer,
@@ -168,14 +169,14 @@ module Ronin
                                end
 
           option :user_agent, value: {
-                                type: String,
+                                type:  String,
                                 usage: 'USER-AGENT'
                               },
                               desc: 'Sets the User-Agent string'
 
           option :user_agent_string, short: '-U',
                                      value: {
-                                       type: String,
+                                       type:  String,
                                        usage: 'STRING'
                                      },
                                      desc: 'The User-Agent string to use' do |ua|
@@ -184,11 +185,9 @@ module Ronin
 
           option :user_agent, short: '-u',
                               value: {
-                                type: Hash[
-                                  Support::Network::HTTP::UserAgents::ALIASES.keys.map { |key|
-                                    [key.to_s.tr('_','-'), key]
-                                  }
-                                ]
+                                type: Support::Network::HTTP::UserAgents::ALIASES.transform_keys { |key|
+                                  key.to_s.tr('_','-')
+                                }
                               },
                               desc: 'The User-Agent to use' do |name|
                                 @user_agent = name
@@ -196,34 +195,34 @@ module Ronin
 
           option :referer, short: '-R',
                            value: {
-                             type: String,
+                             type:  String,
                              usage: 'URL'
                            },
                            desc: 'Sets the Referer URL'
 
           option :delay, short: '-d',
                          value: {
-                           type: Numeric,
+                           type:  Numeric,
                            usage: 'SECS'
                          },
                          desc: 'Sets the delay in seconds between each request'
 
           option :limit, short: '-l',
                          value: {
-                           type: Integer,
+                           type:  Integer,
                            usage: 'COUNT'
                          },
                          desc: 'Only spiders up to COUNT pages'
 
           option :max_depth, short: '-d',
                              value: {
-                               type: Integer,
-                               usage: 'DEPTH',
+                               type:  Integer,
+                               usage: 'DEPTH'
                              },
                              desc: 'Only spiders up to max depth'
 
           option :enqueue, value: {
-                             type: String,
+                             type:  String,
                              usage: 'URL'
                            },
                            desc: 'Adds the URL to the queue' do |url|
@@ -231,7 +230,7 @@ module Ronin
                            end
 
           option :visited, value: {
-                             type: String,
+                             type:  String,
                              usage: 'URL'
                            },
                            desc: 'Marks the URL as previously visited' do |url|
@@ -243,7 +242,7 @@ module Ronin
           option :strip_query, desc: 'Enables/disables stripping the query component of every URL'
 
           option :visit_host, value: {
-                                type: String,
+                                type:  String,
                                 usage: 'HOST'
                               },
                               desc: 'Visit URLs with the matching host name' do |host|
@@ -267,15 +266,15 @@ module Ronin
                                end
 
           option :ignore_hosts_like, value: {
-                                      type:  Regexp,
-                                      usage: '/REGEX/'
-                                    },
-                                    desc: 'Ignore the host names matching the REGEX' do |regex|
-                                      @ignore_hosts << regex
-                                    end
+                                       type:  Regexp,
+                                       usage: '/REGEX/'
+                                     },
+                                     desc: 'Ignore the host names matching the REGEX' do |regex|
+                                       @ignore_hosts << regex
+                                     end
 
           option :visit_port, value: {
-                                type: Integer,
+                                type:  Integer,
                                 usage: 'PORT'
                               },
                               desc: 'Visit URLs with the matching port number' do |port|
@@ -299,15 +298,15 @@ module Ronin
                                end
 
           option :ignore_ports_like, value: {
-                                      type:  Regexp,
-                                      usage: '/REGEX/'
-                                    },
-                                    desc: 'Ignore the port numbers matching the REGEXP' do |regex|
-                                      @ignore_ports << regex
-                                    end
+                                       type:  Regexp,
+                                       usage: '/REGEX/'
+                                     },
+                                     desc: 'Ignore the port numbers matching the REGEXP' do |regex|
+                                       @ignore_ports << regex
+                                     end
 
           option :visit_link, value: {
-                                type: String,
+                                type:  String,
                                 usage: 'URL'
                               },
                               desc: 'Visit the URL' do |link|
@@ -331,36 +330,36 @@ module Ronin
                                end
 
           option :ignore_links_like, value: {
-                                      type:  Regexp,
-                                      usage: '/REGEX/'
-                                    },
-                                    desc: 'Ignore URLs matching the REGEX' do |regex|
-                                      @ignore_links << regex
-                                    end
+                                       type:  Regexp,
+                                       usage: '/REGEX/'
+                                     },
+                                     desc: 'Ignore URLs matching the REGEX' do |regex|
+                                       @ignore_links << regex
+                                     end
 
           option :visit_ext, value: {
-                                type: String,
-                                usage: 'FILE_EXT'
-                              },
-                              desc: 'Visit URLs with the matching file ext' do |ext|
-                                @visit_exts << ext
-                              end
+                               type:  String,
+                               usage: 'FILE_EXT'
+                             },
+                             desc: 'Visit URLs with the matching file ext' do |ext|
+                               @visit_exts << ext
+                             end
 
           option :visit_exts_like, value: {
-                                      type:  Regexp,
-                                      usage: '/REGEX/'
-                                    },
-                                    desc: 'Visit URLs with file exts that match the REGEX' do |regex|
-                                      @visit_exts << regex
-                                    end
+                                     type:  Regexp,
+                                     usage: '/REGEX/'
+                                   },
+                                   desc: 'Visit URLs with file exts that match the REGEX' do |regex|
+                                     @visit_exts << regex
+                                   end
 
           option :ignore_ext, value: {
-                                 type:  String,
-                                 usage: 'FILE_EXT'
-                               },
-                               desc: 'Ignore the URLs with the file ext' do |ext|
-                                 @ignore_exts << ext
-                               end
+                                type:  String,
+                                usage: 'FILE_EXT'
+                              },
+                              desc: 'Ignore the URLs with the file ext' do |ext|
+                                @ignore_exts << ext
+                              end
 
           option :ignore_exts_like, value: {
                                       type:  Regexp,
@@ -374,19 +373,19 @@ module Ronin
                           desc:  'Specifies whether to honor robots.txt'
 
           option :host, value: {
-                          type: String,
+                          type:  String,
                           usage: 'HOST'
                         },
                         desc: 'Spiders the specific HOST'
 
           option :domain, value: {
-                            type: String,
-                            usage: 'DOMAIN',
+                            type:  String,
+                            usage: 'DOMAIN'
                           },
                           desc: 'Spiders the whole domain'
 
           option :site, value: {
-                          type: String,
+                          type:  String,
                           usage: 'URL'
                         },
                         desc: 'Spiders the website, starting at the URL'
@@ -396,25 +395,25 @@ module Ronin
           option :print_headers, desc: 'Print response headers for each URL'
 
           option :print_header, value: {
-                                  type: String,
+                                  type:  String,
                                   usage: 'NAME'
                                 },
                                 desc: 'Prints a specific header'
 
           option :history, value: {
-                             type: String,
+                             type:  String,
                              usage: 'FILE'
                            },
                            desc: 'The history file'
 
           option :archive, value: {
-                             type: String,
+                             type:  String,
                              usage: 'DIR'
                            },
                            desc: 'Archive every visited page to the DIR'
 
           option :git_archive, value: {
-                                 type: String,
+                                 type:  String,
                                  usage: 'DIR'
                                },
                                desc: 'Archive every visited page to the git repository'
@@ -588,6 +587,8 @@ module Ronin
               end
             end
 
+            # post-spidering tasks
+
             if options[:git_archive]
               archive.commit "Updated #{Time.now}"
             end
@@ -699,6 +700,7 @@ module Ronin
           #
           def agent_kwargs
             kwargs = {}
+
             kwargs[:proxy] = options[:proxy] if options[:proxy]
 
             unless @default_headers.empty?

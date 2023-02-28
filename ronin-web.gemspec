@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'yaml'
 
@@ -21,10 +21,10 @@ Gem::Specification.new do |gem|
   gem.email       = gemspec['email']
   gem.homepage    = gemspec['homepage']
 
-  glob = lambda { |patterns| gem.files & Dir[*patterns] }
+  glob = ->(patterns) { gem.files & Dir[*patterns] }
 
-  gem.files = `git ls-files`.split($/)
-  gem.files = glob[gemspec['files']] if gemspec['files']
+  gem.files  = `git ls-files`.split($/)
+  gem.files  = glob[gemspec['files']] if gemspec['files']
   gem.files += Array(gemspec['generated_files'])
   # exclude test files from the packages gem
   gem.files -= glob[gemspec['test_files'] || 'spec/{**/}*']
@@ -32,6 +32,7 @@ Gem::Specification.new do |gem|
   gem.executables = gemspec.fetch('executables') do
     glob['bin/*'].map { |path| File.basename(path) }
   end
+
   gem.default_executable = gem.executables.first if Gem::VERSION < '1.7.'
 
   gem.extensions       = glob[gemspec['extensions'] || 'ext/**/extconf.rb']
@@ -46,7 +47,7 @@ Gem::Specification.new do |gem|
   gem.required_rubygems_version = gemspec['required_rubygems_version']
   gem.post_install_message      = gemspec['post_install_message']
 
-  split = lambda { |string| string.split(/,\s*/) }
+  split = ->(string) { string.split(/,\s*/) }
 
   if gemspec['dependencies']
     gemspec['dependencies'].each do |name,versions|

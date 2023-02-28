@@ -5,10 +5,10 @@ describe Ronin::Web::XML do
   describe ".parse" do
     let(:xml) do
       <<~XML
-      <?xml version="1.0"?>
-      <root>
-        <stuff>Hello</stuff>
-      </root>
+        <?xml version="1.0"?>
+        <root>
+          <stuff>Hello</stuff>
+        </root>
       XML
     end
 

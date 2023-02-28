@@ -5,9 +5,9 @@ describe Ronin::Web::HTML do
   describe ".parse" do
     let(:html) do
       <<~HTML
-      <html>
-        <body>Hello</body>
-      </html>
+        <html>
+          <body>Hello</body>
+        </html>
       HTML
     end
 

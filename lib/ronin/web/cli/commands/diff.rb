@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #
 # ronin-web - A collection of useful web helper methods and commands.
 #
@@ -42,7 +43,7 @@ module Ronin
         # ## Options
         #
         #     -h, --help                       Print help information
-        # 
+        #
         class Diff < Command
 
           include CommandKit::Terminal
