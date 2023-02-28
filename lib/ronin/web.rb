@@ -203,6 +203,7 @@ module Ronin
                        referer:    nil,
                        cookie:     nil,
                        **kwargs)
+      uri     = URI(url)
       options = {proxy: proxy, **kwargs}
 
       if user_agent
@@ -217,7 +218,7 @@ module Ronin
       options['Referer'] = referer if referer
       options['Cookie']  = cookie  if cookie
 
-      return URI.open(url,options)
+      return uri.open(options)
     end
 
     #

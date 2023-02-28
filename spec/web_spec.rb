@@ -59,12 +59,24 @@ describe Ronin::Web do
     end
   end
 
-  describe ".open", :network do
-    it "must open URLs as temporary files" do
-      file = subject.open(url)
+  describe ".open" do
+    describe "integration", :network do
+      it "must open URLs as temporary files" do
+        file = subject.open(url)
 
-      expect(file).to be_kind_of(StringIO)
-      expect(file.read).to include("Example Domain")
+        expect(file).to be_kind_of(StringIO)
+        expect(file.read).to include("Example Domain")
+      end
+    end
+
+    context "when given a none-URI" do
+      let(:bad_uri) { ' ' }
+
+      it do
+        expect {
+          subject.open(bad_uri)
+        }.to raise_error(URI::InvalidURIError)
+      end
     end
   end
 
