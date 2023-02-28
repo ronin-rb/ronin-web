@@ -1,0 +1,20 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.1
+
+inherit_gem:
+  rubocop-ronin: rubocop.yml
+
+#
+# ronin-web specific exceptions
+#
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'data/new/**/*'
+
+Lint/ShadowingOuterLocalVariable:
+  Exclude:
+    - 'lib/ronin/web/cli/commands/reverse_proxy.rb'
+    - 'lib/ronin/web/cli/commands/spider.rb'
