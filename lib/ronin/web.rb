@@ -34,6 +34,9 @@ require 'nokogiri/diff'
 require 'open_namespace'
 
 module Ronin
+  #
+  # Top-level web helper methods.
+  #
   module Web
     include OpenNamespace
 
