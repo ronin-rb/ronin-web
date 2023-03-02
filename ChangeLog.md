@@ -1,3 +1,8 @@
+### 1.0.1 / 2023-03-01
+
+* Require `ronin-web-server` ~> 0.1, >= 0.1.1.
+* Disable SSL/TLS verification by default in {Ronin::Web::Mechanize}.
+
 ### 1.0.0 / 2023-02-01
 
 * Added [nokogiri-ext] ~> 0.1 as a dependency.
