@@ -24,9 +24,9 @@ end
 # gem 'spidr', '~> 0.7', github: 'postmodern/spidr'
 
 # Ronin dependencies
-# gem 'ronin-support',         '~> 1.0', github: 'ronin-rb/ronin-support',
-#                                        branch: 'main'
-# gem 'ronin-web-server',      '~> 0.1', github: 'ronin-rb/ronin-web-server',
+gem 'ronin-support',         '~> 1.1', github: "ronin-rb/ronin-support",
+                                       branch: '1.1.0'
+# gem 'ronin-web-server',      '~> 0.1', github: "ronin-rb/ronin-web-server",
 #                                        branch: 'main'
 # gem 'ronin-web-spider',      '~> 0.1', github: 'ronin-rb/ronin-web-spider',
 #                                        branch: 'main'
@@ -34,6 +34,9 @@ end
 #                                        branch: 'main'
 # gem 'ronin-core',	       '~> 0.1', github: 'ronin-rb/ronin-core',
 #                                        branch: 'main'
+
+gem 'ronin-web-session_cookie', '~> 0.1', github: 'ronin-rb/ronin-web-session_cookie',
+                                          branch: 'main'
 
 group :development do
   gem 'rake'

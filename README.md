@@ -393,10 +393,11 @@ puts doc.to_xml
 * [mechanize] ~> 2.0
 * [robots] ~> 0.10
 * [open_namespace] ~> 0.4
-* [ronin-support] ~> 1.0
+* [ronin-support] ~> 1.1
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
 * [ronin-web-user_agents] ~> 0.1
+* [ronin-web-session_cookie] ~> 0.1
 * [ronin-core] ~> 0.1
 
 ## Install
