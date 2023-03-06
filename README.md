@@ -53,6 +53,7 @@ Commands:
     new
     reverse-proxy
     server
+    session-cookie
     spider
 ```
 
