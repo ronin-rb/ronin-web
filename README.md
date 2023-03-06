@@ -55,6 +55,7 @@ Commands:
     server
     session-cookie
     spider
+    user-agent
 ```
 
 Open the `ronin-web` Ruby REPL:
