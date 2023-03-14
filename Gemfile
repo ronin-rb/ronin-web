@@ -26,6 +26,9 @@ end
 # Ronin dependencies
 gem 'ronin-support',         '~> 1.1', github: "ronin-rb/ronin-support",
                                        branch: '1.1.0'
+
+gem 'ronin-web-browser',     '~> 0.1', github: 'ronin-rb/ronin-web-browser'
+
 # gem 'ronin-web-server',      '~> 0.1', github: "ronin-rb/ronin-web-server",
 #                                        branch: 'main'
 # gem 'ronin-web-spider',      '~> 0.1', github: 'ronin-rb/ronin-web-spider',
