@@ -57,6 +57,209 @@ Commands:
     spider
 ```
 
+Open the `ronin-web` Ruby REPL:
+
+```shell
+$ ronin-web irb
+```
+
+Diff two HTML files:
+
+```shell
+$ ronin-web diff index1.html index2.html
++
+
++ <div>hax</div>
+```
+
+Diff two URLs:
+
+```shell
+$ ronin-web diff http://example.com/index.html http://example.com/index2.html
+```
+
+Perform an XPath query on an HTML file:
+
+```shell
+$ ronin-web html --xpath index.html
+<meta charset="utf-8">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+Perform an XPath query on a URL:
+
+```shell
+$ ronin-web html --xpath //meta https://example.com/
+<meta charset="utf-8">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+Dump all links from a web page:
+
+```shell
+$ ronin-web html --links https://www.google.com/
+https://www.google.com/imghp?hl=en&tab=wi
+https://maps.google.com/maps?hl=en&tab=wl
+https://play.google.com/?hl=en&tab=w8
+https://www.youtube.com/?tab=w1
+https://news.google.com/?tab=wn
+https://mail.google.com/mail/?tab=wm
+https://drive.google.com/?tab=wo
+https://www.google.com/intl/en/about/products?tab=wh
+http://www.google.com/history/optout?hl=en
+/preferences?hl=en
+https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/&ec=GAZAAQ
+/advanced_search?hl=en&authuser=0
+https://www.google.com/url?q=https://blog.google/products/search/google-search-new-fact-checking-misinformation/&source=hpp&id=19034203&ct=3&usg=AOvVaw3UxG35a-5UX1Rl8M_VwPbd&sa=X&ved=0ahUKEwjM4Iq--JD-AhVtGTQIHXMBBaYQ8IcBCAU
+/intl/en/ads/
+/services/
+/intl/en/about.html
+/intl/en/policies/privacy/
+/intl/en/policies/terms/
+```
+
+Spiders a host and print all visited URLs:
+
+```shell
+$ ronin-web spider --host www.ruby-lang.org
+http://www.ruby-lang.org/
+http://www.ruby-lang.org/en/
+http://www.ruby-lang.org/en/downloads/
+http://www.ruby-lang.org/en/documentation/
+http://www.ruby-lang.org/en/libraries/
+http://www.ruby-lang.org/en/community/
+https://www.ruby-lang.org/en/news/
+https://www.ruby-lang.org/en/security/
+https://www.ruby-lang.org/en/about/
+...
+```
+
+Spiders the domain and sub-domains and print every visited URL:
+
+```shell
+$ ronin-web spider --domain ruby-lang.org
+http://ruby-lang.org/
+https://www.ruby-lang.org/
+https://www.ruby-lang.org/en/
+https://www.ruby-lang.org/en/downloads/
+https://www.ruby-lang.org/en/documentation/
+https://www.ruby-lang.org/en/libraries/
+https://www.ruby-lang.org/en/community/
+https://www.ruby-lang.org/en/news/
+https://www.ruby-lang.org/en/security/
+https://www.ruby-lang.org/en/about/
+...
+```
+
+Spiders a specific web-site and print every visited URL:
+
+```shell
+$ ronin-web spider --site https://www.ruby-lang.org/
+https://www.ruby-lang.org/
+https://www.ruby-lang.org/en/
+https://www.ruby-lang.org/en/downloads/
+https://www.ruby-lang.org/en/documentation/
+https://www.ruby-lang.org/en/libraries/
+https://www.ruby-lang.org/en/community/
+https://www.ruby-lang.org/en/news/
+https://www.ruby-lang.org/en/security/
+https://www.ruby-lang.org/en/about/
+...
+```
+
+Spider a host and print the response statuses:
+
+```shell
+200 http://www.ruby-lang.org/
+200 http://www.ruby-lang.org/en/
+200 http://www.ruby-lang.org/en/downloads/
+200 http://www.ruby-lang.org/en/documentation/
+200 http://www.ruby-lang.org/en/libraries/
+200 http://www.ruby-lang.org/en/community/
+200 http://www.ruby-lang.org/en/news/
+200 http://www.ruby-lang.org/en/security/
+200 http://www.ruby-lang.org/en/about/
+...
+```
+
+Spider a host and print the response status and headers:
+
+```shell
+ronin-web spider --print-headers --host www.ruby-lang.org
+200 http://www.ruby-lang.org/
+    Connection: close
+    Content-Length: 887
+    Server: Cowboy
+    Strict-Transport-Security: max-age=31536000
+    Content-Type: text/html
+    Etag: W/"496ac7fab29a6094e490da28025c5857"
+    X-Frame-Options: SAMEORIGIN
+    Via: 1.1 vegur, 1.1 varnish
+    Accept-Ranges: bytes
+    Date: Tue, 04 Apr 2023 19:42:51 GMT
+    Age: 155
+    X-Served-By: cache-pdx12330-PDX
+    X-Cache: HIT
+    X-Cache-Hits: 1
+    X-Timer: S1680637372.808609,VS0,VE1
+    Vary: Accept-Encoding
+...
+```
+
+Start a debug web server on http://localhost:8000/:
+
+```shell
+$ ronin-web server
+[2023-04-04 12:26:59] INFO  WEBrick 1.7.0
+[2023-04-04 12:26:59] INFO  ruby 3.1.3 (2022-11-24) [x86_64-linux]
+== Sinatra (v3.0.4) has taken the stage on 8000 for development with backup from WEBrick
+[2023-04-04 12:26:59] INFO  WEBrick::HTTPServer#start: pid=8966 port=8000
+```
+
+Start a debug web server on a different address and port:
+
+```shell
+$ ronin-web server --host 0.0.0.0 --port 1337
+```
+
+Host the files in a directory on http://localhost:8000/:
+
+```shell
+$ ronin-web server --root .
+```
+
+Mount a specific file at a specific HTTP path:
+
+```shell
+$ ronin-web server --dir /dir/index.html:./index.html
+```
+
+Mount a specific directory at a specific HTTP path:
+
+```shell
+$ ronin-web server --dir /dir:.
+```
+
+Add a redirect to the web server:
+
+```shell
+$ ronin-web server --redirect /redirect:https://example.com/
+```
+
+Start a HTTP reverse proxy that rewrites HTTP responses on http://localhost:8080:
+
+```shell
+$ ronin-web reverse-proxy --rewrite-response Example:Hax
+```
+
+Test the reverse proxy:
+
+```shell
+$ curl -H "Host: example.com" http://localhost:8080/
+```
+
 ## Examples
 
 Get a web-page:
