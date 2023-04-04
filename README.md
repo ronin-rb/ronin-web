@@ -81,7 +81,7 @@ $ ronin-web diff http://example.com/index.html http://example.com/index2.html
 Perform an XPath query on an HTML file:
 
 ```shell
-$ ronin-web html --xpath index.html
+$ ronin-web html --xpath //meta index.html
 <meta charset="utf-8">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
