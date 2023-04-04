@@ -264,18 +264,24 @@ Generate a new Ruby script for parsing HTML/XML:
 
 ```shell
 $ ronin-web new nokogiri parse.rb
+	erb	nokogiri.rb.erb	parse.rb
+	chmod	parse.rb
 ```
 
 Generate a new web spider script:
 
 ```shell
-$ ronin-web new spider --host www.example.com spider.rb
+$ ronin-web new spider --host=www.example.com spider.rb
+	erb	spider.rb.erb	spider.rb
+	chmod	spider.rb
 ```
 
 Generate a new web server script:
 
 ```shell
 $ ronin-web new server server.rb
+	erb	server.rb.erb	server.rb
+	chmod	server.rb
 ```
 
 Generate a new web app:
