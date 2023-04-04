@@ -260,6 +260,38 @@ Test the reverse proxy:
 $ curl -H "Host: example.com" http://localhost:8080/
 ```
 
+Generate a new Ruby script for parsing HTML/XML:
+
+```shell
+$ ronin-web new nokogiri parse.rb
+```
+
+Generate a new web spider script:
+
+```shell
+$ ronin-web new spider --host www.example.com spider.rb
+```
+
+Generate a new web server script:
+
+```shell
+$ ronin-web new server server.rb
+```
+
+Generate a new web app:
+
+```shell
+$ ronin-web new webapp app
+	mkdir	app
+	mkdir	app/lib
+	mkdir	app/views
+	mkdir	app/public
+	erb	.ruby-version.erb	app/.ruby-version
+	cp	Gemfile	app
+	erb	app.rb.erb	app/app.rb
+	cp	config.ru	app
+```
+
 ## Examples
 
 Get a web-page:
