@@ -390,7 +390,7 @@ module Ronin
                         },
                         desc: 'Spiders the website, starting at the URL'
 
-          option :print_stauts, desc: 'Print the status codes for each URL'
+          option :print_status, desc: 'Print the status codes for each URL'
 
           option :print_headers, desc: 'Print response headers for each URL'
 
