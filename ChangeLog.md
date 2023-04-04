@@ -1,3 +1,13 @@
+### 1.0.2 / 2023-04-04
+
+* Improved documentation.
+
+#### CLI
+
+* Fixed a bug in `ronin-web server` where `App.host` was being called instead of
+  `App.bind`.
+* Fixed a typo in the `ronin-web spider --print-status` option.
+
 ### 1.0.1 / 2023-03-01
 
 * Require `ronin-web-server` ~> 0.1, >= 0.1.1.
