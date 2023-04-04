@@ -32,7 +32,9 @@ module Ronin
     class Mechanize < ::Mechanize
 
       #
-      # Creates a new [Mechanize](http://mechanize.rubyforge.org/) Agent.
+      # Creates a new [Mechanize] Agent.
+      #
+      # [Mechanize]: https://github.com/sparklemotion/mechanize#readme
       #
       # @param [Network::HTTP::Proxy, Hash, String] proxy
       #   Proxy information.
