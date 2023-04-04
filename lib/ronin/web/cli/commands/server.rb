@@ -58,7 +58,7 @@ module Ronin
                           default: 'localhost'
                         },
                         desc: 'Host name or IP to bind to' do |host|
-                          App.host = host
+                          App.bind = host
                         end
 
           option :port, short: '-p',
@@ -144,7 +144,7 @@ module Ronin
               end
             end
 
-            log_info "Starting web server listening on #{App.host}:#{App.port} ..."
+            log_info "Starting web server listening on #{App.bind}:#{App.port} ..."
             begin
               App.run!
             rescue Errno::EADDRINUSE => error
