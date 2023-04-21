@@ -38,6 +38,7 @@ dependencies:
   nokogiri-ext: ~> 0.1
   nokogiri-diff: ~> 0.2
   mechanize: ~> 2.0
+  robots: ~> 0.10
   open_namespace: ~> 0.4
   # Ronin dependencies:
   ronin-support: ~> 1.0
