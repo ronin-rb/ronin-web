@@ -52,6 +52,7 @@ Commands:
     irb
     new
     reverse-proxy
+    screenshot
     server
     session-cookie
     spider

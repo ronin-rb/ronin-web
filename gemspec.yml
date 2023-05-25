@@ -29,6 +29,7 @@ generated_files:
   - man/ronin-web-new-server.1
   - man/ronin-web-new-spider.1
   - man/ronin-web-new-webapp.1
+  - man/ronin-web-screenshot.1
   - man/ronin-web-server.1
   - man/ronin-web-spider.1
   - man/ronin-web-reverse-proxy.1
