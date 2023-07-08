@@ -18,10 +18,10 @@ Screenshots one or more URLs.
 `-B`, `--browser` *NAME*\|*PATH*
   The browser name or path to execute.
 
-`-W`, `--browser-width` *WIDTH*
+`-W`, `--width` *WIDTH*
   Sets the width of the browser viewport. Defaults to `1024` if not given.
   .
-`-H`, `--browser-height` *HEIGHT*
+`-H`, `--height` *HEIGHT*
   Sets the height of the browser viewport. Defaults to `768` if not given.
 
 `-f`, `--file` *FILE*
