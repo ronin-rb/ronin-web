@@ -37,8 +37,8 @@ module Ronin
         # ## Options
         #
         #     -B, --browser NAME|PATH          The browser name or path to execute
-        #     -W, --browser-width WIDTH        Sets the width of the browser viewport (Default: 1024)
-        #     -H, --browser-height HEIGHT      Sets the height of the browser viewport (Default: 768)
+        #     -W, --width WIDTH                Sets the width of the browser viewport (Default: 1024)
+        #     -H, --height HEIGHT              Sets the height of the browser viewport (Default: 768)
         #     -f, --file FILE                  Input file to read URLs from
         #     -F, --format png|jpg             Screenshot image format (Default: png)
         #     -d, --directory DIR              Directory to save images to (Default: /data/home/postmodern/code/ronin-rb/ronin-web)
