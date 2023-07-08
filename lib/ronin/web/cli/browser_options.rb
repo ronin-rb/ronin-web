@@ -43,21 +43,21 @@ module Ronin
                                    },
                                    desc: 'The browser name or path to execute'
 
-          command.option :browser_width, short: '-W',
-                                         value: {
-                                           type:    Integer,
-                                           default: 1024,
-                                           usage:   'WIDTH'
-                                         },
-                                         desc: 'Sets the width of the browser viewport'
+          command.option :width, short: '-W',
+                                 value: {
+                                   type:    Integer,
+                                   default: 1024,
+                                   usage:   'WIDTH'
+                                 },
+                                 desc: 'Sets the width of the browser viewport'
 
-          command.option :browser_height, short: '-H',
-                                          value: {
-                                            type:    Integer,
-                                            default: 768,
-                                            usage:   'HEIGHT'
-                                          },
-                                          desc: 'Sets the height of the browser viewport'
+          command.option :height, short: '-H',
+                                  value: {
+                                    type:    Integer,
+                                    default: 768,
+                                    usage:   'HEIGHT'
+                                  },
+                                  desc: 'Sets the height of the browser viewport'
         end
 
         #
@@ -77,7 +77,7 @@ module Ronin
         #
         def browser_kwargs
           kwargs = {
-            window_size: [options[:browser_width], options[:browser_height]]
+            window_size: [options[:width], options[:height]]
           }
 
           if options[:browser]

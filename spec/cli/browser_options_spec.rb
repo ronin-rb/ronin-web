@@ -24,21 +24,21 @@ describe Ronin::Web::CLI::BrowserOptions do
     end
 
     it "must add the '-W,--browser-width' option" do
-      expect(subject.options[:browser_width]).to_not be(nil)
-      expect(subject.options[:browser_width].short).to eq('-W')
-      expect(subject.options[:browser_width].value.type).to be(Integer)
-      expect(subject.options[:browser_width].value.default).to eq(1024)
-      expect(subject.options[:browser_width].value.usage).to eq('WIDTH')
-      expect(subject.options[:browser_width].desc).to eq('Sets the width of the browser viewport (Default: 1024)')
+      expect(subject.options[:width]).to_not be(nil)
+      expect(subject.options[:width].short).to eq('-W')
+      expect(subject.options[:width].value.type).to be(Integer)
+      expect(subject.options[:width].value.default).to eq(1024)
+      expect(subject.options[:width].value.usage).to eq('WIDTH')
+      expect(subject.options[:width].desc).to eq('Sets the width of the browser viewport (Default: 1024)')
     end
 
     it "must add the '-H,--browser-height' option" do
-      expect(subject.options[:browser_height]).to_not be(nil)
-      expect(subject.options[:browser_height].short).to eq('-H')
-      expect(subject.options[:browser_height].value.type).to be(Integer)
-      expect(subject.options[:browser_height].value.default).to eq(768)
-      expect(subject.options[:browser_height].value.usage).to eq('HEIGHT')
-      expect(subject.options[:browser_height].desc).to eq('Sets the height of the browser viewport (Default: 768)')
+      expect(subject.options[:height]).to_not be(nil)
+      expect(subject.options[:height].short).to eq('-H')
+      expect(subject.options[:height].value.type).to be(Integer)
+      expect(subject.options[:height].value.default).to eq(768)
+      expect(subject.options[:height].value.usage).to eq('HEIGHT')
+      expect(subject.options[:height].desc).to eq('Sets the height of the browser viewport (Default: 768)')
     end
   end
 
@@ -64,7 +64,7 @@ describe Ronin::Web::CLI::BrowserOptions do
     context "when the --browser-width option is given" do
       let(:new_width) { 512 }
 
-      before { subject.options[:browser_width] = new_width }
+      before { subject.options[:width] = new_width }
 
       it "must change the width in the :window_size keyword argument" do
         expect(subject.browser_kwargs[:window_size][0]).to eq(new_width)
@@ -74,7 +74,7 @@ describe Ronin::Web::CLI::BrowserOptions do
     context "when the --browser-height option is given" do
       let(:new_height) { 512 }
 
-      before { subject.options[:browser_height] = new_height }
+      before { subject.options[:height] = new_height }
 
       it "must change the :height in the :window_size keyword argument" do
         expect(subject.browser_kwargs[:window_size][1]).to eq(new_height)
