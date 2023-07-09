@@ -402,7 +402,7 @@ puts doc.to_xml
 * [ronin-web-spider] ~> 0.1
 * [ronin-web-user_agents] ~> 0.1
 * [ronin-web-session_cookie] ~> 0.1
-* [ronin-core] ~> 0.1
+* [ronin-core] ~> 0.2
 
 ## Install
 

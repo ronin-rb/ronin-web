@@ -35,8 +35,8 @@ gem 'ronin-web-browser',     '~> 0.1', github: 'ronin-rb/ronin-web-browser'
 #                                        branch: 'main'
 # gem 'ronin-web-user_agents', '~> 0.1', github: 'ronin-rb/ronin-web-user_agents',
 #                                        branch: 'main'
-# gem 'ronin-core',	       '~> 0.1', github: 'ronin-rb/ronin-core',
-#                                        branch: 'main'
+gem 'ronin-core',	       '~> 0.2', github: "ronin-rb/ronin-core",
+                                         branch: '0.2.0'
 
 gem 'ronin-web-session_cookie', '~> 0.1', github: 'ronin-rb/ronin-web-session_cookie',
                                           branch: 'main'
