@@ -396,6 +396,7 @@ puts doc.to_xml
 * [mechanize] ~> 2.0
 * [robots] ~> 0.10
 * [open_namespace] ~> 0.4
+* [wordlist] ~> 1.0, >= 1.0.1
 * [ronin-support] ~> 1.1
 * [ronin-web-browser] ~> 0.1
 * [ronin-web-server] ~> 0.1
