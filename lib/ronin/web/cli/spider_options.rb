@@ -56,6 +56,7 @@ module Ronin
                                   usage: 'URL'
                                 },
                                 desc: 'Spiders the website, starting at the URL'
+
           command.option :open_timeout, value: {
                                           type: Integer,
                                           usage: 'SECS',
