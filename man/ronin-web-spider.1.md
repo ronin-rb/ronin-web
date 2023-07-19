@@ -67,49 +67,49 @@ Spiders a website.
 `--visit-host` *HOST*
   Visit URLs with the matching host name.
 
-`--visit-hosts-like` /*REGEX*/
+`--visit-hosts-like` `/`*REGEX*`/`
   Visit URLs with hostnames that match the *REGEX*.
 
 `--ignore-host` *HOST*
   Ignore the host name.
 
-`--ignore-hosts-like` /*REGEX*/
+`--ignore-hosts-like` `/`*REGEX*`/`
   Ignore the host names matching the *REGEX*.
 
 `--visit-port` *PORT*
   Visit URLs with the matching port number.
 
-`--visit-ports-like` /*REGEX*/
+`--visit-ports-like` `/`*REGEX*`/`
   Visit URLs with port numbers that match the *REGEX*.
 
 `--ignore-port` *PORT*
   Ignore the port number.
 
-`--ignore-ports-like` /*REGEX*/
+`--ignore-ports-like` `/`*REGEX*`/`
   Ignore the port numbers matching the *REGEXP*.
 
 `--visit-link` *URL*
   Visit the *URL*.
 
-`--visit-links-like` /*REGEX*/
+`--visit-links-like` `/`*REGEX*`/`
   Visit URLs that match the *REGEX*.
 
 `--ignore-link` *URL*
   Ignore the *URL*.
 
-`--ignore-links-like` /*REGEX*/
+`--ignore-links-like` `/`*REGEX*`/`
   Ignore URLs matching the *REGEX*.
 
 `--visit-ext` *FILE_EXT*
   Visit URLs with the matching file ext.
 
-`--visit-exts-like` /*REGEX*/
+`--visit-exts-like` `/`*REGEX*`/`
   Visit URLs with file exts that match the *REGEX*.
 
 `--ignore-ext` *FILE_EXT*
   Ignore the URLs with the file ext.
 
-`--ignore-exts-like` /*REGEX*/
+`--ignore-exts-like` `/`*REGEX*`/`
   Ignore URLs with file exts matching the REGEX.
 
 `-r`, `--robots`
