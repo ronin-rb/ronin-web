@@ -8,7 +8,8 @@ describe Ronin::Web::CLI::RubyShell do
     end
 
     it "must default #context to Ronin::Web" do
-      expect(subject.context).to be(Ronin::Web)
+      expect(subject.context).to be_a(Object)
+      expect(subject.context).to be_kind_of(Ronin::Web)
     end
   end
 end
