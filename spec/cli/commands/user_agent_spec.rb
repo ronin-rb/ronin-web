@@ -54,9 +54,7 @@ describe Ronin::Web::CLI::Commands::UserAgent do
         expect {
           subject.run
         }.to output(
-          %r{
-             ^Mozilla/5\.0\ \([^\)]+\)\ AppleWebKit/537\.36\ \(KHTML,\ like\ Gecko\)\ Chrome/\d+(\.\d+)*\ (?:Mobile\ )?Safari/537\.36$
-          }x
+          %r{^Mozilla/5\.0 \([^\)]+(?:\(\d+\)[^\)]+)?\) AppleWebKit/537\.36 \(KHTML, like Gecko\) Chrome/\d+(\.\d+)* (?:Mobile )?Safari/537\.36$}
         ).to_stdout
       end
     end
@@ -68,9 +66,7 @@ describe Ronin::Web::CLI::Commands::UserAgent do
         expect {
           subject.run
         }.to output(
-          %r{
-             ^Mozilla/5\.0\ \([^\)]+\)\ Gecko/(?:20100101|\d+(?:\.\d+)*)\ Firefox/\d+(\.\d+)*$
-          }x
+          %r{^Mozilla/5\.0 \([^\)]+\) Gecko/(?:20100101|\d+(?:\.\d+)*) Firefox/\d+(\.\d+)*$}
         ).to_stdout
       end
     end
