@@ -2,7 +2,7 @@
 
 ## SYNOPSIS
 
-`ronin-web-spider` [*options*] {`--host` *HOST* \| `--domain` *DOMAIN* \| `--site` *URL*}
+`ronin-web spider` [*options*] {`--host` *HOST* \| `--domain` *DOMAIN* \| `--site` *URL*}
 
 ## DESCRIPTION
 

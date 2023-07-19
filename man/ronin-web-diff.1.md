@@ -2,7 +2,7 @@
 
 ## SYNOPSIS
 
-`ronin-web-diff` [*options*] {*URL* \| *FILE*} {*URL* \| *FILE*}
+`ronin-web diff` [*options*] {*URL* \| *FILE*} {*URL* \| *FILE*}
 
 ## DESCRIPTION
 
