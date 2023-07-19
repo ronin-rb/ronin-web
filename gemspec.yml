@@ -35,6 +35,7 @@ generated_files:
   - man/ronin-web-reverse-proxy.1
   - man/ronin-web-session-cookie.1
   - man/ronin-web-user-agent.1
+  - man/ronin-web-wordlist.1
 
 dependencies:
   nokogiri: ~> 1.4
