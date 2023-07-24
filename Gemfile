@@ -30,6 +30,7 @@ gem 'ronin-support', '~> 1.1', github: "ronin-rb/ronin-support",
 gem 'ronin-core',    '~> 0.2', github: "ronin-rb/ronin-core",
                                branch: '0.2.0'
 
+gem 'ferrum',                      github: 'rubycdp/ferrum'
 gem 'ronin-web-browser', '~> 0.1', github: 'ronin-rb/ronin-web-browser'
 # gem 'ronin-web-server',      '~> 0.1', github: "ronin-rb/ronin-web-server",
 #                                        branch: 'main'
