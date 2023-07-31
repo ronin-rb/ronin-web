@@ -18,3 +18,8 @@ Lint/ShadowingOuterLocalVariable:
   Exclude:
     - 'lib/ronin/web/cli/commands/reverse_proxy.rb'
     - 'lib/ronin/web/cli/commands/spider.rb'
+
+Naming/MethodParameterName:
+  Exclude:
+    - 'lib/ronin/web/cli/browser_shell.rb'
+    - 'lib/ronin/web/cli/js_shell.rb'
