@@ -21,6 +21,7 @@ metadata:
 
 generated_files:
   - man/ronin-web.1
+  - man/ronin-web-browser.1
   - man/ronin-web-diff.1
   - man/ronin-web-html.1
   - man/ronin-web-irb.1
