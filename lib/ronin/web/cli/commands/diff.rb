@@ -43,6 +43,7 @@ module Ronin
         # ## Options
         #
         #     -h, --help                       Print help information
+        #     -f, --format                     Pass the format of the URL or files. Supported formats are html and xml. (Default: html)
         #
         class Diff < Command
 
@@ -58,6 +59,13 @@ module Ronin
                            usage:    'URL | FILE',
                            desc:     'The modified URL or file'
 
+          option :format, short: '-f', value: {
+            type: String,
+            default: 'html',
+            usage: 'html | xml'
+          },
+          desc: 'The format of the web pages'
+
           description 'Diffs two web pges'
 
           man_page 'ronin-web-diff.1'
@@ -72,8 +80,7 @@ module Ronin
           #   The URL or file path of the modified page.
           #
           def run(page1,page2)
-            doc1 = Nokogiri::HTML(read(page1))
-            doc2 = Nokogiri::HTML(read(page2))
+            doc1, doc2 = load_doc(page1, page2)
 
             doc1.diff(doc2) do |change,node|
               unless change == ' '
@@ -98,6 +105,27 @@ module Ronin
             else
               File.new(source)
             end
+          end
+
+          private
+
+          def load_doc(page1, page2)
+            case options[:format].to_sym
+            when :html
+              [load_html(page1), load_html(page2)]
+            when :xml
+              [load_xml(page1), load_xml(page2)]
+            else
+              raise "Unsupported format"
+            end
+          end
+
+          def load_html(page)
+            Nokogiri::HTML(read(page))
+          end
+
+          def load_xml(page)
+            Nokogiri::XML(read(page))
           end
 
         end
