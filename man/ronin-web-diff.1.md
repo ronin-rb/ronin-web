@@ -6,7 +6,7 @@
 
 ## DESCRIPTION
 
-Diffs two separate HTML or XML pages and prints the HTML/XML nodes which got changed.
+Diffs two separate HTML or XML pages and prints the HTML/XML nodes which were changed.
 
 ## ARGUMENTS
 
@@ -21,13 +21,12 @@ Diffs two separate HTML or XML pages and prints the HTML/XML nodes which got cha
 `-h`, `--help`
   Print help information
 
-`-f`, `--format`
-  Pass the format of the URL or files. Supported formats are html and xml. (Default: html)
+`-f`, `--format` `html`|`xml`
+  Pass the format of the URL or files. Supported formats are `html` and `xml`. (Default: `html`)
 
 ## AUTHOR
 
 Postmodern <postmodern.mod3@gmail.com>
-Santhosh C @santhosh-chinnasamy
 
 ## SEE ALSO
 

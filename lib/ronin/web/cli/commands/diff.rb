@@ -59,12 +59,12 @@ module Ronin
                            usage:    'URL | FILE',
                            desc:     'The modified URL or file'
 
-          option :format, short: '-f', value: {
-            type: String,
-            default: 'html',
-            usage: 'html | xml'
-          },
-          desc: 'The format of the web pages'
+          option :format, short: '-f',
+                          value: {
+                            type: [:html, :xml],
+                            default: :html
+                          },
+                          desc: 'The format of the web pages'
 
           description 'Diffs two web pges'
 
@@ -80,7 +80,7 @@ module Ronin
           #   The URL or file path of the modified page.
           #
           def run(page1,page2)
-            doc1, doc2 = load_doc(page1, page2)
+            doc1, doc2 = load_docs(page1, page2)
 
             doc1.diff(doc2) do |change,node|
               unless change == ' '
@@ -109,25 +109,26 @@ module Ronin
 
           private
 
-          def load_doc(page1, page2)
-            case options[:format].to_sym
+          #
+          # Loads the given html or xml sources
+          #
+          # @param [String] page1
+          #   The URL or file path of the original page.
+          #
+          # @param [String] page2
+          #   The URL or file path of the modified page.
+          # @return [@Nokogiri::HTML, @Nokogiri::HTML] or [@Nokogiri::XML, @Nokogiri::XML]
+          #
+          def load_docs(page1, page2)
+            case options[:format]
             when :html
-              [load_html(page1), load_html(page2)]
+              [Nokogiri::HTML(read(page1)), Nokogiri::HTML(read(page2))]
             when :xml
-              [load_xml(page1), load_xml(page2)]
+              [Nokogiri::XML(read(page1)), Nokogiri::XML(read(page2))]
             else
-              raise "Unsupported format"
+              raise(NotImplementedError,"unsupported format: #{options[:format].inspect}")
             end
           end
-
-          def load_html(page)
-            Nokogiri::HTML(read(page))
-          end
-
-          def load_xml(page)
-            Nokogiri::XML(read(page))
-          end
-
         end
       end
     end
