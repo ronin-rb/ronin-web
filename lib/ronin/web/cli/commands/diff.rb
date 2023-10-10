@@ -80,7 +80,8 @@ module Ronin
           #   The URL or file path of the modified page.
           #
           def run(page1,page2)
-            doc1, doc2 = load_docs(page1, page2)
+            doc1 = load_doc(page1)
+            doc2 = load_doc(page2)
 
             doc1.diff(doc2) do |change,node|
               unless change == ' '
@@ -112,19 +113,18 @@ module Ronin
           #
           # Loads the given html or xml sources
           #
-          # @param [String] page1
+          # @param [String] page
           #   The URL or file path of the original page.
           #
-          # @param [String] page2
-          #   The URL or file path of the modified page.
-          # @return [@Nokogiri::HTML, @Nokogiri::HTML] or [@Nokogiri::XML, @Nokogiri::XML]
+          # @return (Nokogiri::HTML::Document, Nokogiri::XML::Document)
+          #   html or xml document depends upon --format option
           #
-          def load_docs(page1, page2)
+          def load_doc(page)
             case options[:format]
             when :html
-              [Nokogiri::HTML(read(page1)), Nokogiri::HTML(read(page2))]
+              Nokogiri::HTML(read(page))
             when :xml
-              [Nokogiri::XML(read(page1)), Nokogiri::XML(read(page2))]
+              Nokogiri::XML(read(page))
             else
               raise(NotImplementedError,"unsupported format: #{options[:format].inspect}")
             end
