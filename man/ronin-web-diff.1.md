@@ -6,7 +6,7 @@
 
 ## DESCRIPTION
 
-Diffs two separate webpages and prints the HTML nodes which change changed.
+Diffs two separate HTML or XML pages and prints the HTML/XML nodes which were changed.
 
 ## ARGUMENTS
 
@@ -14,12 +14,15 @@ Diffs two separate webpages and prints the HTML nodes which change changed.
   A `https://` or `http://` URL of the web page to diff.
 
 *FILE*
-  A path to the local HTML file to diff.
+  A path to the local HTML or XML file to diff.
 
 ## OPTIONS
 
 `-h`, `--help`
   Print help information
+
+`-f`, `--format` `html`|`xml`
+  Pass the format of the URL or files. Supported formats are `html` and `xml`. (Default: `html`)
 
 ## AUTHOR
 
