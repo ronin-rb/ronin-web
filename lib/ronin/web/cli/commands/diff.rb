@@ -116,7 +116,7 @@ module Ronin
           # @param [String] page
           #   The URL or file path of the original page.
           #
-          # @return (Nokogiri::HTML::Document, Nokogiri::XML::Document)
+          # @return [Nokogiri::HTML::Document, Nokogiri::XML::Document]
           #   html or xml document depends upon --format option
           #
           def load_doc(page)
