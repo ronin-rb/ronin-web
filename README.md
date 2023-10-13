@@ -493,6 +493,68 @@ post_json 'https://example.com/api/endpoint.json', json: {foo: 'bar'}
 # => {...}
 ```
 
+### User Agents
+
+Get a random `User-Agent` string:
+
+```ruby
+user_agent = UserAgents.random
+# => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.230 Safari/537.36"
+```
+
+For more examples, see [ronin-web-user_agents][ronin-web-user_agents-examples].
+
+[ronin-web-user_agents-examples]: https://github.com/ronin-rb/ronin-web-user_agents#examples
+
+### Session Cookie
+
+Parse a Django JSON session cookie:
+
+```ruby
+SessionCookie.parse('sessionid=eyJmb28iOiJiYXIifQ:1pQcTx:UufiSnuPIjNs7zOAJS0UpqnyvRt7KET7BVes0I8LYbA')
+# =>
+# #<Ronin::Web::SessionCookie::Django:0x00007f29bb9c6b70
+#  @hmac=
+#   "R\xE7\xE2J{\x8F\"3l\xEF3\x80%-\x14\xA6\xA9\xF2\xBD\e{(D\xFB\x05W\xAC\xD0\x8F\va\xB0",
+#  @params={"foo"=>"bar"},
+#  @salt=1676070425>
+```
+
+For more examples, see [ronin-web-session_cookie][ronin-web-session_cookie-examples].
+
+[ronin-web-session_cookie-examples]: https://github.com/ronin-rb/ronin-web-session_cookie#examples
+
+### Spider
+
+Spider a website and print out visited URLs:
+
+```ruby
+Spider.site('http://www.rubyinside.com/') do |spider|
+  spider.every_url { |url| puts url }
+end
+```
+
+For more examples, see [ronin-web-spider][ronin-web-spider-examples].
+
+[ronin-web-spider-examples]: https://github.com/ronin-rb/ronin-web-spider#examples
+
+### Browser
+
+Open a visible web browser and intercept all requests:
+
+```ruby
+browser = Ronin::Web::Browser.new(visible: true)
+browser.every_request do |request|
+  puts "> #{request.method} #{request.url}"
+end
+
+browser.go_to("https://twitter.com/login")
+```
+
+For more examples, see [ronin-web-browser][ronin-web-browser-examples].
+
+[ronin-web-browser-examples]: https://github.com/ronin-rb/ronin-web-browser#examples
+
 ## Requirements
 
 * [Ruby] >= 3.0.0
