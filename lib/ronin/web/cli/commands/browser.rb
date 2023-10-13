@@ -218,9 +218,6 @@ module Ronin
           #
           # Starts an interactive browser shell.
           #
-          # @param [Ronin::Web::Browser::Agent] browser
-          #   The browser instance.
-          #
           def start_shell
             # start the shell then immediately quit the browser once exited
             if options[:js_shell]
