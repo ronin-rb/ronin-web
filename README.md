@@ -24,7 +24,6 @@ research and development.
   * Also provides additional extensions to [Nokogiri][nokogiri] using
     [nokogiri-ext].
 * Supports diffing HTML/XML documents using [nokogiri-diff].
-* Automated Web Browsing using [Mechanize][mechanize].
 * Supports random `User-Agent` generation using [ronin-web-user_agents].
 * Provides an easy to use [Sinatra][sinatra] based web server using
   [ronin-web-server].
@@ -303,43 +302,58 @@ $ ronin-web new webapp app
 
 ## Examples
 
-Get a web-page:
+### HTML
+
+Parse an HTML string:
 
 ```ruby
-Web.get('http://www.rubyinside.com/')
+doc = html_parse("<html>\n  <body>\n    <p>Hello world</p>\n  </body>\n</html>\n")
+# =>
+# #(Document:0x6ab8 {
+#   name = "document",
+#   children = [
+#     #(DTD:0x6be4 { name = "html" }),
+#     #(Element:0x6cd4 {
+#       name = "html",
+#       children = [
+#         #(Text "\n  "),
+#         #(Element:0x6e64 {
+#           name = "body",
+#           children = [
+#             #(Text "\n    "),
+#             #(Element:0x6ff4 { name = "p", children = [ #(Text "Hello world")] }),
+#             #(Text "\n  ")]
+#           }),
+#         #(Text "\n")]
+#       })]
+#   })
 ```
 
-Get only the body of the web-page:
+Parse a HTML file:
 
 ```ruby
-Web.get_body('http://www.rubyinside.com/')
+doc = html_open("index.html")
+# => #<Nokogiri::HTML::Document:...>
 ```
 
-Get a [Mechanize agent][mechanize]:
+Searching an HTML document using [XPath] or CSS-path:
 
 ```ruby
-agent = Web.agent
-```
+nodes = doc.search('//div/p')
+nodes = doc.search('div p.class')
+# => [#<Nokogiri::HTML::Element:...>, ...]
 
-Parse HTML:
-
-```ruby
-HTML.parse(open('some_file.html'))
-# => <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
-# <html>
-#   <head>
-#     <script type="text/javascript" src="redirect.js"></script>
-#   </head>
-# </html>
+node = doc.at('#id')
+# => #<Nokogiri::HTML::Element:...>
 ```
 
 Build a HTML document:
 
 ```ruby
-doc = HTML.build do
+doc = html_build do
   html {
     head {
-      script(:type => 'text/javascript', :src => 'redirect.js')
+      script(type: 'text/javascript', src: 'redirect.js')
     }
   }
 end
@@ -349,23 +363,56 @@ puts doc.to_html
 # <html><head><script src="redirect.js" type="text/javascript"></script></head></html>
 ```
 
-Parse XML:
+### XML
+
+Parse an XML response body:
 
 ```ruby
-XML.parse(some_text)
-# => <?xml version="1.0"?>
-# <users>
-#   <user>
-#     <name>admin</name>
-#     <password>0mni</password>
-#   </user>
-# </users>
+xml_parse("<?xml version=\"1.0\"?>\n<users>\n  <user>\n    <name>admin</name>\n    <password>0mni</password>\n  <user>\n</users>\n")
+# =>
+# #(Document:0xdebc {
+#   name = "document",
+#   children = [
+#     #(Element:0xdfe8 {
+#       name = "users",
+#       children = [
+#         #(Text "\n  "),
+#         #(Element:0xe178 {
+#           name = "user",
+#           children = [
+#             #(Text "\n    "),
+#             #(Element:0xe308 { name = "name", children = [ #(Text "admin")] }),
+#             #(Text "\n    "),
+#             #(Element:0xe538 { name = "password", children = [ #(Text "0mni")] }),
+#             #(Text "\n  "),
+#             #(Element:0xe768 { name = "user", children = [ #(Text "\n")] }),
+#             #(Text "\n")]
+#           })]
+#       })]
+#   })
+```
+
+Parse a XML file:
+
+```ruby
+doc = html_open("data.xml")
+# => #<Nokogiri:XML:::Document:...>
+```
+
+Searching an XML document using [XPath]:
+
+```ruby
+users = doc.search('//user')
+# => [#<Nokogiri::XML::Element:...>, ...]
+
+admin = doc.at('//user[@name="admin"]')
+# => #<Nokogiri::XML::Element:...>
 ```
 
 Build a XML document:
 
 ```ruby
-doc = XML.build do
+doc = xml_build do
   playlist {
     mp3 {
       file { text('02 THE WAIT.mp3') }
@@ -388,17 +435,74 @@ puts doc.to_xml
 # </playlist>
 ```
 
+### Web Requests
+
+Gets a URL and follows any redirects:
+
+```ruby
+get 'https://example.com/'
+# => #<Net::HTTPResponse:...>
+```
+
+Gets a URL and parses the HTML response:
+
+```ruby
+get_html 'https://example.com/'
+# => #<Nokogiri::HTML::Document:...>
+```
+
+Gets a URL and parses the XML response:
+
+```ruby
+get_xml 'https://example.com/sitemap.xml'
+# => #<Nokogiri::XML::Document:...>
+```
+
+Gets a URL and parses the JSON response:
+
+```ruby
+get_json 'https://example.com/api/endpoint.json'
+# => {...}
+```
+
+POSTs to a URL and follows any redirects:
+
+```ruby
+post 'https://example.com/form', form_data: {'foo' => 'bar'}
+# => #<Net::HTTPResponse:...>
+```
+
+POSTs to a URL and parses the HTML response:
+
+```ruby
+post_html 'https://example.com/form', form_data: {'foo' => 'bar'}
+# => #<Nokogiri::HTML::Document:...>
+```
+
+POSTs to a URL and parses the XML response:
+
+```ruby
+post_xml 'https://example.com/form', form_data: {'foo' => 'bar'}
+# => #<Nokogiri::XML::Document:...>
+```
+
+POSTs to a URL and parses the JSON response:
+
+```ruby
+post_json 'https://example.com/api/endpoint.json', json: {foo: 'bar'}
+# => {...}
+```
+
 ## Requirements
 
 * [Ruby] >= 3.0.0
 * [nokogiri] ~> 1.4
-* [nokogiri-ext] ~> 0.1
 * [nokogiri-diff] ~> 0.2
-* [mechanize] ~> 2.0
 * [robots] ~> 0.10
 * [open_namespace] ~> 0.4
 * [wordlist] ~> 1.0, >= 1.0.1
 * [ronin-support] ~> 1.1
+* [ronin-support-web] ~> 0.1
 * [ronin-web-browser] ~> 0.1
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.1
@@ -446,11 +550,10 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [Ruby]: https://www.ruby-lang.org
 
 [nokogiri]: https://nokogiri.org/
-[nokogiri-ext]: https://github.com/postmodern/nokogiri-ext#readme
 [nokogiri-diff]: https://github.com/postmodern/nokogiri-diff#readme
-[mechanize]: https://github.com/sparklemotion/mechanize#readme
 [open_namespace]: https://github.com/postmodern/open_namespace#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support#readme
+[ronin-support-web]: https://github.com/ronin-rb/ronin-support-web#readme
 [ronin-core]: https://github.com/ronin-rb/ronin-core#readme
 [ronin-web-browser]: https://github.com/ronin-rb/ronin-web-browser#readme
 [ronin-web-server]: https://github.com/ronin-rb/ronin-web-server#readme
@@ -458,3 +561,5 @@ along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 [ronin-web-user_agents]: https://github.com/ronin-rb/ronin-web-user_agents#readme
 [ronin]: https://github.com/ronin-rb/ronin#readme
 [sinatra]: https://sinatrarb.com/
+
+[XPath]: https://developer.mozilla.org/en-US/docs/Web/XPath

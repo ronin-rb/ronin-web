@@ -4,11 +4,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-if RUBY_VERSION >= '3.0'
-  # XXX: dep in webrick for mechanize for Ruby 3.0
-  gem 'webrick', platform: :ruby
-end
-
 platforms :jruby do
   gem 'jruby-openssl', '~> 0.7'
 end
@@ -25,10 +20,12 @@ end
 # gem 'wordlist', '~> 1.0', github: 'postmodern/wordlist.rb'
 
 # Ronin dependencies
-gem 'ronin-support', '~> 1.1', github: "ronin-rb/ronin-support",
-                               branch: '1.1.0'
-gem 'ronin-core',    '~> 0.2', github: "ronin-rb/ronin-core",
-                               branch: '0.2.0'
+gem 'ronin-support',     '~> 1.1', github: "ronin-rb/ronin-support",
+                                   branch: '1.1.0'
+gem 'ronin-support-web', '~> 0.1', github: "ronin-rb/ronin-support-web",
+                                   branch: 'main'
+gem 'ronin-core',        '~> 0.2', github: "ronin-rb/ronin-core",
+                                   branch: '0.2.0'
 
 gem 'ferrum',                      github: 'rubycdp/ferrum'
 gem 'ronin-web-browser', '~> 0.1', github: 'ronin-rb/ronin-web-browser'
