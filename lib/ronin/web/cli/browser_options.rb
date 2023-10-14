@@ -26,7 +26,7 @@ module Ronin
       #
       # Adds options for opening a browser.
       #
-      # @since 1.1.0
+      # @since 2.0.0
       #
       module BrowserOptions
         #

@@ -27,7 +27,7 @@ module Ronin
       #
       # Adds options for spidering a website.
       #
-      # @since 1.1.0
+      # @since 2.0.0
       #
       module SpiderOptions
         #

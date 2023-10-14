@@ -47,7 +47,7 @@ module Ronin
         #
         #     URL | COOKIE                     The URL or the session cookie to parse
         #
-        # @since 1.1.0
+        # @since 2.0.0
         #
         class SessionCookie < Command
 

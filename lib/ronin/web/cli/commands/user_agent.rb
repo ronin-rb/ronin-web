@@ -45,7 +45,7 @@ module Ronin
         #         --os-version VERSION         The desired OS version
         #     -h, --help                       Print help information
         #
-        # @since 1.1.0
+        # @since 2.0.0
         #
         class UserAgent < Command
 
