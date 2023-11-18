@@ -126,4 +126,4 @@ Postmodern <postmodern.mod3@gmail.com>
 
 ## SEE ALSO
 
-ronin-web-new-nokogiri(1) ronin-web-new-server(1) ronin-web-new-webapp(1)
+ronin-web-new-nokogiri(1) ronin-web-new-server(1) ronin-web-new-app(1)

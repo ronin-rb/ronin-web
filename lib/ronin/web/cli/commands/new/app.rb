@@ -27,11 +27,11 @@ module Ronin
       module Commands
         class New < Command
           #
-          # Generate a new ronin-web-server based webapp.
+          # Generate a new ronin-web-server based web app.
           #
           # ## Usage
           #
-          #     ronin-web new webapp [options] DIR
+          #     ronin-web new app [options] DIR
           #
           # ## Options
           #
@@ -45,11 +45,11 @@ module Ronin
           #
           #     DIR                              The directory to create
           #
-          class Webapp < Command
+          class App < Command
 
             include Core::CLI::Generator
 
-            template_dir File.join(ROOT,'data','new','webapp')
+            template_dir File.join(ROOT,'data','new','app')
 
             usage '[options] DIR'
 
@@ -75,12 +75,12 @@ module Ronin
             argument :dir, required: true,
                            desc: 'The directory to create'
 
-            description 'Generate a new ronin-web-server based webapp'
+            description 'Generate a new ronin-web-server based app'
 
-            man_page 'ronin-web-new-webapp.1'
+            man_page 'ronin-web-new-app.1'
 
             #
-            # Runs the `ronin-web new webapp` command.
+            # Runs the `ronin-web new app` command.
             #
             # @param [String] path
             #   The path to the new project directory to create.

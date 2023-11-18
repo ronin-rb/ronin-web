@@ -289,15 +289,15 @@ $ ronin-web new server server.rb
 Generate a new web app:
 
 ```shell
-$ ronin-web new webapp app
-	mkdir	app
-	mkdir	app/lib
-	mkdir	app/views
-	mkdir	app/public
-	erb	.ruby-version.erb	app/.ruby-version
-	cp	Gemfile	app
-	erb	app.rb.erb	app/app.rb
-	cp	config.ru	app
+$ ronin-web new app myapp
+	mkdir	myapp
+	mkdir	myapp/lib
+	mkdir	myapp/views
+	mkdir	myapp/public
+	erb	.ruby-version.erb	myapp/.ruby-version
+	cp	Gemfile	myapp
+	erb	app.rb.erb	myapp/app.rb
+	cp	config.ru	myapp
 ```
 
 Open the Ronin Web Ruby REPL:

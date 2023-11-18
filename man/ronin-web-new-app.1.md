@@ -1,12 +1,12 @@
-# ronin-web-new-webapp 1 "May 2022" Ronin "User Manuals"
+# ronin-web-new-app 1 "May 2022" Ronin "User Manuals"
 
 ## SYNOPSIS
 
-`ronin-web new webapp` [*options*] [*DIR*]
+`ronin-web new app` [*options*] [*DIR*]
 
 ## DESCRIPTION
 
-Generates a new `ronin-web-server` based webapp.
+Generates a new `ronin-web-server` based web app.
 
 ## ARGUMENTS
 
@@ -16,7 +16,7 @@ Generates a new `ronin-web-server` based webapp.
 ## OPTIONS
 
 `--port` *PORT*
-  The port the webapp will listen on by default. Defaults to `3000`.
+  The port the app will listen on by default. Defaults to `3000`.
 
 `--ruby-version` *VERSION*
   The desired ruby version for the project Defaults to the current ruby version.
