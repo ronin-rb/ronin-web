@@ -23,14 +23,14 @@ Creates a new web server, spider, or nokogiri script.
 *nokogiri*
   Generates a new `nokogiri` Ruby script for parsing HTML/XML.
 
+*spider*
+  Generates a new `ronin-web-spider` Ruby script.
+
 *server*
   Generates a new `ronin-web-server` Ruby script.
 
 *app*
   Generate a new `ronin-web-server` based app.
-
-*spider*
-  Generates a new `ronin-web-spider` Ruby script.
 
 *help*
   Lists available `ronin new` commands.
