@@ -28,7 +28,7 @@ module Ronin
         #
         # ## Usage
         #
-        #     ronin-web new {nokogiri | server | spider | webapp}
+        #     ronin-web new {nokogiri | server | app | spider}
         #
         # ## Options
         #
@@ -42,11 +42,11 @@ module Ronin
         #
         # ## Commands
         #
+        #     app
         #     help
         #     nokogiri
         #     server
         #     spider
-        #     webapp
         #
         class New < Command
 
