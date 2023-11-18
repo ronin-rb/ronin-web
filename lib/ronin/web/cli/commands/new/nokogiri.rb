@@ -58,7 +58,7 @@ module Ronin
                          desc: 'Optional URL for the script'
 
             argument :file, required: true,
-                            desc: 'The file to create'
+                            desc:     'The file to create'
 
             description 'Generates a new nokogiri Ruby script for parsing HTML/XML'
 
