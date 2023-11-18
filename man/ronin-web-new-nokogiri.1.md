@@ -6,7 +6,7 @@
 
 ## DESCRIPTION
 
-Generates a new nokogiri Ruby script.
+Generates a new nokogiri Ruby script for parsing HTML/XML.
 
 ## ARGUMENTS
 

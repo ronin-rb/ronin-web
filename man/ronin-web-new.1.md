@@ -21,7 +21,7 @@ Creates a new web server, spider, or nokogiri script.
 ## COMMANDS
 
 *nokogiri*
-  Generates a new `nokogiri` Ruby script.
+  Generates a new `nokogiri` Ruby script for parsing HTML/XML.
 
 *server*
   Generates a new `ronin-web-server` Ruby script.

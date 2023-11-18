@@ -27,7 +27,7 @@ module Ronin
       module Commands
         class New < Command
           #
-          # Generates a new nokogiri Ruby script.
+          # Generates a new nokogiri Ruby script for parsing HTML/XML.
           #
           # ## Usage
           #
@@ -60,7 +60,7 @@ module Ronin
             argument :file, required: true,
                             desc: 'The file to create'
 
-            description 'Generates a new nokogiri Ruby script'
+            description 'Generates a new nokogiri Ruby script for parsing HTML/XML'
 
             man_page 'ronin-web-new-nokogiri.1'
 
