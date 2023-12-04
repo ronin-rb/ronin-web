@@ -11,18 +11,18 @@ Diffs two separate HTML or XML pages and prints the HTML/XML nodes which were ch
 ## ARGUMENTS
 
 *URL*
-  A `https://` or `http://` URL of the web page to diff.
+: A `https://` or `http://` URL of the web page to diff.
 
 *FILE*
-  A path to the local HTML or XML file to diff.
+: A path to the local HTML or XML file to diff.
 
 ## OPTIONS
 
 `-h`, `--help`
-  Print help information
+: Print help information
 
 `-f`, `--format` `html`|`xml`
-  Pass the format of the URL or files. Supported formats are `html` and `xml`. (Default: `html`)
+: Pass the format of the URL or files. Supported formats are `html` and `xml`. (Default: `html`)
 
 ## AUTHOR
 
@@ -30,4 +30,4 @@ Postmodern <postmodern.mod3@gmail.com>
 
 ## SEE ALSO
 
-ronin-web-html(1)
+[ronin-web-html](ronin-web-html.1.md)
