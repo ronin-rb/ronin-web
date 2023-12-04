@@ -34,11 +34,11 @@ Starts a HTTP reverse proxy server.
 
 Listen on the external interface on port 80:
 
-    sudo ronin-web reverse-proxy --host 0.0.0.0 --port 80
+    $ sudo ronin-web reverse-proxy --host 0.0.0.0 --port 80
 
 Replace every occurrence of `https` with `http` in the response bodies:
 
-    ronin-web reverse-proxy --rewrite-responses https:http
+    $ ronin-web reverse-proxy --rewrite-responses https:http
 
 ## AUTHOR
 
