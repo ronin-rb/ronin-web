@@ -2,7 +2,7 @@
 
 ## SYNOPSIS
 
-`ronin-web-screenshot` [*options*] {*URL* [...] | `--file` *FILE*}
+`ronin-web-screenshot` [*options*] {*URL* [...] \| `--file` *FILE*}
 
 ## DESCRIPTION
 
