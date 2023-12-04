@@ -1,12 +1,12 @@
-# ronin-web-proxy 1 "2022-01-01" Ronin "User Manuals"
+# ronin-web-reverse-proxy 1 "2022-01-01" Ronin "User Manuals"
 
 ## SYNOPSIS
 
-`ronin-web proxy` [*options*] [`--host` *HOST*] [`--port` *PORT*]
+`ronin-web reverse-proxy` [*options*] [`--host` *HOST*] [`--port` *PORT*]
 
 ## DESCRIPTION
 
-Starts a HTTP proxy server.
+Starts a HTTP reverse proxy server.
 
 ## OPTIONS
 
@@ -34,11 +34,11 @@ Starts a HTTP proxy server.
 
 Listen on the external interface on port 80:
 
-    sudo ronin-web proxy --host 0.0.0.0 --port 80
+    sudo ronin-web reverse-proxy --host 0.0.0.0 --port 80
 
 Replace every occurrence of `https` with `http` in the response bodies:
 
-    ronin-web proxy --rewrite-responses https:http
+    ronin-web reverse-proxy --rewrite-responses https:http
 
 ## AUTHOR
 
