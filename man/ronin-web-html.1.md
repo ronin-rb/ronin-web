@@ -34,9 +34,6 @@ Performs XPath/CSS-path queries on a URL or HTML file.
 `-C`, `--css-path` *CSS-path*
 : The CSS-path query to perform.
 
-`-F`, `--first`
-: Only print the first match.
-
 `-t`, `--text`
 : Prints the inner-text of the matching elements.
 
@@ -63,6 +60,9 @@ Performs XPath/CSS-path queries on a URL or HTML file.
 
 `-u`, `--urls`
 : Dumps all URLs in the page.
+
+`-F`, `--first`
+: Only print the first match.
 
 `-h`, `--help`
 : Print help information.
