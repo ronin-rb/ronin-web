@@ -51,7 +51,7 @@ group :development do
   gem 'yard',            '~> 0.9'
   gem 'yard-spellcheck', require: false
 
-  gem 'kramdown-man',    '~> 0.1'
+  gem 'kramdown-man',    '~> 1.0'
 
   gem 'dead_end',        require: false
   gem 'sord',            require: false, platform: :mri

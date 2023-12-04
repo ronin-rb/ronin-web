@@ -13,23 +13,23 @@ cookies.
 ## ARGUMENTS
 
 *URL*
-  The `http://` or `https://` URL to request and extract the session cookie
+: The `http://` or `https://` URL to request and extract the session cookie
   from.
 
 *STRING*
-  The session cookie string to parse.
+: The session cookie string to parse.
 
 ## OPTIONS
 
 `-F`, `--format` [`ruby` \| `json` \| `yaml`]
-  The format to print the session cookie params. Defaults to `ruby` if not
+: The format to print the session cookie params. Defaults to `ruby` if not
   given.
 
 `-v`, `--verbose`
-  Enables verbose output.
+: Enables verbose output.
 
 `-h`, `--help`
-  Print help information.
+: Print help information.
 
 ## AUTHOR
 
