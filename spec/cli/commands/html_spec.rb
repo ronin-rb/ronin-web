@@ -8,6 +8,7 @@ describe Ronin::Web::CLI::Commands::Html do
   let(:fixtures_dir) { File.join(__dir__,'..','..','fixtures') }
   let(:html_path)    { File.join(fixtures_dir,'page.html') }
   let(:html)         { File.read(html_path) }
+  let(:doc)          { Nokogiri::HTML(html) }
 
   describe "#option_parser" do
     before { subject.option_parser.parse(argv) }
@@ -91,6 +92,122 @@ describe Ronin::Web::CLI::Commands::Html do
 
       it "must set #query to '//a/@href | //link/@href | //script/@src | //form/@action'" do
         expect(subject.query).to eq('//a/@href | //link/@href | //script/@src | //form/@action')
+      end
+    end
+  end
+
+  describe "#run" do
+    let(:xpath)    { '//p' }
+    let(:elements) { doc.search(xpath) }
+    let(:argv)     { [] }
+
+    before { subject.option_parser.parse(argv) }
+
+    context "when given an HTML file" do
+      let(:argv) { ['--xpath', xpath] }
+
+      it "must parse the HTML file, query the elements using #query, and print the elements" do
+        expected_lines  = elements.map(&:to_html)
+        expected_output = expected_lines.join($/) + $/
+
+        expect {
+          subject.run(html_path)
+        }.to output(expected_output).to_stdout
+      end
+
+      context "and when --first is given" do
+        let(:argv) { ['--first', '--xpath', xpath] }
+
+        it "must only print the first matching element" do
+          expected_output = elements.first.to_html + $/
+
+          expect {
+            subject.run(html_path)
+          }.to output(expected_output).to_stdout
+        end
+
+        context "and when --text is given" do
+          let(:argv) { ['--first', '--text', '--xpath', xpath] }
+
+          it "must print the inner text of the matching elements" do
+            expected_output = elements.first.inner_text + $/
+
+            expect {
+              subject.run(html_path)
+            }.to output(expected_output).to_stdout
+          end
+        end
+      end
+
+      context "and when --text is given" do
+        let(:argv) { ['--text', '--xpath', xpath] }
+
+        it "must print the inner text of the matching elements" do
+          expected_output = elements.inner_text + $/
+
+          expect {
+            subject.run(html_path)
+          }.to output(expected_output).to_stdout
+        end
+      end
+    end
+
+    context "when given an HTML file and a query argument" do
+      it "must parse the HTML file, query the elements using the query, and print the elements" do
+        expected_lines  = elements.map(&:to_html)
+        expected_output = expected_lines.join($/) + $/
+
+        expect {
+          subject.run(html_path,xpath)
+        }.to output(expected_output).to_stdout
+      end
+
+      context "and when --first is given" do
+        let(:argv) { %w[--first] }
+
+        it "must only print the first matching element" do
+          expected_output = elements.first.to_html + $/
+
+          expect {
+            subject.run(html_path,xpath)
+          }.to output(expected_output).to_stdout
+        end
+
+        context "and when --text is given" do
+          let(:argv) { %w[--first --text] }
+
+          it "must print the inner text of the matching elements" do
+            expected_output = elements.first.inner_text + $/
+
+            expect {
+              subject.run(html_path,xpath)
+            }.to output(expected_output).to_stdout
+          end
+        end
+      end
+
+      context "and when --text is given" do
+        let(:argv) { %w[--text] }
+
+        it "must print the inner text of the matching elements" do
+          expected_output = elements.inner_text + $/
+
+          expect {
+            subject.run(html_path,xpath)
+          }.to output(expected_output).to_stdout
+        end
+      end
+    end
+
+    context "when no query options or QUERY argument is given" do
+      it "must print an erorr and exit with -1" do
+        expect(subject).to receive(:print_error).with("must specify --xpath, --css-path, or an XPath/CSS-path argument")
+
+        expect {
+          subject.run(html_path)
+        }.to raise_error(SystemExit) do |error|
+          expect(error.status).to eq(-1)
+        end
       end
     end
   end
