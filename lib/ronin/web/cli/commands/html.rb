@@ -135,6 +135,11 @@ module Ronin
 
           man_page 'ronin-web-html.1'
 
+          # The XPath or CSS-path query.
+          #
+          # @return [String, nil]
+          attr_reader :query
+
           #
           # Runs the `ronin-web xpath` command.
           #
