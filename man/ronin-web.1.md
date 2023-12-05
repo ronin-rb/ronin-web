@@ -75,4 +75,4 @@ Postmodern <postmodern.mod3@gmail.com>
 
 ## SEE ALSO
 
-[ronin-web-diff](ronin-web-diff.1.md) [ronin-web-html](ronin-web-html.1.md) [ronin-web-server](ronin-web-server.1.md) [ronin-web-spider](ronin-web-spider.1.md) [ronin-web-proxy](ronin-web-proxy.1.md) [ronin-web-xml](ronin-web-xml.1.md)
+[ronin-web-browser](ronin-web-browser.1.md) [ronin-web-diff](ronin-web-diff.1.md) [ronin-web-html](ronin-web-html.1.md) [ronin-web-irb](ronin-web-irb.1.md) [ronin-web-new](ronin-web-new.1.md) [ronin-web-reverse-proxy](ronin-web-reverse-proxy.1.md) [ronin-web-screenshot](ronin-web-screenshot.1.md) [ronin-web-server](ronin-web-server.1.md) [ronin-web-session-cookie](ronin-web-session-cookie.1.md) [ronin-web-spider](ronin-web-spider.1.md) [ronin-web-user-agent](ronin-web-user-agent.1.md) [ronin-web-wordlist](ronin-web-wordlist.1.md) [ronin-web-xml](ronin-web-xml.1.md)
