@@ -55,6 +55,8 @@ module Ronin
             namespace: "#{self}"
           )
 
+          description 'Creates new projects or scripts'
+
           man_page 'ronin-web-new.1'
 
         end
