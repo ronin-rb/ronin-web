@@ -38,6 +38,7 @@ module Ronin
         #
         #     -X, --xpath XPATH                XPath query
         #     -C, --css-path CSSPath           CSS-path query
+        #     -t, --text                       Prints the inner-text
         #     -M, --meta-tags                  Searches for all <meta ...> tags
         #     -l, --links                      Searches for all <a href="..."> URLs
         #     -S, --style                      Dumps all <style> tags
@@ -69,6 +70,9 @@ module Ronin
                             desc:  'CSS-path query' do |css_path|
                               @query = css_path
                             end
+
+          option :text, short: '-t',
+                        desc:  'Prints the inner-text'
 
           option :meta_tags, short: '-M',
                              desc: 'Searches for all <meta ...> tags' do
@@ -145,7 +149,11 @@ module Ronin
                     else                    doc.search(query)
                     end
 
-            puts nodes
+            if options[:text]
+              puts nodes.inner_text
+            else
+              puts nodes
+            end
           end
 
           #

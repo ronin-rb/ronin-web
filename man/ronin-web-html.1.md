@@ -34,6 +34,9 @@ Performs XPath/CSS-path queries on a URL or HTML file.
 `-C`, `--css-path` *CSS-path*
 : The CSS-path query to perform.
 
+`-t`, `--text`
+: Prints the inner-text of the matching elements.
+
 `-M`, `--meta-tags`
 : Searches for all `<meta ...>` tags.
 
