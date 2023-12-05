@@ -1,5 +1,9 @@
 # ronin-web-server 1 "2022-01-01" Ronin Web "User Manuals"
 
+## NAME
+
+ronin-web-server - Starts a web server
+
 ## SYNOPSIS
 
 `ronin-web-server` [*options*]

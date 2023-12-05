@@ -1,5 +1,9 @@
 # ronin-web-screenshot 1 "2023-05-01" Ronin Web "User Manuals"
 
+## NAME
+
+ronin-web-screenshot - Screenshots one or more URLs
+
 ## SYNOPSIS
 
 `ronin-web-screenshot` [*options*] {*URL* [...] \| `--file` *FILE*}

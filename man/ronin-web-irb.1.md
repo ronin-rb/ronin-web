@@ -1,5 +1,9 @@
 # ronin-web-irb 1 "May 2022" Ronin "User Manuals"
 
+## NAME
+
+ronin-web-irb - Starts an interactive Ruby shell with ronin-web loaded
+
 ## SYNOPSIS
 
 `ronin-web irb` [*options*]

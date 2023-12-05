@@ -1,5 +1,9 @@
 # ronin-web-browser 1 "2022-01-01" Ronin Web "User Manuals"
 
+## NAME
+
+ronin-web-browser - Automates a web browser
+
 ## SYNOPSIS
 
 `ronin-web-browser` [*options*] [*URL*]

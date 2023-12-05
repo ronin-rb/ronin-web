@@ -1,5 +1,9 @@
 # ronin-web-new 1 "May 2022" Ronin "User Manuals"
 
+## NAME
+
+ronin-web-new - Creates new projects or scripts
+
 ## SYNOPSIS
 
 `ronin-web new` [*options*] [*COMMAND*]

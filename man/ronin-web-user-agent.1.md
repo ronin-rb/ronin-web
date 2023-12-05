@@ -1,5 +1,9 @@
 # ronin-web-user-agent 1 "2023-03-01" Ronin "User Manuals"
 
+## NAME
+
+ronin-web-user-agent - Generates a random User-Agent string
+
 ## SYNOPSIS
 
 `ronin-web user-agent` [*options*]
