@@ -25,6 +25,50 @@ A collection of useful web commands.
 `-h`, `--help`
 : Prints help information.
 
+## COMMANDS
+
+`browser`
+: Automates a web browser.
+
+`diff`
+: Diffs two web pages.
+
+`html`
+: Performs XPath/CSS-path queries on a URL or HTML file.
+
+`irb`
+: Starts an interactive Ruby shell with ronin-web loaded.
+
+`new`
+: Creates new projects or scripts.
+
+`reverse-proxy`
+: Starts a HTTP proxy server.
+
+`screenshot`
+: Screenshots one or more URLs.
+
+`server`
+: Starts a web server.
+
+`session-cookie`
+: Parses and deserializes various session cookie formats.
+
+`spider`
+: Spiders a website.
+
+`user-agent`
+: Generates a random User-Agent string.
+
+`wordlist`
+: Builds a wordlist by spidering a website.
+
+`xml`
+: Performs XPath queries on a URL or XML file.
+
+`help`
+: Prints help information about this command or another command.
+
 ## AUTHOR
 
 Postmodern <postmodern.mod3@gmail.com>
