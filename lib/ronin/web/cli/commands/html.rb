@@ -144,7 +144,7 @@ module Ronin
               exit(-1)
             end
 
-            doc   = Nokogiri::HTML(read(source))
+            doc   = parse(read(source))
             nodes = if options[:first] then doc.at(query)
                     else                    doc.search(query)
                     end
@@ -172,6 +172,19 @@ module Ronin
             else
               File.new(source)
             end
+          end
+
+          #
+          # Parses the HTML source code.
+          #
+          # @param [String] html
+          #   The raw unparsed HTML.
+          #
+          # @return [Nokogiri::HTML::Document]
+          #   The parsed HTML document.
+          #
+          def parse(html)
+            Nokogiri::HTML(html)
           end
 
         end
