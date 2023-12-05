@@ -58,7 +58,7 @@ module Ronin
                            usage:    'URL | FILE',
                            desc:     'The modified URL or file'
 
-          description 'Diffs two web pges'
+          description 'Diffs two web pages'
 
           man_page 'ronin-web-diff.1'
 
