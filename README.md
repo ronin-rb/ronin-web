@@ -57,6 +57,7 @@ Commands:
     session-cookie
     spider
     user-agent
+    vulns
     wordlist
     xml
 ```
@@ -600,6 +601,7 @@ For more examples, see [ronin-web-browser][ronin-web-browser-examples].
 * [ronin-web-user_agents] ~> 0.1
 * [ronin-web-session_cookie] ~> 0.1
 * [ronin-core] ~> 0.2
+* [ronin-vulns] ~> 0.2
 
 ## Install
 
