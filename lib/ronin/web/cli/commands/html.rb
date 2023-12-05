@@ -18,7 +18,7 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/command'
+require 'ronin/web/cli/commands/xml'
 require 'ronin/support/network/http'
 
 require 'nokogiri'
@@ -55,18 +55,9 @@ module Ronin
         #     URL | FILE                       The URL or FILE to search
         #     [XPATH | CSS-path]               The XPath or CSS-path query
         #
-        class Html < Command
+        class Html < Xml
 
           usage '[options] {URL | FILE} [XPATH | CSS-path]'
-
-          option :xpath, short: '-X',
-                         value: {
-                           type:  String,
-                           usage: 'XPATH'
-                         },
-                         desc:  'XPath query' do |xpath|
-                           @query = xpath
-                         end
 
           option :css_path, short: '-C',
                             value: {
@@ -76,9 +67,6 @@ module Ronin
                             desc:  'CSS-path query' do |css_path|
                               @query = css_path
                             end
-
-          option :text, short: '-t',
-                        desc:  'Prints the inner-text'
 
           option :meta_tags, short: '-M',
                              desc: 'Searches for all <meta ...> tags' do
@@ -120,9 +108,6 @@ module Ronin
                           @query = '//a/@href | //link/@href | //script/@src | //form/@action'
                         end
 
-          option :first, short: '-F',
-                         desc: 'Only print the first match'
-
           argument :source, required: true,
                             usage: 'URL | FILE',
                             desc:  'The URL or FILE to search'
@@ -155,34 +140,7 @@ module Ronin
               exit(-1)
             end
 
-            doc   = parse(read(source))
-            nodes = if options[:first] then doc.at(query)
-                    else                    doc.search(query)
-                    end
-
-            if options[:text]
-              puts nodes.inner_text
-            else
-              puts nodes
-            end
-          end
-
-          #
-          # Reads a URI or file.
-          #
-          # @param [String] source
-          #   The URI or file path.
-          #
-          # @return [File, String]
-          #   The contents of the URI or file.
-          #
-          def read(source)
-            if source.start_with?('https://') ||
-               source.start_with?('http://')
-              Support::Network::HTTP.get_body(source)
-            else
-              File.new(source)
-            end
+            super(source,query)
           end
 
           #
