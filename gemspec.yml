@@ -38,6 +38,7 @@ generated_files:
   - man/ronin-web-reverse-proxy.1
   - man/ronin-web-session-cookie.1
   - man/ronin-web-user-agent.1
+  - man/ronin-web-vulns.1
   - man/ronin-web-wordlist.1
   - man/ronin-web-xml.1
 
@@ -56,6 +57,7 @@ dependencies:
   ronin-web-user_agents: ~> 0.1
   ronin-web-session_cookie: ~> 0.1
   ronin-core: ~> 0.2
+  ronin-vulns: ~> 0.2
 
 development_dependencies:
   bundler: ~> 2.0
