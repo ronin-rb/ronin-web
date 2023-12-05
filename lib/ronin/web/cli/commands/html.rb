@@ -141,13 +141,11 @@ module Ronin
             end
 
             doc   = Nokogiri::HTML(read(source))
-            nodes = if options[:first] then [doc.at(query)]
+            nodes = if options[:first] then doc.at(query)
                     else                    doc.search(query)
                     end
 
-            nodes.each do |node|
-              puts node
-            end
+            puts nodes
           end
 
           #
