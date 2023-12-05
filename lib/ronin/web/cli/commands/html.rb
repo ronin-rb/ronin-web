@@ -60,13 +60,19 @@ module Ronin
           usage '[options] {URL | FILE} [XPATH | CSS-path]'
 
           option :xpath, short: '-X',
-                         value: {type: String, usage: 'XPATH'},
+                         value: {
+                           type:  String,
+                           usage: 'XPATH'
+                         },
                          desc:  'XPath query' do |xpath|
                            @query = xpath
                          end
 
           option :css_path, short: '-C',
-                            value: {type: String, usage: 'CSSPath'},
+                            value: {
+                              type:  String,
+                              usage: 'CSSPath'
+                            },
                             desc:  'CSS-path query' do |css_path|
                               @query = css_path
                             end
