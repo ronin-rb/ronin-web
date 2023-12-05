@@ -1,5 +1,9 @@
 # ronin-web-html 1 "2022-01-01" Ronin "User Manuals"
 
+## NAME
+
+ronin-web-html - Performs XPath/CSS-path queries on a URL or HTML file
+
 ## SYNOPSIS
 
 `ronin-web html` [*options*] {*URL* \| *FILE*} [*XPATH* \| *CSS-path*]

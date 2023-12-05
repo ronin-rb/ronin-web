@@ -1,5 +1,9 @@
 # ronin-web-spider 1 "2022-01-01" Ronin Web "User Manuals"
 
+## NAME
+
+ronin-web-wordlist - Builds a wordlist by spidering a website
+
 ## SYNOPSIS
 
 `ronin-web wordlist` [*options*] {`--host` *HOST* \| `--domain` *DOMAIN* \| `--site` *URL*}

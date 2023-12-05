@@ -1,5 +1,9 @@
 # ronin-web 1 "2022-01-01" Ronin Web "User Manuals"
 
+## NAME
+
+ronin-web - a collection of useful web commands
+
 ## SYNOPSIS
 
 `ronin-web` [*options*] [*COMMAND* [*ARGS*]]

@@ -1,5 +1,9 @@
 # ronin-web-session-cookie 1 "2023-03-01" Ronin "User Manuals"
 
+## NAME
+
+ronin-web-session-cookie - Parses and deserializes various session cookie formats
+
 ## SYNOPSIS
 
 `ronin-web session-cookie` [*options*] {*URL* \| *STRING*}

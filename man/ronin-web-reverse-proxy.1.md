@@ -1,5 +1,9 @@
 # ronin-web-reverse-proxy 1 "2022-01-01" Ronin "User Manuals"
 
+## NAME
+
+ronin-web-reverse-proxy - Starts a HTTP proxy server
+
 ## SYNOPSIS
 
 `ronin-web reverse-proxy` [*options*] [`--host` *HOST*] [`--port` *PORT*]

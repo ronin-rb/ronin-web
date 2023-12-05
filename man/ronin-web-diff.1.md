@@ -1,5 +1,9 @@
 # ronin-web-diff 1 "2022-01-01" Ronin Web "User Manuals"
 
+## NAME
+
+ronin-web-diff - Diffs two web pages
+
 ## SYNOPSIS
 
 `ronin-web diff` [*options*] {*URL* \| *FILE*} {*URL* \| *FILE*}

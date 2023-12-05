@@ -1,5 +1,9 @@
 # ronin-web-spider 1 "2022-01-01" Ronin Web "User Manuals"
 
+## NAME
+
+ronin-web-spider - Spiders a website
+
 ## SYNOPSIS
 
 `ronin-web spider` [*options*] {`--host` *HOST* \| `--domain` *DOMAIN* \| `--site` *URL*}
