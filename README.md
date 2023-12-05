@@ -57,6 +57,7 @@ Commands:
     spider
     user-agent
     wordlist
+    xml
 ```
 
 Open the `ronin-web` Ruby REPL:

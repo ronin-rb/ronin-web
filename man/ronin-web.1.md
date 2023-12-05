@@ -31,4 +31,4 @@ Postmodern <postmodern.mod3@gmail.com>
 
 ## SEE ALSO
 
-[ronin-web-diff](ronin-web-diff.1.md) [ronin-web-html](ronin-web-html.1.md) [ronin-web-server](ronin-web-server.1.md) [ronin-web-spider](ronin-web-spider.1.md) [ronin-web-proxy](ronin-web-proxy.1.md)
+[ronin-web-diff](ronin-web-diff.1.md) [ronin-web-html](ronin-web-html.1.md) [ronin-web-server](ronin-web-server.1.md) [ronin-web-spider](ronin-web-spider.1.md) [ronin-web-proxy](ronin-web-proxy.1.md) [ronin-web-xml](ronin-web-xml.1.md)
