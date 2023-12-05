@@ -38,6 +38,13 @@ gem 'ronin-web-browser', '~> 0.1', github: 'ronin-rb/ronin-web-browser'
 gem 'ronin-web-session_cookie', '~> 0.1', github: 'ronin-rb/ronin-web-session_cookie',
                                           branch: 'main'
 
+gem 'ronin-db',              '~> 0.2', github: 'ronin-rb/ronin-db',
+                                       branch: '0.2.0'
+gem 'ronin-db-activerecord', '~> 0.2', github: 'ronin-rb/ronin-db-activerecord',
+                                       branch: '0.2.0'
+gem 'ronin-vulns',           '~> 0.2', github: 'ronin-rb/ronin-vulns',
+                                       branch: '0.2.0'
+
 group :development do
   gem 'rake'
   gem 'rubygems-tasks',  '~> 0.1'
@@ -45,6 +52,7 @@ group :development do
   gem 'rspec',           '~> 3.0'
   gem 'simplecov',       '~> 0.20'
   gem 'rack-test',       '~> 0.6'
+  gem 'webmock',         '~> 3.0'
 
   gem 'kramdown',        '~> 2.0'
   gem 'redcarpet',       platform: :mri
