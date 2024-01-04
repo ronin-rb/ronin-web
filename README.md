@@ -45,6 +45,7 @@ Arguments:
     [ARGS ...]                       Additional arguments for the command
 
 Commands:
+    completion
     diff
     help
     html

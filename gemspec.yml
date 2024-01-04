@@ -23,6 +23,7 @@ generated_files:
   - data/completions/ronin-web
   - man/ronin-web.1
   - man/ronin-web-browser.1
+  - man/ronin-web-completion.1
   - man/ronin-web-diff.1
   - man/ronin-web-html.1
   - man/ronin-web-irb.1
