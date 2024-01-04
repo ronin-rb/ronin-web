@@ -37,3 +37,10 @@ YARD::Rake::YardocTask.new
 
 require 'kramdown/man/task'
 Kramdown::Man::Task.new
+
+require 'command_kit/completion/task'
+CommandKit::Completion::Task.new(
+  class_file:  'ronin/web/cli',
+  class_name:  'Ronin::Web::CLI',
+  output_file: 'data/completions/ronin-web'
+)
