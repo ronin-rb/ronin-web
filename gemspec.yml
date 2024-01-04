@@ -20,6 +20,7 @@ metadata:
   rubygems_mfa_required: 'true'
 
 generated_files:
+  - data/completions/ronin-web
   - man/ronin-web.1
   - man/ronin-web-browser.1
   - man/ronin-web-diff.1
