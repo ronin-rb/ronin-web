@@ -14,6 +14,15 @@ Spiders a website.
 
 ## OPTIONS
 
+`--host` *HOST*
+: Spiders the specific *HOST*.
+
+`--domain` *DOMAIN*
+: Spiders the whole *DOMAIN*.
+
+`--site` *URL*
+: Spiders the website, starting at the *URL*.
+
 `--open-timeout` *SECS*
 : Sets the connection open timeout.
 
@@ -130,15 +139,6 @@ Spiders a website.
 
 `-r`, `--robots`
 : Specifies whether to honor `robots.txt`.
-
-`--host` *HOST*
-: Spiders the specific *HOST*.
-
-`--domain` *DOMAIN*
-: Spiders the whole *DOMAIN*.
-
-`--site` *URL*
-: Spiders the website, starting at the *URL*.
 
 `--print-status`
 : Print the status codes for each URL.

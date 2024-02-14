@@ -39,6 +39,23 @@ module Ronin
         def self.included(command)
           command.usage '[options] {--host HOST | --domain DOMAIN | --site URL}'
 
+          command.option :host, value: {
+                                  type:  String,
+                                  usage: 'HOST'
+                                },
+                                desc: 'Spiders the specific HOST'
+
+          command.option :domain, value: {
+                                    type:  String,
+                                    usage: 'DOMAIN'
+                                  },
+                                  desc: 'Spiders the whole domain'
+
+          command.option :site, value: {
+                                  type:  String,
+                                  usage: 'URL'
+                                },
+                                desc: 'Spiders the website, starting at the URL'
           command.option :open_timeout, value: {
                                           type: Integer,
                                           usage: 'SECS',
@@ -331,24 +348,6 @@ module Ronin
 
           command.option :robots, short: '-r',
                                   desc:  'Specifies whether to honor robots.txt'
-
-          command.option :host, value: {
-                                  type:  String,
-                                  usage: 'HOST'
-                                },
-                                desc: 'Spiders the specific HOST'
-
-          command.option :domain, value: {
-                                    type:  String,
-                                    usage: 'DOMAIN'
-                                  },
-                                  desc: 'Spiders the whole domain'
-
-          command.option :site, value: {
-                                  type:  String,
-                                  usage: 'URL'
-                                },
-                                desc: 'Spiders the website, starting at the URL'
         end
 
         # The default HTTP headers to send with every request.

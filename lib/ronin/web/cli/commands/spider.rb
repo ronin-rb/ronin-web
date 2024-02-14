@@ -42,6 +42,9 @@ module Ronin
         # ## Options
         #
         #     -v, --verbose                    Enables verbose output
+        #         --host HOST                  Spiders the specific HOST
+        #         --domain DOMAIN              Spiders the whole domain
+        #         --site URL                   Spiders the website, starting at the URL
         #         --open-timeout SECS          Sets the connection open timeout
         #         --read-timeout SECS          Sets the read timeout
         #         --ssl-timeout SECS           Sets the SSL connection timeout
@@ -83,9 +86,6 @@ module Ronin
         #         --ignore-ext FILE_EXT        Ignore the URLs with the file ext
         #         --ignore-exts-like /REGEX/   Ignore URLs with file exts matching the REGEX
         #     -r, --robots                     Specifies whether to honor robots.txt
-        #         --host HOST                  Spiders the specific HOST
-        #         --domain DOMAIN              Spiders the whole domain
-        #         --site URL                   Spiders the website, starting at the URL
         #         --print-status               Print the status codes for each URL
         #         --print-headers              Print response headers for each URL
         #         --print-header NAME          Prints a specific header
