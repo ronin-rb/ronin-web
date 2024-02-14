@@ -41,7 +41,6 @@ module Ronin
         #
         # ## Options
         #
-        #     -v, --verbose                    Enables verbose output
         #         --host HOST                  Spiders the specific HOST
         #         --domain DOMAIN              Spiders the whole domain
         #         --site URL                   Spiders the website, starting at the URL
@@ -86,6 +85,7 @@ module Ronin
         #         --ignore-ext FILE_EXT        Ignore the URLs with the file ext
         #         --ignore-exts-like /REGEX/   Ignore URLs with file exts matching the REGEX
         #     -r, --robots                     Specifies whether to honor robots.txt
+        #     -v, --verbose                    Enables verbose output
         #         --print-status               Print the status codes for each URL
         #         --print-headers              Print response headers for each URL
         #         --print-header NAME          Prints a specific header
