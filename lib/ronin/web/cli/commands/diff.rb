@@ -108,8 +108,6 @@ module Ronin
             end
           end
 
-          private
-
           #
           # Loads the given html or xml sources
           #
