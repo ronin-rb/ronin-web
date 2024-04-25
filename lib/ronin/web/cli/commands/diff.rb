@@ -21,6 +21,7 @@
 require 'ronin/web/cli/command'
 require 'ronin/support/network/http'
 
+require 'command_kit/colors'
 require 'nokogiri/diff'
 
 module Ronin
@@ -45,6 +46,8 @@ module Ronin
         #     -f, --format                     Pass the format of the URL or files. Supported formats are html and xml. (Default: html)
         #
         class Diff < Command
+
+          include CommandKit::Colors
 
           usage '[options] {URL | FILE} {URL | FILE}'
 
@@ -81,9 +84,34 @@ module Ronin
             doc2 = parse_doc(page2)
 
             doc1.diff(doc2) do |change,node|
-              unless change == ' '
-                puts "#{change} #{node}"
+              unless change == ' ' # ignroe unchanged nodes
+                print_change(change,node)
               end
+            end
+          end
+
+          #
+          # Prints a change to the document.
+          #
+          # @param ["+", "-"] change
+          #   The type of change.
+          #
+          #   * `+` - indicates an added node.
+          #   * `-` - indicates a removed node.
+          #
+          # @param [Nokogiri::HTML::Node, Nokogiri::HTML::Node] node
+          #   The node that was changed.
+          #
+          def print_change(change,node)
+            color = case change
+                    when '+' then colors.method(:green)
+                    when '-' then colors.method(:red)
+                    end
+
+            content = node.to_s
+
+            content.each_line(chomp: true) do |line|
+              puts color.call("#{change} #{line}")
             end
           end
 
