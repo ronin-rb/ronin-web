@@ -21,7 +21,6 @@
 require 'ronin/web/cli/command'
 require 'ronin/support/network/http'
 
-require 'command_kit/terminal'
 require 'nokogiri/diff'
 
 module Ronin
@@ -46,8 +45,6 @@ module Ronin
         #     -f, --format                     Pass the format of the URL or files. Supported formats are html and xml. (Default: html)
         #
         class Diff < Command
-
-          include CommandKit::Terminal
 
           usage '[options] {URL | FILE} {URL | FILE}'
 
