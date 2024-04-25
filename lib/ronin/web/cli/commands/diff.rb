@@ -80,8 +80,8 @@ module Ronin
           #   The URL or file path of the modified page.
           #
           def run(page1,page2)
-            doc1 = load_doc(page1)
-            doc2 = load_doc(page2)
+            doc1 = parse_doc(page1)
+            doc2 = parse_doc(page2)
 
             doc1.diff(doc2) do |change,node|
               unless change == ' '
@@ -117,7 +117,7 @@ module Ronin
           # @return [Nokogiri::HTML::Document, Nokogiri::XML::Document]
           #   html or xml document depends upon --format option
           #
-          def load_doc(page)
+          def parse_doc(page)
             case options[:format]
             when :html
               Nokogiri::HTML(read(page))
