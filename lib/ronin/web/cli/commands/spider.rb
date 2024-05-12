@@ -168,12 +168,6 @@ module Ronin
                                  @host_headers[name] = value
                                end
 
-          option :user_agent, value: {
-                                type:  String,
-                                usage: 'USER-AGENT'
-                              },
-                              desc: 'Sets the User-Agent string'
-
           option :user_agent_string, short: '-U',
                                      value: {
                                        type:  String,
