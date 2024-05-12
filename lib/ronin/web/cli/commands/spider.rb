@@ -701,6 +701,26 @@ module Ronin
           def agent_kwargs
             kwargs = {}
 
+            if options[:open_timeout]
+              kwargs[:open_timeout] = options[:open_timeout]
+            end
+
+            if options[:read_timeout]
+              kwargs[:read_timeout] = options[:read_timeout]
+            end
+
+            if options[:ssl_timeout]
+              kwargs[:ssl_timeout] = options[:ssl_timeout]
+            end
+
+            if options[:continue_timeout]
+              kwargs[:continue_timeout] = options[:continue_timeout]
+            end
+
+            if options[:keep_alive_timeout]
+              kwargs[:keep_alive_timeout] = options[:keep_alive_timeout]
+            end
+
             kwargs[:proxy] = options[:proxy] if options[:proxy]
 
             unless @default_headers.empty?
