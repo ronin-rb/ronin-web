@@ -241,36 +241,36 @@ module Ronin
           option :strip_query, desc: 'Enables/disables stripping the query component of every URL'
 
           option :visit_scheme, value: {
-                                type:  String,
-                                usage: 'SCHEME'
-                              },
-                              desc: 'Visit URLs with the URI scheme' do |scheme|
-                                @visit_schemes << scheme
-                              end
+                                  type:  String,
+                                  usage: 'SCHEME'
+                                },
+                                desc: 'Visit URLs with the URI scheme' do |scheme|
+                                  @visit_schemes << scheme
+                                end
 
           option :visit_schemes_like, value: {
-                                      type:  Regexp,
-                                      usage: '/REGEX/'
-                                    },
-                                    desc: 'Visit URLs with URI schemes that match the REGEX' do |regex|
-                                      @visit_schemes << regex
-                                    end
+                                        type:  Regexp,
+                                        usage: '/REGEX/'
+                                      },
+                                      desc: 'Visit URLs with URI schemes that match the REGEX' do |regex|
+                                        @visit_schemes << regex
+                                      end
 
           option :ignore_scheme, value: {
-                                 type:  String,
-                                 usage: 'SCHEME'
-                               },
-                               desc: 'Ignore the URLs with the URI scheme' do |scheme|
-                                 @ignore_schemes << scheme
-                               end
+                                   type:  String,
+                                   usage: 'SCHEME'
+                                 },
+                                 desc: 'Ignore the URLs with the URI scheme' do |scheme|
+                                   @ignore_schemes << scheme
+                                 end
 
           option :ignore_schemes_like, value: {
-                                       type:  Regexp,
-                                       usage: '/REGEX/'
-                                     },
-                                     desc: 'Ignore the URLs with URI schemes matching the REGEX' do |regex|
-                                       @ignore_schemes << regex
-                                     end
+                                         type:  Regexp,
+                                         usage: '/REGEX/'
+                                       },
+                                       desc: 'Ignore the URLs with URI schemes matching the REGEX' do |regex|
+                                         @ignore_schemes << regex
+                                       end
 
           option :visit_host, value: {
                                 type:  String,
