@@ -62,42 +62,54 @@ module Ronin
                                           usage: 'SECS',
                                           default: Spidr.open_timeout
                                         },
-                                        desc: 'Sets the connection open timeout'
+                                        desc: 'Sets the connection open timeout' do |timeout|
+                                          self.open_timeout = timeout
+                                        end
 
           command.option :read_timeout, value: {
                                           type: Integer,
                                           usage: 'SECS',
                                           default: Spidr.read_timeout
                                         },
-                                        desc: 'Sets the read timeout'
+                                        desc: 'Sets the read timeout' do |timeout|
+                                          self.read_timeout = timeout
+                                        end
 
           command.option :ssl_timeout, value: {
                                          type: Integer,
                                          usage: 'SECS',
                                          default: Spidr.ssl_timeout
                                        },
-                                       desc: 'Sets the SSL connection timeout'
+                                       desc: 'Sets the SSL connection timeout' do |timeout|
+                                         self.ssl_timeout = timeout
+                                       end
 
           command.option :continue_timeout, value: {
                                               type:    Integer,
                                               usage:   'SECS',
                                               default: Spidr.continue_timeout
                                             },
-                                            desc: 'Sets the continue timeout'
+                                            desc: 'Sets the continue timeout' do |timeout|
+                                              self.continue_timeout = timeout
+                                            end
 
           command.option :keep_alive_timeout, value: {
                                                 type:    Integer,
                                                 usage:   'SECS',
                                                 default: Spidr.keep_alive_timeout
                                               },
-                                              desc: 'Sets the connection keep alive timeout'
+                                              desc: 'Sets the connection keep alive timeout' do |timeout|
+                                                self.keep_alive_timeout = timeout
+                                              end
 
           command.option :proxy, short: '-P',
                                  value: {
                                    type:  String,
                                    usage: 'PROXY'
                                  },
-                                 desc: 'Sets the proxy to use'
+                                 desc: 'Sets the proxy to use' do |proxy|
+                                   self.proxy = proxy
+                                 end
 
           command.option :header, short: '-H',
                                   value: {
@@ -107,7 +119,7 @@ module Ronin
                                   desc: 'Sets a default header' do |header|
                                     name, value = header.split(/:\s*/,2)
 
-                                    @default_headers[name] = value
+                                    self.default_headers[name] = value
                                   end
 
           command.option :host_header, value: {
@@ -117,7 +129,7 @@ module Ronin
                                        desc: 'Sets a default header' do |name_value|
                                          name, value = name_value.split('=',2)
 
-                                         @host_headers[name] = value
+                                         self.host_headers[name] = value
                                        end
 
           command.option :user_agent_string, short: '-U',
@@ -126,7 +138,7 @@ module Ronin
                                                usage: 'STRING'
                                              },
                                              desc: 'The User-Agent string to use' do |ua|
-                                               @user_agent = ua
+                                               self.user_agent = ua
                                              end
 
           command.option :user_agent, short: '-u',
@@ -136,7 +148,7 @@ module Ronin
                                         }
                                       },
                                       desc: 'The User-Agent to use' do |name|
-                                        @user_agent = name
+                                        self.user_agent = name
                                       end
 
           command.option :referer, short: '-R',
@@ -144,35 +156,43 @@ module Ronin
                                      type:  String,
                                      usage: 'URL'
                                    },
-                                   desc: 'Sets the Referer URL'
+                                   desc: 'Sets the Referer URL' do |referer|
+                                     self.referer = referer
+                                   end
 
           command.option :delay, short: '-d',
                                  value: {
                                    type:  Numeric,
                                    usage: 'SECS'
                                  },
-                                 desc: 'Sets the delay in seconds between each request'
+                                 desc: 'Sets the delay in seconds between each request' do |delay|
+                                   self.delay = delay
+                                 end
 
           command.option :limit, short: '-l',
                                  value: {
                                    type:  Integer,
                                    usage: 'COUNT'
                                  },
-                                 desc: 'Only spiders up to COUNT pages'
+                                 desc: 'Only spiders up to COUNT pages' do |limit|
+                                   self.limit = limit
+                                 end
 
           command.option :max_depth, short: '-d',
                                      value: {
                                        type:  Integer,
                                        usage: 'DEPTH'
                                      },
-                                     desc: 'Only spiders up to max depth'
+                                     desc: 'Only spiders up to max depth' do |depth|
+                                       self.max_depth = depth
+                                     end
 
           command.option :enqueue, value: {
                                      type:  String,
                                      usage: 'URL'
                                    },
                                    desc: 'Adds the URL to the queue' do |url|
-                                     @queue << url
+                                     self.queue << url
                                    end
 
           command.option :visited, value: {
@@ -180,19 +200,23 @@ module Ronin
                                      usage: 'URL'
                                    },
                                    desc: 'Marks the URL as previously visited' do |url|
-                                     @history << url
+                                     self.history << url
                                    end
 
-          command.option :strip_fragments, desc: 'Enables/disables stripping the fragment component of every URL'
+          command.option :strip_fragments, desc: 'Enables/disables stripping the fragment component of every URL' do
+            self.strip_fragments = true
+          end
 
-          command.option :strip_query, desc: 'Enables/disables stripping the query component of every URL'
+          command.option :strip_query, desc: 'Enables/disables stripping the query component of every URL' do
+            self.strip_query = true
+          end
 
           command.option :visit_scheme, value: {
                                           type:  String,
                                           usage: 'SCHEME'
                                         },
                                         desc: 'Visit URLs with the URI scheme' do |scheme|
-                                          @visit_schemes << scheme
+                                          self.visit_schemes << scheme
                                         end
 
           command.option :visit_schemes_like, value: {
@@ -200,7 +224,7 @@ module Ronin
                                                 usage: '/REGEX/'
                                               },
                                               desc: 'Visit URLs with URI schemes that match the REGEX' do |regex|
-                                                @visit_schemes << regex
+                                                self.visit_schemes << regex
                                               end
 
           command.option :ignore_scheme, value: {
@@ -208,7 +232,7 @@ module Ronin
                                            usage: 'SCHEME'
                                          },
                                          desc: 'Ignore the URLs with the URI scheme' do |scheme|
-                                           @ignore_schemes << scheme
+                                           self.ignore_schemes << scheme
                                          end
 
           command.option :ignore_schemes_like, value: {
@@ -216,7 +240,7 @@ module Ronin
                                                  usage: '/REGEX/'
                                                },
                                                desc: 'Ignore the URLs with URI schemes matching the REGEX' do |regex|
-                                                 @ignore_schemes << regex
+                                                 self.ignore_schemes << regex
                                                end
 
           command.option :visit_host, value: {
@@ -224,7 +248,7 @@ module Ronin
                                         usage: 'HOST'
                                       },
                                       desc: 'Visit URLs with the matching host name' do |host|
-                                        @visit_hosts << host
+                                        self.visit_hosts << host
                                       end
 
           command.option :visit_hosts_like, value: {
@@ -232,7 +256,7 @@ module Ronin
                                               usage: '/REGEX/'
                                             },
                                             desc: 'Visit URLs with hostnames that match the REGEX' do |regex|
-                                              @visit_hosts << regex
+                                              self.visit_hosts << regex
                                             end
 
           command.option :ignore_host, value: {
@@ -240,7 +264,7 @@ module Ronin
                                          usage: 'HOST'
                                        },
                                        desc: 'Ignore the host name' do |host|
-                                         @ignore_hosts << host
+                                         self.ignore_hosts << host
                                        end
 
           command.option :ignore_hosts_like, value: {
@@ -248,7 +272,7 @@ module Ronin
                                                usage: '/REGEX/'
                                              },
                                              desc: 'Ignore the host names matching the REGEX' do |regex|
-                                               @ignore_hosts << regex
+                                               self.ignore_hosts << regex
                                              end
 
           command.option :visit_port, value: {
@@ -256,7 +280,7 @@ module Ronin
                                         usage: 'PORT'
                                       },
                                       desc: 'Visit URLs with the matching port number' do |port|
-                                        @visit_ports << port
+                                        self.visit_ports << port
                                       end
 
           command.option :visit_ports_like, value: {
@@ -264,7 +288,7 @@ module Ronin
                                               usage: '/REGEX/'
                                             },
                                             desc: 'Visit URLs with port numbers that match the REGEX' do |regex|
-                                              @visit_ports << regex
+                                              self.visit_ports << regex
                                             end
 
           command.option :ignore_port, value: {
@@ -272,7 +296,7 @@ module Ronin
                                          usage: 'PORT'
                                        },
                                        desc: 'Ignore the port number' do |port|
-                                         @ignore_ports << port
+                                         self.ignore_ports << port
                                        end
 
           command.option :ignore_ports_like, value: {
@@ -280,7 +304,7 @@ module Ronin
                                                usage: '/REGEX/'
                                              },
                                              desc: 'Ignore the port numbers matching the REGEXP' do |regex|
-                                               @ignore_ports << regex
+                                               self.ignore_ports << regex
                                              end
 
           command.option :visit_link, value: {
@@ -288,7 +312,7 @@ module Ronin
                                         usage: 'URL'
                                       },
                                       desc: 'Visit the URL' do |link|
-                                        @visit_links << link
+                                        self.visit_links << link
                                       end
 
           command.option :visit_links_like, value: {
@@ -296,7 +320,7 @@ module Ronin
                                               usage: '/REGEX/'
                                             },
                                             desc: 'Visit URLs that match the REGEX' do |regex|
-                                              @visit_links << regex
+                                              self.visit_links << regex
                                             end
 
           command.option :ignore_link, value: {
@@ -304,7 +328,7 @@ module Ronin
                                          usage: 'URL'
                                        },
                                        desc: 'Ignore the URL' do |link|
-                                         @ignore_links << link
+                                         self.ignore_links << link
                                        end
 
           command.option :ignore_links_like, value: {
@@ -312,7 +336,7 @@ module Ronin
                                                usage: '/REGEX/'
                                              },
                                              desc: 'Ignore URLs matching the REGEX' do |regex|
-                                               @ignore_links << regex
+                                               self.ignore_links << regex
                                              end
 
           command.option :visit_ext, value: {
@@ -320,7 +344,7 @@ module Ronin
                                        usage: 'FILE_EXT'
                                      },
                                      desc: 'Visit URLs with the matching file ext' do |ext|
-                                       @visit_exts << ext
+                                       self.visit_exts << ext
                                      end
 
           command.option :visit_exts_like, value: {
@@ -328,7 +352,7 @@ module Ronin
                                              usage: '/REGEX/'
                                            },
                                            desc: 'Visit URLs with file exts that match the REGEX' do |regex|
-                                             @visit_exts << regex
+                                             self.visit_exts << regex
                                            end
 
           command.option :ignore_ext, value: {
@@ -336,7 +360,7 @@ module Ronin
                                         usage: 'FILE_EXT'
                                       },
                                       desc: 'Ignore the URLs with the file ext' do |ext|
-                                        @ignore_exts << ext
+                                        self.ignore_exts << ext
                                       end
 
           command.option :ignore_exts_like, value: {
@@ -344,82 +368,21 @@ module Ronin
                                               usage: '/REGEX/'
                                             },
                                             desc: 'Ignore URLs with file exts matching the REGEX' do |regex|
-                                              @ignore_exts << regex
+                                              self.ignore_exts << regex
                                             end
 
           command.option :robots, short: '-r',
-                                  desc:  'Specifies whether to honor robots.txt'
+                                  desc:  'Specifies whether to honor robots.txt' do
+                                    self.robots = true
+                                  end
         end
 
-        # The default HTTP headers to send with every request.
+        # Keyword arguments to initialize a new `Spidr::Agent`.
         #
-        # @return [Hash{String => String}]
-        attr_reader :default_headers
-
-        # The mapping of custom `Host` headers.
+        # @return [Hash{Symbol => Object}]
         #
-        # @return [Hash{String => String}]
-        attr_reader :host_headers
-
-        # The pre-existing queue of URLs to start spidering with.
-        #
-        # @return [Array<String>]
-        attr_reader :queue
-
-        # The pre-existing of previously visited URLs to start spidering with.
-        #
-        # @return [Array<String>]
-        attr_reader :history
-
-        # The URI schemes to visit.
-        #
-        # @return [Array<String>]
-        attr_reader :visit_schemes
-
-        # The hosts to visit.
-        #
-        # @return [Array<String, Regexp>]
-        attr_reader :visit_hosts
-
-        # The port numbers to visit.
-        #
-        # @return [Array<Integer, Regexp>]
-        attr_reader :visit_ports
-
-        # The links to visit.
-        #
-        # @return [Array<String, Regexp>]
-        attr_reader :visit_links
-
-        # The URL file extensions to visit.
-        #
-        # @return [Array<String, Regexp>]
-        attr_reader :visit_exts
-
-        # The URI schemes to ignore.
-        #
-        # @return [Array<String, Regexp>]
-        attr_reader :ignore_schemes
-
-        # The hosts to ignore.
-        #
-        # @return [Array<String, Regexp>]
-        attr_reader :ignore_hosts
-
-        # The port numbers to ignore.
-        #
-        # @return [Array<Integer, Regexp>]
-        attr_reader :ignore_ports
-
-        # The links to ignore.
-        #
-        # @return [Array<String, Regexp>]
-        attr_reader :ignore_links
-
-        # The URL file extensions to ignore.
-        #
-        # @return [Array<String, Regexp>]
-        attr_reader :ignore_exts
+        # @since 2.0.0
+        attr_reader :agent_kwargs
 
         #
         # Initializes the command.
@@ -430,23 +393,7 @@ module Ronin
         def initialize(**kwargs)
           super(**kwargs)
 
-          @default_headers = {}
-          @host_headers    = {}
-
-          @queue   = []
-          @history = []
-
-          @visit_schemes = []
-          @visit_hosts   = []
-          @visit_ports   = []
-          @visit_links   = []
-          @visit_exts    = []
-
-          @ignore_schemes = []
-          @ignore_hosts   = []
-          @ignore_ports   = []
-          @ignore_links   = []
-          @ignore_exts    = []
+          @agent_kwargs = {}
         end
 
         #
@@ -477,91 +424,494 @@ module Ronin
         end
 
         #
-        # Builds keyword arguments for `Ronin::Web::Spider::Agent#initialize`.
+        # The open connection timeout.
         #
-        # @return [Hash{Symbol => Object}]
-        #   The keyword arguments for `Ronin::Web::Spider::Agent#initialize`.
+        # @return [Integer, nil]
         #
-        def agent_kwargs
-          kwargs = {}
+        # @since 2.0.0
+        #
+        def open_timeout
+          @agent_kwargs[:open_timeout]
+        end
 
-          if options[:open_timeout]
-            kwargs[:open_timeout] = options[:open_timeout]
-          end
+        #
+        # Sets the open connection timeout.
+        #
+        # @param [Integer] new_timeout
+        #
+        # @return [Integer]
+        #
+        # @since 2.0.0
+        #
+        def open_timeout=(new_timeout)
+          @agent_kwargs[:open_timeout] = new_timeout
+        end
 
-          if options[:read_timeout]
-            kwargs[:read_timeout] = options[:read_timeout]
-          end
+        #
+        # The read timeout.
+        #
+        # @return [Integer, nil]
+        #
+        # @since 2.0.0
+        #
+        def read_timeout
+          @agent_kwargs[:read_timeout]
+        end
 
-          if options[:ssl_timeout]
-            kwargs[:ssl_timeout] = options[:ssl_timeout]
-          end
+        #
+        # Sets the read timeout.
+        #
+        # @param [Integer] new_timeout
+        #
+        # @return [Integer]
+        #
+        # @since 2.0.0
+        #
+        def read_timeout=(new_timeout)
+          @agent_kwargs[:read_timeout] = new_timeout
+        end
 
-          if options[:continue_timeout]
-            kwargs[:continue_timeout] = options[:continue_timeout]
-          end
+        #
+        # The SSL timeout.
+        #
+        # @return [Integer, nil]
+        #
+        # @since 2.0.0
+        #
+        def ssl_timeout
+          @agent_kwargs[:ssl_timeout]
+        end
 
-          if options[:keep_alive_timeout]
-            kwargs[:keep_alive_timeout] = options[:keep_alive_timeout]
-          end
+        #
+        # Sets the SSL timeout.
+        #
+        # @param [Integer] new_timeout
+        #
+        # @return [Integer]
+        #
+        # @since 2.0.0
+        #
+        def ssl_timeout=(new_timeout)
+          @agent_kwargs[:ssl_timeout] = new_timeout
+        end
 
-          kwargs[:proxy] = options[:proxy] if options[:proxy]
+        #
+        # The continue timeout.
+        #
+        # @return [Integer, nil]
+        #
+        # @since 2.0.0
+        #
+        def continue_timeout
+          @agent_kwargs[:continue_timeout]
+        end
 
-          unless @default_headers.empty?
-            kwargs[:default_headers] = @default_headers
-          end
+        #
+        # Sets the continue timeout.
+        #
+        # @param [Integer] new_timeout
+        #
+        # @return [Integer]
+        #
+        # @since 2.0.0
+        #
+        def continue_timeout=(new_timeout)
+          @agent_kwargs[:continue_timeout] = new_timeout
+        end
 
-          unless @host_headers.empty?
-            kwargs[:host_headers] = @host_headers
-          end
+        #
+        # The `Keep-Alive` timeout.
+        #
+        # @return [Integer, nil]
+        #
+        # @since 2.0.0
+        #
+        def keep_alive_timeout
+          @agent_kwargs[:keep_alive_timeout]
+        end
 
-          kwargs[:user_agent] = @user_agent       if @user_agent
-          kwargs[:referer]    = options[:referer] if options[:referer]
+        #
+        # Sets the `Keep-Alive` timeout.
+        #
+        # @param [Integer] new_timeout
+        #
+        # @return [Integer]
+        #
+        # @since 2.0.0
+        #
+        def keep_alive_timeout=(new_timeout)
+          @agent_kwargs[:keep_alive_timeout] = new_timeout
+        end
 
-          kwargs[:delay]     = options[:delay]     if options[:delay]
-          kwargs[:limit]     = options[:limit]     if options[:limit]
-          kwargs[:max_depth] = options[:max_depth] if options[:max_depth]
+        #
+        # The proxy to use for spidering.
+        #
+        # @return [String, nil]
+        #
+        # @since 0.2.0
+        #
+        def proxy
+          @agent_kwargs[:proxy]
+        end
 
-          kwargs[:queue]   = @queue   unless @queue.empty?
-          kwargs[:history] = @history unless @history.empty?
+        #
+        # Sets the proxy to use for spidering.
+        #
+        # @param [String] new_proxy
+        #   The new proxy URI.
+        #
+        # @return [String]
+        #
+        # @since 2.0.0
+        #
+        def proxy=(new_proxy)
+          @agent_kwargs[:proxy] = new_proxy
+        end
 
-          if options.has_key?(:strip_fragments)
-            kwargs[:strip_fragments] = options[:strip_fragments]
-          end
+        #
+        # The default headers to send with every request.
+        #
+        # @return [Hash{String => String}]
+        #
+        # @since 2.0.0
+        #
+        def default_headers
+          @agent_kwargs[:default_headers] ||= {}
+        end
 
-          if options.has_key?(:strip_query)
-            kwargs[:strip_query] = options[:strip_query]
-          end
+        #
+        # The default `Host` headers to send with every request.
+        #
+        # @return [Hash{String => String}]
+        #
+        # @since 2.0.0
+        #
+        def host_headers
+          @agent_kwargs[:host_headers] ||= {}
+        end
 
-          kwargs[:schemes] = @visit_schemes unless @visit_schemes.empty?
-          kwargs[:hosts]   = @visit_hosts   unless @visit_hosts.empty?
-          kwargs[:ports]   = @visit_ports   unless @visit_ports.empty?
-          kwargs[:links]   = @visit_links   unless @visit_links.empty?
-          kwargs[:exts]    = @visit_exts    unless @visit_exts.empty?
+        #
+        # Sets the new `User-Agent` header to use for spidering.
+        #
+        # @return [String, nil]
+        #
+        # @since 2.0.0
+        #
+        def user_agent
+          @agent_kwargs[:user_agent]
+        end
 
-          unless @ignore_schemes.empty?
-            kwargs[:ignore_schemes] = @ignore_schemes
-          end
+        #
+        # Sets the new `User-Agent` header to use for spidering.
+        #
+        # @param [String] new_user_agent
+        #
+        # @return [String]
+        #
+        # @since 2.0.0
+        #
+        def user_agent=(new_user_agent)
+          @agent_kwargs[:user_agent] = new_user_agent
+        end
 
-          unless @ignore_hosts.empty?
-            kwargs[:ignore_hosts] = @ignore_hosts
-          end
+        #
+        # The `Referer` header to use for spidering.
+        #
+        # @return [String, nil]
+        #
+        # @since 2.0.0
+        #
+        def referer
+          @agent_kwargs[:referer]
+        end
 
-          unless @ignore_ports.empty?
-            kwargs[:ignore_ports] = @ignore_ports
-          end
+        #
+        # Sets the `Referer` header to use for spidering.
+        #
+        # @param [String] new_referer
+        #
+        # @return [String, nil]
+        #
+        # @since 2.0.0
+        #
+        def referer=(new_referer)
+          @agent_kwargs[:referer] = new_referer
+        end
 
-          unless @ignore_links.empty?
-            kwargs[:ignore_links] = @ignore_links
-          end
+        #
+        # The amount of seconds to pause between each request.
+        #
+        # @return [Integer, Float, nil]
+        #
+        # @since 2.0.0
+        #
+        def delay
+          @agent_kwargs[:delay]
+        end
 
-          unless @ignore_exts.empty?
-            kwargs[:ignore_exts] = @ignore_exts
-          end
+        #
+        # Sets the amount of seconds to pause between each request.
+        #
+        # @param [Integer, Float] new_delay
+        #
+        # @return [Integer, Float]
+        #
+        # @since 2.0.0
+        #
+        def delay=(new_delay)
+          @agent_kwargs[:delay] = new_delay
+        end
 
-          kwargs[:robots] = options[:robots] if options.has_key?(:robots)
+        #
+        # The limit to how many URLs to visit.
+        #
+        # @return [Integer, nil]
+        #
+        # @since 2.0.0
+        #
+        def limit
+          @agent_kwargs[:limit]
+        end
 
-          return kwargs
+        #
+        # Sets the limit of how many URLs to visit.
+        #
+        # @param [Integer] new_limit
+        #
+        # @return [Integer]
+        #
+        # @since 2.0.0
+        #
+        def limit=(new_limit)
+          @agent_kwargs[:limit] = new_limit
+        end
+
+        #
+        # The maximum depth to spider.
+        #
+        # @return [Integer, nil]
+        #
+        # @since 2.0.0
+        #
+        def max_depth
+          @agent_kwargs[:max_depth]
+        end
+
+        #
+        # Sets the maximum depth to spider.
+        #
+        # @param [Integer] new_max_depth
+        #
+        # @return [Integer]
+        #
+        # @since 2.0.0
+        #
+        def max_depth=(new_max_depth)
+          @agent_kwargs[:max_depth] = new_max_depth
+        end
+
+        #
+        # The pre-existing queue of URLs to start spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def queue
+          @agent_kwargs[:queue] ||= []
+        end
+
+        #
+        # The pre-existing history of URLs that have already been spidered.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def history
+          @agent_kwargs[:history] ||= []
+        end
+
+        #
+        # Whether to strip the `#fragment` components of links.
+        #
+        # @return [Boolean]
+        #
+        # @since 2.0.0
+        #
+        def strip_fragments
+          @agent_kwargs[:strip_fragments]
+        end
+
+        #
+        # Sets whether to strip the `#fragment` components of links.
+        #
+        # @param [Boolean] new_value
+        #
+        # @return [Boolean]
+        #
+        # @since 2.0.0
+        #
+        def strip_fragments=(new_value)
+          @agent_kwargs[:strip_fragments] = new_value
+        end
+
+        #
+        # Whether to strip the `?query` components of links.
+        #
+        # @return [Boolean]
+        #
+        # @since 2.0.0
+        #
+        def strip_query
+          @agent_kwargs[:strip_query]
+        end
+
+        #
+        # Sets whether to strip the `?query` components of links.
+        #
+        # @param [Boolean] new_value
+        #
+        # @return [Boolean]
+        #
+        # @since 2.0.0
+        #
+        def strip_query=(new_value)
+          @agent_kwargs[:strip_query] = new_value
+        end
+
+        #
+        # The list of URI schemes to allow spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def visit_schemes
+          @agent_kwargs[:schemes] ||= []
+        end
+
+        #
+        # The list of URI hosts to allow spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def visit_hosts
+          @agent_kwargs[:hosts] ||= []
+        end
+
+        #
+        # The list of URI ports to allow spidering.
+        #
+        # @return [Array<Integer>]
+        #
+        # @since 2.0.0
+        #
+        def visit_ports
+          @agent_kwargs[:ports] ||= []
+        end
+
+        #
+        # The list of URI links to allow spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def visit_links
+          @agent_kwargs[:links] ||= []
+        end
+
+        #
+        # The list of URI file extensions to allow spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def visit_exts
+          @agent_kwargs[:exts] ||= []
+        end
+
+        #
+        # The list of URI schemes to ignore while spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def ignore_schemes
+          @agent_kwargs[:ignore_schemes] ||= []
+        end
+
+        #
+        # The list of URI hosts to ignore while spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def ignore_hosts
+          @agent_kwargs[:ignore_hosts] ||= []
+        end
+
+        #
+        # The list of URI ports to ignore while spidering.
+        #
+        # @return [Array<Integer>]
+        #
+        # @since 2.0.0
+        #
+        def ignore_ports
+          @agent_kwargs[:ignore_ports] ||= []
+        end
+
+        #
+        # The list of URI links to ignore while spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def ignore_links
+          @agent_kwargs[:ignore_links] ||= []
+        end
+
+        #
+        # The list of URI file extensions to ignore while spidering.
+        #
+        # @return [Array<String>]
+        #
+        # @since 2.0.0
+        #
+        def ignore_exts
+          @agent_kwargs[:ignore_exts] ||= []
+        end
+
+        #
+        # Whether to honor the `robots.txt` file while spidering.
+        #
+        # @return [Boolean]
+        #
+        # @since 2.0.0
+        #
+        def robots
+          @agent_kwargs[:robots]
+        end
+
+        #
+        # Sets whether to honor the `robots.txt` file while spidering.
+        #
+        # @param [Boolean] new_value
+        #
+        # @return [Boolean]
+        #
+        # @since 2.0.0
+        #
+        def robots=(new_value)
+          @agent_kwargs[:robots] = new_value
         end
       end
     end
