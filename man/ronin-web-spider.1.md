@@ -64,6 +64,18 @@ Spiders a website.
 `--strip-query`
   Enables/disables stripping the query component of every URL.
 
+`--visit-scheme` *SCHEME*
+  Visit URLs with the URI scheme.
+
+`--visit-schemes-like` `/`*REGEX*`/`
+  Visit URLs with URI schemes that match the *REGEX*.
+
+`--ignore-scheme` *SCHEME*
+  Ignore URLs with the URI scheme.
+
+`--ignore-schemes-like` `/`*REGEX*`/`
+  Ignore URLs with URI schemes matching the *REGEX*.
+
 `--visit-host` *HOST*
   Visit URLs with the matching host name.
 

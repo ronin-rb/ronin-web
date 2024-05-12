@@ -61,6 +61,11 @@ module Ronin
         #         --visited URL                Marks the URL as previously visited
         #         --strip-fragments            Enables/disables stripping the fragment component of every URL
         #         --strip-query                Enables/disables stripping the query component of every URL
+        #         --visit-scheme SCHEME        Visit URLs with the URI scheme
+        #         --visit-schemes-like /REGEX/ Visit URLs with URI schemes that match the REGEX
+        #         --ignore-scheme SCHEME       Ignore the URLs with the URI scheme
+        #         --ignore-schemes-like /REGEX/
+        #                                      Ignore the URLs with URI schemes matching the REGEX
         #         --visit-host HOST            Visit URLs with the matching host name
         #         --visit-hosts-like /REGEX/   Visit URLs with hostnames that match the REGEX
         #         --ignore-host HOST           Ignore the host name
@@ -234,6 +239,38 @@ module Ronin
           option :strip_fragments, desc: 'Enables/disables stripping the fragment component of every URL'
 
           option :strip_query, desc: 'Enables/disables stripping the query component of every URL'
+
+          option :visit_scheme, value: {
+                                type:  String,
+                                usage: 'SCHEME'
+                              },
+                              desc: 'Visit URLs with the URI scheme' do |scheme|
+                                @visit_schemes << scheme
+                              end
+
+          option :visit_schemes_like, value: {
+                                      type:  Regexp,
+                                      usage: '/REGEX/'
+                                    },
+                                    desc: 'Visit URLs with URI schemes that match the REGEX' do |regex|
+                                      @visit_schemes << regex
+                                    end
+
+          option :ignore_scheme, value: {
+                                 type:  String,
+                                 usage: 'SCHEME'
+                               },
+                               desc: 'Ignore the URLs with the URI scheme' do |scheme|
+                                 @ignore_schemes << scheme
+                               end
+
+          option :ignore_schemes_like, value: {
+                                       type:  Regexp,
+                                       usage: '/REGEX/'
+                                     },
+                                     desc: 'Ignore the URLs with URI schemes matching the REGEX' do |regex|
+                                       @ignore_schemes << regex
+                                     end
 
           option :visit_host, value: {
                                 type:  String,
@@ -495,6 +532,11 @@ module Ronin
           # @return [Array<String, Regexp>]
           attr_reader :visit_exts
 
+          # The URI schemes to ignore.
+          #
+          # @return [Array<String, Regexp>]
+          attr_reader :ignore_schemes
+
           # The hosts to ignore.
           #
           # @return [Array<String, Regexp>]
@@ -536,10 +578,11 @@ module Ronin
             @visit_links   = []
             @visit_exts    = []
 
-            @ignore_hosts = []
-            @ignore_ports = []
-            @ignore_links = []
-            @ignore_exts  = []
+            @ignore_schemes = []
+            @ignore_hosts   = []
+            @ignore_ports   = []
+            @ignore_links   = []
+            @ignore_exts    = []
           end
 
           #
@@ -749,10 +792,25 @@ module Ronin
             kwargs[:links]   = @visit_links   unless @visit_links.empty?
             kwargs[:exts]    = @visit_exts    unless @visit_exts.empty?
 
-            kwargs[:ignore_hosts] = @ignore_hosts unless @ignore_hosts.empty?
-            kwargs[:ignore_ports] = @ignore_ports unless @ignore_ports.empty?
-            kwargs[:ignore_links] = @ignore_links unless @ignore_links.empty?
-            kwargs[:ignore_exts]  = @ignore_exts  unless @ignore_exts.empty?
+            unless @ignore_schemes.empty?
+              kwargs[:ignore_schemes] = @ignore_schemes
+            end
+
+            unless @ignore_hosts.empty?
+              kwargs[:ignore_hosts] = @ignore_hosts
+            end
+
+            unless @ignore_ports.empty?
+              kwargs[:ignore_ports] = @ignore_ports
+            end
+
+            unless @ignore_links.empty?
+              kwargs[:ignore_links] = @ignore_links
+            end
+
+            unless @ignore_exts.empty?
+              kwargs[:ignore_exts] = @ignore_exts
+            end
 
             kwargs[:robots] = options[:robots] if options.has_key?(:robots)
 
