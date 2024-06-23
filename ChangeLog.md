@@ -1,3 +1,33 @@
+### 2.0.0 / 2024-XX-XX
+
+* Require [wordlist] ~> 1.0, >= 1.0.1.
+* Require [ronin-support-web] ~> 0.1.
+* Require [ronin-web-browser] ~> 0.1.
+* Require [ronin-web-session_cookie] ~> 0.1.
+* Require [ronin-web-spider] ~> 0.2.
+
+#### CLI
+
+* Added the `ronin-web xml` command.
+* Added the `ronin-web session-cookie` command.
+* Added the `ronin-web user-agent` command.
+* Added the `ronin-web wordlist` command.
+* Added the `ronin-web browser` command.
+* Added the `ronin-web screenshot` command.
+* Added the `ronin-web vulns` command.
+* Added the `ronin-web completion` command to install shell completion files
+  for all `ronin-web` commands for Bash and Zsh shells.
+* Added the `--format=html|xml` option to the `ronin-web diff` command.
+* Added the `-t,--text` option to `ronin-web html`.
+* Added the `--print-js-url-strings` option to the `ronin-web spider` command.
+* Added the `--print-js-path-strings` option to the `ronin-web spider` command.
+* Added the `--print-js-relative-path-strings` option to the `ronin-web spider`
+  command.
+* Added the `--print-js-absolute-path-strings` option to the `ronin-web spider`
+  command.
+* Added ANSI colored output to the `ronin-web diff` command.
+* Renamed `ronin-web new webapp` to `ronin-web new app`.
+
 ### 1.0.2 / 2023-04-04
 
 * Improved documentation.
@@ -179,6 +209,11 @@
 [rack]: https://github.com/rack/rack
 [sinatra]: https://github.com/sinatra/sinatra
 [data_paths]: https://github.com/postmodern/data_paths
+[wordlist]: https://github.com/postmodern/wordlist.rb#readme
 [ronin-support]: https://github.com/ronin-rb/ronin-support
+[ronin-support-web]: https://github.com/ronin-rb/ronin-support-web#readme
+[ronin-web-browser]: https://github.com/ronin-rb/ronin-web-browser#readme
+[ronin-web-session_cookie]: https://github.com/ronin-rb/ronin-web-session_cookie#readme
+[ronin-web-spider]: https://github.com/ronin-rb/ronin-web-spider#readme
 [ronin]: https://github.com/ronin-rb/ronin
 [ronin-scanners]: https://github.com/ronin-rb/ronin-scanners
