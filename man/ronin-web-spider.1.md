@@ -182,6 +182,9 @@ Spiders a website.
 `--print-js-path-strings`
 : Print path strings found in JavaScript.
 
+`--print-js-absolute-path-strings`
+: Only print absolute path strings found in JavaScript.
+
 `--print-js-relative-path-strings`
 : Only print relative path strings found in JavaScript.
 

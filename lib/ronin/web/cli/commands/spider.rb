@@ -100,6 +100,8 @@ module Ronin
         #         --print-js-strings           Print all JavaScript strings
         #         --print-js-url-strings       Print URL strings found in JavaScript
         #         --print-js-path-strings      Print path strings found in JavaScript
+        #         --print-js-absolute-path-strings
+        #                                      Only print absolute path strings found in JavaScript
         #         --print-js-relative-path-strings
         #                                      Only print relative path strings found in JavaScript
         #         --print-html-comments        Print HTML comments
@@ -175,6 +177,8 @@ module Ronin
           option :print_js_url_strings, desc: 'Print URL strings found in JavaScript'
 
           option :print_js_path_strings, desc: 'Print path strings found in JavaScript'
+
+          option :print_js_absolute_path_strings, desc: 'Only print absolute path strings found in JavaScript'
 
           option :print_js_relative_path_strings, desc: 'Only print relative path strings found in JavaScript'
 
@@ -300,6 +304,12 @@ module Ronin
 
             if options[:print_js_path_strings]
               agent.every_js_path_string do |path|
+                print_content path
+              end
+            end
+
+            if options[:print_js_absolute_path_strings]
+              agent.every_js_absolute_path_string do |path|
                 print_content path
               end
             end
