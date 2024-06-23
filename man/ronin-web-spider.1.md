@@ -164,6 +164,27 @@ Spiders a website.
 `-C`, `--css-path` *XPATH*
 : Evaluates the CSS-path on each HTML page.
 
+`--print-hosts`
+: Print all discovered hostnames.
+
+`--print-certs`
+: Print all encountered SSL/TLS certificates.
+
+`--save-certs`
+: Saves all encountered SSL/TLS certificates.
+
+`--print-js-strings`
+: Print all JavaScript strings.
+
+`--print-html-comments`
+: Print HTML comments.
+
+`--print-js-comments`
+: Print JavaScript comments.
+
+`--print-comments`
+: Print all HTML and JavaScript comments.
+
 `-v`, `--verbose`
 : Enables verbose output.
 

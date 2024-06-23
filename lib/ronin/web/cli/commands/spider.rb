@@ -49,12 +49,12 @@ module Ronin
         #         --ssl-timeout SECS           Sets the SSL connection timeout
         #         --continue-timeout SECS      Sets the continue timeout
         #         --keep-alive-timeout SECS    Sets the connection keep alive timeout
-        #     -P, --proxy PROXY                Sets the proxy to use.
+        #     -P, --proxy PROXY                Sets the proxy to use
         #     -H, --header NAME: VALUE         Sets a default header
         #         --host-header NAME=VALUE     Sets a default header
+        #     -U, --user-agent-string STRING   The User-Agent string to use
         #     -u chrome-linux|chrome-macos|chrome-windows|chrome-iphone|chrome-ipad|chrome-android|firefox-linux|firefox-macos|firefox-windows|firefox-iphone|firefox-ipad|firefox-android|safari-macos|safari-iphone|safari-ipad|edge,
         #         --user-agent                 The User-Agent to use
-        #     -U, --user-agent-string STRING   The User-Agent string to use
         #     -R, --referer URL                Sets the Referer URL
         #         --delay SECS                 Sets the delay in seconds between each request
         #     -l, --limit COUNT                Only spiders up to COUNT pages
@@ -86,7 +86,7 @@ module Ronin
         #         --ignore-exts-like /REGEX/   Ignore URLs with file exts matching the REGEX
         #     -r, --robots                     Specifies whether to honor robots.txt
         #     -v, --verbose                    Enables verbose output
-        #         --print-status               Print the status codes for each URL
+        #         --print-stauts               Print the status codes for each URL
         #         --print-headers              Print response headers for each URL
         #         --print-header NAME          Prints a specific header
         #         --history FILE               The history file
@@ -94,6 +94,13 @@ module Ronin
         #         --git-archive DIR            Archive every visited page to the git repository
         #     -X, --xpath XPATH                Evaluates the XPath on each HTML page
         #     -C, --css-path XPATH             Evaluates the CSS-path on each HTML page
+        #         --print-hosts                Print all discovered hostnames
+        #         --print-certs                Print all encountered SSL/TLS certificates
+        #         --save-certs                 Saves all encountered SSL/TLS certificates
+        #         --print-js-strings           Print all JavaScript strings
+        #         --print-html-comments        Print HTML comments
+        #         --print-js-comments          Print JavaScript comments
+        #         --print-comments             Print all HTML and JavaScript comments
         #     -h, --help                       Print help information
         #
         # ## Examples
