@@ -49,15 +49,15 @@ dependencies:
   open_namespace: ~> 0.4
   wordlist: ~> 1.0, >= 1.0.1
   # Ronin dependencies:
-  ronin-support: ~> 1.1
-  ronin-support-web: ~> 0.1
-  ronin-web-browser: ~> 0.1
+  ronin-support: ~> 1.1.0.rc1
+  ronin-support-web: ~> 0.1.0.rc1
+  ronin-web-browser: ~> 0.1.0.rc1
   ronin-web-server: ~> 0.1, >= 0.1.1
-  ronin-web-spider: ~> 0.2
+  ronin-web-spider: ~> 0.2.0.rc1
   ronin-web-user_agents: ~> 0.1
-  ronin-web-session_cookie: ~> 0.1
-  ronin-core: ~> 0.2
-  ronin-vulns: ~> 0.2
+  ronin-web-session_cookie: ~> 0.1.0.rc1
+  ronin-core: ~> 0.2.0.rc1
+  ronin-vulns: ~> 0.2.0.rc1
 
 development_dependencies:
   bundler: ~> 2.0

@@ -20,30 +20,30 @@ end
 # gem 'wordlist', '~> 1.0', github: 'postmodern/wordlist.rb'
 
 # Ronin dependencies
-gem 'ronin-support',     '~> 1.1', github: "ronin-rb/ronin-support",
-                                   branch: '1.1.0'
-gem 'ronin-support-web', '~> 0.1', github: "ronin-rb/ronin-support-web",
-                                   branch: 'main'
-gem 'ronin-core',        '~> 0.2', github: "ronin-rb/ronin-core",
-                                   branch: '0.2.0'
+# gem 'ronin-support',     '~> 1.1', github: "ronin-rb/ronin-support",
+#                                    branch: 'main'
+# gem 'ronin-support-web', '~> 0.1', github: "ronin-rb/ronin-support-web",
+#                                    branch: 'main'
+# gem 'ronin-core',        '~> 0.2', github: "ronin-rb/ronin-core",
+#                                    branch: 'main'
 
-gem 'ferrum',                      github: 'rubycdp/ferrum'
-gem 'ronin-web-browser', '~> 0.1', github: 'ronin-rb/ronin-web-browser'
+# gem 'ferrum',                      github: 'rubycdp/ferrum'
+# gem 'ronin-web-browser', '~> 0.1', github: 'ronin-rb/ronin-web-browser'
 # gem 'ronin-web-server',      '~> 0.1', github: "ronin-rb/ronin-web-server",
 #                                        branch: 'main'
-gem 'ronin-web-spider',      '~> 0.2', github: 'ronin-rb/ronin-web-spider',
-                                       branch: '0.2.0'
+# gem 'ronin-web-spider',      '~> 0.2', github: 'ronin-rb/ronin-web-spider',
+#                                        branch: 'main'
 # gem 'ronin-web-user_agents', '~> 0.1', github: 'ronin-rb/ronin-web-user_agents',
 #                                        branch: 'main'
-gem 'ronin-web-session_cookie', '~> 0.1', github: 'ronin-rb/ronin-web-session_cookie',
-                                          branch: 'main'
+# gem 'ronin-web-session_cookie', '~> 0.1', github: 'ronin-rb/ronin-web-session_cookie',
+#                                           branch: 'main'
 
-gem 'ronin-db',              '~> 0.2', github: 'ronin-rb/ronin-db',
-                                       branch: '0.2.0'
-gem 'ronin-db-activerecord', '~> 0.2', github: 'ronin-rb/ronin-db-activerecord',
-                                       branch: '0.2.0'
-gem 'ronin-vulns',           '~> 0.2', github: 'ronin-rb/ronin-vulns',
-                                       branch: '0.2.0'
+# gem 'ronin-db',              '~> 0.2', github: 'ronin-rb/ronin-db',
+#                                        branch: 'main'
+# gem 'ronin-db-activerecord', '~> 0.2', github: 'ronin-rb/ronin-db-activerecord',
+#                                        branch: 'main'
+# gem 'ronin-vulns',           '~> 0.2', github: 'ronin-rb/ronin-vulns',
+#                                        branch: 'main'
 
 group :development do
   gem 'rake'
