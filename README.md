@@ -597,7 +597,7 @@ For more examples, see [ronin-web-browser][ronin-web-browser-examples].
 * [ronin-support-web] ~> 0.1
 * [ronin-web-browser] ~> 0.1
 * [ronin-web-server] ~> 0.1
-* [ronin-web-spider] ~> 0.1
+* [ronin-web-spider] ~> 0.2
 * [ronin-web-user_agents] ~> 0.1
 * [ronin-web-session_cookie] ~> 0.1
 * [ronin-core] ~> 0.2
