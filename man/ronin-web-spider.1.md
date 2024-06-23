@@ -179,6 +179,9 @@ Spiders a website.
 `--print-js-url-strings`
 : Print URL strings found in JavaScript.
 
+`--print-js-path-strings`
+: Print path strings found in JavaScript.
+
 `--print-html-comments`
 : Print HTML comments.
 
