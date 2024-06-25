@@ -10,7 +10,7 @@ ronin-web-xml - Performs XPath queries on a URL or XML file
 
 ## DESCRIPTION
 
-Performs XPath queries on a URL or HTML file.
+Performs XPath queries on a URL or XML file.
 
 ## ARGUMENTS
 
