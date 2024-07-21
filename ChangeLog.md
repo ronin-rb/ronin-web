@@ -1,4 +1,4 @@
-### 2.0.0 / 2024-XX-XX
+### 2.0.0 / 2024-07-22
 
 * Require [wordlist] ~> 1.0, >= 1.0.1.
 * Require [ronin-support-web] ~> 0.1.
