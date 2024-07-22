@@ -4,7 +4,7 @@ description:
   ronin-web is a Ruby library that provides common web security commands and
   additional libraries.
 
-license: GPL-3.0
+license: GPL-3.0-or-later
 authors: Postmodern
 email: postmodern.mod3@gmail.com
 homepage: https://github.com/ronin-rb/ronin-web#readme
