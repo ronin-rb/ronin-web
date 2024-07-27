@@ -28,7 +28,8 @@ end
 #                                    branch: 'main'
 
 # gem 'ferrum',                      github: 'rubycdp/ferrum'
-# gem 'ronin-web-browser', '~> 0.1', github: 'ronin-rb/ronin-web-browser'
+gem 'ronin-web-browser', '~> 0.2', github: 'ronin-rb/ronin-web-browser',
+                                   branch: '0.2.0'
 # gem 'ronin-web-server',      '~> 0.1', github: "ronin-rb/ronin-web-server",
 #                                        branch: 'main'
 # gem 'ronin-web-spider',      '~> 0.2', github: 'ronin-rb/ronin-web-spider',

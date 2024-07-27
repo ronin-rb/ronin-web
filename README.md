@@ -595,7 +595,7 @@ For more examples, see [ronin-web-browser][ronin-web-browser-examples].
 * [wordlist] ~> 1.0, >= 1.0.1
 * [ronin-support] ~> 1.1
 * [ronin-support-web] ~> 0.1
-* [ronin-web-browser] ~> 0.1
+* [ronin-web-browser] ~> 0.2
 * [ronin-web-server] ~> 0.1
 * [ronin-web-spider] ~> 0.2
 * [ronin-web-user_agents] ~> 0.1
