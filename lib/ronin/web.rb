@@ -19,8 +19,10 @@
 #
 
 require 'ronin/support/web'
-require 'ronin/web/spider'
+require 'ronin/web/browser'
 require 'ronin/web/server'
+require 'ronin/web/session_cookie'
+require 'ronin/web/spider'
 require 'ronin/web/user_agents'
 require 'ronin/web/version'
 
