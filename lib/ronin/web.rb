@@ -35,5 +35,6 @@ module Ronin
   module Web
     include OpenNamespace
     include Support::Web
+    include Browser::Mixin
   end
 end
