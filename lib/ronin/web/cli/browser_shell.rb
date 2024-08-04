@@ -19,8 +19,9 @@
 #
 
 require 'ronin/core/cli/command_shell'
-require 'ronin/web/cli/js_shell'
 require 'ronin/web/browser'
+
+require_relative 'js_shell'
 
 module Ronin
   module Web

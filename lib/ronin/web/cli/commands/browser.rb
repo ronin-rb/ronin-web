@@ -18,10 +18,10 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/command'
-require 'ronin/web/cli/browser_options'
-require 'ronin/web/cli/browser_shell'
-require 'ronin/web/cli/js_shell'
+require_relative '../command'
+require_relative '../browser_options'
+require_relative '../browser_shell'
+require_relative '../js_shell'
 
 require 'command_kit/colors'
 

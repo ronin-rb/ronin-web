@@ -18,9 +18,9 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/root'
-
 require 'ronin/core/cli/command'
+
+require_relative '../root'
 
 module Ronin
   module Web

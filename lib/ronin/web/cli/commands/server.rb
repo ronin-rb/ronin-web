@@ -18,7 +18,8 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/command'
+require_relative '../command'
+
 require 'ronin/core/cli/logging'
 require 'ronin/web/server'
 

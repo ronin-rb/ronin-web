@@ -18,8 +18,9 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/command'
-require 'ronin/web/cli/spider_options'
+require_relative '../command'
+require_relative '../spider_options'
+
 require 'ronin/core/cli/logging'
 require 'ronin/vulns/url_scanner'
 require 'ronin/vulns/cli/printing'

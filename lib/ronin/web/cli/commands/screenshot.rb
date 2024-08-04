@@ -18,8 +18,8 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/command'
-require 'ronin/web/cli/browser_options'
+require_relative '../command'
+require_relative '../browser_options'
 
 require 'ronin/core/cli/logging'
 

@@ -18,8 +18,8 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/command'
-require 'ronin/web/cli/ruby_shell'
+require_relative '../command'
+require_relative '../ruby_shell'
 
 module Ronin
   module Web

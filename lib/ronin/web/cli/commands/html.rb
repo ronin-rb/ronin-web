@@ -18,9 +18,9 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/commands/xml'
-require 'ronin/support/network/http'
+require_relative 'xml'
 
+require 'ronin/support/network/http'
 require 'nokogiri'
 
 module Ronin

@@ -16,8 +16,8 @@
 # along with ronin-web.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-require 'ronin/web/cli/command'
-require 'ronin/web/root'
+require_relative '../../command'
+require_relative '../../../root'
 
 require 'ronin/core/cli/generator'
 
