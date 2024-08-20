@@ -135,7 +135,7 @@ module Ronin
               App.public_dir = options[:root]
             else
               App.any('*') do
-                puts "#{request.request_method} #{request.path}"
+                puts "#{request.request_method} #{request.fullpath}"
 
                 request.headers.each do |name,value|
                   puts "#{name}: #{value}"
