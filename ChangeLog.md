@@ -69,8 +69,8 @@
   * Added the `ronin-web reverse-proxy` command.
   * Added the `ronin-web server` command.
   * Added the `ronin-web spider` command.
-* Added {Ronin::Web::HTML}.
-* Added {Ronin::Web::XML}.
+* Added `Ronin::Web::HTML`.
+* Added `Ronin::Web::XML`.
 
 [nokogiri-ext]: https://github.com/postmodern/nokogiri-ext#readme
 [nokogiri-diff]: https://github.com/postmodern/nokogiri-diff#readme
