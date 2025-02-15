@@ -1,3 +1,18 @@
+### 2.0.1 / 2025-02-14
+
+* Removed legacy 1.x Ruby files:
+  * `ronin/web/html` - This file was moved to [ronin-support-web] and renamed to
+    `ronin/support/web/html`.
+  * `ronin/web/xml` - This file was moved to [ronin-support-web] and renamed to
+    `ronin/support/web/xml`.
+* Require all other `ronin-web-*` libraries in `ronin/web`.
+* Use `require_relative` to improve load times.
+
+#### CLI
+
+* Fixed a bug in the `ronin-web server` command where the query params of
+  requests were not being displayed.
+
 ### 2.0.0 / 2024-07-22
 
 * Require [wordlist] ~> 1.0, >= 1.0.1.
